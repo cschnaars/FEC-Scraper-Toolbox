@@ -90,7 +90,8 @@ This module goes through the following process in this order:
 * Again calls build_prior_archive_list to build a list of archives that
     already have been downloaded and saved to ARCPROCDIR or ARCSVDIR.
     **NOTE:** As stated above, this feature is slated for deprecation.
-* Calls pickle_archives to rebuild zipinfo.p.
+* Calls pickle_archives to rebuild zipinfo.p and save it in the same
+    directory as this module.
 * Calls build_prior_report_list to build a list of reports housed in
     RPTHOLDDIR, RPTPROCDIR and RPTSVDIR.
     **Note:** I plan to add a function that can build a list of previously
@@ -100,9 +101,9 @@ This module goes through the following process in this order:
     past seven days.  The function returns a list of these reports.
 * Calls verify_reports to test whether filings filed for download by
     consume_rss already have been downloaded. If so, the function
-    verifies the length of the file matches the length of the file
-    posted on the FEC website.  When the lengths do not match, the
-    saved file is deleted and retained in the download list.
+    verifies the length of the downloaded file matches the length of
+    the file posted on the FEC website.  When the lengths do not match,
+    the saved file is deleted and retained in the download list.
 * Uses multiprocessing and calls download_report to download each
     report returned by verify_reports.  This subroutine verifies the
     length of each downloaded file and will attempt to download a file

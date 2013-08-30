@@ -1,13 +1,13 @@
 # FEC Scraper Toolbox
-The FEC Scraper Toolbox is series of Python modules you can use to find
-and download electronically filed campaign finance reports housed on
-the Federal Election Commission website and load those reports into a
-database manager. It replaces the [FEC Scraper](https://github.com/cschnaars/FEC-Scraper) repository.
+The FEC Scraper Toolbox is a series of Python modules you can use to
+find and download electronically filed campaign finance reports housed
+on the Federal Election Commission website and load those reports into
+a database manager. It replaces the [FEC Scraper](https://github.com/cschnaars/FEC-Scraper) repository.
 
 Presently, the toolbox consists of three major modules. I am in the
 process of cleaning up and documenting my code and will post these
 modules as I go. At this time, only the first module is ready to go and
-has been posted on Github.
+posted on Github.
 
 FEC Scraper Toolbox has been developed and tested under Python 2.7.4.
 

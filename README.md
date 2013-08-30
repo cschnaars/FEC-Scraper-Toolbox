@@ -35,11 +35,11 @@ except portion of the try statement.
 You can copy and paste the text below into your usersettings.py file,
 then set the values you want to use.
 
-ARCPROCDIR = '' # Directory to house archives that have been processed
-ARCSVDIR = '' # Directory to house archives that have been downloaded but not processed
-RPTHOLDDIR = '' # Directory to house electronically filed reports that cannot be processed
-RPTPROCDIR = '' # Directory to house electronically filed reports that have been processed
-RPTSVDIR = '' # Directory to house electronically filed reports that have been downloaded but not processed
+    ARCPROCDIR = '' # Directory to house archives that have been processed
+    ARCSVDIR = '' # Directory to house archives that have been downloaded but not processed
+    RPTHOLDDIR = '' # Directory to house electronically filed reports that cannot be processed
+    RPTPROCDIR = '' # Directory to house electronically filed reports that have been processed
+    RPTSVDIR = '' # Directory to house electronically filed reports that have been downloaded but not processed
 
 ## download_reports module
 This module tracks and downloads all electronically filed reports
@@ -70,7 +70,7 @@ This module goes through the following process in this order:
     want to control which archives will be retrieved.
 * Calls build_prior_archive_list to build a list of archives that
     already have been downloaded and saved to ARCPROCDIR or ARCSVDIR.
-    **NOTE:** I plan to deprecate this function.  I added this feature for
+    __NOTE:__ I plan to deprecate this function.  I added this feature for
     development and to test the implementation of the zipinfo.p pickle.
     Using the pickle saves a lot of time and disk space compared to
     warehousing all the archives.
@@ -89,12 +89,12 @@ This module goes through the following process in this order:
     this flag is set to 1.  Default is 0.
 * Again calls build_prior_archive_list to build a list of archives that
     already have been downloaded and saved to ARCPROCDIR or ARCSVDIR.
-    **NOTE:** As stated above, this feature is slated for deprecation.
+    __NOTE:__ As stated above, this feature is slated for deprecation.
 * Calls pickle_archives to rebuild zipinfo.p and save it in the same
     directory as this module.
 * Calls build_prior_report_list to build a list of reports housed in
     RPTHOLDDIR, RPTPROCDIR and RPTSVDIR.
-    **Note:** I plan to add a function that can build a list of previously
+    __NOTE:__ I plan to add a function that can build a list of previously
     processed files using a database call rather than combing RPTPROCDIR.
 * Calls consume_rss, which uses a regular expression to scan an FEC RSS
     feed listing all electronically filed reports submitted within the
@@ -113,9 +113,10 @@ This module goes through the following process in this order:
 Here is the commented-out code available in the download_reports module
 that you can use to manually control the zipinfo.p pickle if you don't
 want to download all available archives back to 2001:
-'''python
-# Set mostrecent to the last date you DON'T want, so if you want
-# everything since Jan. 1, 2013, set mostrecent to: '20121231.zip'
-zipinfo['mostrecent'] = '20121231.zip' # YYYYMMDD.zip
-zipinfo['badfiles'] = [] # You probably want to leave this blank
-'''
+
+```python
+    # Set mostrecent to the last date you DON'T want, so if you want
+    # everything since Jan. 1, 2013, set mostrecent to: '20121231.zip'
+    zipinfo['mostrecent'] = '20121231.zip' # YYYYMMDD.zip
+    zipinfo['badfiles'] = [] # You probably want to leave this blank
+```

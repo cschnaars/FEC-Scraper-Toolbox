@@ -1,2 +1,2 @@
 # Authors
-Christopher Schnaars (http://www.chrisschnaars.org/, twitter.com/chrisschnaars)
+Christopher Schnaars (http://www.chrisschnaars.org/, https://twitter.com/chrisschnaars)

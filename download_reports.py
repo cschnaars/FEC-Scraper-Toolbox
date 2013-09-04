@@ -319,8 +319,7 @@ if __name__ == '__main__':
               + ' new archive(s)...')
         pool = multiprocessing.Pool(processes=NUMPROC)
         for archive in archives:
-            pool.apply_async(download_archive(ARCFTP + archive,
-                                              ARCSVDIR + archive))
+            pool.apply_async(download_archive(archive))
         pool.close()
         pool.join()
         print('Done!\n')

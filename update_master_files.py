@@ -14,7 +14,8 @@ import zipfile
 
 # Try to import user settings or set them explicitly
 try:
-    exec(open('usersettings.py').read())
+    import usersettings
+    MASTERDIR = usersettings.MASTERDIR
 except:
     MASTERDIR = 'C:\\data\\FEC\\Master\\'
 

@@ -16,7 +16,12 @@ import zipfile
 
 # Try to import user settings or set them explicitly
 try:
-    exec(open('usersettings.py').read())
+    import usersettings
+    ARCPROCDIR = usersettings.ARCPROCDIR
+    ARCSVDIR = usersettings.ARCSVDIR
+    RPTHOLDDIR = usersettings.RPTHOLDDIR
+    RPTPROCDIR = usersettings.RPTPROCDIR
+    RPTSVDIR = usersettings.RPTSVDIR
 except:
     ARCPROCDIR = 'C:\\data\\FEC\\Archives\\Processed\\'
     ARCSVDIR = 'C:\\data\\FEC\\Archives\\Import\\'

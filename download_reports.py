@@ -33,7 +33,7 @@ except:
 ARCFTP = 'ftp://ftp.fec.gov/FEC/electronic/'
 NUMPROC = 10  # Multiprocessing processes to run simultaneously
 RPTFTP = 'ftp.fec.gov'
-RPTURL = 'http://query.nictusa.com/dcdev/posted/'
+RPTURL = 'http://docquery.fec.gov/dcdev/posted/' # Old URL: http://query.nictusa.com/dcdev/posted/
 RSSURL = 'http://fecapps.nictusa.com/rss/generate?preDefinedFilingType=ALL'
 
 

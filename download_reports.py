@@ -34,7 +34,7 @@ ARCFTP = 'ftp://ftp.fec.gov/FEC/electronic/'
 NUMPROC = 10  # Multiprocessing processes to run simultaneously
 RPTFTP = 'ftp.fec.gov'
 RPTURL = 'http://docquery.fec.gov/dcdev/posted/' # Old URL: http://query.nictusa.com/dcdev/posted/
-RSSURL = 'http://fecapps.nictusa.com/rss/generate?preDefinedFilingType=ALL'
+RSSURL = 'http://efilingapps.fec.gov/rss/generate?preDefinedFilingType=ALL' # Old URL: http://fecapps.nictusa.com/rss/generate?preDefinedFilingType=ALL
 
 
 def build_archive_download_list(zipinfo={'mostrecent': '', 'badfiles':
@@ -111,8 +111,11 @@ def consume_rss():
     Returns a list of electronically filed reports included in an FEC
     RSS feed listing all reports submitted within the past seven days.
     """
-    regex = re.compile(
-        '<link>http://query.nictusa.com/dcdev/posted/([0-9]*)\.fec</link>')
+    # Old URL:
+    # regex = re.compile(
+    #   '<link>http://query.nictusa.com/dcdev/posted/([0-9]*)\.fec</link>')
+    regex = re.compile('<link>http://docquery.fec.gov/dcdev/posted/' \
+                       '([0-9]*)\.fec</link>')
     url = urllib.urlopen(RSSURL)
     rss = url.read()
     matches = []

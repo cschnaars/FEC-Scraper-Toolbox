@@ -176,7 +176,7 @@ as 13 iterations, each of which also can have its own headers.
 
 The parse_reports module handles this by examining the two header rows
 atop each electronically filed report to determine the form type and
-version of that report.  (The current version is 8.0.)  If the form
+version of that report.  (The current version is 8.1.)  If the form
 type and version are supported by the parser, the columns in each data
 row are mapped to standardized columns.  Generally speaking, the
 standardized column headings largely mimic a form's version 8.0

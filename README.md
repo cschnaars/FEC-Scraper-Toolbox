@@ -19,16 +19,17 @@ recently filed reports.
 * __parse_reports:__ Combines any number of reports into a single file
 for each form type (Schedule A, Schedule B and so on).  Report header
 information is loaded into a database.
-* __update_master_files:__ Downloads weekly master files housing
-detailed information about all candidates and committees, individual
-contributions and contributions from committees to candidates and
-other committees.
+* __update_master_files:__ Downloads daily and weekly master files
+housing detailed information about all candidates and committees,
+individual contributions and contributions from committees to
+candidates and other committees.
 
-FEC Scraper Toolbox has been developed and tested under Python 2.7.4.
+FEC Scraper Toolbox was developed under Python 2.7.4. I presently am
+running it under 2.7.6.
 
 ## Requirements
 The following modules are required to use FEC Scraper Toolbox. All of
-them are included with a standard Python 2.7.4 installation:
+them are included with a standard Python 2.7 installation:
 * csv
 * datetime
 * ftplib
@@ -340,27 +341,48 @@ this problem by scrubbing all headers in the database each time this
 module is run.
 
 ## update_master_files Module
-This module can be used to download and extract the weekly master files
-housed on the [FEC website](http://www.fec.gov/finance/disclosure/ftpdet.shtml).  The FEC updates these files every Sunday
-evening.
+This module can be used to download and extract the master files housed
+on the [FEC website](http://www.fec.gov/finance/disclosure/ftpdet.shtml).  The
+FEC updates the candidate (cn), committee (cm) and candidate-committee
+linkage (ccl) files daily.  The FEC updates the individual
+contributions (indiv), committee-to-committee transactions (oth) and
+committee-to-candidate transactions (pas2) files every Sunday evening.
 
 ### Warehousing Master Files
 By default, the update_master_files module archives the compressed
-master files downloaded each week (but not the extracted data files).
-  This was done to preserve the source data during development and
-because the FEC overwrites the data each week.
+master files (but not the extracted data files). This was done to
+preserve the source data during development and because the FEC
+overwrites the data files.
 
 To disable this behavior, set the value of the ARCHIVEFILES user
 variable (see the user variables section near the top of the module) to
 zero. When ARCHIVEFILES is set to any value other than one (1), the
 master files are not archived.
 
+The script assumes you will run it daily and late enough in the day to
+make sure the FEC has created the daily data files before you try to
+process them.  At the time of this writing, the FEC updates the three
+daily files around 7:30 a.m. and the weekly files around 4 p.m.  If
+you're scheduling a daily job to run this script, I recommend you
+schedule it for late evening to give yourself plenty of leeway.
+
+By default, the script will ignore the weekly files if the script is
+not run on a Sunday.  To change this behavior and download the Sunday
+files on a different day of the week, set the OMITNONSUNDAYFILES
+variable near the top of the script to 0.
+
 ### How the update_master_files Module Works
 This module goes through the following process in this order:
 * Calls delete_data to remove all .txt and .zip files from the working
-    directory specified by the MASTERDIR variable. (The .zip files from the
-    previous week will be in this directory only if they were not
-    archived the week before.)
+    directory specified by the MASTERDIR variable.  (The .zip files from
+    the previous execution of the script will be in this directory only if
+    they were not archived when the script was last run.)
+* Uses the local date on the machine running the code to calculate the
+    current election cycle and determine whether the files are being
+    downloaded on a Sunday.  If the weekday is not Sunday and
+    OMITNONSUNDAYFILES is set to 1, the script will ignore all master files
+    except for the candidate (cn), committee (cm) and candidate-committee
+    linkage (ccl) files.
 * Uses multiprocessing and calls download_file to download each master
     file specified by the MASTERFILES user variable. (By default, all nine
     master files are downloaded.) These files are saved in the directory
@@ -385,10 +407,11 @@ This module goes through the following process in this order:
     directory.
 
 ### About the Master Files
-The FEC recreates the master files every Sunday evening, overwriting
-the master files posted the week before. The archive filenames include
-a two-digit year to identify the election cycle, but the files housed
-in those archives often do not. For that reason, this module appends a
+The FEC recreates three of the master files daily and the remaining
+master every Sunday evening. Each time the files are generated, they
+overwrite the previously posted files.  The archive filenames include a
+two-digit year to identify the election cycle, but the files housed in
+those archives often do not. For that reason, this module appends a
 two-digit election cycle to extracted filenames that do not include a year
 reference.
 
@@ -397,17 +420,19 @@ the links below to view the data dictionary for a particular file:
 * __add:__ [New Individual Contributions](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryContributionsbyIndividualsAdditions.shtml)
     Lists all contributions added to the master Individuals file in the
     past week.  
-    Files extracted from these archives are named addYYYY.txt.
+    Files extracted from these archives are named
+    addYYYY.txt.  Generated every Sunday.
 * __ccl:__ [Candidate Committee Linkage](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryCandCmteLinkage.shtml)  
     Houses all links between candidates and committees that have
     been reported to the FEC. Strangely, this file does not include
     candidate ties to Leadership PACs, which are reported on Form 1.  
-    Files extracted from these archives are named ccl.txt.
+    Files extracted from these archives are named ccl.txt.  Generated
+    daily.
 * __changes:__ [Individual Contribution Changes](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryContributionsbyIndividualsChanges.shtml)
     Lists all transactions in the master Individuals file that have been
     changed during the past month.  
-    Files extracted from these archives are
-    named chgYYYY.txt.
+    Files extracted from these archives are named chgYYYY.txt.  Generated
+    every Sunday.
 * __cm:__ [Committee Master File](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryCommitteeMaster.shtml)  
     Lists all committees registered with the FEC for a
     specific election cycle. Among other information, you can use this file
@@ -417,30 +442,34 @@ the links below to view the data dictionary for a particular file:
     fundraisers, lobbyist PACs and leadership pacs). Additionally, you can
     look for code O in the Committee Type field (CMTE_TP) to identify
     independent expenditure only committees commonly known as Super PACs.  
-    Files extracted from these archives are named cm.txt.
+    Files extracted from these archives are named cm.txt.  Generated daily.
 * __cn:__ [Candidate Master File](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryCandidateMaster.shtml)
     Lists all candidates registered with the FEC for a
     specific election cycle. You can use this file to see all candidates
     who have filed to run for a particular seat as well as information
     about their political parties, addresses, treasurers and FEC IDs.  
-    Files extracted from these archives are named cn.txt.
+    Files extracted from these archives are named cn.txt.  Generated daily.
 * __delete:__ [Deleted Individual Contributions](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryContributionsbyIndividualsDeletes.shtml)
     Lists all contributions deleted from the master Individuals file in the
     past week.  
-    Files extracted from these archives are named delYYYY.txt.
+    Files extracted from these archives are named delYYYY.txt.  Generated
+    every Sunday.
 * __indiv:__ [Individual Contributions](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryContributionsbyIndividuals.shtml)
     For the most part, lists all itemized contributions of $200 or more
     made by INDIVIDUALS to any committee during the election cycle. Does
     not include most contributions from businesses, PACs and other
     organizations.  
-    Files extracted from these archives are named itcont.txt.
+    Files extracted from these archives are named itcont.txt.  Generated
+    every Sunday.
 * __oth:__ [Committee-to-Committee Transactions](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryCommitteetoCommittee.shtml)
     Lists contributions and independent expenditures made by one committee
     to another.  
-    Files extracted from these archives are named itoth.txt.
+    Files extracted from these archives are named itoth.txt.  Generated
+    every Sunday.
 * __pas2:__ [Committee-to-Candidate Transactions](http://www.fec.gov/finance/disclosure/metadata/DataDictionaryContributionstoCandidates.shtml)
     Lists contributions made by a committee to a candidate.  
-    Files extracted from these archives are named itpas2.txt.
+    Files extracted from these archives are named itpas2.txt.  Generated
+    every Sunday.
 
 ### Using the indiv, add, changes and delete files
 The indiv file generated every Sunday for each election cycle is

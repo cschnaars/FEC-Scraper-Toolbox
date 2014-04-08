@@ -3,6 +3,22 @@
 # Developed with Python 2.7.4
 # See README.md for complete documentation
 
+# WARNING:
+# --------
+# If you automate the execution of this script, you should set it to
+# run in the late evening to make sure you don't download any master
+# files before the FEC has a chance to update them. At the time of this
+# writing, the FEC was updating the candidate, committee and
+# candidate-committee linkage files daily around 7:30 a.m. while
+# other weekly files were updated a little before 4 p.m. on Sundays.
+
+# Development Notes:
+# ------------------
+# 4/7/2014: Updated code so files can be downloaded daily. The FEC began
+# publishing daily updates to the candidate, committee and
+# candidate-committee linkage files. Other master files continue
+# to be updated weekly.
+
 # Import needed libraries
 from datetime import datetime, timedelta
 import glob
@@ -20,21 +36,22 @@ except:
     MASTERDIR = 'C:\\data\\FEC\\Master\\'
 
 # Other user variables
-ARCHIVEFILES = 1 # Set to 0 if you don't want to archive the weekly master files each week.
+ARCHIVEFILES = 1 # Set to 0 if you don't want to archive the master files each week.
 MASTERFTP = 'ftp://ftp.fec.gov/FEC/'
 MASTERFILES = ['add', 'ccl', 'chg', 'cm', 'cn', 'delete', 'indiv', 'oth', 'pas2']
 NUMPROC = 10 # Multiprocessing processes to run simultaneously
 STARTCYCLE = 2002 # Oldest election cycle for which you want to download master files
+OMITNONSUNDAYFILES = 1 # Set to 0 to download all files regardless of day of week
 
 
-def archive_master_files(archivedate):
+def archive_master_files():
     """
-    Moves current weekly master files to archive directory. The
+    Moves current master files to archive directory. The
     archivedate parameter specifies the most recent Sunday date. If the
     archive directory does not exist, this subroutine creates it.
     """
     # Create timestamp
-    timestamp = archivedate.strftime("%Y%m%d")
+    timestamp = datetime.now().strftime("%Y%m%d")
 
     # Create archive directory if it doesn't exist
     savedir = MASTERDIR + 'Archive\\' + timestamp + '\\'
@@ -47,6 +64,11 @@ def archive_master_files(archivedate):
     # Move all the files
     for datafile in glob.glob(os.path.join(MASTERDIR, '*.zip')):
         os.rename(datafile, datafile.replace(MASTERDIR, savedir))
+
+        
+def create_timestamp():
+    filetime = datetime.datetime.now()
+    return filetime.strftime('%Y%m%d')
 
 
 def delete_files(dir, ext):
@@ -122,28 +144,42 @@ def unzip_master_file(masterfile):
 
 if __name__=='__main__':
     
-    # Delete text files extracted from the prior week's archives
+    # Delete text files extracted from an earlier archive
     print('Deleting old data...')
     delete_files(MASTERDIR, 'txt')
 
-    # Delete last week's archives if they're still in the working
+    # Delete old archives if they're still in the working
     # directory. These files are moved to another directory
     # (archived) below when ARCHIVEFILES is set to 1.
     delete_files(MASTERDIR, 'zip')
     print('Done!\n')
 
-    # Use multiprocessing to download weekly files
-    print('Downloading weekly master files...\n')
+    # Use multiprocessing to download master files
+    print('Downloading master files...\n')
     pool = multiprocessing.Pool(processes=NUMPROC)
 
     # Determine most recent Sunday's date
-    maxdate = datetime.now()
-    x = -(maxdate.weekday()%6)-1
-    maxdate = maxdate + timedelta(days=x)
+##    maxdate = datetime.now()
+##    x = -(maxdate.weekday()%6)-1
+##    maxdate = maxdate + timedelta(days=x)
 
-    # Parse year
-    maxyear = maxdate.year
-    # Add one if it's not even
+    # Determine whether today is Sunday
+    sunday = False
+    if datetime.now().weekday() == 6:
+        sunday = True
+
+    # Remove all files but cn, cm and ccl from MASTERFILES
+    # if sunday == False and OMITNONSUNDAYFILES == 1
+    if sunday == False and OMITNONSUNDAYFILES == 1:
+        files = []
+        for fecfile in ['ccl', 'cm', 'cn']:
+            if fecfile in MASTERFILES:
+                files.append(fecfile)
+        MASTERFILES = files
+
+    # Calculate current election cycle
+    maxyear = datetime.now().year
+    # Add one if it's not an even-numbered year
     if maxyear/2*2 < maxyear: maxyear += 1
         
     # Create loop to iterate through FEC ftp directories
@@ -173,7 +209,7 @@ if __name__=='__main__':
     # Otherwise delete files
     if ARCHIVEFILES == 1:
 	    print('Archiving data files...')
-	    archive_master_files(maxdate)
+	    archive_master_files()
 	    print('Done!\n')
 
     print('Process complete.')

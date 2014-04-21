@@ -270,21 +270,25 @@ def verify_reports(rpts, downloaded):
     """
     downloads = []
     for rpt in rpts:
+        childdirs = [RPTSVDIR, RPTPROCDIR, RPTHOLDDIR]
         if rpt not in downloaded:
             downloads.append(rpt)
         else:
-            srclen = float(urllib2.urlopen(RPTURL + rpt + '.fec').info()
-                           .get('Content-Length'))
-            destlen = 0
-            childdirs = [RPTSVDIR, RPTPROCDIR, RPTHOLDDIR]
+            try:
+                srclen = float(urllib2.urlopen(RPTURL + rpt + '.fec').info()
+                               .get('Content-Length'))
+            except urllib2.HTTPError:
+                print(RPTURL + rpt + '.fec could not be downloaded.')
+                continue
+            
             for child in childdirs:
                 try:
                     destlen = os.path.getsize(child + rpt + '.fec')
+                    if srclen != destlen:
+                        downloads.append(rpt)
+                        os.remove(child + rpt + '.fec')
                 except:
                     pass
-            if srclen != destlen:
-                downloads.append(rpt)
-                os.remove(child + rpt + '.fec')
 
     return downloads
 

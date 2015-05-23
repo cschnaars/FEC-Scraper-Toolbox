@@ -100,3 +100,41 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR). Write
+# code to make sure // does not occur anywhere.
+BASE_DIR = 'C:/data'
+
+# Parent directory used to house all downloaded reports. Default is: <BASE_DIR>/reports
+REPORTS_DIR = BASE_DIR + '/reports'
+
+# Default delimiter for text data. Default is: chr(28)
+DEFAULT_DELIM = chr(28)
+
+# To avoid hardcoding file formats, use this dictionary to specify a user-defined key for each possible report type.
+# Values for each key are dictionaries of other settings, such as delimiter, url regex pattern, file extension and
+# save path. Delimiter probably is not needed in parent class but will be needed by subclasses.
+FILE_TYPES = {'pdf': {'ext': 'pdf',
+                      'delim': None,
+                      'url_pattern': '<put_regex_here>',
+                      'save_path': REPORTS_DIR + '/pdf/'},
+              'csv': {'ext': 'csv',
+                      'delim': ',',
+                      'url_pattern': '<put_regex_here>',
+                      'save_path': REPORTS_DIR + '/text/csv/'},
+              'ascii28': {'ext': 'txt',
+                          'delim': chr(28),
+                          'url_pattern': '<put_regex_here>',
+                          'save_path': REPORTS_DIR + '/text/ascii28/'}
+              }
+
+# Default download settings for base Report class instantiation
+DOWN_NOW = [['ascii28'], FILE_TYPES]
+
+# Specifies in base Report class whether the indicated format should be downloaded and retained in memory upon
+# instantiation.
+MEM_LOAD = ['ascii28', FILE_TYPES]
+
+# Specifies in base Report class whether the application should attempt to download a report in the specified format
+# upon instantiation and load that data into the database.
+DB_LOAD = [['ascii28'], FILE_TYPES]

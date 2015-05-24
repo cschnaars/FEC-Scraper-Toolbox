@@ -1,14 +1,14 @@
-db_field_name,pretty_name,8.1|8.0|7.0|6.4|6.3|6.2|6.1,5.3|5.2|5.1|5.0|3,P3.1|P3.0|P2.6,P2.4|P2.3|P2.2,P1.0
-rec_tp,Record Type,1,1,1,1,1
-form_tp,Electronic Form Type,2,2,,,
-hdr_ver,Header Version,3,3,2,2,2
-soft_nm,Software Name,4,4,,,
-soft_ver,Software Version,5,5,,,
-nm_delim,Name Delimiter,,6,,,
-amd_rpt_id,Amended Report ID,6,7,,,
-amd_rpt_nbr,Amendment Number,7,8,,,
-hdr_cmt,Header Comment,8,9,,,
-vendor,Paper Report Vendor,,,3,3,3
-batch_nbr,FEC Batch Number,,,4,4,4
-rcpt_dt,Date Received,,,5,,
-fec_orig_id,FEC Original ID,,,6,5,
+db_field_name,pretty_name,type,len,8.1|8.0|7.0|6.4|6.3|6.2|6.1,5.3|5.2|5.1|5.0|3,P3.1|P3.0|P2.6,P2.4|P2.3|P2.2,P1.0
+rec_tp,Record Type,varchar,3,1,1,1,1,1
+form_tp,Electronic Form Type,varchar,3,2,2,,,
+hdr_ver,Header Version,varchar,4,3,3,2,2,2
+soft_nm,Software Name,varchar,90,4,4,,,
+soft_ver,Software Version,varchar,16,5,5,,,
+nm_delim,Name Delimiter,char,1,,6,,,
+amd_rpt_id,Amended Report ID,varchar,16,6,7,,,
+amd_rpt_nbr,Amendment Number,tinyint,,7,8,,,
+hdr_cmt,Header Comment,varchar,200,8,9,,,
+vendor,Paper Report Vendor,varchar,90,,,3,3,3
+batch_nbr,FEC Batch Number,smallint,,,,4,4,4
+rcpt_dt,Date Received,char,8,,,5,,
+fec_orig_id,FEC Original ID,varchar,15,,,6,5,

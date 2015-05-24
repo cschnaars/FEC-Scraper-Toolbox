@@ -1,5 +1,8 @@
+import requests
+
 from django.shortcuts import render
 from FEC_Toolbox import settings
+from lib/paper_or_plastic import paper_or_plastic
 
 
 class Report:
@@ -37,34 +40,64 @@ class Report:
         """
         self.rpt_id = rpt_id
 
-    def fetch(self, filetype, url=None, keep_in_mem=False, save_to_disk=False, save_path=None, overwrite=False):
+    def fetch(self, rpt_id, filetype, delim=None, url_pattern=None, keep_in_mem=False, save_to_disk=False,
+              save_path=None, overwrite=False):
         """
         If save path and/or url set to None, retrieve values from FILE_TYPES dictionary. Alert user and exit if filetype
         does not exist in FILE_TYPES to lookup values that have not been provided. Before downloading, check to see if
         file already exists. Alert user and take no other action if overwrite is set to False. Otherwise, download the
         file.
+        :param rpt_id:
         :param filetype:
-        :param url:
+        :param url_pattern:
         :param keep_in_mem:
         :param save_to_disk:
         :param save_path:
         :param overwrite:
         :return:
         """
-        pass
+        fech(self, rpt_id, filetype, delim, url_pattern, keep_in_mem, save_to_disk, save_path, overwrite)
 
-    def fech(self, filetype, url=None, keep_in_mem=False, save_to_disk=False, save_path=None, overwrite=False):
+    def fech(self, rpt_id, filetype, delim=None, url_pattern=None, keep_in_mem=False, save_to_disk=False,
+             save_path=None, overwrite=False):
         """
-        Calls fetch.
+        It's "fetch", with a soft "ch" sound. There are no other acceptable pronunciations.
+
+        If save path and/or url set to None, retrieve values from FILE_TYPES dictionary. Alert user and exit if filetype
+        does not exist in FILE_TYPES to lookup values that have not been provided. Before downloading, check to see if
+        file already exists. Alert user and take no other action if overwrite is set to False. Otherwise, download the
+        file.
+        :param rpt_id:
         :param filetype:
-        :param url:
+        :param url_pattern:
         :param keep_in_mem:
         :param save_to_disk:
         :param save_path:
         :param overwrite:
         :return:
         """
-        pass
+
+        # Fetch default/missing values from FILE_TYPES
+        if filetype in settings.FILE_TYPES.keys():
+            if delim is None:
+                delim = settings.FILE_TYPES[filetype][delim]
+            if url_pattern is None:
+                url_pattern = settings.FILE_TYPES[filetype][url_pattern]
+            if save_path is None:
+                save_path = settings.FILE_TYPES[filetype][save_path]
+
+        # Check to see whether report was filed electronically or on paper.
+        # This is necessary to form URL to fetch report for text-based reports.
+        # Skip this process if no delimiter
+        if delim is None:
+            pass
+        elif not 'text_url' in self.__dict__:
+            self.text_url = paper_or_plastic(rpt_id, url_pattern)
+        elif self.text_url is None:
+            self.text_url = paper_or_plastic(rpt_id, url_pattern)
+
+        # Display
+
 
     def load_to_mem(filetype=DEFAULT_DELIM, url=None, file_path=None, local=True, reload=False):
         """

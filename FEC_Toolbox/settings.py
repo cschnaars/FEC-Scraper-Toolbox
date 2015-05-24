@@ -116,15 +116,15 @@ DEFAULT_DELIM = chr(28)
 # save path. Delimiter probably is not needed in parent class but will be needed by subclasses.
 FILE_TYPES = {'pdf': {'ext': 'pdf',
                       'delim': None,
-                      'url_pattern': '<put_regex_here>',
+                      'url_pattern': None,
                       'save_path': REPORTS_DIR + '/pdf/'},
               'csv': {'ext': 'csv',
                       'delim': ',',
-                      'url_pattern': '<put_regex_here>',
+                      'url_pattern': 'http://docquery.fec.gov/<paper_or_plastic>/posted/<rpt_id>.csv',
                       'save_path': REPORTS_DIR + '/text/csv/'},
               'ascii28': {'ext': 'txt',
                           'delim': chr(28),
-                          'url_pattern': '<put_regex_here>',
+                          'url_pattern': 'http://docquery.fec.gov/<paper_or_plastic>/posted/<rpt_id>.fec',
                           'save_path': REPORTS_DIR + '/text/ascii28/'}
               }
 

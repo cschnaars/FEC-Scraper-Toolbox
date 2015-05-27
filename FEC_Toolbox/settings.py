@@ -103,38 +103,60 @@ STATIC_URL = '/static/'
 
 # Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR). Write
 # code to make sure // does not occur anywhere.
-BASE_DIR = 'C:/data'
+BASE_FEC_DIR = 'C:/data'
 
-# Parent directory used to house all downloaded reports. Default is: <BASE_DIR>/reports
-REPORTS_DIR = BASE_DIR + '/reports'
+# Parent directory used to house all downloaded reports. Default is: <BASE_FEC_DIR>/reports
+REPORTS_DIR = BASE_FEC_DIR + '/reports'
 
 # Default delimiter for text data. Default is: chr(28)
 DEFAULT_DELIM = chr(28)
 
 # To avoid hardcoding file formats, use this dictionary to specify a user-defined key for each possible report type.
-# Values for each key are dictionaries of other settings, such as delimiter, url regex pattern, file extension and
+# Values for each key are dictionaries of other settings, such as delimiter, url pattern, file extension and
 # save path. Delimiter probably is not needed in parent class but will be needed by subclasses.
 FILE_TYPES = {'pdf': {'ext': 'pdf',
                       'delim': None,
-                      'url_pattern': None,
+                      'elec_url_pattern': None,
+                      'paper_url_pattern': None,
+                      'a_id': None,
+                      'json_tag': 'pdf_url',
                       'save_path': REPORTS_DIR + '/pdf/'},
               'csv': {'ext': 'csv',
                       'delim': ',',
-                      'url_pattern': 'http://docquery.fec.gov/<paper_or_plastic>/posted/<rpt_id>.csv',
+                      # This elec_url_pattern works only for reports at least 1000 lines long.
+                      'elec_url_pattern': 'http://docquery.fec.gov/comma/<rpt_id>.fec',
+                      'paper_url_pattern': 'http://docquery.fec.gov/paper/fecpprcsv/<rpt_id>.fec',
+                      'a_id': 'csvfile',
+                      'json_tag': None,
                       'save_path': REPORTS_DIR + '/text/csv/'},
               'ascii28': {'ext': 'txt',
                           'delim': chr(28),
-                          'url_pattern': 'http://docquery.fec.gov/<paper_or_plastic>/posted/<rpt_id>.fec',
+                          'elec_url_pattern': 'http://docquery.fec.gov/dcdev/posted/<rpt_id>.fec',
+                          'paper_url_pattern': 'http://docquery.fec.gov/paper/posted/<rpt_id>.fec',
+                          'a_id': 'asciifile',
+                          'json_tag': None,
                           'save_path': REPORTS_DIR + '/text/ascii28/'}
               }
 
 # Default download settings for base Report class instantiation
-DOWN_NOW = [['ascii28'], FILE_TYPES]
+DOWN_NOW = (['ascii28'], FILE_TYPES)
 
 # Specifies in base Report class whether the indicated format should be downloaded and retained in memory upon
 # instantiation.
-MEM_LOAD = ['ascii28', FILE_TYPES]
+MEM_LOAD = ('ascii28', FILE_TYPES)
 
 # Specifies in base Report class whether the application should attempt to download a report in the specified format
-# upon instantiation and load that data into the database.
-DB_LOAD = [['ascii28'], FILE_TYPES]
+# upon instantiation and load that data into the database. Set to None if the data should not be loaded automatically.
+# If this value does not match a key in FILE_TYPES, you must override DB_LOAD_URL below.
+DB_LOAD_DELIM = 'ascii28'
+
+# URL pattern that should be used to try to download a report with the delimiter specified in DB_LOAD_DELIM
+# DB_LOAD_URL = None
+# if DB_LOAD_DELIM in FILE_TYPES.keys():
+#     DB_LOAD_URL = FILE_TYPES[DB_LOAD_DELIM]['url_pattern']
+
+# List of URL modifiers for paper vs. electronically filed reports. Used by paper_or_plastic.
+URL_RPT_TYPE_MODS = ('', '')
+# http://docquery.fec.gov/paper/fecpprcsv/1006117.fec
+# http://docquery.fec.gov/paper/posted/1006117.fec
+

@@ -7,7 +7,10 @@ from FEC_Toolbox.settings import FILE_TYPES
 def get_delim_report_url(rpt_id, filetype=None, url_patterns=None, delim=None, a_id=None):
     """
     Determine a valid URL that can be used to download the specified report (rpt_id) in the desired format (filetype).
-    If filetype is not a key in settings.FILE_TYPES, url_patterns and delim must be specified.
+    If filetype is not a key in settings.FILE_TYPES, url_patterns and delim must be specified. Presently this function
+    works only for CSV and ASCII 28-delimited reports because URLs to view reports in PDF format or page-by-page in a
+    web browser are not available from the pages used below. This functionality needs to be added, probably as a
+    separate function.
 
     :param rpt_id: Report ID. Required. This is the ID assigned by the FEC for a specific report. It is used as the
     primary key for reports in the django database.
@@ -75,11 +78,5 @@ def get_delim_report_url(rpt_id, filetype=None, url_patterns=None, delim=None, a
         elif 'href' in a_tag.attrs.keys():
             return base_url + a_tag['href']
 
-    # Try to extract URL from JSON if url_patterns is empty list
-    # Will either need committee ID or will have to attempt to download a text report and extract the committee ID.
-    if url_patterns == []:
-
-        ########################
-        #   INSERT CODE HERE   #
-        ########################
-        pass
+    # No valid URL found
+    return None

@@ -45,20 +45,21 @@ def get_delim_report_url(rpt_id, filetype=None, url_patterns=None, a_id=None):
     if url_patterns is None:
         url_patterns = []
 
+        # Try to fetch patterns based on filetype
         if filetype in FILE_TYPES.keys():
             if FILE_TYPES[filetype]['elec_url_pattern'] is not None:
                 url_patterns.append(FILE_TYPES[filetype]['elec_url_pattern'])
             if FILE_TYPES[filetype]['paper_url_pattern'] is not None:
                 url_patterns.append(FILE_TYPES[filetype]['paper_url_pattern'])
 
-    # If url_patterns is still empty and filetype not specified, try to fetch patterns based on a_id:
-    if url_patterns == [] and filetype is None and a_id is not None:
-        for key in FILE_TYPES.keys():
-            if FILE_TYPES[key]['a_id'] == a_id and FILE_TYPES[key]['delim'] is not None:
-                if FILE_TYPES[key]['elec_url_pattern'] is not None:
-                    url_patterns.append(FILE_TYPES[key]['elec_url_pattern'])
-                if FILE_TYPES[key]['paper_url_pattern'] is not None:
-                    url_patterns.append(FILE_TYPES[key]['paper_url_pattern'])
+        # Otherwise, try to fetch patterns based on a_id:
+        elif a_id is not None:
+            for key in FILE_TYPES.keys():
+                if FILE_TYPES[key]['a_id'] == a_id and FILE_TYPES[key]['delim'] is not None:
+                    if FILE_TYPES[key]['elec_url_pattern'] is not None:
+                        url_patterns.append(FILE_TYPES[key]['elec_url_pattern'])
+                    if FILE_TYPES[key]['paper_url_pattern'] is not None:
+                        url_patterns.append(FILE_TYPES[key]['paper_url_pattern'])
 
     # Iterate through patterns to construct a valid URL
     for url_pattern in url_patterns:

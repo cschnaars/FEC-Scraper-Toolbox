@@ -5,8 +5,9 @@ class Report:
     """
     Report base class.
     """
-    def __init__(self, rpt_id, down_now=settings.DOWN_NOW, mem_load=settings.MEM_LOAD,
-                 db_load_delim=settings.DB_LOAD_DELIM, db_load_url=None, destroy=False):
+    def __init__(self, rpt_id, down_now=settings.DOWN_NOW, down_now_urls=None, down_now_paths=None):
+        # mem_load=settings.MEM_LOAD,
+        # db_load_delim=settings.DB_LOAD_DELIM, db_load_url=None, destroy=False):
         """
         Report base class initialization.
 
@@ -15,9 +16,32 @@ class Report:
         :type rpt_id: int
 
         :param down_now: Download now. Use this parameter to control whether the application automatically will download
-        the specified Report ID in one or more formats upon instantiation. Leave this parameter unspecified to use
-        default value (DOWN_NOW) specified in settings.py.
-        :type down_now: tuple
+        the specified Report ID in one or more formats upon instantiation. Leave this parameter unspecified to use the
+        default value (DOWN_NOW) specified in settings.py. If you do not want any files downloaded on instantiation,
+        set this value (or settings.DOWN_NOW) to None. If any filetypes you specify here don't match a key in
+        settings.FILE_TYPES, you must manually set down_now_urls and down_now_paths.
+        Each filetype is useful only to access settings in settings.FILE_TYPES. If you are not using these settings or
+        want to override them, you can set the appropriate filetype(s) to any object you like (including None or '');
+        your filetype setting will be ignored.
+        :type down_now: list
+
+        :param down_now_urls: Download now URLs. You can ignore this setting (set to None) unless a value in down_now
+        does not match a key in settings.DOWN_NOW or you want to override those settings. In those cases, set
+        down_now_urls to a list containing a valid URL for each filetype in down_now. For any filetype that is a key in
+        settings.FILE_TYPES, you can set the appropriate URL in down_now_urls to None, if you want to use the default
+        URL.
+        :type down_now_urls: list
+
+        :param down_now_paths: Download now file paths. You can ignore this setting (set to None) unless a filetype in
+        down_now does not match a key in settings.DOWN_NOW or you want to override those settings. In those cases, set
+        down_now_paths to a list containing a valid save file path for each filetype in down_now. For any filetype that
+        is a key in settings.FILE_TYPES, you can set the appropriate path in down_now_paths to None, if you want to use
+        the default path. Note that unless overridden, the default save path for a given filetype is:
+        settings.FILE_TYPES[filetype]['save_path']<rpt_id>.settings.FILE_TYPES[filetype]['ext']
+        :type down_now_paths: list
+
+
+
 
         :param mem_load: Store report data in memory. Use this parameter to control whether the django application will
         download and retain a report's data in memory upon instantiation of the base Report class. Leave this parameter
@@ -53,15 +77,6 @@ class Report:
         """
         msg = "It's " + '"fetch", with a soft "ch" sound. There are no other acceptable pronunciations.'
         print(msg)
-
-    def get_url(self, rpt_id, fileformat):
-
-
-
-
-
-
-
 
     def fetch(self, rpt_id, filetype, delim=None, url_pattern=None, keep_in_mem=False, save_to_disk=False,
               save_path=None, overwrite=False):

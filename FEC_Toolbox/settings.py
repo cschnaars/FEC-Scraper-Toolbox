@@ -101,15 +101,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR). Write
-# code to make sure // does not occur anywhere.
-BASE_FEC_DIR = 'C:/data'
+# Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR).
+BASE_FEC_DIR = 'C:/data/fec'
 
 # Parent directory used to house all downloaded reports. Default is: <BASE_FEC_DIR>/reports
 REPORTS_DIR = BASE_FEC_DIR + '/reports'
 
-# Default delimiter for text data. Default is: chr(28)
-DEFAULT_DELIM = chr(28)
+# Test directory used to download data during testing.
+TEST_DIR = BASE_FEC_DIR + '/test'
 
 # To avoid hardcoding file formats, use this dictionary to specify a user-defined key for each possible report type.
 # Values for each key are dictionaries of other settings, such as delimiter, url pattern, file extension and
@@ -138,8 +137,30 @@ FILE_TYPES = {'pdf': {'ext': 'pdf',
                           'save_path': REPORTS_DIR + '/text/ascii28/'}
               }
 
-# Default download settings for base Report class instantiation
-DOWN_NOW = (['ascii28'], FILE_TYPES)
+# Default filetypes to download upon base Report class instantiation
+DOWN_NOW = ['ascii28']
+
+# Default number of times the app should attempt to download a report
+DOWN_TRIES = 5
+
+# Overwrite existing files without prompting the user
+DOWN_OVERWRITE = True
+
+# Compare file length on FEC website with downloaded file to verify they are the same
+DOWN_VERIFY = True
+
+# Set size of file chunks (in bytes) to be downloaded; 1024 * 1024 = 1 MB
+DOWN_CHUNK_SIZE = 1024 * 1024
+
+
+
+
+
+
+
+
+# Default delimiter for text data. Default is: chr(28)
+DEFAULT_DELIM = chr(28)
 
 # Specifies in base Report class whether the indicated format should be downloaded and retained in memory upon
 # instantiation.

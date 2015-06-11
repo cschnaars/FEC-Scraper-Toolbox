@@ -2,7 +2,7 @@ db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P
 form_tp,Electronic Form Type,varchar,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 comm_nm,Committee Name,varchar,200,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
-chg_addr,Change of Address,bool,,4,4,4,4,4,4,4,9,9,9,9,9,9,9,4,4,4,4,4,4,4
+chg_addr,Change of Address,char,1,4,4,4,4,4,4,4,9,9,9,9,9,9,9,4,4,4,4,4,4,4
 addr1,Street Address Line 1,varchar,34,5,5,5,5,5,5,5,4,4,4,4,4,4,4,5,5,5,5,5,5,5
 addr2,Street Address Line 2,varchar,34,6,6,6,6,6,6,6,5,5,5,5,5,5,5,6,6,6,6,6,6,6
 addr_city,City (Address),varchar,30,7,7,7,7,7,7,7,6,6,6,6,6,6,6,7,7,7,7,7,7,7
@@ -26,7 +26,7 @@ treas_sign_dt,Date Report Signed by Treasurer,int,,23,23,23,23,23,23,23,93,93,93
 tot_contribs_6a_prd,"Total Contributions (Period, Line 6a)",money,,24,24,24,24,31,31,31,22,22,22,22,22,22,22,23,23,23,23,23,23,23
 tot_refunds_6b_prd,"Total Contribution Refunds (Period, Line 6b)",money,,25,25,25,25,32,32,32,23,23,23,23,23,23,23,24,24,24,24,24,24,24
 net_contribs_6c_prd,"Net Contributions (Period, Line 6c)",money,,26,26,26,26,33,33,33,24,24,24,24,24,24,24,25,25,25,25,25,25,25
-op_exps_7a_prd,"Total Operating Expenditures (Period, Line 7a)",money,,27,27,27,27,34,34,34,25,25,25,25,25,25,25,26,26,26,26,26,26,26
+tot_op_exps_7a_prd,"Total Operating Expenditures (Period, Line 7a)",money,,27,27,27,27,34,34,34,25,25,25,25,25,25,25,26,26,26,26,26,26,26
 offsets_to_op_exps_7b_prd,"Offsets to Operating Expenditures (Period, Line 7b)",money,,28,28,28,28,35,35,35,26,26,26,26,26,26,26,27,27,27,27,27,27,27
 net_op_exps_7c_prd,"Net Operating Expenditures (Period, Line 7c)",money,,29,29,29,29,36,36,36,27,27,27,27,27,27,27,28,28,28,28,28,28,28
 cash_close_8,Cash on Hand at Close of Period (Line 8),money,,30,30,30,30,37,37,37,28,28,28,28,28,28,28,29,29,29,29,29,29,29
@@ -46,7 +46,7 @@ tot_loans_13c_prd,"Total Loans (Period, Line 13c)",money,,43,43,43,43,50,50,50,4
 offsets_to_op_exps_14_prd,"Offsets to Operating Expenditures (Period, Line 14)",money,,44,44,44,44,51,51,51,42,42,42,42,42,42,42,43,43,43,43,43,43,43
 oth_receipts_15_prd,"Other Receipts (Period, Line 15)",money,,45,45,45,45,52,52,52,43,43,43,43,43,43,43,44,44,44,44,44,44,44
 tot_receipts_16_prd,"Total Receipts (Period, Line 16)",money,,46,46,46,46,53,53,53,44,44,44,44,44,44,44,45,45,45,45,45,45,45
-op_exps_17_prd,"Total Operating Expenditures (Period, Line 17)",money,,47,47,47,47,54,54,54,45,45,45,45,45,45,45,46,46,46,46,46,46,46
+tot_op_exps_17_prd,"Total Operating Expenditures (Period, Line 17)",money,,47,47,47,47,54,54,54,45,45,45,45,45,45,45,46,46,46,46,46,46,46
 trans_to_auth_comms_18_prd,"Transfers to Authorized Committees (Period, Line 18)",money,,48,48,48,48,55,55,55,46,46,46,46,46,46,46,47,47,47,47,47,47,47
 cand_loans_repaid_19a_prd,"Repayments of Loans Made or Guaranteed by Candidate (Period, Line 19a)",money,,49,49,49,49,56,56,56,47,47,47,47,47,47,47,48,48,48,48,48,48,48
 oth_loans_repaid_19a_prd,"Repayments of Other Loans (Period, Line 19b)",money,,50,50,50,50,57,57,57,48,48,48,48,48,48,48,49,49,49,49,49,49,49
@@ -65,7 +65,7 @@ cash_close_27,Cash on Hand at Close of Period (Line 27),money,,62,62,62,62,69,69
 tot_contribs_6a_cyc,"Total Contributions (Cycle, Line 6a)",money,,63,63,63,63,70,70,70,61,61,61,61,61,61,61,57,57,57,57,57,57,57
 tot_refunds_6b_cyc,"Total Contribution Refunds (Cycle, Line 6b)",money,,64,64,64,64,71,71,71,62,62,62,62,62,62,62,58,58,58,58,58,58,58
 net_contribs_6c_cyc,"Net Contributions (Cycle, Line 6c)",money,,65,65,65,65,72,72,72,63,63,63,63,63,63,63,59,59,59,59,59,59,59
-op_exps_7a_cyc,"Total Operating Expenditures (Cycle, Line 7a)",money,,66,66,66,66,73,73,73,64,64,64,64,64,64,64,60,60,60,60,60,60,60
+tot_op_exps_7a_cyc,"Total Operating Expenditures (Cycle, Line 7a)",money,,66,66,66,66,73,73,73,64,64,64,64,64,64,64,60,60,60,60,60,60,60
 offsets_to_op_exps_7b_cyc,"Offsets to Operating Expenditures (Cycle, Line 7b)",money,,67,67,67,67,74,74,74,65,65,65,65,65,65,65,61,61,61,61,61,61,61
 net_op_exps_7c_cyc,"Net Operating Expenditures (Cycle, Line 7c)",money,,68,68,68,68,75,75,75,66,66,66,66,66,66,66,62,62,62,62,62,62,62
 ind_contribs_item_11ai_cyc,"Itemized Individual Contributions (Cycle, Line 11a.i)",money,,69,69,69,69,76,76,76,67,67,67,67,67,67,67,63,63,63,63,63,63,63
@@ -82,7 +82,7 @@ tot_loans_13c_cyc,"Total Loans (Cycle, Line 13c)",money,,79,79,79,79,86,86,86,77
 offsets_to_op_exps_14_cyc,"Offsets to Operating Expenditures (Cycle, Line 14)",money,,80,80,80,80,87,87,87,78,78,78,78,78,78,78,74,74,74,74,74,74,74
 oth_receipts_15_cyc,"Other Receipts (Cycle, Line 15)",money,,81,81,81,81,88,88,88,79,79,79,79,79,79,79,75,75,75,75,75,75,75
 tot_receipts_16_cyc,"Total Receipts (Cycle, Line 16)",money,,82,82,82,82,89,89,89,80,80,80,80,80,80,80,76,76,76,76,76,76,76
-op_exps_17_cyc,"Total Operating Expenditures (Cycle, Line 17)",money,,83,83,83,83,90,90,90,81,81,81,81,81,81,81,77,77,77,77,77,77,77
+tot_op_exps_17_cyc,"Total Operating Expenditures (Cycle, Line 17)",money,,83,83,83,83,90,90,90,81,81,81,81,81,81,81,77,77,77,77,77,77,77
 trans_to_auth_comms_18_cyc,"Transfers to Authorized Committees (Cycle, Line 18)",money,,84,84,84,84,91,91,91,82,82,82,82,82,82,82,78,78,78,78,78,78,78
 cand_loans_repaid_19a_cyc,"Repayments of Loans Made or Guaranteed by Candidate (Cycle, Line 19a)",money,,85,85,85,85,92,92,92,83,83,83,83,83,83,83,79,79,79,79,79,79,79
 oth_loans_repaid_19a_cyc,"Repayments of Other Loans (Cycle, Line 19b)",money,,86,86,86,86,93,93,93,84,84,84,84,84,84,84,80,80,80,80,80,80,80
@@ -107,8 +107,8 @@ gross_minus_pers_prim,"Gross Receipts Minus Personal from Candidate (Primary, Fo
 gross_receipts_auth_comms_gen,"Gross Receipts of Authorized Committees (General, Form 3Z-1, discontinued after v6.3)",money,,,,,,104,104,104,100,100,100,100,,,,,,,103,103,103,103
 cand_pers_funds_gen,"Aggregate Amount from Personal Funds (General, Form 3Z-1, discontinued after v6.3)",money,,,,,,105,105,105,101,101,101,101,,,,,,,104,104,104,104
 gross_minus_pers_gen,"Gross Receipts Minus Personal from Candidate (General, Form 3Z-1, discontinued after v6.3)",money,,,,,,106,106,106,102,102,102,102,,,,,,,105,105,105,105
-prim_elec,Primary Election (discontinued after v5.3),bool,,,,,,,,,16,16,16,16,16,16,16,,,,,,,
-gen_elec,General Election (discontinued after v5.3),bool,,,,,,,,,17,17,17,17,17,17,17,,,,,,,
-spec_elec,Special Election (discontinued after v5.3),bool,,,,,,,,,18,18,18,18,18,18,18,,,,,,,
-runoff_elec,Runoff Election (discontinued after v5.3),bool,,,,,,,,,19,19,19,19,19,19,19,,,,,,,
+prim_elec,Primary Election (discontinued after v5.3),char,1,,,,,,,,16,16,16,16,16,16,16,,,,,,,
+gen_elec,General Election (discontinued after v5.3),char,1,,,,,,,,17,17,17,17,17,17,17,,,,,,,
+spec_elec,Special Election (discontinued after v5.3),char,1,,,,,,,,18,18,18,18,18,18,18,,,,,,,
+runoff_elec,Runoff Election (discontinued after v5.3),char,1,,,,,,,,19,19,19,19,19,19,19,,,,,,,
 beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,93,93,93,106,106,106,106

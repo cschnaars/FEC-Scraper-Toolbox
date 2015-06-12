@@ -1,0 +1,126 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+form_tp,Electronic Form Type,varchar,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+comm_nm,Committee Name,varchar,200,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+chg_addr,Change of Address,char,1,4,4,4,4,4,4,4,9,9,9,9,9,9,9,4,4,4,4,4,4,4
+addr1,Street Address Line 1,varchar,34,5,5,5,5,5,5,5,4,4,4,4,4,4,4,5,5,5,5,5,5,5
+addr2,Street Address Line 2,varchar,34,6,6,6,6,6,6,6,5,5,5,5,5,5,5,6,6,6,6,6,6,6
+addr_city,City (Address),varchar,30,7,7,7,7,7,7,7,6,6,6,6,6,6,6,7,7,7,7,7,7,7
+addr_state,State (Address),char,2,8,8,8,8,8,8,8,7,7,7,7,7,7,7,8,8,8,8,8,8,8
+addr_zip,Zip code,varchar,9,9,9,9,9,9,9,9,8,8,8,8,8,8,8,9,9,9,9,9,9,9
+rpt_prd,Report Period,varchar,3,10,10,10,10,10,10,10,11,11,11,11,11,11,11,10,10,10,10,10,10,10
+elec_cd,Election Code,varchar,5,11,11,11,11,11,11,11,12,12,12,12,12,12,12,,,,,,,
+elec_dt,Election Date,int,,12,12,12,12,12,12,12,13,13,13,13,13,13,13,11,11,11,11,11,11,11
+elec_state,Election State,char,2,13,13,13,13,13,13,13,14,14,14,14,14,14,14,12,12,12,12,12,12,12
+covg_fm,Coverage From Date,int,,14,14,14,14,14,14,14,15,15,15,15,15,15,15,13,13,13,13,13,13,13
+covg_to,Coverage To Date,int,,15,15,15,15,15,15,15,16,16,16,16,16,16,16,14,14,14,14,14,14,14
+qual_multi_cand_comm,Qualified Multi-Candidate Committee,char,1,16,16,16,16,16,16,16,10,10,10,10,10,10,10,28,28,28,28,28,28,28
+treas_full_nm,Treasurer Full Name (discontinued after v5.3),varchar,38,,,,,,,,106,106,106,106,106,106,106,,,,,,,
+treas_last,Treasurer Last Name,varchar,30,17,17,17,17,17,17,17,,,,,,,,15,15,15,15,15,15,15
+treas_first,Treasurer First Name,varchar,20,18,18,18,18,18,18,18,,,,,,,,16,16,16,16,16,16,16
+treas_mid,Treasurer Middle Name,varchar,20,19,19,19,19,19,19,19,,,,,,,,17,17,17,17,17,17,17
+treas_pfx,Treasurer Prefix,varchar,10,20,20,20,20,20,20,20,,,,,,,,18,18,18,18,18,18,18
+treas_sfx,Treasurer Suffix,varchar,10,21,21,21,21,21,21,21,,,,,,,,19,19,19,19,19,19,19
+treas_sign_dt,Date Report Signed by Treasurer,int,,22,22,22,22,22,22,22,107,107,107,107,107,107,107,20,20,20,20,20,20,20
+cash_begin_6b_prd,"Beginning Cash on Hand (Period, Line 6b)",money,,23,23,23,23,23,23,23,17,17,17,17,17,17,17,21,21,21,21,21,21,21
+tot_receipts_6c_prd,"Total Receipts (Period, Line 6c)",money,,24,24,24,24,24,24,24,18,18,18,18,18,18,18,22,22,22,22,22,22,22
+subtotal_6d_prd,"Subtotal (Line 6b + Line 6c) (Period, Line 6d)",money,,25,25,25,25,25,25,25,19,19,19,19,19,19,19,23,23,23,23,23,23,23
+tot_disb_7_prd,"Total Disbursements (Period, Line 7)",money,,26,26,26,26,26,26,26,20,20,20,20,20,20,20,24,24,24,24,24,24,24
+cash_close_8_prd,"Cash on Hand at Close (Period, Line 8)",money,,27,27,27,27,27,27,27,21,21,21,21,21,21,21,25,25,25,25,25,25,25
+debts_to_9,"Debts To (Itemized on Schedules C and D, Line 9)",money,,28,28,28,28,28,28,28,22,22,22,22,22,22,22,26,26,26,26,26,26,26
+debts_by_10,"Debts By (Itemized on Schedules C and D, Line 10)",money,,29,29,29,29,29,29,29,23,23,23,23,23,23,23,27,27,27,27,27,27,27
+ind_contribs_item_11ai_prd,"Itemized Individual Contributions (Period, Line 11a.i)",money,,30,30,30,30,30,30,30,24,24,24,24,24,24,24,29,29,29,29,29,29,29
+ind_contribs_unitem_11aii_prd,"Unitemized Individual Contributions (Period, Line 11a.ii)",money,,31,31,31,31,31,31,31,25,25,25,25,25,25,25,30,30,30,30,30,30,30
+ind_contribs_tot_11aiii_prd,"Total Individual Contributions (Period, Line 11a.iii)",money,,32,32,32,32,32,32,32,26,26,26,26,26,26,26,31,31,31,31,31,31,31
+pol_pty_comm_contribs_11b_prd,"Political Party Committee Contributions (Period, Line 11b)",money,,33,33,33,33,33,33,33,27,27,27,27,27,27,27,32,32,32,32,32,32,32
+oth_comm_contribs_11c_prd,"Other Committee Contributions (Period, Line 11c)",money,,34,34,34,34,34,34,34,28,28,28,28,28,28,28,33,33,33,33,33,33,33
+tot_contribs_11d_prd,"Total Contributions (Period, Line 11d)",money,,35,35,35,35,35,35,35,29,29,29,29,29,29,29,34,34,34,34,34,34,34
+trans_fm_affil_comms_12_prd,"Transfers from Affiliated/Other Party Committees (Period, Line 12)",money,,36,36,36,36,36,36,36,30,30,30,30,30,30,30,35,35,35,35,35,35,35
+loans_rcvd_13_prd,"All Loans Received (Period, Line 13)",money,,37,37,37,37,37,37,37,31,31,31,31,31,31,31,36,36,36,36,36,36,36
+loan_repayments_rcvd_14_prd,"Loan Repayments Received (Period, Line 14)",money,,38,38,38,38,38,38,38,32,32,32,32,32,32,32,37,37,37,37,37,37,37
+offsets_to_op_exps_15_prd,"Offsets to Operating Expenditures (Period, Line 15)",money,,39,39,39,39,39,39,39,33,33,33,33,33,33,33,38,38,38,38,38,38,38
+contrib_refunds_rcvd_16_prd,"Contribution Refunds Received (Period, Line 16)",money,,40,40,40,40,40,40,40,34,34,34,34,34,34,34,39,39,39,39,39,39,39
+oth_fed_receipts_17_prd,"Other Federal Receipts (Dividends, Interest, etc.) (Period, Line 17)",money,,41,41,41,41,41,41,41,35,35,35,35,35,35,35,40,40,40,40,40,40,40
+trans_fm_nonfed_acct_18a_prd,"Transfers from Non-Federal Account (H3) (Period, Line 18a)",money,,42,42,42,42,42,42,42,36,36,36,36,36,36,36,41,41,41,41,41,41,41
+trans_fm_levin_funds_18b_prd,"Transfers from Levin Funds (H5) (Period, Line 18b)",money,,43,43,43,43,43,43,43,108,108,108,108,,,,42,42,42,42,42,42,42
+tot_nonfed_trans_18c_prd,"Total Non-Federal Transfers (Line 18a + Line 18b) (Period, Line 18c)",money,,44,44,44,44,44,44,44,109,109,109,109,,,,43,43,43,43,43,43,43
+tot_receipts_19_prd,"Total Receipts (Period, Line 19)",money,,45,45,45,45,45,45,45,37,37,37,37,37,37,37,44,44,44,44,44,44,44
+tot_fed_receipts_19_prd,"Total Federal Receipts (Period, Line 20)",money,,46,46,46,46,46,46,46,38,38,38,38,38,38,38,45,45,45,45,45,45,45
+fed_optg_exp_21ai_prd,"Federal Share of Operating Expenditures from Schedule H5 (Period, Line 21a.i)",money,,47,47,47,47,47,47,47,39,39,39,39,39,39,39,46,46,46,46,46,46,46
+nonfed_optg_exp_21aii_prd,"Non-Federal Share of Operating Expenditures from Schedule H5 (Period, Line 21a.ii)",money,,48,48,48,48,48,48,48,40,40,40,40,40,40,40,47,47,47,47,47,47,47
+oth_fed_optg_exp_21b_prd,"Other Federal Operating Expenditures (Period, Line 21b)",money,,49,49,49,49,49,49,49,41,41,41,41,41,41,41,48,48,48,48,48,48,48
+tot_op_exps_21c_prd,"Total Operating Expenditures (Period, Line 21c)",money,,50,50,50,50,50,50,50,42,42,42,42,42,42,42,49,49,49,49,49,49,49
+trans_to_affil_comms_22_prd,"Transfers to Affiliated/Other Party Committees (Period, Line 22)",money,,51,51,51,51,51,51,51,43,43,43,43,43,43,43,50,50,50,50,50,50,50
+fec_contribs_23_prd,"Contributions to Federal Candidates and Committees (Period, Line 23)",money,,52,52,52,52,52,52,52,44,44,44,44,44,44,44,51,51,51,51,51,51,51
+ind_exps_24_prd,"Independent Expenditures (Period, Line 24)",money,,53,53,53,53,53,53,53,45,45,45,45,45,45,45,52,52,52,52,52,52,52
+coord_exps_25_prd,"Coordinated Expenditures Made by Party Committees (Period, Line 25)",money,,54,54,54,54,54,54,54,46,46,46,46,46,46,46,53,53,53,53,53,53,53
+loan_repayments_26_prd,"Loan Repayments (Period, Line 26)",money,,55,55,55,55,55,55,55,47,47,47,47,47,47,47,54,54,54,54,54,54,54
+loans_made_27_prd,"Loans Made (Period, Line 27)",money,,56,56,56,56,56,56,56,48,48,48,48,48,48,48,55,55,55,55,55,55,55
+refunds_non_comms_28a_prd,"Contribution Refunds to Individuals and non-Committees (Period, Line 28a)",money,,57,57,57,57,57,57,57,49,49,49,49,49,49,49,56,56,56,56,56,56,56
+refunds_pol_pty_comms_28b_prd,"Contribution Refunds to Political Party Committees (Period, Line 28b)",money,,58,58,58,58,58,58,58,50,50,50,50,50,50,50,57,57,57,57,57,57,57
+refunds_oth_comms_28c_prd,"Contribution Refunds to Other Committees (Period, Line 28c)",money,,59,59,59,59,59,59,59,51,51,51,51,51,51,51,58,58,58,58,58,58,58
+tot_refunds_28d_prd,"Total Contribution Refunds (Period, Line 28d)",money,,60,60,60,60,60,60,60,52,52,52,52,52,52,52,59,59,59,59,59,59,59
+oth_disb_29_prd,"Other Disbursements (Period, Line 29)",money,,61,61,61,61,61,61,61,53,53,53,53,53,53,53,60,60,60,60,60,60,60
+fed_elec_activity_fed_shr_30ai_prd,"Federal Share of Federal Election Activity from Schedule H6 (Period, Line 30a.i)",money,,62,62,62,62,62,62,62,110,110,110,110,,,,61,61,61,61,61,61,61
+fed_elec_activity_levin_shr_30aii_prd,"Levin Share of Federal Election Activity from Schedule H6 (Period, Line 30a.ii)",money,,63,63,63,63,63,63,63,111,111,111,111,,,,62,62,62,62,62,62,62
+fed_elec_activity_fed_funds_only_30b_prd,"Federal Election Activity Paid With Federal Funds Only (Period, Line 30b)",money,,64,64,64,64,64,64,64,112,112,112,112,,,,63,63,63,63,63,63,63
+tot_fed_elec_activity_30c_prd,"Total Federal Election Activity (Period, Line 30c)",money,,65,65,65,65,65,65,65,113,113,113,113,,,,64,64,64,64,64,64,64
+tot_disb_31_prd,"Total Disbursements (Period, Line 31)",money,,66,66,66,66,66,66,66,54,54,54,54,54,54,54,65,65,65,65,65,65,65
+tot_fed_disb_32_prd,"Total Federal Disbursements (Period, Line 32)",money,,67,67,67,67,67,67,67,55,55,55,55,55,55,55,66,66,66,66,66,66,66
+tot_contribs_33_prd,"Total Contributions (Period, Line 33)",money,,68,68,68,68,68,68,68,56,56,56,56,56,56,56,67,67,67,67,67,67,67
+tot_refunds_34_prd,"Total Contribution Refunds (Period, Line 34)",money,,69,69,69,69,69,69,69,57,57,57,57,57,57,57,68,68,68,68,68,68,68
+net_contribs_35_prd,"Net Contributions (Period, Line 35)",money,,70,70,70,70,70,70,70,58,58,58,58,58,58,58,69,69,69,69,69,69,69
+tot_fed_op_exps_36_prd,"Total Federal Operating Expenditures (Period, Line 36)",money,,71,71,71,71,71,71,71,59,59,59,59,59,59,59,70,70,70,70,70,70,70
+offsets_to_op_exps_37_prd,"Offsets to Operating Expenditures (Period, Line 37)",money,,72,72,72,72,72,72,72,60,60,60,60,60,60,60,71,71,71,71,71,71,71
+net_op_exps_38_prd,"Net Operating Expenditures (Period, Line 38)",money,,73,73,73,73,73,73,73,61,61,61,61,61,61,61,72,72,72,72,72,72,72
+cash_begin_yr_6a,Cash on Hand as of January 1 (Line 6a),money,,74,74,74,74,74,74,74,62,62,62,62,62,62,62,74,74,74,74,74,74,74
+cash_year_6a,Cash on Hand Year as of January 1 (Line 6a),smallint,,75,75,75,75,75,75,75,63,63,63,63,63,63,63,73,73,73,73,73,73,73
+tot_receipts_6c_yr,"Total Receipts (Year, Line 6c)",money,,76,76,76,76,76,76,76,64,64,64,64,64,64,64,75,75,75,75,75,75,75
+subtotal_6d_yr,"Subtotal (Line 6b + Line 6c) (Year, Line 6d)",money,,77,77,77,77,77,77,77,65,65,65,65,65,65,65,76,76,76,76,76,76,76
+tot_disb_7_yr,"Total Disbursements (Year, Line 7)",money,,78,78,78,78,78,78,78,66,66,66,66,66,66,66,77,77,77,77,77,77,77
+cash_close_8_yr,"Cash on Hand at Close (Year, Line 8)",money,,79,79,79,79,79,79,79,67,67,67,67,67,67,67,78,78,78,78,78,78,78
+ind_contribs_item_11ai_yr,"Itemized Individual Contributions (Year, Line 11a.i)",money,,80,80,80,80,80,80,80,68,68,68,68,68,68,68,79,79,79,79,79,79,79
+ind_contribs_unitem_11aii_yr,"Unitemized Individual Contributions (Year, Line 11a.ii)",money,,81,81,81,81,81,81,81,69,69,69,69,69,69,69,80,80,80,80,80,80,80
+ind_contribs_tot_11aiii_yr,"Total Individual Contributions (Year, Line 11a.iii)",money,,82,82,82,82,82,82,82,70,70,70,70,70,70,70,81,81,81,81,81,81,81
+pol_pty_comm_contribs_11b_yr,"Political Party Committee Contributions (Year, Line 11b)",money,,83,83,83,83,83,83,83,71,71,71,71,71,71,71,82,82,82,82,82,82,82
+oth_comm_contribs_11c_yr,"Other Committee Contributions (Year, Line 11c)",money,,84,84,84,84,84,84,84,72,72,72,72,72,72,72,83,83,83,83,83,83,83
+tot_contribs_11d_yr,"Total Contributions (Year, Line 11d)",money,,85,85,85,85,85,85,85,73,73,73,73,73,73,73,84,84,84,84,84,84,84
+trans_fm_affil_comms_12_yr,"Transfers from Affiliated/Other Party Committees (Year, Line 12)",money,,86,86,86,86,86,86,86,74,74,74,74,74,74,74,85,85,85,85,85,85,85
+loans_rcvd_13_yr,"All Loans Received (Year, Line 13)",money,,87,87,87,87,87,87,87,75,75,75,75,75,75,75,86,86,86,86,86,86,86
+loan_repayments_rcvd_14_yr,"Loan Repayments Received (Year, Line 14)",money,,88,88,88,88,88,88,88,76,76,76,76,76,76,76,87,87,87,87,87,87,87
+offsets_to_op_exps_15_yr,"Offsets to Operating Expenditures (Year, Line 15)",money,,89,89,89,89,89,89,89,77,77,77,77,77,77,77,88,88,88,88,88,88,88
+contrib_refunds_rcvd_16_yr,"Contribution Refunds Received (Year, Line 16)",money,,90,90,90,90,90,90,90,78,78,78,78,78,78,78,89,89,89,89,89,89,89
+oth_fed_receipts_17_yr,"Other Federal Receipts (Dividends, Interest, etc.) (Year, Line 17)",money,,91,91,91,91,91,91,91,79,79,79,79,79,79,79,90,90,90,90,90,90,90
+trans_fm_nonfed_acct_18a_yr,"Transfers from Non-Federal Account (H3) (Year, Line 18a)",money,,92,92,92,92,92,92,92,80,80,80,80,80,80,80,91,91,91,91,91,91,91
+trans_fm_levin_funds_18b_yr,"Transfers from Levin Funds (H5) (Year, Line 18b)",money,,93,93,93,93,93,93,93,114,114,114,114,,,,92,92,92,92,92,92,92
+tot_nonfed_trans_18c_yr,"Total Non-Federal Transfers (Line 18a + Line 18b) (Year, Line 18c)",money,,94,94,94,94,94,94,94,115,115,115,115,,,,93,93,93,93,93,93,93
+tot_receipts_19_yr,"Total Receipts (Year, Line 19)",money,,95,95,95,95,95,95,95,81,81,81,81,81,81,81,94,94,94,94,94,94,94
+tot_fed_receipts_19_yr,"Total Federal Receipts (Year, Line 20)",money,,96,96,96,96,96,96,96,82,82,82,82,82,82,82,95,95,95,95,95,95,95
+fed_optg_exp_21ai_yr,"Federal Share of Operating Expenditures from Schedule H5 (Year, Line 21a.i)",money,,97,97,97,97,97,97,97,83,83,83,83,83,83,83,96,96,96,96,96,96,96
+nonfed_optg_exp_21aii_yr,"Non-Federal Share of Operating Expenditures from Schedule H5 (Year, Line 21a.ii)",money,,98,98,98,98,98,98,98,84,84,84,84,84,84,84,97,97,97,97,97,97,97
+oth_fed_optg_exp_21b_yr,"Other Federal Operating Expenditures (Year, Line 21b)",money,,99,99,99,99,99,99,99,85,85,85,85,85,85,85,98,98,98,98,98,98,98
+tot_op_exps_21c_yr,"Total Operating Expenditures (Year, Line 21c)",money,,100,100,100,100,100,100,100,86,86,86,86,86,86,86,99,99,99,99,99,99,99
+trans_to_affil_comms_22_yr,"Transfers to Affiliated/Other Party Committees (Year, Line 22)",money,,101,101,101,101,101,101,101,87,87,87,87,87,87,87,100,100,100,100,100,100,100
+fec_contribs_23_yr,"Contributions to Federal Candidates and Committees (Year, Line 23)",money,,102,102,102,102,102,102,102,88,88,88,88,88,88,88,101,101,101,101,101,101,101
+ind_exps_24_yr,"Independent Expenditures (Year, Line 24)",money,,103,103,103,103,103,103,103,89,89,89,89,89,89,89,102,102,102,102,102,102,102
+coord_exps_25_yr,"Coordinated Expenditures Made by Party Committees (Year, Line 25)",money,,104,104,104,104,104,104,104,90,90,90,90,90,90,90,103,103,103,103,103,103,103
+loan_repayments_26_yr,"Loan Repayments (Year, Line 26)",money,,105,105,105,105,105,105,105,91,91,91,91,91,91,91,104,104,104,104,104,104,104
+loans_made_27_yr,"Loans Made (Year, Line 27)",money,,106,106,106,106,106,106,106,92,92,92,92,92,92,92,105,105,105,105,105,105,105
+refunds_non_comms_28a_yr,"Contribution Refunds to Individuals and non-Committees (Year, Line 28a)",money,,107,107,107,107,107,107,107,93,93,93,93,93,93,93,106,106,106,106,106,106,106
+refunds_pol_pty_comms_28b_yr,"Contribution Refunds to Political Party Committees (Year, Line 28b)",money,,108,108,108,108,108,108,108,94,94,94,94,94,94,94,107,107,107,107,107,107,107
+refunds_oth_comms_28c_yr,"Contribution Refunds to Other Committees (Year, Line 28c)",money,,109,109,109,109,109,109,109,95,95,95,95,95,95,95,108,108,108,108,108,108,108
+tot_refunds_28d_yr,"Total Contribution Refunds (Year, Line 28d)",money,,110,110,110,110,110,110,110,96,96,96,96,96,96,96,109,109,109,109,109,109,109
+oth_disb_29_yr,"Other Disbursements (Year, Line 29)",money,,111,111,111,111,111,111,111,97,97,97,97,97,97,97,110,110,110,110,110,110,110
+fed_elec_activity_fed_shr_30ai_yr,"Federal Share of Federal Election Activity from Schedule H6 (Year, Line 30a.i)",money,,112,112,112,112,112,112,112,116,116,116,116,,,,111,111,111,111,111,111,111
+fed_elec_activity_levin_shr_30aii_yr,"Levin Share of Federal Election Activity from Schedule H6 (Year, Line 30a.ii)",money,,113,113,113,113,113,113,113,117,117,117,117,,,,112,112,112,112,112,112,112
+fed_elec_activity_fed_funds_only_30b_yr,"Federal Election Activity Paid With Federal Funds Only (Year, Line 30b)",money,,114,114,114,114,114,114,114,118,118,118,118,,,,113,113,113,113,113,113,113
+tot_fed_elec_activity_30c_yr,"Total Federal Election Activity (Year, Line 30c)",money,,115,115,115,115,115,115,115,119,119,119,119,,,,114,114,114,114,114,114,114
+tot_disb_31_yr,"Total Disbursements (Year, Line 31)",money,,116,116,116,116,116,116,116,98,98,98,98,98,98,98,115,115,115,115,115,115,115
+tot_fed_disb_32_yr,"Total Federal Disbursements (Year, Line 32)",money,,117,117,117,117,117,117,117,99,99,99,99,99,99,99,116,116,116,116,116,116,116
+tot_contribs_33_yr,"Total Contributions (Year, Line 33)",money,,118,118,118,118,118,118,118,100,100,100,100,100,100,100,117,117,117,117,117,117,117
+tot_refunds_34_yr,"Total Contribution Refunds (Year, Line 34)",money,,119,119,119,119,119,119,119,101,101,101,101,101,101,101,118,118,118,118,118,118,118
+net_contribs_35_yr,"Net Contributions (Year, Line 35)",money,,120,120,120,120,120,120,120,102,102,102,102,102,102,102,119,119,119,119,119,119,119
+tot_fed_op_exps_36_yr,"Total Federal Operating Expenditures (Year, Line 36)",money,,121,121,121,121,121,121,121,103,103,103,103,103,103,103,120,120,120,120,120,120,120
+offsets_to_op_exps_37_yr,"Offsets to Operating Expenditures (Year, Line 37)",money,,122,122,122,122,122,122,122,104,104,104,104,104,104,104,121,121,121,121,121,121,121
+net_op_exps_38_yr,"Net Operating Expenditures (Year, Line 38)",money,,123,123,123,123,123,123,123,105,105,105,105,105,105,105,122,122,122,122,122,122,122
+beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,123,123,123,123,123,123,123

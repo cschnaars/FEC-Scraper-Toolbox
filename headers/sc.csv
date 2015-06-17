@@ -1,0 +1,74 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,26,26,26,26,26,26,3,,,,,,,
+rcpt_ln_nbr,Receipt Line Number,varchar,8,4,4,4,4,4,4,4,27,27,27,,,,,3,3,3,3,3,3,3
+ent_tp,Entity Type,char,3,5,5,5,5,5,5,5,3,3,3,3,3,3,,,,,,,,
+lender_full_nm,Lender Full Name (discontinued after v5),varchar,90,,,,,,,,4,4,4,4,4,4,4,,,,,,,
+lender_org_nm,Lender Organization Name,varchar,200,6,6,6,6,6,6,6,,,,,,,,4,4,4,4,4,4,4
+lender_last,Lender Last Name,varchar,30,7,7,7,7,7,7,7,,,,,,,,5,5,5,5,5,5,5
+lender_first,Lender First Name,varchar,20,8,8,8,8,8,8,8,,,,,,,,6,6,6,6,6,6,6
+lender_mid,Lender Middle Name,varchar,20,9,9,9,9,9,9,9,,,,,,,,7,7,7,7,7,7,7
+lender_pfx,Lender Name Prefix,varchar,10,10,10,10,10,10,10,10,,,,,,,,8,8,8,8,8,8,8
+lender_sfx,Lender Name Suffix,varchar,10,11,11,11,11,11,11,11,,,,,,,,9,9,9,9,9,9,9
+lender_addr1,Lender Street Address Line 1,varchar,34,12,12,12,12,12,12,12,5,5,5,5,5,5,5,10,10,10,10,10,10,10
+lender_addr2,Lender Street Address Line 2,varchar,34,13,13,13,13,13,13,13,6,6,6,6,6,6,6,11,11,11,11,11,11,11
+lender_city,Lender City (Address),varchar,30,14,14,14,14,14,14,14,7,7,7,7,7,7,7,12,12,12,12,12,12,12
+lender_state,Lender State (Address),char,2,15,15,15,15,15,15,15,8,8,8,8,8,8,8,13,13,13,13,13,13,13
+lender_zip,Lender Zip Code,varchar,9,16,16,16,16,16,16,16,9,9,9,9,9,9,9,14,14,14,14,14,14,14
+elec_cd,Election Code,char,5,17,17,17,17,17,17,17,10,10,10,10,10,10,10,15,15,15,15,15,15,15
+elec_oth_desc,Other Election Description,varchar,20,18,18,18,18,18,18,18,11,11,11,11,11,11,11,16,16,16,16,16,16,16
+orig_loan_amt,Original Loan Amount,money,,19,19,19,19,19,19,19,12,12,12,12,12,12,12,17,17,17,17,17,17,17
+loan_pymt_to_dt,Loan Payment to Date,money,,20,20,20,20,20,20,20,13,13,13,13,13,13,13,18,18,18,18,18,18,18
+loan_bal,Loan Balance,money,,21,21,21,21,21,21,21,14,14,14,14,14,14,14,19,19,19,19,19,19,19
+loan_incur_dt,Date Loan Incurred,int,,22,22,22,22,22,22,22,15,15,15,15,15,15,15,20,20,20,20,20,20,20
+loan_due_dt,Loan Due Date,int,,23,23,23,23,23,23,23,,,,,,,16,,,,,,,
+loan_int_rt,Loan Interest Rate,varchar,15,24,24,24,24,24,24,24,17,17,17,17,17,17,17,22,22,22,22,22,22,22
+loan_secured,Loan Secured,char,1,25,25,25,25,25,25,25,18,18,18,18,18,18,18,23,23,23,23,23,23,23
+loan_pers_funds,Loan from Personal Funds,char,1,26,26,26,26,26,26,,,,,,,,,,,,,,,
+lender_comm_id,Lender Committee ID,char,9,27,27,27,27,27,27,26,19,19,19,19,19,19,,,,,,,,
+lender_cand_id,Lender Candidate ID,char,9,28,28,28,28,28,28,27,20,20,20,20,20,20,,,,,,,,
+lender_cand_full_nm,Lender Candidate Full Name,varchar,38,,,,,,,,21,21,21,21,21,21,,,,,,,,
+lender_cand_last,Lender Candidate Last Name,varchar,30,29,29,29,29,29,29,28,,,,,,,,,,,,,,
+lender_cand_first,Lender Candidate First Name,varchar,20,30,30,30,30,30,30,29,,,,,,,,,,,,,,
+lender_cand_mid,Lender Candidate Middle Name,varchar,20,31,31,31,31,31,31,30,,,,,,,,,,,,,,
+lender_cand_pfx,Lender Candidate Name Prefix,varchar,10,32,32,32,32,32,32,31,,,,,,,,,,,,,,
+lender_cand_sfx,Lender Candidate Name Suffix,varchar,10,33,33,33,33,33,33,32,,,,,,,,,,,,,,
+lender_cand_office,Lender Candidate Office,char,1,34,34,34,34,34,34,33,22,22,22,22,22,22,,,,,,,,
+lender_cand_state,Lender Candidate State,char,2,35,35,35,35,35,35,34,23,23,23,23,23,23,,,,,,,,
+lender_cand_dist,Lender Candidate District,tinyint,,36,36,36,36,36,36,35,24,24,24,24,24,24,,,,,,,,
+memo_cd,Memo Code,char,1,37,37,37,37,37,37,,,,,,,,,,,,,,,
+memo_text,Memo Text/Description,varchar,100,38,38,38,38,38,38,,,,,,,,,24,24,24,24,,,
+loan_due_dt_terms,Loan Due Date Terms,varchar,15,,,,,,,,16,16,16,16,16,16,,21,21,21,21,21,21,21
+space_holder,Not used (v5.3 only),char,1,,,,,,,,25,,,,,,,,,,,,,
+amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,25,25,25,25,25,46,,,,,,,
+orig_trans_id,Original Transaction ID (v2 only),varchar,32,,,,,,,,,,,,,27,,,,,,,,
+supr_trans_id,Super Transaction ID (v2 only),varchar,32,,,,,,,,,,,,,28,,,,,,,,
+guar1_full_nm,Loan Guarantor/Endorser 1 Full Name (v1 only),varchar,38,,,,,,,,,,,,,,19,,,,,,,
+guar1_addr1,Loan Guarantor/Endorser 1 Street Address Line 1 (v1 only),varchar,34,,,,,,,,,,,,,,20,,,,,,,
+guar1_addr2,Loan Guarantor/Endorser 1 Street Address Line 2 (v1 only),varchar,34,,,,,,,,,,,,,,21,,,,,,,
+guar1_city,Loan Guarantor/Endorser 1 City (Address) (v1 only),varchar,18,,,,,,,,,,,,,,22,,,,,,,
+guar1_state,Loan Guarantor/Endorser 1 State (Address) (v1 only),char,2,,,,,,,,,,,,,,23,,,,,,,
+guar1_zip,Loan Guarantor/Endorser 1 Zip Code (v1 only),varchar,9,,,,,,,,,,,,,,24,,,,,,,
+guar1_emp,Loan Guarantor/Endorser 1 Employer (v1 only),varchar,38,,,,,,,,,,,,,,25,,,,,,,
+guar1_occ,Loan Guarantor/Endorser 1 Occupation (v1 only),varchar,38,,,,,,,,,,,,,,26,,,,,,,
+guar1_bal_amt,Loan Guarantor/Endorser 1 Balance Amount Guaranteed (v1 only),money,,,,,,,,,,,,,,,27,,,,,,,
+guar2_full_nm,Loan Guarantor/Endorser 2 Full Name (v1 only),varchar,38,,,,,,,,,,,,,,28,,,,,,,
+guar2_addr1,Loan Guarantor/Endorser 2 Street Address Line 1 (v1 only),varchar,34,,,,,,,,,,,,,,29,,,,,,,
+guar2_addr2,Loan Guarantor/Endorser 2 Street Address Line 2 (v1 only),varchar,34,,,,,,,,,,,,,,30,,,,,,,
+guar2_city,Loan Guarantor/Endorser 2 City (Address) (v1 only),varchar,18,,,,,,,,,,,,,,31,,,,,,,
+guar2_state,Loan Guarantor/Endorser 2 State (Address) (v1 only),char,2,,,,,,,,,,,,,,32,,,,,,,
+guar2_zip,Loan Guarantor/Endorser 2 Zip Code (v1 only),varchar,9,,,,,,,,,,,,,,33,,,,,,,
+guar2_emp,Loan Guarantor/Endorser 2 Employer (v1 only),varchar,38,,,,,,,,,,,,,,34,,,,,,,
+guar2_occ,Loan Guarantor/Endorser 2 Occupation (v1 only),varchar,38,,,,,,,,,,,,,,35,,,,,,,
+guar2_bal_amt,Loan Guarantor/Endorser 2 Balance Amount Guaranteed (v1 only),money,,,,,,,,,,,,,,,36,,,,,,,
+guar3_full_nm,Loan Guarantor/Endorser 3 Full Name (v1 only),varchar,38,,,,,,,,,,,,,,37,,,,,,,
+guar3_addr1,Loan Guarantor/Endorser 3 Street Address Line 1 (v1 only),varchar,34,,,,,,,,,,,,,,38,,,,,,,
+guar3_addr2,Loan Guarantor/Endorser 3 Street Address Line 2 (v1 only),varchar,34,,,,,,,,,,,,,,39,,,,,,,
+guar3_city,Loan Guarantor/Endorser 3 City (Address) (v1 only),varchar,18,,,,,,,,,,,,,,40,,,,,,,
+guar3_state,Loan Guarantor/Endorser 3 State (Address) (v1 only),char,2,,,,,,,,,,,,,,41,,,,,,,
+guar3_zip,Loan Guarantor/Endorser 3 Zip Code (v1 only),varchar,9,,,,,,,,,,,,,,42,,,,,,,
+guar3_emp,Loan Guarantor/Endorser 3 Employer (v1 only),varchar,38,,,,,,,,,,,,,,43,,,,,,,
+guar3_occ,Loan Guarantor/Endorser 3 Occupation (v1 only),varchar,38,,,,,,,,,,,,,,44,,,,,,,
+guar3_bal_amt,Loan Guarantor/Endorser 3 Balance Amount Guaranteed (v1 only),money,,,,,,,,,,,,,,,45,,,,,,,
+beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,25,25,25,25,24,24,24

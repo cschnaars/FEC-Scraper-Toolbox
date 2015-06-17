@@ -71,4 +71,4 @@ guar3_zip,Loan Guarantor/Endorser 3 Zip Code (v1 only),varchar,9,,,,,,,,,,,,,,42
 guar3_emp,Loan Guarantor/Endorser 3 Employer (v1 only),varchar,38,,,,,,,,,,,,,,43,,,,,,,
 guar3_occ,Loan Guarantor/Endorser 3 Occupation (v1 only),varchar,38,,,,,,,,,,,,,,44,,,,,,,
 guar3_bal_amt,Loan Guarantor/Endorser 3 Balance Amount Guaranteed (v1 only),money,,,,,,,,,,,,,,,45,,,,,,,
-beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,25,25,25,25,24,24,24
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,25,25,25,25,24,24,24

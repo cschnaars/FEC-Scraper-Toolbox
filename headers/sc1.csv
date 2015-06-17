@@ -52,4 +52,4 @@ auth_rep_sign_dt,Date This Schedule Signed by Lender Authorized Representative,i
 ent_tp,Entity Type,char,3,,,,,,,,4,4,4,4,4,4,,,,,,,,
 space_holder,Not used (v5.3 only),char,1,,,,,,,,41,,,,,,,,,,,,,
 amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,41,41,41,,,40,,,,,,,
-beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,46,46,46,46,46,46,46
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,46,46,46,46,46,46,46

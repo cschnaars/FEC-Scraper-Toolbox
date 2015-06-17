@@ -19,4 +19,4 @@ guar_occ,Loan Guarantor Occupation (v1 only),varchar,38,16,16,16,16,16,16,16,11,
 guar_amt,Guaranteed Amount,money,,17,17,17,17,17,17,17,12,12,12,12,12,12,15,15,15,15,15,15,15
 space_holder,Not used (v5.3 only),char,1,,,,,,,,13,,,,,,,,,,,,
 amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,13,13,13,,,,,,,,,
-beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,16,16,16,16,16,16,16
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,16,16,16,16,16,16,16

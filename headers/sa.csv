@@ -58,4 +58,4 @@ donor_comm_addr2,Donor Committee Street Address Line 2 (discontinued after v1),v
 donor_comm_city,Donor Committee City (Address) (discontinued after v1),varchar,18,,,,,,,,,,,,,,22,,,,,,,
 donor_comm_state,Donor Committee State (Address) (discontinued after v1),char,2,,,,,,,,,,,,,,23,,,,,,,
 donor_comm_zip,Donor Committee Zip Code (discontinued after v1),varchar,9,,,,,,,,,,,,,,24,,,,,,,
-beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24

@@ -1,0 +1,22 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,,,,,,,,,,,,,
+bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,3,3,3,3,3,3,,,,,,,
+guar_full_nm,Guarantor Full Name (discontinued after v5.3),varchar,38,,,,,,,,4,4,4,4,4,4,,,,,,,
+guar_last,Guarantor Last Name,varchar,30,5,5,5,5,5,5,5,,,,,,,3,3,3,3,3,3,3
+guar_first,Guarantor First Name,varchar,20,6,6,6,6,6,6,6,,,,,,,4,4,4,4,4,4,4
+guar_mid,Guarantor Middle Name,varchar,20,7,7,7,7,7,7,7,,,,,,,5,5,5,5,5,5,5
+guar_pfx,Guarantor Prefix,varchar,10,8,8,8,8,8,8,8,,,,,,,6,6,6,6,6,6,6
+guar_sfx,Guarantor Suffix,varchar,10,9,9,9,9,9,9,9,,,,,,,7,7,7,7,7,7,7
+guar_addr1,Loan Guarantor Street Address Line 1 (v1 only),varchar,34,10,10,10,10,10,10,10,5,5,5,5,5,5,8,8,8,8,8,8,8
+guar_addr2,Loan Guarantor Street Address Line 2 (v1 only),varchar,34,11,11,11,11,11,11,11,6,6,6,6,6,6,9,9,9,9,9,9,9
+guar_city,Loan Guarantor City (Address) (v1 only),varchar,18,12,12,12,12,12,12,12,7,7,7,7,7,7,10,10,10,10,10,10,10
+guar_state,Loan Guarantor State (Address) (v1 only),char,2,13,13,13,13,13,13,13,8,8,8,8,8,8,11,11,11,11,11,11,11
+guar_zip,Loan Guarantor Zip Code (v1 only),varchar,9,14,14,14,14,14,14,14,9,9,9,9,9,9,12,12,12,12,12,12,12
+guar_emp,Loan Guarantor Employer (v1 only),varchar,38,15,15,15,15,15,15,15,10,10,10,10,10,10,13,13,13,13,13,13,13
+guar_occ,Loan Guarantor Occupation (v1 only),varchar,38,16,16,16,16,16,16,16,11,11,11,11,11,11,14,14,14,14,14,14,14
+guar_amt,Guaranteed Amount,money,,17,17,17,17,17,17,17,12,12,12,12,12,12,15,15,15,15,15,15,15
+space_holder,Not used (v5.3 only),char,1,,,,,,,,13,,,,,,,,,,,,
+amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,13,13,13,,,,,,,,,
+beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,16,16,16,16,16,16,16

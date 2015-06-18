@@ -68,6 +68,6 @@ payee_cand_full_nm,Payee Candidate Full Name,varchar,38,,,,,,,,,,,,,21,,,,,,,,
 payee_cand_office,Payee Candidate Office,char,1,,,,,,,,,,,,,22,,,,,,,,
 payee_cand_state,Payee Candidate State,char,2,,,,,,,,,,,,,23,,,,,,,,
 payee_cand_dist,Payee Candidate District,tinyint,,,,,,,,,,,,,,24,,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,32,,,,,,,,,,,,,38,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,32,,,,,,,,,,,,,39,,,,,,,,
+orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,38,,,,,,,,
+supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,39,,,,,,,,
 img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,37,36,36,36,36,36,36

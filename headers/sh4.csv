@@ -1,0 +1,57 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,34,34,34,34,34,34,,,,,,,,
+bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,37,37,37,37,37,,,,,,,,,
+bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,38,38,38,38,38,,,,,,,,,
+ent_tp,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,3,3,,,,,,,,
+payee_full_nm,Payee Full Name (discontinued after v5),varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
+payee_org_nm,Payee Organization Name,varchar,200,7,7,7,7,7,7,7,,,,,,,,3,3,3,3,3,3,3
+payee_last,Payee Last Name,varchar,30,8,8,8,8,8,8,8,,,,,,,,4,4,4,4,4,4,4
+payee_first,Payee First Name,varchar,20,9,9,9,9,9,9,9,,,,,,,,5,5,5,5,5,5,5
+payee_mid,Payee Middle Name,varchar,20,10,10,10,10,10,10,10,,,,,,,,6,6,6,6,6,6,6
+payee_pfx,Payee Name Prefix,varchar,10,11,11,11,11,11,11,11,,,,,,,,7,7,7,7,7,7,7
+payee_sfx,Payee Name Suffix,varchar,10,12,12,12,12,12,12,12,,,,,,,,8,8,8,8,8,8,8
+payee_addr1,Payee Street Address Line 1,varchar,34,13,13,13,13,13,13,13,5,5,5,5,5,5,4,9,9,9,9,9,9,9
+payee_addr2,Payee Street Address Line 2,varchar,34,14,14,14,14,14,14,14,6,6,6,6,6,6,5,10,10,10,10,10,10,10
+payee_city,Payee City (Address),varchar,30,15,15,15,15,15,15,15,7,7,7,7,7,7,6,11,11,11,11,11,11,11
+payee_state,Payee State (Address),char,2,16,16,16,16,16,16,16,8,8,8,8,8,8,7,12,12,12,12,12,12,12
+payee_zip,Payee Zip Code,varchar,9,17,17,17,17,17,17,17,9,9,9,9,9,9,8,13,13,13,13,13,13,13
+evt_nm,Activity or Event Name/Identifier,varchar,100,18,18,18,18,18,18,18,,,,,,,10,15,15,15,15,15,15,15
+exp_dt,Expenditure Date,int,,19,19,19,19,19,19,19,11,11,11,11,11,11,11,24,24,24,24,24,24,24
+exp_amt,Expenditure Amount,money,,20,20,20,20,20,20,20,12,12,12,12,12,12,12,27,27,27,27,27,27,27
+fed_amt,Federal Share Amount,money,,21,21,21,21,21,21,21,13,13,13,13,13,13,13,25,25,25,25,25,25,25
+non_fed_amt,Non-Federal Share Amount,money,,22,22,22,22,22,22,22,14,14,14,14,14,14,14,26,26,26,26,26,26,26
+evt_tot_ytd,Activity or Event Total Year-to-Date,money,,23,23,23,23,23,23,23,19,19,19,19,19,19,19,23,23,23,23,23,23,23
+exp_purp_cd,Expenditure Purpose Code,char,3,,,24,24,24,24,24,42,42,42,42,,,,,,,,,,
+exp_purp_desc,Expenditure Purpose Description,varchar,100,24,24,25,25,25,25,25,10,10,10,10,10,10,9,14,14,14,14,14,14,14
+exp_cat_cd,Expenditure Category Code,char,3,25,25,26,26,26,26,26,41,41,41,41,,,,16,16,16,16,16,16,16
+admin_only,Activity is Administrative Only,char,1,26,26,27,27,27,27,27,39,39,39,39,,,,17,17,17,17,17,17,17
+fundraising,Activity is Direct Fundraising,char,1,27,27,28,28,28,28,28,16,16,16,16,16,16,16,18,18,18,18,18,18,18
+exempt,Activity is an Exempt Activity,char,1,28,28,29,29,29,29,29,17,17,17,17,17,17,17,19,19,19,19,19,19,19
+voter_drive,Activity is Generic Voter Drive Only,char,1,29,29,30,30,30,30,30,40,40,40,40,,,18,20,20,20,20,20,20,20
+dir_cand_supp,Activity is Direct Candidate Support,char,1,30,30,31,31,31,31,31,18,18,18,18,18,18,,21,21,21,21,21,21,21
+pub_comm,Activity is Public Communictions Made by a PAC and Referring Only to a Party,char,1,31,31,32,32,32,32,32,43,43,,,,,,22,22,22,22,22,22,22
+memo_cd,Memo Code,char,1,32,32,33,33,33,33,33,35,35,35,35,35,,,,,,,,,
+memo_text,Memo Text/Description,varchar,100,33,33,34,34,34,34,34,36,36,36,36,36,,,,,,,,,
+exp_purp_addl_desc,Expenditure Purpose Additional Description (discontinued after v5.3),varchar,100,,,,,,,,20,20,20,20,20,20,20,,,,,,,
+comm_id,FEC Committee ID,char,9,,,,,,,,21,21,21,21,21,21,,,,,,,,
+cand_id,FEC Candidate ID,char,9,,,,,,,,22,22,22,22,22,22,,,,,,,,
+cand_full_nm,Candidate Full Name (discontinued after v5.3),varchar,38,,,,,,,,23,23,23,23,23,23,,,,,,,,
+cand_office,Candidate Office,char,1,,,,,,,,24,24,24,24,24,24,,,,,,,,
+cand_state,Candidate State,char,2,,,,,,,,25,25,25,25,25,25,,,,,,,,
+cand_dist,Candidate District,tinyint,,,,,,,,,26,26,26,26,26,26,,,,,,,,
+conduit_nm,Conduit Name,varchar,200,,,,,,,,27,27,27,27,27,27,,,,,,,,
+conduit_addr1,Conduit Street Address Line 1,varchar,34,,,,,,,,28,28,28,28,28,28,,,,,,,,
+conduit_addr2,Conduit Street Address Line 2,varchar,34,,,,,,,,29,29,29,29,29,29,,,,,,,,
+conduit_city,Conduit City (Address),varchar,30,,,,,,,,30,30,30,30,30,30,,,,,,,,
+conduit_state,Conduit State (Address),char,2,,,,,,,,31,31,31,31,31,31,,,,,,,,
+conduit_zip,Conduit Zip Code,varchar,9,,,,,,,,32,32,32,32,32,32,,,,,,,,
+space_holder_1,Not used,char,1,,,,,,,,15,15,,,,,,,,,,,,
+space_holder_2,Not used (v5.3 only),char,1,,,,,,,,33,,,,,,,,,,,,,
+internal,Internal Use Only (v5.2 only),char,1,,,,,,,,,33,,,,,,,,,,,,
+amended_cd,Amended Code,char,1,,,,,,,,,,33,33,33,33,21,,,,,,,
+admin_or_voter,Activity is Administrative Or Voter Drive (v5.1 only),char,1,,,,,,,,,,15,15,15,15,15,,,,,,,
+orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,35,,,,,,,,
+supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,36,,,,,,,,
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,28,28,28,28,28,28,28

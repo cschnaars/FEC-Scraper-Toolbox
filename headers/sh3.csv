@@ -1,0 +1,44 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,11,11,11,11,11,10,,,,,,,,
+bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,3,3,3,3,3,,,,,,,,,
+acct_nm,Account Name,varchar,90,5,5,5,5,5,5,5,4,4,4,4,4,3,3,3,3,3,3,3,3,3
+evt_tp,Event Type,char,2,6,6,6,6,6,6,6,6,6,6,6,6,,,6,6,6,6,6,6,6
+evt_nm,Activity or Event Name/Identifier,varchar,90,7,7,7,7,7,7,7,5,5,5,5,5,,,8,8,8,8,8,8,8
+rcpt_dt,Receipt Date,int,,8,8,8,8,8,8,8,7,7,7,7,7,4,4,4,4,4,4,4,4,4
+tot_amt_trans,Total Amount Transferred,money,,9,9,9,9,9,9,9,9,9,9,9,9,5,5,5,5,5,5,5,5,5
+evt_amt_trans,Amount Transferred for Activity or Event,money,,10,10,10,10,10,10,10,8,8,8,8,8,,,7,7,7,7,7,7,7
+space_holder,Not used,char,1,,,,,,,,10,,,,,,,,,,,,,
+internal,Internal Use Only,char,1,,,,,,,,,10,,,,,,,,,,,,
+amended_cd,Amended Code,char,1,,,,,,,,,,10,10,10,9,33,,,,,,,
+orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,11,,,,,,,,
+supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,12,,,,,,,,
+adm_voter_amt,Amount Transferred for Administrative Costs and Voter Drive (discontinued after v2),money,,,,,,,,,,,,,,6,6,,,,,,,
+fund_amt,Amount Transferred for Fundraising (discontinued after v2),money,,,,,,,,,,,,,,7,19,,,,,,,
+cand_supp_amt,Amount Transferred for Direct Candidate Support (discontinued after v2),money,,,,,,,,,,,,,,8,32,,,,,,,
+adm_voter_evt_nm_1,Administration/Voter Drive Activity or Event Name 1 (v1 only),varchar,38,,,,,,,,,,,,,,7,,,,,,,
+adm_voter_evt_id_1,Administration/Voter Drive Activity or Event Identifier 1 (v1 only),varchar,10,,,,,,,,,,,,,,8,,,,,,,
+adm_voter_evt_amt_trans_1,Administration/Voter Drive Amount Transferred for Activity or Event 1 (v1 only),money,,,,,,,,,,,,,,,9,,,,,,,
+adm_voter_evt_nm_2,Administration/Voter Drive Activity or Event Name 2 (v1 only),varchar,38,,,,,,,,,,,,,,10,,,,,,,
+adm_voter_evt_id_2,Administration/Voter Drive Activity or Event Identifier 2 (v1 only),varchar,10,,,,,,,,,,,,,,11,,,,,,,
+adm_voter_evt_amt_trans_2,Administration/Voter Drive Amount Transferred for Activity or Event 2 (v1 only),money,,,,,,,,,,,,,,,12,,,,,,,
+adm_voter_evt_nm_3,Administration/Voter Drive Activity or Event Name 3 (v1 only),varchar,38,,,,,,,,,,,,,,13,,,,,,,
+adm_voter_evt_id_3,Administration/Voter Drive Activity or Event Identifier 3 (v1 only),varchar,10,,,,,,,,,,,,,,14,,,,,,,
+adm_voter_evt_amt_trans_3,Administration/Voter Drive Amount Transferred for Activity or Event 3 (v1 only),money,,,,,,,,,,,,,,,15,,,,,,,
+adm_voter_evt_nm_4,Administration/Voter Drive Activity or Event Name 4 (v1 only),varchar,38,,,,,,,,,,,,,,16,,,,,,,
+adm_voter_evt_id_4,Administration/Voter Drive Activity or Event Identifier 4 (v1 only),varchar,10,,,,,,,,,,,,,,17,,,,,,,
+adm_voter_evt_amt_trans_4,Administration/Voter Drive Amount Transferred for Activity or Event 4 (v1 only),money,,,,,,,,,,,,,,,18,,,,,,,
+fund_evt_nm_1,Fundraising Activity or Event Name 1 (v1 only),varchar,38,,,,,,,,,,,,,,20,,,,,,,
+fund_evt_id_1,Fundraising Activity or Event Identifier 1 (v1 only),varchar,10,,,,,,,,,,,,,,21,,,,,,,
+fund_evt_amt_trans_1,Fundraising Amount Transferred for Activity or Event 1 (v1 only),money,,,,,,,,,,,,,,,22,,,,,,,
+fund_evt_nm_2,Fundraising Activity or Event Name 2 (v1 only),varchar,38,,,,,,,,,,,,,,23,,,,,,,
+fund_evt_id_2,Fundraising Activity or Event Identifier 2 (v1 only),varchar,10,,,,,,,,,,,,,,24,,,,,,,
+fund_evt_amt_trans_2,Fundraising Amount Transferred for Activity or Event 2 (v1 only),money,,,,,,,,,,,,,,,25,,,,,,,
+fund_evt_nm_3,Fundraising Activity or Event Name 3 (v1 only),varchar,38,,,,,,,,,,,,,,26,,,,,,,
+fund_evt_id_3,Fundraising Activity or Event Identifier 3 (v1 only),varchar,10,,,,,,,,,,,,,,27,,,,,,,
+fund_evt_amt_trans_3,Fundraising Amount Transferred for Activity or Event 3 (v1 only),money,,,,,,,,,,,,,,,28,,,,,,,
+fund_evt_nm_4,Fundraising Activity or Event Name 4 (v1 only),varchar,38,,,,,,,,,,,,,,29,,,,,,,
+fund_evt_id_4,Fundraising Activity or Event Identifier 4 (v1 only),varchar,10,,,,,,,,,,,,,,30,,,,,,,
+fund_evt_amt_trans_4,Fundraising Amount Transferred for Activity or Event 4 (v1 only),money,,,,,,,,,,,,,,,31,,,,,,,
+img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,9,9,9,9,9,9,9

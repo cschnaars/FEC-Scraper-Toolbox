@@ -1,0 +1,29 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,P3.1,P3.0,P2.6
+form_tp,Electronic Form Type,varchar,4,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2
+comm_nm,Committee Name,varchar,200,3,3,3,3,3,3,3
+chg_addr,Change of Address,char,1,4,4,4,4,4,4,4
+addr1,Street Address Line 1,varchar,34,5,5,5,5,5,5,5
+addr2,Street Address Line 2,varchar,34,6,6,6,6,6,6,6
+addr_city,City (Address),varchar,30,7,7,7,7,7,7,7
+addr_state,State (Address),char,2,8,8,8,8,8,8,8
+addr_zip,Zip code,varchar,9,9,9,9,9,9,9,9
+cand_state,Candidate State,char,2,10,10,10,10,10,10,10
+cand_dist,Candidate District,tinyint,,11,11,11,11,11,11,11
+rpt_prd,Report Period,varchar,3,12,12,12,12,12,12,12
+elec_dt,Election Date,int,,13,13,13,13,13,13,13
+elec_state,Election State,char,2,14,14,14,14,14,14,14
+semi_annual,Report Also Covers Semi-Annual Period,char,1,15,15,15,15,15,15,15
+covg_fm,Coverage From Date,int,,16,16,16,16,16,16,16
+covg_to,Coverage To Date,int,,17,17,17,17,17,17,17
+semi_annual_jan_june,"Semi-Annual Period, January to June",char,1,18,18,18,18,18,18,18
+semi_annual_july_dec,"Semi-Annual Period, July to December",char,1,19,19,19,19,19,19,19
+bund_contribs_prd,Reportable Bundled Contributions by Lobbyists/Registrants or Lobbyist/Registrant PACS for Period (Quarterly/Monthly/Pre-Election/Post-Election),money,,20,20,20,20,20,20,20
+bund_contribs_semi_ann,Reportable Bundled Contributions by Lobbyists/Registrants or Lobbyist/Registrant PACS for Semi-Annual Period,money,,21,21,21,21,21,21,21
+treas_last,Treasurer Last Name,varchar,30,22,22,22,22,22,22,22
+treas_first,Treasurer First Name,varchar,20,23,23,23,23,23,23,23
+treas_mid,Treasurer Middle Name,varchar,20,24,24,24,24,24,24,24
+treas_pfx,Treasurer Prefix,varchar,10,25,25,25,25,25,25,25
+treas_sfx,Treasurer Suffix,varchar,10,26,26,26,26,26,26,26
+treas_sign_dt,Date Report Signed by Treasurer,int,,27,27,27,27,27,27,27
+img_nbr,Image Number,bigint,,,,,,28,28,28

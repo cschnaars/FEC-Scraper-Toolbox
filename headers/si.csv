@@ -1,0 +1,36 @@
+db_field_name,pretty_name,type,len,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1
+form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,30,30,30,30,30,30,
+rec_id,Record ID Number (for Account Name),char,9,4,4,4,4,4,31,31,31,31,31,,
+acct_nm,Account Name,varchar,90,5,5,5,5,5,4,4,4,4,4,4,4
+bank_acct_nbr,Bank Account ID Number,varchar,16,6,6,6,6,6,3,3,3,3,3,3,3
+covg_fm,Coverage From Date,int,,7,7,7,7,7,5,5,5,5,5,5,5
+covg_to,Coverage To Date,int,,8,8,8,8,8,6,6,6,6,6,6,6
+tot_receipts_prd,Total Receipts (Period),money,,9,9,9,9,9,7,7,7,7,7,7,7
+tran_fed_prd,Transfers to Federal or Allocation (Period),money,,10,10,10,10,10,8,8,8,8,8,8,8
+tran_non_fed_prd,Transfers to State/Local Party Organizations (Period),money,,11,11,11,11,11,9,9,9,9,9,9,9
+dir_cand_supp_prd,Direct State/Local Candidate Support (Period),money,,12,12,12,12,12,10,10,10,10,10,10,10
+oth_disb_prd,Other Disbursements (Period),money,,13,13,13,13,13,11,11,11,11,11,11,11
+tot_disb_prd,Total Disbursements (Period),money,,14,14,14,14,14,12,12,12,12,12,12,12
+cash_begin_prd,Beginning Cash on Hand (Period),money,,15,15,15,15,15,13,13,13,13,13,13,13
+net_receipts_prd,Net Receipts (Period),money,,16,16,16,16,16,14,14,14,14,14,14,14
+subtotal_prd,Subtotal (Period),money,,17,17,17,17,17,15,15,15,15,15,15,15
+net_disb_prd,Net Disbursements (Period),money,,18,18,18,18,18,16,16,16,16,16,16,16
+cash_end_prd,Ending Cash on Hand (Period),money,,19,19,19,19,19,17,17,17,17,17,17,17
+tot_receipts_cyc,Total Receipts (Cycle),money,,20,20,20,20,20,18,18,18,18,18,18,18
+tran_fed_cyc,Transfers to Federal or Allocation (Cycle),money,,21,21,21,21,21,19,19,19,19,19,19,19
+tran_non_fed_cyc,Transfers to State/Local Party Organizations (Cycle),money,,22,22,22,22,22,20,20,20,20,20,20,20
+dir_cand_supp_cyc,Direct State/Local Candidate Support (Cycle),money,,23,23,23,23,23,21,21,21,21,21,21,21
+oth_disb_cyc,Other Disbursements (Cycle),money,,24,24,24,24,24,22,22,22,22,22,22,22
+tot_disb_cyc,Total Disbursements (Cycle),money,,25,25,25,25,25,23,23,23,23,23,23,23
+cash_begin_cyc,Beginning Cash on Hand (Cycle),money,,26,26,26,26,26,24,24,24,24,24,24,24
+net_receipts_cyc,Net Receipts (Cycle),money,,27,27,27,27,27,25,25,25,25,25,25,25
+subtotal_cyc,Subtotal (Cycle),money,,28,28,28,28,28,26,26,26,26,26,26,26
+net_disb_cyc,Net Disbursements (Cycle),money,,29,29,29,29,29,27,27,27,27,27,27,27
+cash_end_cyc,Ending Cash on Hand (Cycle),money,,30,30,30,30,30,28,28,28,28,28,28,28
+space_holder,Not used,char,1,,,,,,29,,,,,,
+amended_cd,Amended Code,char,1,,,,,,,29,29,29,29,29,29
+orig_trans_id,Original Transaction ID (v2 only),varchar,20,,,,,,,,,,,31,
+supr_trans_id,Super Transaction ID (v2 only),varchar,20,,,,,,,,,,,32,
+img_nbr,Image Number,bigint,,,,,,,,,,,,,

@@ -1,0 +1,9 @@
+db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3
+form_tp,Electronic Form Type,char,4,1,1,1,1,1,1,1,1,1,1,1,1
+comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,,,,,
+trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,,,,,
+bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,3,3,3,3,3
+bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,2,2,2,2,2
+memo_text,Text,varchar,4000,6,6,6,6,6,6,6,4,4,4,4,4
+space_holder,Not used (v5.3 only),char,1,,,,,,,,5,,,,
+amended_cd,Amended Code,char,1,,,,,,,,,5,5,5,

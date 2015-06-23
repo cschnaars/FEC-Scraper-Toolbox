@@ -98,7 +98,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
 STATIC_URL = '/static/'
 
 # Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR).
@@ -138,7 +137,8 @@ FILE_TYPES = {'pdf': {'ext': 'pdf',
               }
 
 # Default filetypes to download upon base Report class instantiation
-DOWN_NOW = ['ascii28']
+# DOWN_NOW = ['ascii28']
+DOWN_NOW = {'ascii28': {}}
 
 # Default number of times the app should attempt to download a report
 DOWN_TRIES = 5

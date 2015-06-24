@@ -81,7 +81,6 @@ DATABASES = {
     }
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -180,4 +179,3 @@ DB_LOAD_DELIM = 'ascii28'
 URL_RPT_TYPE_MODS = ('', '')
 # http://docquery.fec.gov/paper/fecpprcsv/1006117.fec
 # http://docquery.fec.gov/paper/posted/1006117.fec
-

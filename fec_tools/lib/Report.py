@@ -1,7 +1,7 @@
-# from fec_tools.lib import paper_or_plastic
+# from ..lib import paper_or_plastic
 from FEC_Toolbox import settings
-from fec_tools.lib.download_report import download_report
-from fec_tools.lib.get_delim_report_url import get_delim_report_url
+from ..lib.download_report import download_report
+from ..lib.get_delim_report_url import get_delim_report_url
 
 
 class Report:

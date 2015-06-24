@@ -1,8 +1,8 @@
 import os
 import unittest
 
-import fec_tools.lib.download_report
-import fec_tools.lib.get_delim_report_url
+from ..lib.download_report import download_report
+from ..lib.get_delim_report_url import get_delim_report_url
 from FEC_Toolbox.settings import FILE_TYPES, REPORTS_DIR, TEST_DIR
 
 
@@ -21,34 +21,34 @@ class TestDownloadReport(unittest.TestCase):
         pass
 
     def test_down_csv_with_defaults(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext']))
 
     def test_down_asc28_with_defaults(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='ascii28'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='ascii28'),
             save_path=FILE_TYPES['ascii28']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['ascii28']['ext']))
 
     def test_down_csv_with_zero_tries(self):
         msg = 'File not downloaded. The tries parameter must be an integer >= 1.'
-        self.assertEqual((False, msg), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((False, msg), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'], tries='0'))
 
     def test_down_csv_with_string_tries(self):
         msg = 'File not downloaded. The tries parameter is invalid. Set to an integer >= 1.'
-        self.assertEqual((False, msg), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((False, msg), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'], tries='x'))
 
     def test_down_csv_with_overwrite_true(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'],
             overwrite=True))
@@ -56,29 +56,29 @@ class TestDownloadReport(unittest.TestCase):
     def test_down_csv_with_overwrite_false(self):
         msg = 'File not downloaded. File already exists, and overwriting the file is not allowed. To override this ' \
             'behavior, delete the file or set the overwrite parameter to True.'
-        self.assertEqual((False, msg), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((False, msg), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'],
             overwrite=False))
 
     def test_down_csv_with_chunk_size(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'],
             chunk_size=512 * 1024))
 
     def test_down_csv_with_ck_file_len_true(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'],
             ck_file_len=True))
 
     def test_down_csv_with_ck_file_len_false(self):
-        self.assertEqual((True, 'File downloaded.'), fec_tools.lib.download_report.download_report(
-            url=fec_tools.lib.get_delim_report_url.get_delim_report_url(1008299, file_type='csv'),
+        self.assertEqual((True, 'File downloaded.'), download_report(
+            url=get_delim_report_url(1008299, file_type='csv'),
             save_path=FILE_TYPES['csv']['save_path'].replace(REPORTS_DIR, TEST_DIR) + '1008299.' +
             FILE_TYPES['csv']['ext'],
             ck_file_len=False))

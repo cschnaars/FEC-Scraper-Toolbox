@@ -3,7 +3,7 @@ import unittest
 
 from ..lib.download_report import download_report
 from ..lib.get_delim_report_url import get_delim_report_url
-from FEC_Toolbox.settings import FILE_TYPES, REPORTS_DIR, TEST_DIR
+from FEC_Toolbox.local_settings import FILE_TYPES, REPORTS_DIR, TEST_DIR
 
 
 # Tests for lib\download_report

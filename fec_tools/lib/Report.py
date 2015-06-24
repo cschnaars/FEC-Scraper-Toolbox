@@ -1,5 +1,5 @@
 # from ..lib import paper_or_plastic
-from FEC_Toolbox import settings
+from FEC_Toolbox.local_settings import DOWN_NOW, FILE_TYPES
 from ..lib.download_report import download_report
 from ..lib.get_delim_report_url import get_delim_report_url
 
@@ -8,7 +8,7 @@ class Report:
     """
     Report base class.
     """
-    def __init__(self, rpt_id, down_now=settings.DOWN_NOW):
+    def __init__(self, rpt_id, down_now=DOWN_NOW):
         # down_now_urls=None
         # down_now_paths=None
         # mem_load=settings.MEM_LOAD
@@ -87,7 +87,7 @@ class Report:
                 url = down_now[filetype]['url']
 
             # Otherwise, call function to determine URL
-            elif filetype in settings.FILE_TYPES.keys():
+            elif filetype in FILE_TYPES.keys():
                 url = get_delim_report_url(rpt_id=self.rpt_id, file_type=filetype)
 
             # Return error message if no valid URL
@@ -102,9 +102,9 @@ class Report:
                 path = down_now[filetype]['path']
 
             # Otherwise, call function to determine URL
-            elif filetype in settings.FILE_TYPES.keys():
-                file_ext = settings.FILE_TYPES[filetype]['ext']
-                path = settings.FILE_TYPES[filetype]['save_path'] + str(self.rpt_id) + '.' + file_ext
+            elif filetype in FILE_TYPES.keys():
+                file_ext = FILE_TYPES[filetype]['ext']
+                path = FILE_TYPES[filetype]['save_path'] + str(self.rpt_id) + '.' + file_ext
 
             # Return error message if invalid save path
             if path is None:
@@ -166,7 +166,8 @@ class Report:
 
         # Display
 
-    def load_to_mem(self, filetype=settings.DEFAULT_DELIM, url=None, file_path=None, local=True, reload=False):
+    def load_to_mem(self, filetype=None, #DEFAULT_DELIM,
+                    url=None, file_path=None, local=True, reload=False):
         """
         DOCSTRING NEEDS REVSION:
         Load the raw data. If data is not None and reload is False, alert the user. If filetype is provided, it must be

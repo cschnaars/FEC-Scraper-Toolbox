@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-from FEC_Toolbox.settings import FILE_TYPES
+from FEC_Toolbox.local_settings import FILE_TYPES
 
 
 def get_delim_report_url(rpt_id, file_type=None, url_patterns=None, a_id=None):

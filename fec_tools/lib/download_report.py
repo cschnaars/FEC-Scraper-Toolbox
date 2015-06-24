@@ -1,7 +1,7 @@
 import os
 import requests
 
-from FEC_Toolbox.settings import DOWN_TRIES, DOWN_OVERWRITE, DOWN_VERIFY, DOWN_CHUNK_SIZE
+from FEC_Toolbox.local_settings import DOWN_TRIES, DOWN_OVERWRITE, DOWN_VERIFY, DOWN_CHUNK_SIZE
 
 
 def download_report(url, save_path, tries=DOWN_TRIES, overwrite=DOWN_OVERWRITE, chunk_size=DOWN_CHUNK_SIZE,

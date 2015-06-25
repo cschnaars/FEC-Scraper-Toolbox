@@ -1,7 +1,93 @@
-"""
-Local settings for FEC_Toolbox.
-"""
+import json
+import os
 
+from django.core.exceptions import ImproperlyConfigured
+
+# Fetch JSON data for settings stored outside version control
+with open('secret_settings.json') as json_file:
+    secrets_data = json.loads(json_file.read())
+
+# Function to fetch secret settings
+def get_secret_setting(setting, data=secrets_data):
+    try:
+        return secrets_data[setting]
+    except KeyError:
+        raise ImproperlyConfigured(setting + ' setting not found.')
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+
+SECRET_KEY = get_secret_setting('SECRET_KEY')
+
+DEBUG = False
+
+ALLOWED_HOSTS = []
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+)
+
+ROOT_URLCONF = 'FEC_Toolbox.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'FEC_Toolbox.wsgi.application'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+STATIC_URL = '/static/'
+
+# FEC_Toolbox Settings
+# --------------------
 # Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR).
 BASE_FEC_DIR = 'C:/data/fec'
 
@@ -53,6 +139,9 @@ DOWN_VERIFY = True
 
 # Set size of file chunks (in bytes) to be downloaded; 1024 * 1024 = 1 MB
 DOWN_CHUNK_SIZE = 1024 * 1024
+
+# Notes only below this point:
+# ----------------------------
 
 # Default delimiter for text data. Default is: chr(28)
 # DEFAULT_DELIM = chr(28)

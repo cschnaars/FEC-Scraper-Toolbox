@@ -26,4 +26,4 @@ treas_mid,Treasurer Middle Name,varchar,20,24,24,24,24,24,24,24
 treas_pfx,Treasurer Prefix,varchar,10,25,25,25,25,25,25,25
 treas_sfx,Treasurer Suffix,varchar,10,26,26,26,26,26,26,26
 treas_sign_dt,Date Report Signed by Treasurer,int,,27,27,27,27,27,27,27
-img_nbr,Image Number,bigint,,,,,,28,28,28
+img_nbr,Beginning Image Number (Paper Filings Only),bigint,,,,,,28,28,28

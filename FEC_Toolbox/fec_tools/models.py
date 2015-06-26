@@ -733,7 +733,7 @@ class FormF3X(models.Model):
     net_op_exps_38_prd = models.DecimalField('Net Operating Expenditures (Period, Line 38)', max_digits=12,
                                              decimal_places=2)
     cash_begin_yr_6a = models.DecimalField('Cash on Hand as of January 1 (Line 6a)', max_digits=12, decimal_places=2)
-    cash_year_6a = models.DecimalField('Cash on Hand Year as of January 1 (Line 6a)', max_digits=12, decimal_places=2)
+    cash_year_6a = models.SmallIntegerField('Cash on Hand Year as of January 1 (Line 6a)')
     tot_receipts_6c_yr = models.DecimalField('Total Receipts (Year, Line 6c)', max_digits=12, decimal_places=2)
     subtotal_6d_yr = models.DecimalField('Subtotal (Line 6b + Line 6c) (Year, Line 6d)', max_digits=12,
                                          decimal_places=2)

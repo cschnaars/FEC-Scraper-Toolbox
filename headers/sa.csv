@@ -5,7 +5,7 @@ trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,34,34,34,34,34,34,,,,,,,,
 bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,35,35,35,35,35,,,,,,,,,
 bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,36,36,36,36,36,,,,,,,,,
 ent_tp,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,3,3,,,,,,,,
-cont_full_nm,Contributor Full Name (discontinued after v5),varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
+cont_full_nm,Contributor Full Name,varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
 cont_org_nm,Contributor Organization Name,varchar,200,7,7,7,7,7,7,7,39,39,39,,,,,3,3,3,3,3,3,3
 cont_last,Contributor Last Name,varchar,30,8,8,8,8,8,8,8,40,40,40,,,,,4,4,4,4,4,4,4
 cont_first,Contributor First Name,varchar,20,9,9,9,9,9,9,9,41,41,41,,,,,5,5,5,5,5,5,5
@@ -22,7 +22,7 @@ elec_oth_desc,Other Election Description,varchar,20,19,19,19,19,19,19,19,11,11,1
 cont_dt,Contribution Date,int,,20,20,20,20,20,20,20,15,15,15,15,15,15,14,14,14,14,14,14,14,14
 cont_amt,Contribution Amount,money,,21,21,21,21,21,21,21,16,16,16,16,16,16,15,21,21,21,21,21,21,21
 cont_agg,Contribution Aggregate,money,,22,22,22,22,22,22,22,14,14,14,14,14,14,13,20,20,20,20,20,20,20
-cont_purp_cd,Contribution Purpose Code (discontinued after v7),varchar,3,,,23,23,23,23,23,17,17,17,17,17,17,16,,,,,,,
+cont_purp_cd,Contribution Purpose Code,varchar,3,,,23,23,23,23,23,17,17,17,17,17,17,16,,,,,,,
 cont_purp,Contribution Purpose Description,varchar,100,23,23,24,24,24,24,24,18,18,18,18,18,18,17,,,,,,,
 cont_emp,Contributor Employer,varchar,38,24,24,25,25,26,26,26,12,12,12,12,12,12,11,16,16,16,16,16,16,16
 cont_occ,Contributor Occupation,varchar,38,25,25,26,26,27,27,27,13,13,13,13,13,13,12,17,17,17,17,17,17,17
@@ -47,15 +47,15 @@ conduit_zip,Conduit Zip Code,varchar,9,42,42,43,43,44,44,43,30,30,30,30,30,30,,,
 memo_cd,Memo Code,char,1,43,43,44,44,45,45,44,31,31,31,31,31,31,30,,,,,,,
 memo_text,Memo Text/Description,varchar,100,44,44,45,45,46,46,45,32,32,32,32,32,32,31,22,22,22,22,22,22,22
 sys_cd,System Code (used in Schedules I and L to identify the account),varchar,9,45,45,46,46,47,47,46,37,37,37,37,37,,,,,,,,,
-inc_limit_cd,Increased Limit Code (discontinued after v6.3),char,1,,,,,25,25,47,38,38,38,38,,,,,,,23,23,23,23
-space_holder,Not used (v5.3 only),char,1,,,,,,,,33,,,,,,,,,,,,,
-amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,33,33,33,33,33,32,,,,,,,
+inc_limit_cd,Increased Limit Code,char,1,,,,,25,25,47,38,38,38,38,,,,,,,23,23,23,23
+space_holder,Not used,char,0,,,,,,,,33,,,,,,,,,,,,,
+amended_cd,Amended Code,char,1,,,,,,,,,33,33,33,33,33,32,,,,,,,
 nat_comm_non_fed_acct,National Committee Non-Federal Account,varchar,9,,,,,,,,,,,,,37,,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,35,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,36,,,,,,,,
-donor_comm_addr1,Donor Committee Street Address Line 1 (discontinued after v1),varchar,34,,,,,,,,,,,,,,20,,,,,,,
-donor_comm_addr2,Donor Committee Street Address Line 2 (discontinued after v1),varchar,34,,,,,,,,,,,,,,21,,,,,,,
-donor_comm_city,Donor Committee City (Address) (discontinued after v1),varchar,18,,,,,,,,,,,,,,22,,,,,,,
-donor_comm_state,Donor Committee State (Address) (discontinued after v1),char,2,,,,,,,,,,,,,,23,,,,,,,
-donor_comm_zip,Donor Committee Zip Code (discontinued after v1),varchar,9,,,,,,,,,,,,,,24,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24
+original_trans_id,Original Transaction ID,varchar,20,,,,,,,,,,,,,35,,,,,,,,
+super_trans_id,Super Transaction ID,varchar,20,,,,,,,,,,,,,36,,,,,,,,
+donor_comm_addr1,Donor Committee Street Address Line 1,varchar,34,,,,,,,,,,,,,,20,,,,,,,
+donor_comm_addr2,Donor Committee Street Address Line 2,varchar,34,,,,,,,,,,,,,,21,,,,,,,
+donor_comm_city,Donor Committee City (Address),varchar,18,,,,,,,,,,,,,,22,,,,,,,
+donor_comm_state,Donor Committee State (Address),char,2,,,,,,,,,,,,,,23,,,,,,,
+donor_comm_zip,Donor Committee Zip Code,varchar,9,,,,,,,,,,,,,,24,,,,,,,
+img_nbr,Image Number (Paper Filings Only),bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24

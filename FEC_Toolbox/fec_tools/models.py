@@ -1,6 +1,10 @@
 from django.db import models
 
 
+class Candidate(models.Model):
+    fec_cand_id = models.CharField('FEC Candidate ID', max_length=9, blank=False)
+
+
 class Committee(models.Model):
     fec_comm_id = models.CharField('FEC Committee ID', max_length=9, blank=False)
     standard_comm_nm = models.CharField('Standardized Committee Name', max_length=100, blank=True)
@@ -11,25 +15,14 @@ class ElectionCode(models.Model):
     elec = models.CharField('Election', max_length=10, blank=True)
 
 
+class EntityType(models.Model):
+    ent_tp = models.CharField('Entity Type', max_length=3)
+    ent_tp_desc = models.CharField('Entity Type Description', max_length=40)
+
+
 class Form(models.Model):
     form = models.CharField('Form', max_length=4, blank=False)
-    form_desc = models.CharField('Form Description', max_length=50)
-
-
-class ReportCommittee(models.Model):
-    rpt_id = models.PositiveIntegerField('Report ID', primary_key=True)
-    committee = models.ForeignKey('Committee', blank=False)
-
-
-class ReportForm(models.Model):
-    rpt_id = models.PositiveIntegerField('Report ID', primary_key=True)
-    form = models.ForeignKey('Form', blank=False)
-
-
-class ReportPeriod(models.Model):
-    rpt_prd = models.CharField('Report Period', max_length=4)
-    rpt_prd_desc = models.CharField('Report Period Description', max_length=50)
-    rpt_prd_verbose_desc = models.CharField('Report Period Verbose Description', max_length=150)
+    form_desc = models.CharField('Form Description', max_length=50, blank=True)
 
 
 class FormF3(models.Model):
@@ -108,7 +101,7 @@ class FormF3(models.Model):
     refunds_non_comms_20a_prd = models.DecimalField('Contribution Refunds to Individuals and non-Committees (Period, '
                                                     'Line 20a)', max_digits=12, decimal_places=2)
     refunds_pol_pty_comms_20b_prd = models.DecimalField('Contribution Refunds to Political Party Committees (Period, '
-                                                    'Line 20b)', max_digits=12, decimal_places=2)
+                                                        'Line 20b)', max_digits=12, decimal_places=2)
     refunds_oth_comms_20c_prd = models.DecimalField('Contribution Refunds to Other Committees (Period, Line 20c)',
                                                     max_digits=12, decimal_places=2)
     tot_refunds_20d_prd = models.DecimalField('Total Contribution Refunds (Period, Line20d)', max_digits=12,
@@ -168,7 +161,7 @@ class FormF3(models.Model):
     refunds_non_comms_20a_cyc = models.DecimalField('Contribution Refunds to Individuals and non-Committees (Cycle, '
                                                     'Line 20a)', max_digits=12, decimal_places=2)
     refunds_pol_pty_comms_20b_cyc = models.DecimalField('Contribution Refunds to Political Party Committees (Cycle, '
-                                                    'Line 20b)', max_digits=12, decimal_places=2)
+                                                        'Line 20b)', max_digits=12, decimal_places=2)
     refunds_oth_comms_20c_cyc = models.DecimalField('Contribution Refunds to Other Committees (Cycle, Line 20c)',
                                                     max_digits=12, decimal_places=2)
     tot_refunds_20d_cyc = models.DecimalField('Total Contribution Refunds (Cycle, Line20d)', max_digits=12,
@@ -272,13 +265,13 @@ class FormF3P(models.Model):
     oth_loans_19b_prd = models.DecimalField('Other Loans (Period, Line 19b)', max_digits=12, decimal_places=2)
     tot_loans_19c_prd = models.DecimalField('Total Loans (Period, Line 19c)', max_digits=12, decimal_places=2)
     offsets_op_exps_prd = models.DecimalField('Offsets to Operating Expenditures (Period, Line 20a)', max_digits=12,
-                                          decimal_places=2)
+                                              decimal_places=2)
     offsets_fundraising_prd = models.DecimalField('Offsets to Fundraising Expenditures (Period, Line 20b)',
                                                   max_digits=12, decimal_places=2)
     offsets_legal_acctg_prd = models.DecimalField('Offsets to Legal and Accounting Expenditures (Period, Line 20c)',
-                                              max_digits=12, decimal_places=2)
+                                                  max_digits=12, decimal_places=2)
     offsets_tot_prd = models.DecimalField('Total Offsets to Expenditures (Period, Line 20d)', max_digits=12,
-                                      decimal_places=2)
+                                          decimal_places=2)
     oth_receipts_21_prd = models.DecimalField('Other Receipts (Period, Line 21)', max_digits=12, decimal_places=2)
     tot_receipts_22_prd = models.DecimalField('Total Receipts (Period, Line 22)', max_digits=12, decimal_places=2)
     tot_op_exps_23_prd = models.DecimalField('Total Operating Expenditures (Period, Line 23)', max_digits=12,
@@ -298,7 +291,7 @@ class FormF3P(models.Model):
     refunds_non_comms_28a_prd = models.DecimalField('Contribution Refunds to Individuals and non-Committees (Period, '
                                                     'Line 28a)', max_digits=12, decimal_places=2)
     refunds_pol_pty_comms_28b_prd = models.DecimalField('Contribution Refunds to Political Party Committees (Period, '
-                                                    'Line 28b)', max_digits=12, decimal_places=2)
+                                                        'Line 28b)', max_digits=12, decimal_places=2)
     refunds_oth_comms_28c_prd = models.DecimalField('Contribution Refunds to Other Committees (Period, Line 28c)',
                                                     max_digits=12, decimal_places=2)
     tot_refunds_28d_prd = models.DecimalField('Total Contribution Refunds (Period, Line28d)', max_digits=12,
@@ -321,7 +314,8 @@ class FormF3P(models.Model):
     prim_exp_colorado_prd = models.DecimalField('Allocation of Primary Expenses by State (Colorado, Period, only '
                                                 'committees receiving federal funds)', max_digits=12, decimal_places=2)
     prim_exp_connecticut_prd = models.DecimalField('Allocation of Primary Expenses by State (Connecticut, Period, only '
-                                                'committees receiving federal funds)', max_digits=12, decimal_places=2)
+                                                   'committees receiving federal funds)', max_digits=12,
+                                                   decimal_places=2)
     prim_exp_delaware_prd = models.DecimalField('Allocation of Primary Expenses by State (Delaware, Period, only '
                                                 'committees receiving federal funds)', max_digits=12, decimal_places=2)
     prim_exp_dc_prd = models.DecimalField('Allocation of Primary Expenses by State (District of Columbia, Period, only '
@@ -455,13 +449,13 @@ class FormF3P(models.Model):
     oth_loans_19b_cyc = models.DecimalField('Other Loans (Cycle, Line 19b)', max_digits=12, decimal_places=2)
     tot_loans_19c_cyc = models.DecimalField('Total Loans (Cycle, Line 19c)', max_digits=12, decimal_places=2)
     offsets_op_exps_cyc = models.DecimalField('Offsets to Operating Expenditures (Cycle, Line 20a)', max_digits=12,
-                                          decimal_places=2)
+                                              decimal_places=2)
     offsets_fundraising_cyc = models.DecimalField('Offsets to Fundraising Expenditures (Cycle, Line 20b)',
                                                   max_digits=12, decimal_places=2)
     offsets_legal_acctg_cyc = models.DecimalField('Offsets to Legal and Accounting Expenditures (Cycle, Line 20c)',
-                                              max_digits=12, decimal_places=2)
+                                                  max_digits=12, decimal_places=2)
     offsets_tot_cyc = models.DecimalField('Total Offsets to Expenditures (Cycle, Line 20d)', max_digits=12,
-                                      decimal_places=2)
+                                          decimal_places=2)
     oth_receipts_21_cyc = models.DecimalField('Other Receipts (Cycle, Line 21)', max_digits=12, decimal_places=2)
     tot_receipts_22_cyc = models.DecimalField('Total Receipts (Cycle, Line 22)', max_digits=12, decimal_places=2)
     tot_op_exps_23_cyc = models.DecimalField('Total Operating Expenditures (Cycle, Line 23)', max_digits=12,
@@ -824,6 +818,7 @@ class FormF3X(models.Model):
 
 
 class LegacyFormF3(models.Model):
+    parent_id = models.ForeignKey('FormF3')
     rpt_id = models.ForeignKey('ReportForm', blank=False)
     treas_full_nm = models.CharField('Treasurer Full Name', max_length=38)
     cand_id = models.CharField('Candidate ID', max_length=9)
@@ -853,11 +848,112 @@ class LegacyFormF3(models.Model):
 
 
 class LegacyFormF3P(models.Model):
+    parent_id = models.ForeignKey('FormF3P')
     rpt_id = models.ForeignKey('ReportForm', blank=False)
     treas_full_nm = models.CharField('Treasurer Full Name', max_length=38)
     chg_addr = models.BooleanField('Change of Address')
 
 
 class LegacyFormF3X(models.Model):
+    parent_id = models.ForeignKey('FormF3X')
     rpt_id = models.ForeignKey('ReportForm', blank=False)
     treas_full_nm = models.CharField('Treasurer Full Name', max_length=38)
+
+
+class LineNumber(models.Model):
+    line_nbr = models.CharField('Line Number', max_length=8, blank=False)
+
+
+class Office(models.Model):
+    office = models.CharField('Office Code', max_length=1, primary_key=True)
+    office_desc = models.CharField('Office Description', max_length=10, blank=True)
+
+
+class TransactionPurpose(models.Model):
+    purp_cd = models.CharField('Transaction Purpose Code', max_length=3, blank=False)
+    purp_desc = models.CharField('Transaction Purpose Description', max_length=50, blank=True)
+
+
+class ReportCommittee(models.Model):
+    rpt_id = models.PositiveIntegerField('Report ID', primary_key=True)
+    committee = models.ForeignKey('Committee', blank=False)
+
+
+class ReportForm(models.Model):
+    rpt_id = models.PositiveIntegerField('Report ID', primary_key=True)
+    form = models.ForeignKey('Form', blank=False)
+
+
+class ReportPeriod(models.Model):
+    rpt_prd = models.CharField('Report Period', max_length=4)
+    rpt_prd_desc = models.CharField('Report Period Description', max_length=50)
+    rpt_prd_verbose_desc = models.CharField('Report Period Verbose Description', max_length=150)
+
+
+class FormSA(models.Model):
+    rpt_id = models.ForeignKey('ReportForm', blank=False)
+    line_nbr = models.ForeignKey('LineNumber')
+    trans_id = models.CharField('Transaction ID', max_length=20)
+    bk_ref_trans_id = models.CharField('Back Reference Transaction ID', max_length=20)
+    bk_ref_schedule = models.ForeignKey('Form')
+    bk_ref_line_nbr = models.ForeignKey('LineNumber')
+    ent_tp = models.ForeignKey('EntityType')
+    cont_org_nm = models.CharField('Contributor Organization Name', max_length=200)
+    cont_last = models.CharField('Contributor Last Name', max_length=30)
+    cont_first = models.CharField('Contributor First Name', max_length=20)
+    cont_mid = models.CharField('Contributor Middle Name', max_length=20)
+    cont_pfx = models.CharField('Contributor Name Prefix', max_length=10)
+    cont_sfx = models.CharField('Contributor Name Suffix', max_length=10)
+    cont_addr1 = models.CharField('Contributor Street Address, Line 1', max_length=34)
+    cont_addr2 = models.CharField('Contributor Street Address, Line 2', max_length=34)
+    cont_city = models.CharField('Contributor City (Address)', max_length=30)
+    cont_state = models.CharField('Contributor State (Address)', max_length=2)
+    cont_zip = models.CharField('Contributor Zip code', max_length=9)
+    elec_yr = models.PositiveSmallIntegerField('Election Year')
+    elec_cd = models.ForeignKey('ElectionCode')
+    elec_oth_desc = models.CharField('Other Election Description', max_length=20)
+    cont_dt = models.DateField('Contribution Date')
+    cont_amt = models.DecimalField('Contribution Amount', max_digits=12, decimal_places=2)
+    cont_agg = models.DecimalField('Contribution Aggregate', max_digits=12, decimal_places=2)
+    cont_purp = models.CharField('Contribution Purpose Description', max_length=100)
+    cont_emp = models.CharField('Contributor Employer', max_length=38)
+    cont_occ = models.CharField('Contributor Occupation', max_length=38)
+    donor_comm_id = models.ForeignKey('Committee')
+    donor_comm_nm = models.CharField('Donor Committee Name', max_length=200)
+    donor_cand_id = models.ForeignKey('Candidate')
+    donor_cand_last = models.CharField('Donor Candidate Last Name', max_length=30)
+    donor_cand_first = models.CharField('Donor Candidate First Name', max_length=20)
+    donor_cand_mid = models.CharField('Donor Candidate Middle Name', max_length=20)
+    donor_cand_pfx = models.CharField('Donor Candidate Name Prefix', max_length=10)
+    donor_cand_sfx = models.CharField('Donor Candidate Name Suffix', max_length=10)
+    donor_cand_office = models.ForeignKey('Office', verbose_name='Donor Candidate Office')
+    donor_cand_state = models.CharField('Donor Candidate State', max_length=2)
+    donor_cand_dist = models.PositiveSmallIntegerField('Donor Candidate District')
+    conduit_nm = models.CharField('Conduit Name', max_length=200)
+    conduit_addr1 = models.CharField('Conduit Street Address, Line 1', max_length=34)
+    conduit_addr2 = models.CharField('Conduit Street Address, Line 2', max_length=34)
+    conduit_city = models.CharField('Conduit City (Address)', max_length=30)
+    conduit_state = models.CharField('Conduit State (Address)', max_length=2)
+    conduit_zip = models.CharField('Conduit Zip code', max_length=9)
+    memo_cd = models.BooleanField('Memo Code')
+    memo_text = models.CharField('Memo Text/Description', max_length=100)
+    img_nbr = models.BigIntegerField('Image Number (Paper Filings Only')
+
+
+class LegacyFormSA(models.Model):
+    parent_id = models.ForeignKey('FormSA')
+    rpt_id = models.ForeignKey('ReportForm', blank=False)
+    cont_full_nm = models.CharField('Contributor Full Name', max_length=90)
+    cont_purp_cd = models.ForeignKey('TransactionPurpose')
+    donor_cand_full_nm = models.CharField('Donor Candidate Full Name', max_length=38)
+    sys_cd = models.CharField('System Code (used in Schedules I and L to identify the account)', max_length=9)
+    inc_limit_cd = models.BooleanField('Increased Limit Code')
+    amended_cd = models.BooleanField('Amended Code')
+    nat_comm_non_fed_acct = models.CharField('National Committee Non-Federal Account', max_length=9)
+    orig_trans_id = models.CharField('Original Transaction ID', max_length=20)
+    super_trans_id = models.CharField('Super Transaction ID', max_length=20)
+    donor_comm_addr1 = models.CharField('Donor Committee Street Address, Line 1', max_length=34)
+    donor_comm_addr2 = models.CharField('Donor Committee Street Address, Line 2', max_length=34)
+    donor_comm_city = models.CharField('Donor Committee City (Address)', max_length=30)
+    donor_comm_state = models.CharField('Donor Committee State (Address)', max_length=2)
+    donor_comm_zip = models.CharField('Donor Committee Zip code', max_length=9)

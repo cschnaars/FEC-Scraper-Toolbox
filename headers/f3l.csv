@@ -19,7 +19,7 @@ covg_to,Coverage To Date,int,,17,17,17,17,17,17,17
 semi_annual_jan_june,"Semi-Annual Period, January to June",char,1,18,18,18,18,18,18,18
 semi_annual_july_dec,"Semi-Annual Period, July to December",char,1,19,19,19,19,19,19,19
 bund_contribs_prd,Reportable Bundled Contributions by Lobbyists/Registrants or Lobbyist/Registrant PACS for Period (Quarterly/Monthly/Pre-Election/Post-Election),money,,20,20,20,20,20,20,20
-bund_contribs_semi_ann,Reportable Bundled Contributions by Lobbyists/Registrants or Lobbyist/Registrant PACS for Semi-Annual Period,money,,21,21,21,21,21,21,21
+bund_contribs_semi_annual,Reportable Bundled Contributions by Lobbyists/Registrants or Lobbyist/Registrant PACS for Semi-Annual Period,money,,21,21,21,21,21,21,21
 treas_last,Treasurer Last Name,varchar,30,22,22,22,22,22,22,22
 treas_first,Treasurer First Name,varchar,20,23,23,23,23,23,23,23
 treas_mid,Treasurer Middle Name,varchar,20,24,24,24,24,24,24,24

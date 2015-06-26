@@ -175,7 +175,7 @@ class FormF3(models.Model):
                                               decimal_places=2)
     oth_disb_21_cyc = models.DecimalField('Other Disbursements (Cycle, Line 21)', max_digits=12, decimal_places=2)
     tot_disb_22_cyc = models.DecimalField('Total Disbursements (Cycle, Line 22)', max_digits=12, decimal_places=2)
-    beg_img_nbr = models.BigIntegerField('Beginning Image Number')
+    img_nbr = models.BigIntegerField('Beginning Image Number (Paper Filings Only')
 
 
 class LegacyFormF3(models.Model):
@@ -205,3 +205,37 @@ class LegacyFormF3(models.Model):
     gen_elec = models.BooleanField('General Election')
     spec_elec = models.BooleanField('Special Election')
     runoff_elec = models.BooleanField('Runoff Election')
+
+
+class FormF3L(models.Model):
+    rpt_id = models.ForeignKey('ReportForm', blank=False)
+    comm_nm = models.CharField('Committee Name', max_length=200)
+    chg_addr = models.BooleanField('Change of Address')
+    addr1 = models.CharField('Street Address, Line 1', max_length=34)
+    addr2 = models.CharField('Street Address, Line 2', max_length=34)
+    addr_city = models.CharField('City (Address)', max_length=30)
+    addr_state = models.CharField('State (Address)', max_length=2)
+    addr_zip = models.CharField('Zip code', max_length=9)
+    district_state = models.CharField('District State', max_length=2)
+    district = models.PositiveSmallIntegerField('District')
+    rpt_prd = models.ForeignKey('ReportPeriod', blank=False)
+    elec_dt = models.DateField('Election Date')
+    elec_state = models.CharField('Election State', max_length=2)
+    semi_annual = models.BooleanField('Report Also Covers Semi-Annual Period')
+    covg_fm = models.DateField('Coverage From Date')
+    covg_to = models.DateField('Coverage To Date')
+    semi_annual_jan_june = models.BooleanField('Semi-Annual Period, January to June')
+    semi_annual_july_dec = models.BooleanField('Semi-Annual Period, July to December')
+    bund_contribs_prd = models.DecimalField('Reportable Bundled Contributions by Lobbyists/Registrants or '
+                                            'Lobbyist/Registrant PACS for Period (Quarterly/Monthly/Pre-Election/Post-'
+                                            'Election)', max_digits=12, decimal_places=2)
+    bund_contribs_semi_annual = models.DecimalField('Reportable Bundled Contributions by Lobbyists/Registrants or '
+                                                    'Lobbyist/Registrant PACS for Semi-Annual Period', max_digits=12,
+                                                    decimal_places=2)
+    treas_last = models.CharField('Treasurer Last Name', max_length=30)
+    treas_first = models.CharField('Treasurer First Name', max_length=20)
+    treas_mid = models.CharField('Treasurer Middle Name', max_length=20)
+    treas_pfx = models.CharField('Treasurer Name Prefix', max_length=10)
+    treas_sfx = models.CharField('Treasurer Name Suffix', max_length=10)
+    treas_sign_dt = models.DateField('Treasurer Sign Date')
+    img_nbr = models.BigIntegerField('Beginning Image Number (Paper Filings Only')

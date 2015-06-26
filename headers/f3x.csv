@@ -14,8 +14,8 @@ elec_dt,Election Date,int,,12,12,12,12,12,12,12,13,13,13,13,13,13,13,11,11,11,11
 elec_state,Election State,char,2,13,13,13,13,13,13,13,14,14,14,14,14,14,14,12,12,12,12,12,12,12
 covg_fm,Coverage From Date,int,,14,14,14,14,14,14,14,15,15,15,15,15,15,15,13,13,13,13,13,13,13
 covg_to,Coverage To Date,int,,15,15,15,15,15,15,15,16,16,16,16,16,16,16,14,14,14,14,14,14,14
-qual_multi_cand_comm,Qualified Multi-Candidate Committee,char,1,16,16,16,16,16,16,16,10,10,10,10,10,10,10,28,28,28,28,28,28,28
-treas_full_nm,Treasurer Full Name (discontinued after v5.3),varchar,38,,,,,,,,106,106,106,106,106,106,106,,,,,,,
+multi_cand_comm,Qualified Multi-Candidate Committee,char,1,16,16,16,16,16,16,16,10,10,10,10,10,10,10,28,28,28,28,28,28,28
+treas_full_nm,Treasurer Full Name,varchar,38,,,,,,,,106,106,106,106,106,106,106,,,,,,,
 treas_last,Treasurer Last Name,varchar,30,17,17,17,17,17,17,17,,,,,,,,15,15,15,15,15,15,15
 treas_first,Treasurer First Name,varchar,20,18,18,18,18,18,18,18,,,,,,,,16,16,16,16,16,16,16
 treas_mid,Treasurer Middle Name,varchar,20,19,19,19,19,19,19,19,,,,,,,,17,17,17,17,17,17,17
@@ -123,4 +123,4 @@ net_contribs_35_yr,"Net Contributions (Year, Line 35)",money,,120,120,120,120,12
 tot_fed_op_exps_36_yr,"Total Federal Operating Expenditures (Year, Line 36)",money,,121,121,121,121,121,121,121,103,103,103,103,103,103,103,120,120,120,120,120,120,120
 offsets_to_op_exps_37_yr,"Offsets to Operating Expenditures (Year, Line 37)",money,,122,122,122,122,122,122,122,104,104,104,104,104,104,104,121,121,121,121,121,121,121
 net_op_exps_38_yr,"Net Operating Expenditures (Year, Line 38)",money,,123,123,123,123,123,123,123,105,105,105,105,105,105,105,122,122,122,122,122,122,122
-beg_img_nbr,Beginning Image Number,bigint,,,,,,,,,,,,,,,,123,123,123,123,123,123,123
+img_nbr,Beginning Image Number (Paper Filings Only),bigint,,,,,,,,,,,,,,,,123,123,123,123,123,123,123

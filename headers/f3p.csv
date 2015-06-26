@@ -16,7 +16,7 @@ elec_dt,Election Date,int,,14,14,14,14,14,14,14,14,14,14,14,14,14,14
 elec_state,Election State,char,2,15,15,15,15,15,15,15,15,15,15,15,15,15,15
 covg_fm,Coverage From Date,int,,16,16,16,16,16,16,16,16,16,16,16,16,16,16
 covg_to,Coverage To Date,int,,17,17,17,17,17,17,17,17,17,17,17,17,17,17
-treas_full_nm,Treasurer Full Name (discontinued after v5.3),varchar,38,,,,,,,,197,197,197,197,197,197,197
+treas_full_nm,Treasurer Full Name,varchar,38,,,,,,,,197,197,197,197,197,197,197
 treas_last,Treasurer Last Name,varchar,30,18,18,18,18,18,18,18,,,,,,,
 treas_first,Treasurer First Name,varchar,20,19,19,19,19,19,19,19,,,,,,,
 treas_mid,Treasurer Middle Name,varchar,20,20,20,20,20,20,20,20,,,,,,,
@@ -45,10 +45,10 @@ trans_fm_pty_comms_18_prd,"Transfers from Party Committees (Period, Line 18)",mo
 cand_loans_19a_prd,"Loans Made or Guaranteed by Candidate (Period, Line 19a)",money,,43,43,43,41,41,41,41,35,35,35,35,35,35,35
 oth_loans_19b_prd,"Other Loans (Period, Line 19b)",money,,44,44,44,42,42,42,42,36,36,36,36,36,36,36
 tot_loans_19c_prd,"Total Loans (Period, Line 19c)",money,,45,45,45,43,43,43,43,37,37,37,37,37,37,37
-offsets_op_exps,"Offsets to Operating Expenditures (Period, Line 20a)",money,,46,46,46,44,44,44,44,38,38,38,38,38,38,38
-offsets_fundraising,"Offsets to Fundraising Expenditures (Period, Line 20b)",money,,47,47,47,45,45,45,45,39,39,39,39,39,39,39
-offsets_legal_acctg,"Offsets to Legal and Accounting Expenditures (Period, Line 20c)",money,,48,48,48,46,46,46,46,40,40,40,40,40,40,40
-offsets_tot,"Total Offsets to Expenditures (Period, Line 20d)",money,,49,49,49,47,47,47,47,41,41,41,41,41,41,41
+offsets_op_exps_prd,"Offsets to Operating Expenditures (Period, Line 20a)",money,,46,46,46,44,44,44,44,38,38,38,38,38,38,38
+offsets_fundraising_prd,"Offsets to Fundraising Expenditures (Period, Line 20b)",money,,47,47,47,45,45,45,45,39,39,39,39,39,39,39
+offsets_legal_acctg_prd,"Offsets to Legal and Accounting Expenditures (Period, Line 20c)",money,,48,48,48,46,46,46,46,40,40,40,40,40,40,40
+offsets_tot_prd,"Total Offsets to Expenditures (Period, Line 20d)",money,,49,49,49,47,47,47,47,41,41,41,41,41,41,41
 oth_receipts_21_prd,"Other Receipts (Period, Line 21)",money,,50,50,50,48,48,48,48,42,42,42,42,42,42,42
 tot_receipts_22_prd,"Total Receipts (Period, Line 22)",money,,51,51,51,49,49,49,49,43,43,43,43,43,43,43
 tot_op_exps_23_prd,"Total Operating Expenditures (Period, Line 23)",money,,52,52,52,50,50,50,50,44,44,44,44,44,44,44
@@ -76,7 +76,7 @@ prim_exp_delaware_prd,"Allocation of Primary Expenses by State (Delaware, Period
 prim_exp_dc_prd,"Allocation of Primary Expenses by State (District of Columbia, Period, only committees receiving federal funds)",money,,74,74,74,72,72,72,72,66,66,66,66,66,66,66
 prim_exp_florida_prd,"Allocation of Primary Expenses by State (Florida, Period, only committees receiving federal funds)",money,,75,75,75,73,73,73,73,67,67,67,67,67,67,67
 prim_exp_georgia_prd,"Allocation of Primary Expenses by State (Georgia, Period, only committees receiving federal funds)",money,,76,76,76,74,74,74,74,68,68,68,68,68,68,68
-prim_exp_ hawaii_prd,"Allocation of Primary Expenses by State (Hawaii, Period, only committees receiving federal funds)",money,,77,77,77,75,75,75,75,69,69,69,69,69,69,69
+prim_exp_hawaii_prd,"Allocation of Primary Expenses by State (Hawaii, Period, only committees receiving federal funds)",money,,77,77,77,75,75,75,75,69,69,69,69,69,69,69
 prim_exp_idaho_prd,"Allocation of Primary Expenses by State (Idaho, Period, only committees receiving federal funds)",money,,78,78,78,76,76,76,76,70,70,70,70,70,70,70
 prim_exp_illinois_prd,"Allocation of Primary Expenses by State (Illinois, Period, only committees receiving federal funds)",money,,79,79,79,77,77,77,77,71,71,71,71,71,71,71
 prim_exp_indiana_prd,"Allocation of Primary Expenses by State (Indiana, Period, only committees receiving federal funds)",money,,80,80,80,78,78,78,78,72,72,72,72,72,72,72
@@ -132,10 +132,10 @@ trans_fm_pty_comms_18_cyc,"Transfers from Party Committees (Cycle, Line 18)",mon
 cand_loans_19a_cyc,"Loans Made or Guaranteed by Candidate (Cycle, Line 19a)",money,,130,130,130,126,126,126,126,120,120,120,120,120,120,120
 oth_loans_19b_cyc,"Other Loans (Cycle, Line 19b)",money,,131,131,131,127,127,127,127,121,121,121,121,121,121,121
 tot_loans_19c_cyc,"Total Loans (Cycle, Line 19c)",money,,132,132,132,128,128,128,128,122,122,122,122,122,122,122
-offsets_op_exps,"Offsets to Operating Expenditures (Cycle, Line 20a)",money,,133,133,133,129,129,129,129,123,123,123,123,123,123,123
-offsets_fundraising,"Offsets to Fundraising Expenditures (Cycle, Line 20b)",money,,134,134,134,130,130,130,130,124,124,124,124,124,124,124
-offsets_legal_acctg,"Offsets to Legal and Accounting Expenditures (Cycle, Line 20c)",money,,135,135,135,131,131,131,131,125,125,125,125,125,125,125
-offsets_tot,"Total Offsets to Expenditures (Cycle, Line 20d)",money,,136,136,136,132,132,132,132,126,126,126,126,126,126,126
+offsets_op_exps_cyc,"Offsets to Operating Expenditures (Cycle, Line 20a)",money,,133,133,133,129,129,129,129,123,123,123,123,123,123,123
+offsets_fundraising_cyc,"Offsets to Fundraising Expenditures (Cycle, Line 20b)",money,,134,134,134,130,130,130,130,124,124,124,124,124,124,124
+offsets_legal_acctg_cyc,"Offsets to Legal and Accounting Expenditures (Cycle, Line 20c)",money,,135,135,135,131,131,131,131,125,125,125,125,125,125,125
+offsets_tot_cyc,"Total Offsets to Expenditures (Cycle, Line 20d)",money,,136,136,136,132,132,132,132,126,126,126,126,126,126,126
 oth_receipts_21_cyc,"Other Receipts (Cycle, Line 21)",money,,137,137,137,133,133,133,133,127,127,127,127,127,127,127
 tot_receipts_22_cyc,"Total Receipts (Cycle, Line 22)",money,,138,138,138,134,134,134,134,128,128,128,128,128,128,128
 tot_op_exps_23_cyc,"Total Operating Expenditures (Cycle, Line 23)",money,,139,139,139,135,135,135,135,129,129,129,129,129,129,129
@@ -162,7 +162,7 @@ prim_exp_delaware_cyc,"Allocation of Primary Expenses by State (Delaware, Cycle,
 prim_exp_dc_cyc,"Allocation of Primary Expenses by State (District of Columbia, Cycle, only committees receiving federal funds)",money,,160,160,160,156,156,156,156,150,150,150,150,150,150,150
 prim_exp_florida_cyc,"Allocation of Primary Expenses by State (Florida, Cycle, only committees receiving federal funds)",money,,161,161,161,157,157,157,157,151,151,151,151,151,151,151
 prim_exp_georgia_cyc,"Allocation of Primary Expenses by State (Georgia, Cycle, only committees receiving federal funds)",money,,162,162,162,158,158,158,158,152,152,152,152,152,152,152
-prim_exp_ hawaii_cyc,"Allocation of Primary Expenses by State (Hawaii, Cycle, only committees receiving federal funds)",money,,163,163,163,159,159,159,159,153,153,153,153,153,153,153
+prim_exp_hawaii_cyc,"Allocation of Primary Expenses by State (Hawaii, Cycle, only committees receiving federal funds)",money,,163,163,163,159,159,159,159,153,153,153,153,153,153,153
 prim_exp_idaho_cyc,"Allocation of Primary Expenses by State (Idaho, Cycle, only committees receiving federal funds)",money,,164,164,164,160,160,160,160,154,154,154,154,154,154,154
 prim_exp_illinois_cyc,"Allocation of Primary Expenses by State (Illinois, Cycle, only committees receiving federal funds)",money,,165,165,165,161,161,161,161,155,155,155,155,155,155,155
 prim_exp_indiana_cyc,"Allocation of Primary Expenses by State (Indiana, Cycle, only committees receiving federal funds)",money,,166,166,166,162,162,162,162,156,156,156,156,156,156,156

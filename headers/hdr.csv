@@ -1,14 +1,14 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-rec_tp,Record Type,varchar,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-form_tp,Electronic Form Type,varchar,3,2,2,2,2,2,2,2,2,2,2,2,2,,,,,,,
-hdr_ver,Header Version,varchar,4,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2
-soft_nm,Software Name,varchar,90,4,4,4,4,4,4,4,4,4,4,4,4,,,,,,,
-soft_ver,Software Version,varchar,16,5,5,5,5,5,5,5,5,5,5,5,5,,,,,,,
-nm_delim,Name Delimiter,char,1,,,,,,,,6,6,6,6,6,,,,,,,
-amd_rpt_id,Amended Report ID,varchar,16,6,6,6,6,6,6,6,7,7,7,7,7,,,,,,,
-amd_rpt_nbr,Amendment Number,tinyint,,7,7,7,7,7,7,7,8,8,8,8,8,,,,,,,
-hdr_cmt,Header Comment,varchar,200,8,8,8,8,8,8,8,9,9,9,9,9,,,,,,,
-vendor,Paper Report Vendor,varchar,90,,,,,,,,,,,,,3,3,3,3,3,3,3
-batch_nbr,FEC Batch Number,smallint,,,,,,,,,,,,,,4,4,4,4,4,4,4
-rcpt_dt,Date Received,char,8,,,,,,,,,,,,,5,5,5,,,,
-fec_orig_id,FEC Original ID,varchar,15,,,,,,,,,,,,,6,6,6,5,5,5,
+field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
+record_type,Record Type,varchar,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+electronic_form_type,Electronic Form Type,varchar,3,2,2,2,2,2,2,2,2,2,2,2,2,,,,,,,
+header_version,Header Version,varchar,4,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2
+software_name,Software Name,varchar,90,4,4,4,4,4,4,4,4,4,4,4,4,,,,,,,
+software_version,Software Version,varchar,16,5,5,5,5,5,5,5,5,5,5,5,5,,,,,,,
+name_delimiter,Name Delimiter,char,1,,,,,,,,6,6,6,6,6,,,,,,,
+amended_report_id,Amended Report ID,varchar,16,6,6,6,6,6,6,6,7,7,7,7,7,,,,,,,
+amended_report_number,Amendment Number,tinyint,,7,7,7,7,7,7,7,8,8,8,8,8,,,,,,,
+header_comment,Header Comment,varchar,200,8,8,8,8,8,8,8,9,9,9,9,9,,,,,,,
+paper_report_vendor,Paper Report Vendor,varchar,90,,,,,,,,,,,,,3,3,3,3,3,3,3
+fec_batch_number,FEC Batch Number,smallint,,,,,,,,,,,,,,4,4,4,4,4,4,4
+date_received,Date Received,char,8,,,,,,,,,,,,,5,5,5,,,,
+fec_original_id,FEC Original ID,varchar,15,,,,,,,,,,,,,6,6,6,5,5,5,

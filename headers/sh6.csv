@@ -1,53 +1,53 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,39,39,39,39,,,,,,,
-bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,40,40,40,40,,,,,,,
-bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,41,41,41,41,,,,,,,
-ent_tp,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,,,,,,,
-payee_full_nm,Payee Full Name (discontinued after v5.3),varchar,90,,,,,,,,4,4,4,4,,,,,,,
-payee_org_nm,Payee Organization Name,varchar,200,7,7,7,7,7,7,7,,,,,3,3,3,3,3,3,3
-payee_last,Payee Last Name,varchar,30,8,8,8,8,8,8,8,,,,,4,4,4,4,4,4,4
-payee_first,Payee First Name,varchar,20,9,9,9,9,9,9,9,,,,,5,5,5,5,5,5,5
-payee_mid,Payee Middle Name,varchar,20,10,10,10,10,10,10,10,,,,,6,6,6,6,6,6,6
-payee_pfx,Payee Name Prefix,varchar,10,11,11,11,11,11,11,11,,,,,7,7,7,7,7,7,7
-payee_sfx,Payee Name Suffix,varchar,10,12,12,12,12,12,12,12,,,,,8,8,8,8,8,8,8
-payee_addr1,Payee Street Address Line 1,varchar,34,13,13,13,13,13,13,13,5,5,5,5,9,9,9,9,9,9,9
-payee_addr2,Payee Street Address Line 2,varchar,34,14,14,14,14,14,14,14,6,6,6,6,10,10,10,10,10,10,10
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,39,39,39,39,,,,,,,
+back_reference_transaction_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,40,40,40,40,,,,,,,
+back_reference_schedule,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,41,41,41,41,,,,,,,
+entity_type,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,,,,,,,
+payee_full_name,Payee Full Name (discontinued after v5.3),varchar,90,,,,,,,,4,4,4,4,,,,,,,
+payee_organization_name,Payee Organization Name,varchar,200,7,7,7,7,7,7,7,,,,,3,3,3,3,3,3,3
+payee_last_name,Payee Last Name,varchar,30,8,8,8,8,8,8,8,,,,,4,4,4,4,4,4,4
+payee_first_name,Payee First Name,varchar,20,9,9,9,9,9,9,9,,,,,5,5,5,5,5,5,5
+payee_middle_name,Payee Middle Name,varchar,20,10,10,10,10,10,10,10,,,,,6,6,6,6,6,6,6
+payee_name_prefix,Payee Name Prefix,varchar,10,11,11,11,11,11,11,11,,,,,7,7,7,7,7,7,7
+payee_name_suffix,Payee Name Suffix,varchar,10,12,12,12,12,12,12,12,,,,,8,8,8,8,8,8,8
+payee_address_1,Payee Street Address Line 1,varchar,34,13,13,13,13,13,13,13,5,5,5,5,9,9,9,9,9,9,9
+payee_address_2,Payee Street Address Line 2,varchar,34,14,14,14,14,14,14,14,6,6,6,6,10,10,10,10,10,10,10
 payee_city,Payee City (Address),varchar,30,15,15,15,15,15,15,15,7,7,7,7,11,11,11,11,11,11,11
 payee_state,Payee State (Address),char,2,16,16,16,16,16,16,16,8,8,8,8,12,12,12,12,12,12,12
 payee_zip,Payee Zip Code,varchar,9,17,17,17,17,17,17,17,9,9,9,9,13,13,13,13,13,13,13
-evt_nm,Activity or Event Name/Identifier,varchar,100,18,18,18,18,18,18,18,,,,,,,,,,,
-exp_dt,Expenditure Date,int,,19,19,19,19,19,19,19,13,13,13,13,21,21,21,21,21,21,21
-tot_amt,Total Amount,money,,20,20,20,20,20,20,20,14,14,14,14,24,24,24,24,24,24,24
-fed_amt,Federal Amount,money,,21,21,21,21,21,21,21,15,15,15,15,22,22,22,22,22,22,22
-non_fed_amt,Non-Federal/Levin Amount,money,,22,22,22,22,22,22,22,16,16,16,16,23,23,23,23,23,23,23
-evt_tot_ytd,Activity or Event Total Year-to-Date,money,,23,23,23,23,23,23,23,21,21,21,21,20,20,20,20,20,20,20
-exp_purp_cd,Expenditure Purpose Code,char,3,,,24,24,24,24,24,11,11,11,11,,,,,,,
-exp_purp_desc,Expenditure Purpose Description,varchar,100,24,24,25,25,25,25,25,12,12,12,12,14,14,14,14,14,14,14
-exp_cat_cd,Expenditure Category Code,char,3,25,25,26,26,26,26,26,10,10,10,10,15,15,15,15,15,15,15
-voter_reg,Activity or Event is Voter Registration,char,1,26,26,27,27,27,27,27,17,17,17,17,16,16,16,16,16,16,16
-gotv,Activity or Event is GOTV,char,1,27,27,28,28,28,28,28,19,19,19,19,17,17,17,17,17,17,17
-voter_id,Activity or Event is Voter ID,char,1,28,28,29,29,29,29,29,18,18,18,18,18,18,18,18,18,18,18
-gen_camp,Activity or Event is Generic Campaign Activity,char,1,29,29,30,30,30,30,30,20,20,20,20,19,19,19,19,19,19,19
-memo_cd,Memo Code,char,1,30,30,31,31,31,31,31,,,,,,,,,,,
+activity_event_name,Activity or Event Name/Identifier,varchar,100,18,18,18,18,18,18,18,,,,,,,,,,,
+expenditure_date,Expenditure Date,int,,19,19,19,19,19,19,19,13,13,13,13,21,21,21,21,21,21,21
+total_amount,Total Amount,"numeric(12, 4)",,20,20,20,20,20,20,20,14,14,14,14,24,24,24,24,24,24,24
+federal_amount,Federal Amount,"numeric(12, 4)",,21,21,21,21,21,21,21,15,15,15,15,22,22,22,22,22,22,22
+non_federal_amount,Non-Federal/Levin Amount,"numeric(12, 4)",,22,22,22,22,22,22,22,16,16,16,16,23,23,23,23,23,23,23
+activity_event_total_year_to_date,Activity or Event Total Year-to-Date,"numeric(12, 4)",,23,23,23,23,23,23,23,21,21,21,21,20,20,20,20,20,20,20
+expenditure_purpose_code,Expenditure Purpose Code,char,3,,,24,24,24,24,24,11,11,11,11,,,,,,,
+expenditure_purpose_description,Expenditure Purpose Description,varchar,100,24,24,25,25,25,25,25,12,12,12,12,14,14,14,14,14,14,14
+expenditure_category_code,Expenditure Category Code,char,3,25,25,26,26,26,26,26,10,10,10,10,15,15,15,15,15,15,15
+activity_event_is_voter_registration,Activity or Event is Voter Registration,char,1,26,26,27,27,27,27,27,17,17,17,17,16,16,16,16,16,16,16
+activity_event_is_gotv,Activity or Event is GOTV,char,1,27,27,28,28,28,28,28,19,19,19,19,17,17,17,17,17,17,17
+activity_event_is_voter_id,Activity or Event is Voter ID,char,1,28,28,29,29,29,29,29,18,18,18,18,18,18,18,18,18,18,18
+activity_event_is_generic_campaign_activity,Activity or Event is Generic Campaign Activity,char,1,29,29,30,30,30,30,30,20,20,20,20,19,19,19,19,19,19,19
+memo_code,Memo Code,char,1,30,30,31,31,31,31,31,,,,,,,,,,,
 memo_text,Memo Text/Description,varchar,100,31,31,32,32,32,32,32,,,,,,,,,,,
-exp_purp_addl_desc,Expenditure Purpose Additional Description (discontinued after v5.3),varchar,100,,,,,,,,22,22,22,22,,,,,,,
-comm_id,FEC Committee ID,char,9,,,,,,,,23,23,23,23,,,,,,,
-cand_id,FEC Candidate ID,char,9,,,,,,,,24,24,24,24,,,,,,,
-cand_full_nm,Candidate Full Name (discontinued after v5.3),varchar,38,,,,,,,,25,25,25,25,,,,,,,
-cand_office,Candidate Office,char,1,,,,,,,,26,26,26,26,,,,,,,
-cand_state,Candidate State,char,2,,,,,,,,27,27,27,27,,,,,,,
-cand_dist,Candidate District,tinyint,,,,,,,,,28,28,28,28,,,,,,,
-conduit_comm_id,Conduit Committee ID,char,9,,,,,,,,29,29,29,29,,,,,,,
-conduit_nm,Conduit Name,varchar,200,,,,,,,,30,30,30,30,,,,,,,
-conduit_addr1,Conduit Street Address Line 1,varchar,34,,,,,,,,31,31,31,31,,,,,,,
-conduit_addr2,Conduit Street Address Line 2,varchar,34,,,,,,,,32,32,32,32,,,,,,,
+expenditure_purpose_additional_description,Expenditure Purpose Additional Description (discontinued after v5.3),varchar,100,,,,,,,,22,22,22,22,,,,,,,
+fec_committee_id,FEC Committee ID,char,9,,,,,,,,23,23,23,23,,,,,,,
+candidate_id,FEC Candidate ID,char,9,,,,,,,,24,24,24,24,,,,,,,
+candidate_full_name,Candidate Full Name (discontinued after v5.3),varchar,38,,,,,,,,25,25,25,25,,,,,,,
+candidate_office,Candidate Office,char,1,,,,,,,,26,26,26,26,,,,,,,
+candidate_state,Candidate State,char,2,,,,,,,,27,27,27,27,,,,,,,
+candidate_district,Candidate District,tinyint,,,,,,,,,28,28,28,28,,,,,,,
+conduit_committee_id,Conduit Committee ID,char,9,,,,,,,,29,29,29,29,,,,,,,
+conduit_name,Conduit Name,varchar,200,,,,,,,,30,30,30,30,,,,,,,
+conduit_address_1,Conduit Street Address Line 1,varchar,34,,,,,,,,31,31,31,31,,,,,,,
+conduit_address_2,Conduit Street Address Line 2,varchar,34,,,,,,,,32,32,32,32,,,,,,,
 conduit_city,Conduit City (Address),varchar,30,,,,,,,,33,33,33,33,,,,,,,
 conduit_state,Conduit State (Address),char,2,,,,,,,,34,34,34,34,,,,,,,
 conduit_zip,Conduit Zip Code,varchar,9,,,,,,,,35,35,35,35,,,,,,,
-memo_cd,Memo Code,char,1,,,,,,,,36,36,36,36,,,,,,,
+memo_code,Memo Code,char,1,,,,,,,,36,36,36,36,,,,,,,
 memo_text,Memo Text/Description,varchar,100,,,,,,,,37,37,37,37,,,,,,,
 space_holder,Not used,char,1,,,,,,,,38,,,,,,,,,,
-amended_cd,Amended Code,char,1,,,,,,,,,38,38,38,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,25,25,25,25,25,25,25
+amended_code,Amended Code,char,1,,,,,,,,,38,38,38,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,25,25,25,25,25,25,25

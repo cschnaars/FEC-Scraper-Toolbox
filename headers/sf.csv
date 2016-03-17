@@ -1,62 +1,62 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,37,37,37,37,37,37,,,,,,,,
-bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,40,40,40,40,40,,,,,,,,,
-bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,41,41,41,41,41,,,,,,,,,
-desig_coord_exp,Filer Designated to Make Coordinated Expenditures,char,1,6,6,6,6,6,6,6,3,3,3,3,3,3,3,3,3,3,4,4,4,4
-desig_comm_id,Designating Committee ID,char,9,7,7,7,7,7,7,7,4,4,4,4,4,4,4,,,,,,,
-desig_comm_nm,Designating Committee Name,varchar,200,8,8,8,8,8,8,8,5,5,5,5,5,5,,4,4,4,5,5,5,5
-sub_comm_id,Subordinate Committee ID,char,9,9,9,9,9,9,9,9,6,6,6,6,6,6,,,,,,,,
-sub_comm_nm,Subordinate Committee Name,varchar,200,10,10,10,10,10,10,10,7,7,7,7,7,7,5,5,5,5,6,6,6,6
-sub_addr1,Subordinate Street Address Line 1,varchar,34,11,11,11,11,11,11,11,8,8,8,8,8,8,6,6,6,6,7,7,7,7
-sub_addr2,Subordinate Street Address Line 2,varchar,34,12,12,12,12,12,12,12,9,9,9,9,9,9,7,7,7,7,8,8,8,8
-sub_city,Subordinate City (Address),varchar,30,13,13,13,13,13,13,13,10,10,10,10,10,10,8,8,8,8,9,9,9,9
-sub_state,Subordinate State (Address),char,2,14,14,14,14,14,14,14,11,11,11,11,11,11,9,9,9,9,10,10,10,10
-sub_zip,Subordinate Zip Code,varchar,9,15,15,15,15,15,15,15,12,12,12,12,12,12,10,10,10,10,11,11,11,11
-ent_tp,Entity Type,char,3,16,16,16,16,16,16,16,13,13,13,13,13,13,,,,,,,,
-payee_full_nm,Payee Full Name (discontinued after v5),varchar,90,,,,,,,,14,14,14,14,14,14,11,,,,,,,
-payee_org_nm,Payee Organization Name,varchar,200,17,17,17,17,17,17,17,,,,,,,,11,11,11,12,12,12,12
-payee_last,Payee Last Name,varchar,30,18,18,18,18,18,18,18,,,,,,,,12,12,12,13,13,13,13
-payee_first,Payee First Name,varchar,20,19,19,19,19,19,19,19,,,,,,,,13,13,13,14,14,14,14
-payee_mid,Payee Middle Name,varchar,20,20,20,20,20,20,20,20,,,,,,,,14,14,14,15,15,15,15
-payee_pfx,Payee Name Prefix,varchar,10,21,21,21,21,21,21,21,,,,,,,,15,15,15,16,16,16,16
-payee_sfx,Payee Name Suffix,varchar,10,22,22,22,22,22,22,22,,,,,,,,16,16,16,17,17,17,17
-payee_addr1,Payee Street Address Line 1,varchar,34,23,23,23,23,23,23,23,15,15,15,15,15,15,12,17,17,17,18,18,18,18
-payee_addr2,Payee Street Address Line 2,varchar,34,24,24,24,24,24,24,24,16,16,16,16,16,16,13,18,18,18,19,19,19,19
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,37,37,37,37,37,37,,,,,,,,
+back_reference_transaction_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,40,40,40,40,40,,,,,,,,,
+back_reference_schedule,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,41,41,41,41,41,,,,,,,,,
+designated_to_make_coordinated_expenditures,Filer Designated to Make Coordinated Expenditures,char,1,6,6,6,6,6,6,6,3,3,3,3,3,3,3,3,3,3,4,4,4,4
+designating_committee_id,Designating Committee ID,char,9,7,7,7,7,7,7,7,4,4,4,4,4,4,4,,,,,,,
+designating_committee_name,Designating Committee Name,varchar,200,8,8,8,8,8,8,8,5,5,5,5,5,5,,4,4,4,5,5,5,5
+subordinate_committee_id,Subordinate Committee ID,char,9,9,9,9,9,9,9,9,6,6,6,6,6,6,,,,,,,,
+subordinate_committee_name,Subordinate Committee Name,varchar,200,10,10,10,10,10,10,10,7,7,7,7,7,7,5,5,5,5,6,6,6,6
+subordinate_address_1,Subordinate Street Address Line 1,varchar,34,11,11,11,11,11,11,11,8,8,8,8,8,8,6,6,6,6,7,7,7,7
+subordinate_address_2,Subordinate Street Address Line 2,varchar,34,12,12,12,12,12,12,12,9,9,9,9,9,9,7,7,7,7,8,8,8,8
+subordinate_city,Subordinate City (Address),varchar,30,13,13,13,13,13,13,13,10,10,10,10,10,10,8,8,8,8,9,9,9,9
+subordinate_state,Subordinate State (Address),char,2,14,14,14,14,14,14,14,11,11,11,11,11,11,9,9,9,9,10,10,10,10
+subordinate_zip,Subordinate Zip Code,varchar,9,15,15,15,15,15,15,15,12,12,12,12,12,12,10,10,10,10,11,11,11,11
+entity_type,Entity Type,char,3,16,16,16,16,16,16,16,13,13,13,13,13,13,,,,,,,,
+payee_full_name,Payee Full Name (discontinued after v5),varchar,90,,,,,,,,14,14,14,14,14,14,11,,,,,,,
+payee_organization_name,Payee Organization Name,varchar,200,17,17,17,17,17,17,17,,,,,,,,11,11,11,12,12,12,12
+payee_last_name,Payee Last Name,varchar,30,18,18,18,18,18,18,18,,,,,,,,12,12,12,13,13,13,13
+payee_first_name,Payee First Name,varchar,20,19,19,19,19,19,19,19,,,,,,,,13,13,13,14,14,14,14
+payee_middle_name,Payee Middle Name,varchar,20,20,20,20,20,20,20,20,,,,,,,,14,14,14,15,15,15,15
+payee_name_prefix,Payee Name Prefix,varchar,10,21,21,21,21,21,21,21,,,,,,,,15,15,15,16,16,16,16
+payee_name_suffix,Payee Name Suffix,varchar,10,22,22,22,22,22,22,22,,,,,,,,16,16,16,17,17,17,17
+payee_address_1,Payee Street Address Line 1,varchar,34,23,23,23,23,23,23,23,15,15,15,15,15,15,12,17,17,17,18,18,18,18
+payee_address_2,Payee Street Address Line 2,varchar,34,24,24,24,24,24,24,24,16,16,16,16,16,16,13,18,18,18,19,19,19,19
 payee_city,Payee City (Address),varchar,30,25,25,25,25,25,25,25,17,17,17,17,17,17,14,19,19,19,20,20,20,20
 payee_state,Payee State (Address),char,2,26,26,26,26,26,26,26,18,18,18,18,18,18,15,20,20,20,21,21,21,21
 payee_zip,Payee Zip Code,varchar,9,27,27,27,27,27,27,27,19,19,19,19,19,19,16,21,21,21,22,22,22,22
-exp_dt,Expenditure Date,int,,28,28,28,28,28,28,28,22,22,22,22,22,22,24,24,24,24,25,25,25,25
-exp_amt,Expenditure Amount,money,,29,29,29,29,29,29,29,23,23,23,23,23,23,25,34,34,34,35,35,35,35
-agg_gen_elec_exp,Aggregate Expended for General Election,money,,30,30,30,30,30,30,30,20,20,20,20,20,20,22,33,33,33,34,34,34,34
-exp_purp_cd,Expenditure Purpose Code,char,3,,,31,31,31,31,31,44,44,44,44,,,,,,,,,,
-exp_purp_desc,Expenditure Purpose Description,varchar,100,31,31,32,33,33,33,33,21,21,21,21,21,21,23,22,22,22,23,23,23,23
-exp_cat_cd,Expenditure Category Code,char,3,32,32,33,34,35,36,37,43,43,43,43,,,,23,23,23,24,24,24,24
-payee_comm_id,Payee Committee ID,char,9,33,33,34,35,36,37,38,24,24,24,24,24,24,,,,,,,,
-payee_cand_id,Payee Candidate ID,char,9,34,34,35,36,37,38,39,25,25,25,25,25,25,17,,,,,,,
-payee_cand_full_nm,Payee Candidate Full Name,varchar,38,35,35,36,37,38,39,40,26,26,26,26,26,26,18,,,,,,,
-payee_cand_last,Payee Candidate Last Name,varchar,30,,,,,,,,,,,,,,,25,25,25,26,26,26,26
-payee_cand_first,Payee Candidate First Name,varchar,20,36,36,37,38,39,40,41,,,,,,,,26,26,26,27,27,27,27
-payee_cand_mid,Payee Candidate Middle Name,varchar,20,37,37,38,39,40,41,42,,,,,,,,27,27,27,28,28,28,28
-payee_cand_pfx,Payee Candidate Name Prefix,varchar,10,38,38,39,40,41,42,43,,,,,,,,28,28,28,29,29,29,29
-payee_cand_sfx,Payee Candidate Name Suffix,varchar,10,39,39,40,41,42,43,44,,,,,,,,29,29,29,30,30,30,30
-payee_cand_office,Payee Candidate Office,char,1,40,40,41,42,43,44,45,27,27,27,27,27,27,19,30,30,30,31,31,31,31
-payee_cand_state,Payee Candidate State,char,2,41,41,42,43,44,45,46,28,28,28,28,28,28,20,31,31,31,32,32,32,32
-payee_cand_dist,Payee Candidate District,tinyint,,42,42,43,44,45,46,47,29,29,29,29,29,29,21,32,32,32,33,33,33,33
-memo_cd,Memo Code,char,1,43,43,44,45,46,47,48,38,38,38,38,38,,,,,,,,,
+expenditure_date,Expenditure Date,int,,28,28,28,28,28,28,28,22,22,22,22,22,22,24,24,24,24,25,25,25,25
+expenditure_amount,Expenditure Amount,"numeric(12, 4)",,29,29,29,29,29,29,29,23,23,23,23,23,23,25,34,34,34,35,35,35,35
+aggregate_expended_for_general_election,Aggregate Expended for General Election,"numeric(12, 4)",,30,30,30,30,30,30,30,20,20,20,20,20,20,22,33,33,33,34,34,34,34
+expenditure_purpose_code,Expenditure Purpose Code,char,3,,,31,31,31,31,31,44,44,44,44,,,,,,,,,,
+expenditure_purpose_description,Expenditure Purpose Description,varchar,100,31,31,32,33,33,33,33,21,21,21,21,21,21,23,22,22,22,23,23,23,23
+expenditure_category_code,Expenditure Category Code,char,3,32,32,33,34,35,36,37,43,43,43,43,,,,23,23,23,24,24,24,24
+payee_committee_id,Payee Committee ID,char,9,33,33,34,35,36,37,38,24,24,24,24,24,24,,,,,,,,
+payee_candidate_id,Payee Candidate ID,char,9,34,34,35,36,37,38,39,25,25,25,25,25,25,17,,,,,,,
+payee_candidate_full_name,Payee Candidate Full Name,varchar,38,35,35,36,37,38,39,40,26,26,26,26,26,26,18,,,,,,,
+payee_candidate_last_name,Payee Candidate Last Name,varchar,30,,,,,,,,,,,,,,,25,25,25,26,26,26,26
+payee_candidate_first_name,Payee Candidate First Name,varchar,20,36,36,37,38,39,40,41,,,,,,,,26,26,26,27,27,27,27
+payee_candidate_middle_name,Payee Candidate Middle Name,varchar,20,37,37,38,39,40,41,42,,,,,,,,27,27,27,28,28,28,28
+payee_candidate_name_prefix,Payee Candidate Name Prefix,varchar,10,38,38,39,40,41,42,43,,,,,,,,28,28,28,29,29,29,29
+payee_candidate_name_suffix,Payee Candidate Name Suffix,varchar,10,39,39,40,41,42,43,44,,,,,,,,29,29,29,30,30,30,30
+payee_candidate_office,Payee Candidate Office,char,1,40,40,41,42,43,44,45,27,27,27,27,27,27,19,30,30,30,31,31,31,31
+payee_candidate_state,Payee Candidate State,char,2,41,41,42,43,44,45,46,28,28,28,28,28,28,20,31,31,31,32,32,32,32
+payee_candidate_district,Payee Candidate District,tinyint,,42,42,43,44,45,46,47,29,29,29,29,29,29,21,32,32,32,33,33,33,33
+memo_code,Memo Code,char,1,43,43,44,45,46,47,48,38,38,38,38,38,,,,,,,,,
 memo_text,Memo Text/Description,varchar,100,44,44,45,46,47,48,49,39,39,39,39,39,,,,,,,,,
-inc_limit_cd,Increased Limit Code (discontinued after v6.3),char,1,,,,,34,34,34,,,,,,,,,,,,,,
-conduit_nm,Conduit Name,varchar,90,,,,,,,,30,30,30,30,30,30,,,,,,,,
-conduit_addr1,Conduit Street Address Line 1,varchar,34,,,,,,,,31,31,31,31,31,31,,,,,,,,
-conduit_addr2,Conduit Street Address Line 2,varchar,34,,,,,,,,32,32,32,32,32,32,,,,,,,,
+increased_limit_code,Increased Limit Code (discontinued after v6.3),char,1,,,,,34,34,34,,,,,,,,,,,,,,
+conduit_name,Conduit Name,varchar,90,,,,,,,,30,30,30,30,30,30,,,,,,,,
+conduit_address_1,Conduit Street Address Line 1,varchar,34,,,,,,,,31,31,31,31,31,31,,,,,,,,
+conduit_address_2,Conduit Street Address Line 2,varchar,34,,,,,,,,32,32,32,32,32,32,,,,,,,,
 conduit_city,Conduit City (Address),varchar,18,,,,,,,,33,33,33,33,33,33,,,,,,,,
 conduit_state,Conduit State (Address),char,2,,,,,,,,34,34,34,34,34,34,,,,,,,,
 conduit_zip,Conduit Zip Code,varchar,9,,,,,,,,35,35,35,35,35,35,,,,,,,,
 space_holder,Not used (v5.3 only),char,1,,,,,,,,36,,,,,,,,,,,,,
 unlimited_spending,Unlimited Spending,char,1,,,,,,,,42,42,42,42,,,,,,,36,36,36,36
-amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,36,36,36,36,36,26,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,38,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,39,,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,35,35,35,37,37,37,37
-notice_24hr,24 Hour Notice,char,1,,,,,,,,,,,,,,,,,,3,3,3,3
+amended_code,Amended Code (discontinued after v5.2),char,1,,,,,,,,,36,36,36,36,36,26,,,,,,,
+original_transaction_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,38,,,,,,,,
+super_transaction_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,39,,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,,,,35,35,35,37,37,37,37
+notice_24_hour,24 Hour Notice,char,1,,,,,,,,,,,,,,,,,,3,3,3,3

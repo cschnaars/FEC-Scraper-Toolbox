@@ -1,39 +1,39 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,28,28,28,28,28,28,,,,,,,,
-ent_tp,Entity Type,char,3,4,4,4,4,4,4,4,3,3,3,3,3,3,,,,,,,,
-cred_full_nm,Creditor Full Name (discontinued after v5),varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
-cred_org_nm,Creditor Organization Name,varchar,200,5,5,5,5,5,5,5,,,,,,,,3,3,3,3,3,3,3
-cred_last,Creditor Last Name,varchar,30,6,6,6,6,6,6,6,,,,,,,,4,4,4,4,4,4,4
-cred_first,Creditor First Name,varchar,20,7,7,7,7,7,7,7,,,,,,,,5,5,5,5,5,5,5
-cred_mid,Creditor Middle Name,varchar,20,8,8,8,8,8,8,8,,,,,,,,6,6,6,6,6,6,6
-cred_pfx,Creditor Name Prefix,varchar,10,9,9,9,9,9,9,9,,,,,,,,7,7,7,7,7,7,7
-cred_sfx,Creditor Name Suffix,varchar,10,10,10,10,10,10,10,10,,,,,,,,8,8,8,8,8,8,8
-cred_addr1,Creditor Street Address Line 1,varchar,34,11,11,11,11,11,11,11,5,5,5,5,5,5,4,9,9,9,9,9,9,9
-cred_addr2,Creditor Street Address Line 2,varchar,34,12,12,12,12,12,12,12,6,6,6,6,6,6,5,10,10,10,10,10,10,10
-cred_city,Creditor City (Address),varchar,30,13,13,13,13,13,13,13,7,7,7,7,7,7,6,11,11,11,11,11,11,11
-cred_state,Creditor State (Address),char,2,14,14,14,14,14,14,14,8,8,8,8,8,8,7,12,12,12,12,12,12,12
-cred_zip,Creditor Zip Code,varchar,9,15,15,15,15,15,15,15,9,9,9,9,9,9,8,13,13,13,13,13,13,13
-debt_purp,Purpose of Debt or Obligation,varchar,100,16,16,16,16,16,16,16,10,10,10,10,10,10,9,14,14,14,14,14,14,14
-beg_bal,Beginning Balance This Period,money,,17,17,17,17,17,17,17,11,11,11,11,11,11,10,15,15,15,15,15,15,15
-incur_amt,Amount Incurred This Period,money,,18,18,18,18,18,18,18,12,12,12,12,12,12,11,16,16,16,16,16,16,16
-paymt_amt,Payment Amount This Period,money,,19,19,19,19,19,19,19,13,13,13,13,13,13,12,17,17,17,17,17,17,17
-close_bal,Closing Balance This Period,money,,20,20,20,20,20,20,20,14,14,14,14,14,14,13,18,18,18,18,18,18,18
-lender_comm_id,Lender Committee ID,char,9,,,,,,,,15,15,15,15,15,15,,,,,,,,
-lender_cand_id,Lender Candidate ID,char,9,,,,,,,,16,16,16,16,16,16,,,,,,,,
-lender_cand_full_nm,Lender Candidate Full Name,varchar,38,,,,,,,,17,17,17,17,17,17,,,,,,,,
-lender_cand_office,Lender Candidate Office,char,1,,,,,,,,18,18,18,18,18,18,,,,,,,,
-lender_cand_state,Lender Candidate State,char,2,,,,,,,,19,19,19,19,19,19,,,,,,,,
-lender_cand_dist,Lender Candidate District,tinyint,,,,,,,,,20,20,20,20,20,20,,,,,,,,
-conduit_nm,Conduit Name,varchar,200,,,,,,,,21,21,21,21,21,21,,,,,,,,
-conduit_addr1,Conduit Street Address Line 1,varchar,34,,,,,,,,22,22,22,22,22,22,,,,,,,,
-conduit_addr2,Conduit Street Address Line 2,varchar,34,,,,,,,,23,23,23,23,23,23,,,,,,,,
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,28,28,28,28,28,28,,,,,,,,
+entity_type,Entity Type,char,3,4,4,4,4,4,4,4,3,3,3,3,3,3,,,,,,,,
+creditor_full_name,Creditor Full Name (discontinued after v5),varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
+creditor_organization_name,Creditor Organization Name,varchar,200,5,5,5,5,5,5,5,,,,,,,,3,3,3,3,3,3,3
+creditor_last_name,Creditor Last Name,varchar,30,6,6,6,6,6,6,6,,,,,,,,4,4,4,4,4,4,4
+creditor_first_name,Creditor First Name,varchar,20,7,7,7,7,7,7,7,,,,,,,,5,5,5,5,5,5,5
+creditor_middle_name,Creditor Middle Name,varchar,20,8,8,8,8,8,8,8,,,,,,,,6,6,6,6,6,6,6
+creditor_name_prefix,Creditor Name Prefix,varchar,10,9,9,9,9,9,9,9,,,,,,,,7,7,7,7,7,7,7
+creditor_name_suffix,Creditor Name Suffix,varchar,10,10,10,10,10,10,10,10,,,,,,,,8,8,8,8,8,8,8
+creditor_address_1,Creditor Street Address Line 1,varchar,34,11,11,11,11,11,11,11,5,5,5,5,5,5,4,9,9,9,9,9,9,9
+creditor_address_2,Creditor Street Address Line 2,varchar,34,12,12,12,12,12,12,12,6,6,6,6,6,6,5,10,10,10,10,10,10,10
+creditor_city,Creditor City (Address),varchar,30,13,13,13,13,13,13,13,7,7,7,7,7,7,6,11,11,11,11,11,11,11
+creditor_state,Creditor State (Address),char,2,14,14,14,14,14,14,14,8,8,8,8,8,8,7,12,12,12,12,12,12,12
+creditor_zip,Creditor Zip Code,varchar,9,15,15,15,15,15,15,15,9,9,9,9,9,9,8,13,13,13,13,13,13,13
+debt_purpose,Purpose of Debt or Obligation,varchar,100,16,16,16,16,16,16,16,10,10,10,10,10,10,9,14,14,14,14,14,14,14
+beginning_balance,Beginning Balance This Period,"numeric(12, 4)",,17,17,17,17,17,17,17,11,11,11,11,11,11,10,15,15,15,15,15,15,15
+incurred_amount_period,Amount Incurred This Period,"numeric(12, 4)",,18,18,18,18,18,18,18,12,12,12,12,12,12,11,16,16,16,16,16,16,16
+payment_amount_period,Payment Amount This Period,"numeric(12, 4)",,19,19,19,19,19,19,19,13,13,13,13,13,13,12,17,17,17,17,17,17,17
+closing_balance,Closing Balance This Period,"numeric(12, 4)",,20,20,20,20,20,20,20,14,14,14,14,14,14,13,18,18,18,18,18,18,18
+lender_committee_id,Lender Committee ID,char,9,,,,,,,,15,15,15,15,15,15,,,,,,,,
+lender_candidate_id,Lender Candidate ID,char,9,,,,,,,,16,16,16,16,16,16,,,,,,,,
+lender_candidate_full_name,Lender Candidate Full Name,varchar,38,,,,,,,,17,17,17,17,17,17,,,,,,,,
+lender_candidate_office,Lender Candidate Office,char,1,,,,,,,,18,18,18,18,18,18,,,,,,,,
+lender_candidate_state,Lender Candidate State,char,2,,,,,,,,19,19,19,19,19,19,,,,,,,,
+lender_candidate_district,Lender Candidate District,tinyint,,,,,,,,,20,20,20,20,20,20,,,,,,,,
+conduit_name,Conduit Name,varchar,200,,,,,,,,21,21,21,21,21,21,,,,,,,,
+conduit_address_1,Conduit Street Address Line 1,varchar,34,,,,,,,,22,22,22,22,22,22,,,,,,,,
+conduit_address_2,Conduit Street Address Line 2,varchar,34,,,,,,,,23,23,23,23,23,23,,,,,,,,
 conduit_city,Conduit City (Address),varchar,30,,,,,,,,24,24,24,24,24,24,,,,,,,,
 conduit_state,Conduit State (Address),char,2,,,,,,,,25,25,25,25,25,25,,,,,,,,
 conduit_zip,Conduit Zip Code,varchar,9,,,,,,,,26,26,26,26,26,26,,,,,,,,
 space_holder,Not used (v5.3 only),char,1,,,,,,,,27,,,,,,,,,,,,,
-amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,27,27,27,27,27,14,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,29,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,30,,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,19,19,19,19,19,19,19
+amended_code,Amended Code (discontinued after v5.2),char,1,,,,,,,,,27,27,27,27,27,14,,,,,,,
+original_transaction_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,29,,,,,,,,
+super_transaction_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,30,,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,,,,19,19,19,19,19,19,19

@@ -1,14 +1,14 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,11,11,11,11,,,,,,,
-acct_nm,Account Name,varchar,90,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3
-rcpt_dt,Receipt Date,int,,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4
-tot_amt_trans,Total Amount Transferred,money,,6,6,6,6,6,6,6,9,9,9,9,5,5,5,5,5,5,5
-voter_reg_amt,Voter Registration Amount,money,,7,7,7,7,7,7,7,5,5,5,5,6,6,6,6,6,6,6
-voter_id_amt,Voter ID Amount,money,,8,8,8,8,8,8,8,6,6,6,6,7,7,7,7,7,7,7
-gotv_amt,GOTV Amount,money,,9,9,9,9,9,9,9,7,7,7,7,8,8,8,8,8,8,8
-gen_camp_act_amt,Generic Campaign Activity Amount,money,,10,10,10,10,10,10,10,8,8,8,8,9,9,9,9,9,9,9
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,11,11,11,11,,,,,,,
+account_name,Account Name,varchar,90,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3
+receipt_date,Receipt Date,int,,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4
+total_amount_transferred,Total Amount Transferred,"numeric(12, 4)",,6,6,6,6,6,6,6,9,9,9,9,5,5,5,5,5,5,5
+voter_registration_amount,Voter Registration Amount,"numeric(12, 4)",,7,7,7,7,7,7,7,5,5,5,5,6,6,6,6,6,6,6
+voter_id_amount,Voter ID Amount,"numeric(12, 4)",,8,8,8,8,8,8,8,6,6,6,6,7,7,7,7,7,7,7
+gotv_amount,GOTV Amount,"numeric(12, 4)",,9,9,9,9,9,9,9,7,7,7,7,8,8,8,8,8,8,8
+generic_campaign_activity_amount,Generic Campaign Activity Amount,"numeric(12, 4)",,10,10,10,10,10,10,10,8,8,8,8,9,9,9,9,9,9,9
 space_holder,Not used (v5.3 only),char,1,,,,,,,,10,,,,,,,,,,
-amended_cd,Amended Code,char,1,,,,,,,,,10,10,10,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,10,10,10,10,10,10,10
+amended_code,Amended Code,char,1,,,,,,,,,10,10,10,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,10,10,10,10,10,10,10

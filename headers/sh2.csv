@@ -1,19 +1,19 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,11,11,11,11,11,11,,,,,,,,
-act_evt_nm,Activity/Event Name,varchar,90,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3
-act_fund,Activity/Event is Fundraising,char,1,5,5,5,5,5,5,5,4,4,4,4,4,4,5,4,4,4,4,4,4,4
-act_cand_supp,Activity/Event is Direct Candidate Support,char,1,6,6,6,6,6,6,6,6,6,6,6,6,6,7,5,5,5,5,5,5,5
-ratio_cd,"Ratio Code (New, Revised or Same)",char,1,7,7,7,7,7,7,7,7,7,7,7,7,7,8,6,6,6,6,6,6,6
-fed_pct,Federal Percentage,"numeric(10, 5)",,8,8,8,8,8,8,8,8,8,8,8,8,8,9,7,7,7,7,7,7,7
-non_fed_pct,Non-Federal Percentage,"numeric(10, 5)",,9,9,9,9,9,9,9,9,9,9,9,9,9,10,8,8,8,8,8,8,8
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,11,11,11,11,11,11,,,,,,,,
+activity_event_name,Activity/Event Name,varchar,90,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+activity_event_fundraising,Activity/Event is Fundraising,char,1,5,5,5,5,5,5,5,4,4,4,4,4,4,5,4,4,4,4,4,4,4
+activity_event_direct_candidate_support,Activity/Event is Direct Candidate Support,char,1,6,6,6,6,6,6,6,6,6,6,6,6,6,7,5,5,5,5,5,5,5
+ratio_code,"Ratio Code (New, Revised or Same)",char,1,7,7,7,7,7,7,7,7,7,7,7,7,7,8,6,6,6,6,6,6,6
+federal_percentage,Federal Percentage,"numeric(12, 4)",,8,8,8,8,8,8,8,8,8,8,8,8,8,9,7,7,7,7,7,7,7
+non_federal_percentage,Non-Federal Percentage,"numeric(12, 4)",,9,9,9,9,9,9,9,9,9,9,9,9,9,10,8,8,8,8,8,8,8
 space_holder_1,Not used (v5.3 only),char,1,,,,,,,,5,5,,,,,,,,,,,,
 space_holder_2,Not used (v5.3 only),char,1,,,,,,,,10,,,,,,,,,,,,,
 internal,Internal Use Only,char,1,,,,,,,,,10,,,,,,,,,,,,
-amended_cd,Amended Code,char,1,,,,,,,,,,10,10,10,10,11,,,,,,,
-act_exempt,Activity/Event is Exempt,char,1,,,,,,,,,,5,5,5,5,6,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,12,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,13,,,,,,,,
-act_evt_nbr,Activity/Event Number,varchar,10,,,,,,,,,,,,,,4,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,9,9,9,9,9,9,9
+amended_code,Amended Code,char,1,,,,,,,,,,10,10,10,10,11,,,,,,,
+activity_event_exempt,Activity/Event is Exempt,char,1,,,,,,,,,,5,5,5,5,6,,,,,,,
+original_transaction_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,12,,,,,,,,
+super_transaction_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,13,,,,,,,,
+activity_event_number,Activity/Event Number,varchar,10,,,,,,,,,,,,,,4,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,,,,9,9,9,9,9,9,9

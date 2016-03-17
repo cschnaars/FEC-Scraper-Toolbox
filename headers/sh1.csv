@@ -1,17 +1,17 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,29,29,29,29,29,29,,,,,,,,
-pres_only,State and Loal Part Committee Presidential-Only Election Year,char,1,4,4,4,4,4,4,4,30,30,30,30,,,,3,3,3,3,3,3,3
-pres_and_sen,State and Loal Part Committee Presidential and Senate Election Year,char,1,5,5,5,5,5,5,5,31,31,31,31,,,,4,4,4,4,4,4,4
-sen_only,State and Loal Part Committee Senate-Only Election Year,char,1,6,6,6,6,6,6,6,32,32,32,32,,,,5,5,5,5,5,5,5
-non_pres_non_sen,State and Loal Part Committee Non-Presidential and Non-Senate Election Year,char,1,7,7,7,7,7,7,7,33,33,33,33,,,,6,6,6,6,6,6,6
-flat_min_fed_pct,Flad Minimum Federal Percentage,char,1,8,8,8,8,8,8,8,34,34,,,,,,7,7,7,7,7,7,7
-fed_pct,Federal Percent,"numeric(10, 5)",,9,9,9,9,9,9,9,35,35,,,,,,8,8,8,8,8,8,8
-non_fed_pct,Non-Federal Percent,"numeric(10, 5)",,10,10,10,10,10,10,10,36,36,,,,,,9,9,9,9,9,9,9
-admin_ratio,Administrative Ratio Applies,char,1,11,11,11,11,11,11,11,37,37,,,,,,10,10,10,10,10,10,10
-voter_ratio,Generic Voter Drive Ratio Applies,char,1,12,12,12,12,12,12,12,38,38,,,,,,11,11,11,11,11,11,11
-pub_comm_ratio,Public Communications Referencing Party Only Ratio Applies,char,1,13,13,13,13,13,13,13,39,39,,,,,,12,12,12,12,12,12,12
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,29,29,29,29,29,29,,,,,,,,
+state_and_local_party_president_only_election_year,State and Local Party Committee Presidential-Only Election Year,char,1,4,4,4,4,4,4,4,30,30,30,30,,,,3,3,3,3,3,3,3
+state_and_local_party_president_and_senate_election_year,State and Local Party Committee Presidential and Senate Election Year,char,1,5,5,5,5,5,5,5,31,31,31,31,,,,4,4,4,4,4,4,4
+state_and_local_party_senate_only_election_year,State and Local Party Committee Senate-Only Election Year,char,1,6,6,6,6,6,6,6,32,32,32,32,,,,5,5,5,5,5,5,5
+state_and_local_party_non_president_non_senate_election_year,State and Local Party Committee Non-Presidential and Non-Senate Election Year,char,1,7,7,7,7,7,7,7,33,33,33,33,,,,6,6,6,6,6,6,6
+flat_minimum_federal_percentage,Flat Minimum Federal Percentage,char,1,8,8,8,8,8,8,8,34,34,,,,,,7,7,7,7,7,7,7
+federal_percentage,Federal Percent,"numeric(12, 4)",,9,9,9,9,9,9,9,35,35,,,,,,8,8,8,8,8,8,8
+non_federal_percentage,Non-Federal Percent,"numeric(12, 4)",,10,10,10,10,10,10,10,36,36,,,,,,9,9,9,9,9,9,9
+administrative_ratio_applies,Administrative Ratio Applies,char,1,11,11,11,11,11,11,11,37,37,,,,,,10,10,10,10,10,10,10
+voter_drive_ratio_applies,Generic Voter Drive Ratio Applies,char,1,12,12,12,12,12,12,12,38,38,,,,,,11,11,11,11,11,11,11
+public_communications_ratio_applies,Public Communications Referencing Party Only Ratio Applies,char,1,13,13,13,13,13,13,13,39,39,,,,,,12,12,12,12,12,12,12
 space_holder_01,Not used,char,1,,,,,,,,3,3,,,,,,,,,,,,
 space_holder_02,Not used,char,1,,,,,,,,4,4,,,,,,,,,,,,
 space_holder_03,Not used,char,1,,,,,,,,5,5,,,,,,,,,,,,
@@ -39,32 +39,32 @@ space_holder_24,Not used,char,1,,,,,,,,26,26,,,,,,,,,,,,
 space_holder_25,Not used,char,1,,,,,,,,27,27,,,,,,,,,,,,
 space_holder_26,Not used,char,1,,,,,,,,28,,,,,,,,,,,,,
 internal,Internal Use Only,char,1,,,,,,,,,28,,,,,,,,,,,,
-nat_pty_comms_pct,National Party Committees Percentage,"numeric(10, 5)",,,,,,,,,,,3,3,3,3,3,,,,,,,
-cong_pty_comms_min_fed_pct,,"numeric(10, 5)",,,,,,,,,,,4,4,4,4,4,,,,,,,
-cong_pty_comms_est_pct_fed_cand_supp,House/Senate Party Committees Percentage Estimated Federal Candidate Support,"numeric(10, 5)",,,,,,,,,,,5,5,5,5,5,,,,,,,
-cong_pty_comms_est_pct_non_fed_cand_supp,House/Senate Party Committees Percentage Estimated Non-Federal Candidate Support,"numeric(10, 5)",,,,,,,,,,,6,6,6,6,6,,,,,,,
-cong_pty_comms_act_fed_cand_supp,House/Senate Party Committees Actual Federal Candidate Support,money,,,,,,,,,,,7,7,7,7,7,,,,,,,
-cong_pty_comms_act_non_fed_cand_supp,House/Senate Party Committees Actual Non-Federal Candidate Support,money,,,,,,,,,,,8,8,8,8,8,,,,,,,
-cong_pty_comms_pct_act_fed,House/Senate Party Committees Percentage Actual Federal,"numeric(10, 5)",,,,,,,,,,,9,9,9,9,9,,,,,,,
-est_dir_cand_supp_fed_pct,"Estimated Direct Candidate Support, Federal Percentage","numeric(10, 5)",,,,,,,,,,,10,10,10,10,10,,,,,,,
-est_dir_cand_supp_non_fed_pct,"Estimated Direct Candidate Support, Non-Federal Percentage","numeric(10, 5)",,,,,,,,,,,11,11,11,11,11,,,,,,,
-act_dir_cand_supp_fed_amt,"Actual Direct Candidate Support, Federal Amount",money,,,,,,,,,,,12,12,12,12,12,,,,,,,
-act_dir_cand_supp_non_fed_amt,"Actual Direct Candidate Support, Non-Federal Amount",money,,,,,,,,,,,13,13,13,13,13,,,,,,,
-act_dir_cand_supp_fed_pct,"Actual Direct Candidate Support, Federal Percentage","numeric(10, 5)",,,,,,,,,,,14,14,14,14,14,,,,,,,
-ballot_pres,Ballot Comp Presidential,char,1,,,,,,,,,,15,15,15,15,15,,,,,,,
-ballot_sen,Ballot Comp Senate,char,1,,,,,,,,,,16,16,16,16,16,,,,,,,
+national_party_committees_percentage,National Party Committees Percentage,"numeric(12, 4)",,,,,,,,,,,3,3,3,3,3,,,,,,,
+house_senate_party_committees_minimum_federal_percentage,House/Senate Party Committees Minimum Federal Percentage,"numeric(12, 4)",,,,,,,,,,,4,4,4,4,4,,,,,,,
+house_senate_party_committees_estimated_percentage_federal_candidate_support,House/Senate Party Committees Percentage Estimated Federal Candidate Support,"numeric(12, 4)",,,,,,,,,,,5,5,5,5,5,,,,,,,
+house_senate_party_committees_estimated_percentage_non_federal_candidate_support,House/Senate Party Committees Percentage Estimated Non-Federal Candidate Support,"numeric(12, 4)",,,,,,,,,,,6,6,6,6,6,,,,,,,
+house_senate_party_committees_actual_federal_candidate_support,House/Senate Party Committees Actual Federal Candidate Support,"numeric(12, 4)",,,,,,,,,,,7,7,7,7,7,,,,,,,
+house_senate_party_committees_actual_non_federal_candidate_support,House/Senate Party Committees Actual Non-Federal Candidate Support,"numeric(12, 4)",,,,,,,,,,,8,8,8,8,8,,,,,,,
+house_senate_party_committees_pct_act_fed,House/Senate Party Committees Percentage Actual Federal,"numeric(12, 4)",,,,,,,,,,,9,9,9,9,9,,,,,,,
+estimated_direct_candidate_support_federal_percentage,"Estimated Direct Candidate Support, Federal Percentage","numeric(12, 4)",,,,,,,,,,,10,10,10,10,10,,,,,,,
+estimated_direct_candidate_support_non_federal_percentage,"Estimated Direct Candidate Support, Non-Federal Percentage","numeric(12, 4)",,,,,,,,,,,11,11,11,11,11,,,,,,,
+actual_direct_candidate_support_federal_amount,"Actual Direct Candidate Support, Federal Amount","numeric(12, 4)",,,,,,,,,,,12,12,12,12,12,,,,,,,
+actual_direct_candidate_support_non_federal_amount,"Actual Direct Candidate Support, Non-Federal Amount","numeric(12, 4)",,,,,,,,,,,13,13,13,13,13,,,,,,,
+actual_direct_candidate_support_federal_percentage,"Actual Direct Candidate Support, Federal Percentage","numeric(12, 4)",,,,,,,,,,,14,14,14,14,14,,,,,,,
+ballot_president,Ballot Comp Presidential,char,1,,,,,,,,,,15,15,15,15,15,,,,,,,
+ballot_senate,Ballot Comp Senate,char,1,,,,,,,,,,16,16,16,16,16,,,,,,,
 ballot_house,Ballot Comp House,char,1,,,,,,,,,,17,17,17,17,17,,,,,,,
-ballot_sub_fed,Ballot Comp Subtotal Federal,tinyint,,,,,,,,,,,18,18,18,18,18,,,,,,,
-ballot_gov,Ballot Comp Governor,char,1,,,,,,,,,,19,19,19,19,19,,,,,,,
-ballot_oth_state,Ballot Comp Other Statewide,char,1,,,,,,,,,,20,20,20,20,20,,,,,,,
-ballot_state_sen,Ballot Comp State Senate,char,1,,,,,,,,,,21,21,21,21,21,,,,,,,
-ballot_state_rep,Ballot Comp State Representatives,char,1,,,,,,,,,,22,22,22,22,22,,,,,,,
-ballot_local,Ballot Comp Local Candidates,char,1,,,,,,,,,,23,23,23,23,23,,,,,,,
-ballot_extra_non_fed,Ballot Comp Extra Non-Federal,char,1,,,,,,,,,,24,24,24,24,24,,,,,,,
-ballot_sub_non_fed,Ballot Comp Subtotal Non-Federal,tinyint,,,,,,,,,,,25,25,25,25,25,,,,,,,
-ballot_tot_pts,Ballot Comp Total Points,tinyint,,,,,,,,,,,26,26,26,26,26,,,,,,,
-fed_alloc_pct,Federal Allocation Percentage,"numeric(10, 5)",,,,,,,,,,,27,27,27,27,27,,,,,,,
-amended_cd,Amended Code,char,1,,,,,,,,,,28,28,28,28,28,,,,,,,
-orig_trans_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,30,,,,,,,,
-supr_trans_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,31,,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,13,13,13,13,13,13,13
+ballot_subtotal_federal,Ballot Comp Subtotal Federal,tinyint,,,,,,,,,,,18,18,18,18,18,,,,,,,
+ballot_governor,Ballot Comp Governor,char,1,,,,,,,,,,19,19,19,19,19,,,,,,,
+ballot_other_statewide,Ballot Comp Other Statewide,char,1,,,,,,,,,,20,20,20,20,20,,,,,,,
+ballot_state_senate,Ballot Comp State Senate,char,1,,,,,,,,,,21,21,21,21,21,,,,,,,
+ballot_state_representatives,Ballot Comp State Representatives,char,1,,,,,,,,,,22,22,22,22,22,,,,,,,
+ballot_local_candidates,Ballot Comp Local Candidates,char,1,,,,,,,,,,23,23,23,23,23,,,,,,,
+ballot_extra_non_federal,Ballot Comp Extra Non-Federal,char,1,,,,,,,,,,24,24,24,24,24,,,,,,,
+ballot_subtotal_non_federal,Ballot Comp Subtotal Non-Federal,tinyint,,,,,,,,,,,25,25,25,25,25,,,,,,,
+ballot_total_points,Ballot Comp Total Points,tinyint,,,,,,,,,,,26,26,26,26,26,,,,,,,
+federal_allocation_percentage,Federal Allocation Percentage,"numeric(12, 4)",,,,,,,,,,,27,27,27,27,27,,,,,,,
+amended_code,Amended Code,char,1,,,,,,,,,,28,28,28,28,28,,,,,,,
+original_transaction_id,Original Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,30,,,,,,,,
+super_transaction_id,Super Transaction ID (discontinued after v2),varchar,20,,,,,,,,,,,,,31,,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,,,,13,13,13,13,13,13,13

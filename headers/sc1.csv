@@ -1,55 +1,55 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,,,,,,,,,,,,,,
-bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,3,3,3,3,3,3,3,,,,,,,
-lender_org_nm,Lender Organization Name,varchar,200,5,5,5,5,5,5,5,5,5,5,5,5,5,4,3,3,3,3,3,3,3
-lender_addr1,Lender Street Address Line 1,varchar,34,6,6,6,6,6,6,6,6,6,6,6,6,6,5,4,4,4,4,4,4,4
-lender_addr2,Lender Street Address Line 2,varchar,34,7,7,7,7,7,7,7,7,7,7,7,7,7,6,5,5,5,5,5,5,5
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,,,,,,,,,,,,,,
+back_reference_transaction_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,3,3,3,3,3,3,3,,,,,,,
+lender_organization_name,Lender Organization Name,varchar,200,5,5,5,5,5,5,5,5,5,5,5,5,5,4,3,3,3,3,3,3,3
+lender_address_1,Lender Street Address Line 1,varchar,34,6,6,6,6,6,6,6,6,6,6,6,6,6,5,4,4,4,4,4,4,4
+lender_address_2,Lender Street Address Line 2,varchar,34,7,7,7,7,7,7,7,7,7,7,7,7,7,6,5,5,5,5,5,5,5
 lender_city,Lender City (Address),varchar,30,8,8,8,8,8,8,8,8,8,8,8,8,8,7,6,6,6,6,6,6,6
 lender_state,Lender State (Address),char,2,9,9,9,9,9,9,9,9,9,9,9,9,9,8,7,7,7,7,7,7,7
 lender_zip,Lender Zip Code,varchar,9,10,10,10,10,10,10,10,10,10,10,10,10,10,9,8,8,8,8,8,8,8
-loan_amt,Loan Amount,money,,11,11,11,11,11,11,11,11,11,11,11,11,11,10,9,9,9,9,9,9,9
-loan_int_rt,Loan Interest Rate,varchar,15,12,12,12,12,12,12,12,12,12,12,12,12,12,11,10,10,10,10,10,10,10
-loan_incur_dt,Date Loan Incurred,int,,13,13,13,13,13,13,13,13,13,13,13,13,13,12,11,11,11,11,11,11,11
-loan_due_dt,Loan Due Date,int,,14,14,14,14,14,14,14,14,14,14,14,14,14,13,12,12,12,12,12,12,12
+loan_amount,Loan Amount,"numeric(12, 4)",,11,11,11,11,11,11,11,11,11,11,11,11,11,10,9,9,9,9,9,9,9
+loan_interest_rate,Loan Interest Rate,varchar,15,12,12,12,12,12,12,12,12,12,12,12,12,12,11,10,10,10,10,10,10,10
+loan_incur_date,Date Loan Incurred,int,,13,13,13,13,13,13,13,13,13,13,13,13,13,12,11,11,11,11,11,11,11
+loan_due_date,Loan Due Date,int,,14,14,14,14,14,14,14,14,14,14,14,14,14,13,12,12,12,12,12,12,12
 loan_restructured,Loan Restructured,char,1,15,15,15,15,15,15,15,15,15,15,15,15,15,14,13,13,13,13,13,13,13
-orig_loan_incur_dt,Original Date Loan Incurred,int,,16,16,16,16,16,16,16,16,16,16,16,16,16,15,14,14,14,14,14,14,14
-amt_this_credit_draw,Amount of This Credit Draw,money,,17,17,17,17,17,17,17,17,17,17,17,17,17,16,15,15,15,15,15,15,15
-tot_bal,Total Balance,money,,18,18,18,18,18,18,18,18,18,18,18,18,18,17,16,16,16,16,16,16,16
-oth_liable,Others Liable,char,1,19,19,19,19,19,19,19,19,19,19,19,19,19,18,17,17,17,17,17,17,17
+original_loan_incur_date,Original Date Loan Incurred,int,,16,16,16,16,16,16,16,16,16,16,16,16,16,15,14,14,14,14,14,14,14
+amount_of_this_credit_draw,Amount of This Credit Draw,"numeric(12, 4)",,17,17,17,17,17,17,17,17,17,17,17,17,17,16,15,15,15,15,15,15,15
+total_balance,Total Balance,"numeric(12, 4)",,18,18,18,18,18,18,18,18,18,18,18,18,18,17,16,16,16,16,16,16,16
+others_liable,Others Liable,char,1,19,19,19,19,19,19,19,19,19,19,19,19,19,18,17,17,17,17,17,17,17
 collateral,Collateral,char,1,20,20,20,20,20,20,20,20,20,20,20,20,20,19,18,18,18,18,18,18,18
-collateral_desc,Collateral Description,varchar,100,21,21,21,21,21,21,21,21,21,21,21,21,21,20,19,19,19,19,19,19,19
-collateral_val,Value of Collateral,money,,22,22,22,22,22,22,22,22,22,22,22,22,22,21,20,20,20,20,20,20,20
-perf_int,Perfected Interest,char,1,23,23,23,23,23,23,23,23,23,23,23,23,23,22,21,21,21,21,21,21,21
-fut_inc,Future Income Pledged as Collateral,char,1,24,24,24,24,24,24,24,24,24,24,24,24,24,23,22,22,22,22,22,22,22
-fut_inc_desc,Future Income Description,varchar,100,25,25,25,25,25,25,25,25,25,25,25,25,25,24,23,23,23,23,23,23,23
-fut_inc_val,Value of Future Income,money,,26,26,26,26,26,26,26,26,26,26,26,26,26,25,24,24,24,24,24,24,24
-dep_acct_dt,Date Depository Account Established,int,,27,27,27,27,27,27,27,27,27,27,27,27,27,26,25,25,25,25,25,25,25
-dep_acct_loc,Depository Account Location,varchar,200,28,28,28,28,28,28,28,28,28,28,28,28,28,27,26,26,26,26,26,26,26
-dep_acct_addr1,Depository Account Address Line 1,varchar,34,29,29,29,29,29,29,29,29,29,29,29,29,29,28,27,27,27,27,27,27,27
-dep_acct_addr2,Depository Account Address Line 2,varchar,34,30,30,30,30,30,30,30,30,30,30,30,30,30,29,28,28,28,28,28,28,28
-dep_acct_city,Depository Account City (Address),varchar,30,31,31,31,31,31,31,31,31,31,31,31,31,31,30,29,29,29,29,29,29,29
-dep_acct_state,Depository Account State (Address),char,2,32,32,32,32,32,32,32,32,32,32,32,32,32,31,30,30,30,30,30,30,30
-dep_acct_zip,Depository Account Zip Code,varchar,9,33,33,33,33,33,33,33,33,33,33,33,33,33,32,31,31,31,31,31,31,31
-dep_acct_auth_dt,Date Depository Account Authorized,int,,34,34,34,34,34,34,34,34,34,34,34,34,34,33,,,,,,,
-loan_basis_desc,Description of Loan Basis,varchar,100,35,35,35,35,35,35,35,35,35,35,35,35,35,34,32,32,32,32,32,32,32
-treas_full_nm,Treasurer Full Name (discontinued after v5.3),varchar,38,,,,,,,,36,36,36,36,36,36,35,,,,,,,
-treas_last,Treasurer Last Name,varchar,30,36,36,36,36,36,36,36,,,,,,,,33,33,33,33,33,33,33
-treas_first,Treasurer First Name,varchar,20,37,37,37,37,37,37,37,,,,,,,,34,34,34,34,34,34,34
-treas_mid,Treasurer Middle Name,varchar,20,38,38,38,38,38,38,38,,,,,,,,35,35,35,35,35,35,35
-treas_pfx,Treasurer Prefix,varchar,10,39,39,39,39,39,39,39,,,,,,,,36,36,36,36,36,36,36
-treas_sfx,Treasurer Suffix,varchar,10,40,40,40,40,40,40,40,,,,,,,,37,37,37,37,37,37,37
-treas_sign_dt,Date This Schedule Signed by Treasurer,int,,41,41,41,41,41,41,41,37,37,37,37,37,37,36,38,38,38,38,38,38,38
-auth_rep_full_nm,Lender Authorized Representative Full Name,varchar,38,,,,,,,,38,38,38,38,38,38,37,,,,,,,
-auth_rep_last,Lender Authorized Representative Last Name,varchar,30,42,42,42,42,42,42,42,,,,,,,,39,39,39,39,39,39,39
-auth_rep_first,Lender Authorized Representative First Name,varchar,20,43,43,43,43,43,43,43,,,,,,,,40,40,40,40,40,40,40
-auth_rep_mid,Lender Authorized Representative Middle Name,varchar,20,44,44,44,44,44,44,44,,,,,,,,41,41,41,41,41,41,41
-auth_rep_pfx,Lender Authorized Representative Prefix,varchar,10,45,45,45,45,45,45,45,,,,,,,,42,42,42,42,42,42,42
-auth_rep_sfx,Lender Authorized Representative Suffix,varchar,10,46,46,46,46,46,46,46,,,,,,,,43,43,43,43,43,43,43
-auth_rep_title,Lender Authorized Representative Title,varchar,20,47,47,47,47,47,47,47,39,39,39,39,39,39,38,44,44,44,44,44,44,44
-auth_rep_sign_dt,Date This Schedule Signed by Lender Authorized Representative,int,,48,48,48,48,48,48,48,40,40,40,40,40,,39,45,45,45,45,45,45,45
-ent_tp,Entity Type,char,3,,,,,,,,4,4,4,4,4,4,,,,,,,,
+collateral_description,Collateral Description,varchar,100,21,21,21,21,21,21,21,21,21,21,21,21,21,20,19,19,19,19,19,19,19
+collateral_value,Value of Collateral,"numeric(12, 4)",,22,22,22,22,22,22,22,22,22,22,22,22,22,21,20,20,20,20,20,20,20
+perfected_interest,Perfected Interest,char,1,23,23,23,23,23,23,23,23,23,23,23,23,23,22,21,21,21,21,21,21,21
+future_income,Future Income Pledged as Collateral,char,1,24,24,24,24,24,24,24,24,24,24,24,24,24,23,22,22,22,22,22,22,22
+future_income_description,Future Income Description,varchar,100,25,25,25,25,25,25,25,25,25,25,25,25,25,24,23,23,23,23,23,23,23
+future_income_value,Value of Future Income,"numeric(12, 4)",,26,26,26,26,26,26,26,26,26,26,26,26,26,25,24,24,24,24,24,24,24
+depository_account_date,Date Depository Account Established,int,,27,27,27,27,27,27,27,27,27,27,27,27,27,26,25,25,25,25,25,25,25
+depository_account_location,Depository Account Location,varchar,200,28,28,28,28,28,28,28,28,28,28,28,28,28,27,26,26,26,26,26,26,26
+depository_account_address_1,Depository Account Address Line 1,varchar,34,29,29,29,29,29,29,29,29,29,29,29,29,29,28,27,27,27,27,27,27,27
+depository_account_address_2,Depository Account Address Line 2,varchar,34,30,30,30,30,30,30,30,30,30,30,30,30,30,29,28,28,28,28,28,28,28
+depository_account_city,Depository Account City (Address),varchar,30,31,31,31,31,31,31,31,31,31,31,31,31,31,30,29,29,29,29,29,29,29
+depository_account_state,Depository Account State (Address),char,2,32,32,32,32,32,32,32,32,32,32,32,32,32,31,30,30,30,30,30,30,30
+depository_account_zip,Depository Account Zip Code,varchar,9,33,33,33,33,33,33,33,33,33,33,33,33,33,32,31,31,31,31,31,31,31
+depository_account_authorized_date,Date Depository Account Authorized,int,,34,34,34,34,34,34,34,34,34,34,34,34,34,33,,,,,,,
+loan_basis_description,Description of Loan Basis,varchar,100,35,35,35,35,35,35,35,35,35,35,35,35,35,34,32,32,32,32,32,32,32
+treasurer_full_name,Treasurer Full Name (discontinued after v5.3),varchar,38,,,,,,,,36,36,36,36,36,36,35,,,,,,,
+treasurer_last_name,Treasurer Last Name,varchar,30,36,36,36,36,36,36,36,,,,,,,,33,33,33,33,33,33,33
+treasurer_first_name,Treasurer First Name,varchar,20,37,37,37,37,37,37,37,,,,,,,,34,34,34,34,34,34,34
+treasurer_middle_name,Treasurer Middle Name,varchar,20,38,38,38,38,38,38,38,,,,,,,,35,35,35,35,35,35,35
+treasurer_name_prefix,Treasurer Prefix,varchar,10,39,39,39,39,39,39,39,,,,,,,,36,36,36,36,36,36,36
+treasurer_name_suffix,Treasurer Name Suffix,varchar,10,40,40,40,40,40,40,40,,,,,,,,37,37,37,37,37,37,37
+treasurer_sign_date,Date This Schedule Signed by Treasurer,int,,41,41,41,41,41,41,41,37,37,37,37,37,37,36,38,38,38,38,38,38,38
+authorized_representative_full_name,Lender Authorized Representative Full Name,varchar,38,,,,,,,,38,38,38,38,38,38,37,,,,,,,
+authorized_representative_last_name,Lender Authorized Representative Last Name,varchar,30,42,42,42,42,42,42,42,,,,,,,,39,39,39,39,39,39,39
+authorized_representative_first_name,Lender Authorized Representative First Name,varchar,20,43,43,43,43,43,43,43,,,,,,,,40,40,40,40,40,40,40
+authorized_representative_middle_name,Lender Authorized Representative Middle Name,varchar,20,44,44,44,44,44,44,44,,,,,,,,41,41,41,41,41,41,41
+authorized_representative_name_prefix,Lender Authorized Representative Prefix,varchar,10,45,45,45,45,45,45,45,,,,,,,,42,42,42,42,42,42,42
+authorized_representative_name_suffix,Lender Authorized Representative Suffix,varchar,10,46,46,46,46,46,46,46,,,,,,,,43,43,43,43,43,43,43
+authorized_representative_title,Lender Authorized Representative Title,varchar,20,47,47,47,47,47,47,47,39,39,39,39,39,39,38,44,44,44,44,44,44,44
+authorized_representative_sign_date,Date This Schedule Signed by Lender Authorized Representative,int,,48,48,48,48,48,48,48,40,40,40,40,40,,39,45,45,45,45,45,45,45
+entity_type,Entity Type,char,3,,,,,,,,4,4,4,4,4,4,,,,,,,,
 space_holder,Not used (v5.3 only),char,1,,,,,,,,41,,,,,,,,,,,,,
-amended_cd,Amended Code (discontinued after v5.2),char,1,,,,,,,,,41,41,41,,,40,,,,,,,
-img_nbr,Image Number,bigint,,,,,,,,,,,,,,,,46,46,46,46,46,46,46
+amended_code,Amended Code (discontinued after v5.2),char,1,,,,,,,,,41,41,41,,,40,,,,,,,
+image_number,Image Number,bigint,,,,,,,,,,,,,,,,46,46,46,46,46,46,46

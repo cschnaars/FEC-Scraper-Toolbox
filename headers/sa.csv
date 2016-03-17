@@ -1,61 +1,61 @@
-db_field_name,pretty_name,type,len,8.1,8,7,6.4,6.3,6.2,6.1,5.3,5.2,5.1,5,3,2,1,P3.1,P3.0,P2.6,P2.4,P2.3,P2.2,P1.0
-form_tp,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-comm_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-trans_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,34,34,34,34,34,34,,,,,,,,
-bk_ref_trans_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,35,35,35,35,35,,,,,,,,,
-bk_ref_sched,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,36,36,36,36,36,,,,,,,,,
-ent_tp,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,3,3,,,,,,,,
-cont_full_nm,Contributor Full Name,varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
-cont_org_nm,Contributor Organization Name,varchar,200,7,7,7,7,7,7,7,39,39,39,,,,,3,3,3,3,3,3,3
-cont_last,Contributor Last Name,varchar,30,8,8,8,8,8,8,8,40,40,40,,,,,4,4,4,4,4,4,4
-cont_first,Contributor First Name,varchar,20,9,9,9,9,9,9,9,41,41,41,,,,,5,5,5,5,5,5,5
-cont_mid,Contributor Middle Name,varchar,20,10,10,10,10,10,10,10,42,42,42,,,,,6,6,6,6,6,6,6
-cont_pfx,Contributor Name Prefix,varchar,10,11,11,11,11,11,11,11,43,43,43,,,,,7,7,7,7,7,7,7
-cont_sfx,Contributor Name Suffix,varchar,10,12,12,12,12,12,12,12,44,44,44,,,,,8,8,8,8,8,8,8
-cont_addr1,Contributor Street Address Line 1,varchar,34,13,13,13,13,13,13,13,5,5,5,5,5,5,4,9,9,9,9,9,9,9
-cont_addr2,Contributor Street Address Line 2,varchar,34,14,14,14,14,14,14,14,6,6,6,6,6,6,5,10,10,10,10,10,10,10
-cont_city,Contributor City (Address),varchar,30,15,15,15,15,15,15,15,7,7,7,7,7,7,6,11,11,11,11,11,11,11
-cont_state,Contributor State (Address),char,2,16,16,16,16,16,16,16,8,8,8,8,8,8,7,12,12,12,12,12,12,12
-cont_zip,Contributor Zip Code,varchar,9,17,17,17,17,17,17,17,9,9,9,9,9,9,8,13,13,13,13,13,13,13
-elec_cd,Election Code,char,5,18,18,18,18,18,18,18,10,10,10,10,10,10,9,18,18,18,18,18,18,18
-elec_oth_desc,Other Election Description,varchar,20,19,19,19,19,19,19,19,11,11,11,11,11,11,10,19,19,19,19,19,19,19
-cont_dt,Contribution Date,int,,20,20,20,20,20,20,20,15,15,15,15,15,15,14,14,14,14,14,14,14,14
-cont_amt,Contribution Amount,money,,21,21,21,21,21,21,21,16,16,16,16,16,16,15,21,21,21,21,21,21,21
-cont_agg,Contribution Aggregate,money,,22,22,22,22,22,22,22,14,14,14,14,14,14,13,20,20,20,20,20,20,20
-cont_purp_cd,Contribution Purpose Code,varchar,3,,,23,23,23,23,23,17,17,17,17,17,17,16,,,,,,,
-cont_purp,Contribution Purpose Description,varchar,100,23,23,24,24,24,24,24,18,18,18,18,18,18,17,,,,,,,
-cont_emp,Contributor Employer,varchar,38,24,24,25,25,26,26,26,12,12,12,12,12,12,11,16,16,16,16,16,16,16
-cont_occ,Contributor Occupation,varchar,38,25,25,26,26,27,27,27,13,13,13,13,13,13,12,17,17,17,17,17,17,17
-donor_comm_id,Donor Committee ID,char,9,26,26,27,27,28,28,28,19,19,19,19,19,19,18,15,15,15,15,15,15,15
-donor_comm_nm,Donor Committee Name,varchar,200,27,27,28,28,29,29,,,,,,,,19,,,,,,,
-donor_cand_id,Donor Candidate ID,char,9,28,28,29,29,30,30,29,20,20,20,20,20,20,25,,,,,,,
-donor_cand_full_nm,Donor Candidate Full Name,varchar,38,,,,,,,,21,21,21,21,21,21,26,,,,,,,
-donor_cand_last,Donor Candidate Last Name,varchar,30,29,29,30,30,31,31,30,,,,,,,,,,,,,,
-donor_cand_first,Donor Candidate First Name,varchar,20,30,30,31,31,32,32,31,,,,,,,,,,,,,,
-donor_cand_mid,Donor Candidate Middle Name,varchar,20,31,31,32,32,33,33,32,,,,,,,,,,,,,,
-donor_cand_pfx,Donor Candidate Name Prefix,varchar,10,32,32,33,33,34,34,33,,,,,,,,,,,,,,
-donor_cand_sfx,Donor Candidate Name Suffix,varchar,10,33,33,34,34,35,35,34,,,,,,,,,,,,,,
-donor_cand_office,Donor Candidate Office,char,1,34,34,35,35,36,36,35,22,22,22,22,22,22,27,,,,,,,
-donor_cand_state,Donor Candidate State,char,2,35,35,36,36,37,37,36,23,23,23,23,23,23,28,,,,,,,
-donor_cand_dist,Donor Candidate District,tinyint,,36,36,37,37,38,38,37,24,24,24,24,24,24,29,,,,,,,
-conduit_nm,Conduit Name,varchar,200,37,37,38,38,39,39,38,25,25,25,25,25,25,,,,,,,,
-conduit_addr1,Conduit Street Address Line 1,varchar,34,38,38,39,39,40,40,39,26,26,26,26,26,26,,,,,,,,
-conduit_addr2,Conduit Street Address Line 2,varchar,34,39,39,40,40,41,41,40,27,27,27,27,27,27,,,,,,,,
+field_name,pretty_name,type,len,field_order_8_1,field_order_8,field_order_7,field_order_6_4,field_order_6_3,field_order_6_2,field_order_6_1,field_order_5_3,field_order_5_2,field_order_5_1,field_order_5,field_order_3,field_order_2,field_order_1,field_order_paper_3_1,field_order_paper_3_0,field_order_paper_2_6,field_order_paper_2_4,field_order_paper_2_3,field_order_paper_2_2,field_order_paper_1_0
+form_type,Electronic Form Type,varchar,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+committee_id,Filer Committee ID,char,9,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+transaction_id,Transaction ID,varchar,20,3,3,3,3,3,3,3,34,34,34,34,34,34,,,,,,,,
+back_reference_transaction_id,Back Reference Transaction ID,varchar,20,4,4,4,4,4,4,4,35,35,35,35,35,,,,,,,,,
+back_reference_schedule,Back Reference Schedule Name,varchar,8,5,5,5,5,5,5,5,36,36,36,36,36,,,,,,,,,
+entity_type,Entity Type,char,3,6,6,6,6,6,6,6,3,3,3,3,3,3,,,,,,,,
+contributor_full_name,Contributor Full Name,varchar,90,,,,,,,,4,4,4,4,4,4,3,,,,,,,
+contributor_organization_name,Contributor Organization Name,varchar,200,7,7,7,7,7,7,7,39,39,39,,,,,3,3,3,3,3,3,3
+contributor_last_name,Contributor Last Name,varchar,30,8,8,8,8,8,8,8,40,40,40,,,,,4,4,4,4,4,4,4
+contributor_first_name,Contributor First Name,varchar,20,9,9,9,9,9,9,9,41,41,41,,,,,5,5,5,5,5,5,5
+contributor_middle_name,Contributor Middle Name,varchar,20,10,10,10,10,10,10,10,42,42,42,,,,,6,6,6,6,6,6,6
+contributor_name_prefix,Contributor Name Prefix,varchar,10,11,11,11,11,11,11,11,43,43,43,,,,,7,7,7,7,7,7,7
+contributor_name_suffix,Contributor Name Suffix,varchar,10,12,12,12,12,12,12,12,44,44,44,,,,,8,8,8,8,8,8,8
+contributor_address_1,Contributor Street Address Line 1,varchar,34,13,13,13,13,13,13,13,5,5,5,5,5,5,4,9,9,9,9,9,9,9
+contributor_address_2,Contributor Street Address Line 2,varchar,34,14,14,14,14,14,14,14,6,6,6,6,6,6,5,10,10,10,10,10,10,10
+contributor_city,Contributor City (Address),varchar,30,15,15,15,15,15,15,15,7,7,7,7,7,7,6,11,11,11,11,11,11,11
+contributor_state,Contributor State (Address),char,2,16,16,16,16,16,16,16,8,8,8,8,8,8,7,12,12,12,12,12,12,12
+contributor_zip,Contributor Zip Code,varchar,9,17,17,17,17,17,17,17,9,9,9,9,9,9,8,13,13,13,13,13,13,13
+election_code,Election Code,char,5,18,18,18,18,18,18,18,10,10,10,10,10,10,9,18,18,18,18,18,18,18
+election_other_description,Other Election Description,varchar,20,19,19,19,19,19,19,19,11,11,11,11,11,11,10,19,19,19,19,19,19,19
+contribution_date,Contribution Date,int,,20,20,20,20,20,20,20,15,15,15,15,15,15,14,14,14,14,14,14,14,14
+contribution_amount,Contribution Amount,"numeric(12, 4)",,21,21,21,21,21,21,21,16,16,16,16,16,16,15,21,21,21,21,21,21,21
+contribution_aggregate,Contribution Aggregate,"numeric(12, 4)",,22,22,22,22,22,22,22,14,14,14,14,14,14,13,20,20,20,20,20,20,20
+contribution_purpose_code,Contribution Purpose Code,varchar,3,,,23,23,23,23,23,17,17,17,17,17,17,16,,,,,,,
+contribution_purpose,Contribution Purpose Description,varchar,100,23,23,24,24,24,24,24,18,18,18,18,18,18,17,,,,,,,
+contributor_employer,Contributor Employer,varchar,38,24,24,25,25,26,26,26,12,12,12,12,12,12,11,16,16,16,16,16,16,16
+contributor_occupation,Contributor Occupation,varchar,38,25,25,26,26,27,27,27,13,13,13,13,13,13,12,17,17,17,17,17,17,17
+donor_committee_id,Donor Committee ID,char,9,26,26,27,27,28,28,28,19,19,19,19,19,19,18,15,15,15,15,15,15,15
+donor_committee_name,Donor Committee Name,varchar,200,27,27,28,28,29,29,,,,,,,,19,,,,,,,
+donor_candidate_id,Donor Candidate ID,char,9,28,28,29,29,30,30,29,20,20,20,20,20,20,25,,,,,,,
+donor_candidate_full_name,Donor Candidate Full Name,varchar,38,,,,,,,,21,21,21,21,21,21,26,,,,,,,
+donor_candidate_last_name,Donor Candidate Last Name,varchar,30,29,29,30,30,31,31,30,,,,,,,,,,,,,,
+donor_candidate_first_name,Donor Candidate First Name,varchar,20,30,30,31,31,32,32,31,,,,,,,,,,,,,,
+donor_candidate_middle_name,Donor Candidate Middle Name,varchar,20,31,31,32,32,33,33,32,,,,,,,,,,,,,,
+donor_candidate_name_prefix,Donor Candidate Name Prefix,varchar,10,32,32,33,33,34,34,33,,,,,,,,,,,,,,
+donor_candidate_name_suffix,Donor Candidate Name Suffix,varchar,10,33,33,34,34,35,35,34,,,,,,,,,,,,,,
+donor_candidate_office,Donor Candidate Office,char,1,34,34,35,35,36,36,35,22,22,22,22,22,22,27,,,,,,,
+donor_candidate_state,Donor Candidate State,char,2,35,35,36,36,37,37,36,23,23,23,23,23,23,28,,,,,,,
+donor_candidate_district,Donor Candidate District,tinyint,,36,36,37,37,38,38,37,24,24,24,24,24,24,29,,,,,,,
+conduit_name,Conduit Name,varchar,200,37,37,38,38,39,39,38,25,25,25,25,25,25,,,,,,,,
+conduit_address_1,Conduit Street Address Line 1,varchar,34,38,38,39,39,40,40,39,26,26,26,26,26,26,,,,,,,,
+conduit_address_2,Conduit Street Address Line 2,varchar,34,39,39,40,40,41,41,40,27,27,27,27,27,27,,,,,,,,
 conduit_city,Conduit City (Address),varchar,30,40,40,41,41,42,42,41,28,28,28,28,28,28,,,,,,,,
 conduit_state,Conduit State (Address),char,2,41,41,42,42,43,43,42,29,29,29,29,29,29,,,,,,,,
 conduit_zip,Conduit Zip Code,varchar,9,42,42,43,43,44,44,43,30,30,30,30,30,30,,,,,,,,
-memo_cd,Memo Code,char,1,43,43,44,44,45,45,44,31,31,31,31,31,31,30,,,,,,,
+memo_code,Memo Code,char,1,43,43,44,44,45,45,44,31,31,31,31,31,31,30,,,,,,,
 memo_text,Memo Text/Description,varchar,100,44,44,45,45,46,46,45,32,32,32,32,32,32,31,22,22,22,22,22,22,22
-sys_cd,System Code (used in Schedules I and L to identify the account),varchar,9,45,45,46,46,47,47,46,37,37,37,37,37,,,,,,,,,
-inc_limit_cd,Increased Limit Code,char,1,,,,,25,25,47,38,38,38,38,,,,,,,23,23,23,23
+system_code,System Code (used in Schedules I and L to identify the account),varchar,9,45,45,46,46,47,47,46,37,37,37,37,37,,,,,,,,,
+increased_limit_code,Increased Limit Code,char,1,,,,,25,25,47,38,38,38,38,,,,,,,23,23,23,23
 space_holder,Not used,char,0,,,,,,,,33,,,,,,,,,,,,,
-amended_cd,Amended Code,char,1,,,,,,,,,33,33,33,33,33,32,,,,,,,
-nat_comm_non_fed_acct,National Committee Non-Federal Account,varchar,9,,,,,,,,,,,,,37,,,,,,,,
-original_trans_id,Original Transaction ID,varchar,20,,,,,,,,,,,,,35,,,,,,,,
-super_trans_id,Super Transaction ID,varchar,20,,,,,,,,,,,,,36,,,,,,,,
-donor_comm_addr1,Donor Committee Street Address Line 1,varchar,34,,,,,,,,,,,,,,20,,,,,,,
-donor_comm_addr2,Donor Committee Street Address Line 2,varchar,34,,,,,,,,,,,,,,21,,,,,,,
-donor_comm_city,Donor Committee City (Address),varchar,18,,,,,,,,,,,,,,22,,,,,,,
-donor_comm_state,Donor Committee State (Address),char,2,,,,,,,,,,,,,,23,,,,,,,
-donor_comm_zip,Donor Committee Zip Code,varchar,9,,,,,,,,,,,,,,24,,,,,,,
-img_nbr,Image Number (Paper Filings Only),bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24
+amended_code,Amended Code,char,1,,,,,,,,,33,33,33,33,33,32,,,,,,,
+national_committee_non_federal_acct,National Committee Non-Federal Account,varchar,9,,,,,,,,,,,,,37,,,,,,,,
+original_transaction_id,Original Transaction ID,varchar,20,,,,,,,,,,,,,35,,,,,,,,
+super_transaction_id,Super Transaction ID,varchar,20,,,,,,,,,,,,,36,,,,,,,,
+donor_committee_address_1,Donor Committee Street Address Line 1,varchar,34,,,,,,,,,,,,,,20,,,,,,,
+donor_committee_address_2,Donor Committee Street Address Line 2,varchar,34,,,,,,,,,,,,,,21,,,,,,,
+donor_committee_city,Donor Committee City (Address),varchar,18,,,,,,,,,,,,,,22,,,,,,,
+donor_committee_state,Donor Committee State (Address),char,2,,,,,,,,,,,,,,23,,,,,,,
+donor_committee_zip,Donor Committee Zip Code,varchar,9,,,,,,,,,,,,,,24,,,,,,,
+image_number,Image Number (Paper Filings Only),bigint,,,,,,,,,,,,,,,,23,23,23,24,24,24,24

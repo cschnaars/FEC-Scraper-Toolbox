@@ -4,8 +4,10 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 
 # Fetch JSON data for settings stored outside version control
-with open('secret_settings.json') as json_file:
+# with open('FEC_Toolbox/settings/secret_settings.json') as json_file:
+with open('../../settings/secret_settings.json') as json_file:
     secrets_data = json.loads(json_file.read())
+
 
 # Function to fetch secret settings
 def get_secret_setting(setting, data=secrets_data):
@@ -86,8 +88,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
 
-# FEC_Toolbox Settings
-# --------------------
+# FEC_Toolbox Settings: Directories
+# ---------------------------------
 # Base directory setting used to create default settings for other directories (e.g., REPORT_DIR, BULK_LOAD_DIR).
 BASE_FEC_DIR = 'C:/data/fec'
 
@@ -97,48 +99,58 @@ REPORTS_DIR = BASE_FEC_DIR + '/reports'
 # Test directory used to download data during testing.
 TEST_DIR = BASE_FEC_DIR + '/test'
 
+# FEC_Toolbox Settings: Downloads
+# -------------------------------
+# Set size of file chunks (in bytes) to be downloaded; 1024 * 1024 = 1 MB
+DOWNLOAD_CHUNK_SIZE = 1024 * 1024
+
+# Overwrite existing files without prompting the user
+DOWNLOAD_OVERWRITE = True
+
+# Default number of times the app should attempt to download a report
+DOWNLOAD_TRIES = 5
+
+# Compare file length on FEC website with downloaded file to verify they are the same
+DOWNLOAD_VERIFY = True
+
+# Default file type to download
+DEFAULT_FILE_TYPE = 'ascii28'
+
 # To avoid hardcoding file formats, use this dictionary to specify a user-defined key for each possible report type.
 # Values for each key are dictionaries of other settings, such as delimiter, url pattern, file extension and
-# save path. Delimiter probably is not needed in parent class but will be needed by subclasses.
-FILE_TYPES = {'pdf': {'ext': 'pdf',
-                      'delim': None,
-                      'elec_url_pattern': None,
+# save path.
+FILE_TYPES = {'pdf': {'file_extension': '.pdf',
+                      'delimiter': None,
+                      'electronic_url_pattern': None,
                       'paper_url_pattern': None,
-                      'a_id': None,
+                      'a_tag_id': None,
                       'json_tag': 'pdf_url',
                       'save_path': REPORTS_DIR + '/pdf/'},
-              'csv': {'ext': 'csv',
-                      'delim': ',',
+              'csv': {'file_extension': '.csv',
+                      'delimiter': ',',
                       # This elec_url_pattern works only for reports at least 1000 lines long.
-                      'elec_url_pattern': 'http://docquery.fec.gov/comma/<rpt_id>.fec',
-                      'paper_url_pattern': 'http://docquery.fec.gov/paper/fecpprcsv/<rpt_id>.fec',
-                      'a_id': 'csvfile',
+                      'electronic_url_pattern': 'http://docquery.fec.gov/comma/<report_id>.fec',
+                      'paper_url_pattern': 'http://docquery.fec.gov/paper/fecpprcsv/<report_id>.fec',
+                      'a_tag_id': 'csvfile',
                       'json_tag': None,
                       'save_path': REPORTS_DIR + '/text/csv/'},
-              'ascii28': {'ext': 'txt',
-                          'delim': chr(28),
-                          'elec_url_pattern': 'http://docquery.fec.gov/dcdev/posted/<rpt_id>.fec',
-                          'paper_url_pattern': 'http://docquery.fec.gov/paper/posted/<rpt_id>.fec',
-                          'a_id': 'asciifile',
+              'ascii28': {'file_extension': '.txt',
+                          'delimiter': chr(28),
+                          'electronic_url_pattern': 'http://docquery.fec.gov/dcdev/posted/<report_id>.fec',
+                          'paper_url_pattern': 'http://docquery.fec.gov/paper/posted/<report_id>.fec',
+                          'a_tag_id': 'asciifile',
                           'json_tag': None,
                           'save_path': REPORTS_DIR + '/text/ascii28/'}
               }
 
+# ---------------
+# OLD SETTINGS:
+# ---------------
+"""
+
 # Default filetypes to download upon base Report class instantiation
 # DOWN_NOW = ['ascii28']
 DOWN_NOW = {'ascii28': {}}
-
-# Default number of times the app should attempt to download a report
-DOWN_TRIES = 5
-
-# Overwrite existing files without prompting the user
-DOWN_OVERWRITE = True
-
-# Compare file length on FEC website with downloaded file to verify they are the same
-DOWN_VERIFY = True
-
-# Set size of file chunks (in bytes) to be downloaded; 1024 * 1024 = 1 MB
-DOWN_CHUNK_SIZE = 1024 * 1024
 
 # Notes only below this point:
 # ----------------------------
@@ -164,3 +176,4 @@ DOWN_CHUNK_SIZE = 1024 * 1024
 # URL_RPT_TYPE_MODS = ('', '')
 # http://docquery.fec.gov/paper/fecpprcsv/1006117.fec
 # http://docquery.fec.gov/paper/posted/1006117.fec
+"""

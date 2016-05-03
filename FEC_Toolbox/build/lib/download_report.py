@@ -1,7 +1,7 @@
 import os
 import requests
 
-from FEC_Toolbox.local_settings import DOWN_TRIES, DOWN_OVERWRITE, DOWN_VERIFY, DOWN_CHUNK_SIZE
+from FEC_Toolbox.settings.local import DOWN_TRIES, DOWN_OVERWRITE, DOWN_VERIFY, DOWN_CHUNK_SIZE
 
 
 def download_report(url, save_path, tries=DOWN_TRIES, overwrite=DOWN_OVERWRITE, chunk_size=DOWN_CHUNK_SIZE,
@@ -51,7 +51,7 @@ def download_report(url, save_path, tries=DOWN_TRIES, overwrite=DOWN_OVERWRITE, 
             response = requests.head(url)
             src_len = int(response.headers['content-length'])
         except ValueError:
-            return False, 'File not downloaded. Unable to determine length of file to be downloaded.'
+            return False, 'File not downloaded. Unable to determine length of file to be downloaded via ' + url + '.'
 
     # Exit if file already has been downloaded and overwrite is False
     if not overwrite:

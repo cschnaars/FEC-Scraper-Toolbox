@@ -4,8 +4,7 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 
 # Fetch JSON data for settings stored outside version control
-# with open('FEC_Toolbox/settings/secret_settings.json') as json_file:
-with open('../../settings/secret_settings.json') as json_file:
+with open('settings/secret_settings.json') as json_file:
     secrets_data = json.loads(json_file.read())
 
 
@@ -101,21 +100,6 @@ TEST_DIR = BASE_FEC_DIR + '/test'
 
 # FEC_Toolbox Settings: Downloads
 # -------------------------------
-# Set size of file chunks (in bytes) to be downloaded; 1024 * 1024 = 1 MB
-DOWNLOAD_CHUNK_SIZE = 1024 * 1024
-
-# Overwrite existing files without prompting the user
-DOWNLOAD_OVERWRITE = True
-
-# Default number of times the app should attempt to download a report
-DOWNLOAD_TRIES = 5
-
-# Compare file length on FEC website with downloaded file to verify they are the same
-DOWNLOAD_VERIFY = True
-
-# Default file type to download
-DEFAULT_FILE_TYPE = 'ascii28'
-
 # To avoid hardcoding file formats, use this dictionary to specify a user-defined key for each possible report type.
 # Values for each key are dictionaries of other settings, such as delimiter, url pattern, file extension and
 # save path.

@@ -1,5 +1,4 @@
 import os
-
 import requests
 
 from fec_downloader.utils.get_report_url import get_report_url
@@ -9,14 +8,11 @@ class Report:
     """
     Report base class.
     """
-    def __init__(self, report_id, url=None, save_path=None):
+    def __init__(self, report_id, delimiter=chr(28)):
         self.report_id = report_id
-        self.url = url
-        self.save_path = save_path
-        self.header = None
-        self.delimiter = chr(28)
+        self.delimiter = delimiter
 
-    def download(self, delimiter='ascii28', download_tries=5, overwrite_file=False, chunk_size=1024*1024,
+    def download(self, delimiter=chr(28), download_tries=5, overwrite_file=False, chunk_size=1024*1024,
                  check_file_length=True, save_file_as=None, save_directory='C:/data/fec/reports/text/ascii28/',
                  save_file_extension='.txt'):
         """
@@ -130,8 +126,6 @@ class Report:
 
                 # Exit loop if file downloaded and lengths are the same
                 if source_length == save_length:
-                    # Save the valid url to the instance.
-                    self.url = url
                     return True, 'Report downloaded.'
 
                 # Otherwise, delete the file and try again

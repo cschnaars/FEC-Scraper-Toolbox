@@ -58,8 +58,8 @@ def get_report_url(report_id, delimiter=chr(28)):
     soup = BeautifulSoup(html.text, "html.parser")
     a_tag = soup.find("a", id=a_tag_id)
     if 'href' in a_tag.attrs.keys():
-        base_csv_url = 'http://docquery.fec.gov/showcsv/'
-        csv_url = base_csv_url + a_tag['href'] + '/' + report_id + '.fec'
+        base_csv_url = 'http://docquery.fec.gov'
+        csv_url = base_csv_url + a_tag['href']
         return True, csv_url
 
     # No valid URL found

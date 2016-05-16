@@ -68,9 +68,9 @@ class Report:
         # Exit if tries is invalid or < 0:
         try:
             if int(download_tries) < 1:
-                return False, 'Report not downloaded. The tries parameter must be an integer >= 1.'
+                return False, 'Report not downloaded. The download_tries parameter must be an integer >= 1.'
         except (TypeError, ValueError):
-            return False, 'Report not downloaded. The tries parameter is invalid. Set to an integer >= 1.'
+            return False, 'Report not downloaded. The download_tries parameter is invalid. Set to an integer >= 1.'
 
         # Determine a valid url.
         get_url = get_report_url(self.report_id, delimiter)
@@ -134,7 +134,7 @@ class Report:
 
                     # Return a message to the user if this was the last attempt to download
                     if i == download_tries - 1:
-                        return False, 'Downloaded file did not match length of file posted at ' + url + '.' \
+                        return False, 'Downloaded file did not match length of file posted at ' + url + '. ' \
                                       'Downloaded file deleted.'
 
             except PermissionError:

@@ -31,17 +31,18 @@ import zipfile
 # Try to import user settings or set them explicitly
 try:
     import usersettings
+
     MASTERDIR = usersettings.MASTERDIR
 except:
     MASTERDIR = 'C:\\data\\FEC\\Master\\'
 
 # Other user variables
-ARCHIVEFILES = 1 # Set to 0 if you don't want to archive the master files each week.
+ARCHIVEFILES = 1  # Set to 0 if you don't want to archive the master files each week.
 MASTERFTP = 'ftp://ftp.fec.gov/FEC/'
-MASTERFILES = ['add', 'ccl', 'chg', 'cm', 'cn', 'delete', 'indiv', 'oth', 'pas2']
-NUMPROC = 10 # Multiprocessing processes to run simultaneously
-STARTCYCLE = 2002 # Oldest election cycle for which you want to download master files
-OMITNONSUNDAYFILES = 1 # Set to 0 to download all files regardless of day of week
+MASTERFILES = ['ccl', 'cm', 'cn', 'indiv', 'oth', 'pas2', 'oppexp']
+NUMPROC = 10  # Multiprocessing processes to run simultaneously
+STARTCYCLE = 2002  # Oldest election cycle for which you want to download master files
+OMITNONSUNDAYFILES = 1  # Set to 0 to download all files regardless of day of week
 
 
 def archive_master_files():
@@ -65,7 +66,7 @@ def archive_master_files():
     for datafile in glob.glob(os.path.join(MASTERDIR, '*.zip')):
         os.rename(datafile, datafile.replace(MASTERDIR, savedir))
 
-        
+
 def create_timestamp():
     filetime = datetime.datetime.now()
     return filetime.strftime('%Y%m%d')
@@ -99,13 +100,17 @@ def download_file(src, dest):
     """
     y = 0
     try:
-        srclen = float(
-            urllib2.urlopen(src).info().get('Content-Length'))
+        # Add a header to the request.
+        request = urllib2.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'})
+        srclen = float(urllib2.urlopen(request).info().get('Content-Length'))
     except:
         y = 5
     while y < 5:
         try:
-            urllib.urlretrieve(src, dest)
+            # Add a header
+            urllib.URLopener.version = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'
+            urllib.urlretrieve(url, filename)
             destlen = os.path.getsize(dest)
 
             # Repeat download up to five times if files not same size
@@ -127,23 +132,23 @@ def unzip_master_file(masterfile):
     If the extracted file does not include a year reference, this
     subroutine appends a two-digit year to the extracted filename.
     """
-    fileyear = masterfile[masterfile.find('.zip')-2:masterfile.find('.zip')]
+    fileyear = masterfile[masterfile.find('.zip') - 2:masterfile.find('.zip')]
 
     try:
         zip = zipfile.ZipFile(masterfile)
         for subfile in zip.namelist():
             zip.extract(subfile, MASTERDIR)
             # Rename the file if it does not include the year
-            if subfile.find(fileyear + '.') == -1:
+            if subfile.find(fileyear + '.txt') == -1:
                 savefile = MASTERDIR + subfile
-                os.rename(savefile, savefile.replace('.', fileyear + '.'))
+                os.rename(savefile, savefile.replace('.txt', fileyear + '.txt'))
 
     except:
         print('Files contained in ' + masterfile + ' could not be extracted.')
 
 
-if __name__=='__main__':
-    
+if __name__ == '__main__':
+
     # Delete text files extracted from an earlier archive
     print('Deleting old data...')
     delete_files(MASTERDIR, 'txt')
@@ -158,18 +163,12 @@ if __name__=='__main__':
     print('Downloading master files...\n')
     pool = multiprocessing.Pool(processes=NUMPROC)
 
-    # Determine most recent Sunday's date
-##    maxdate = datetime.now()
-##    x = -(maxdate.weekday()%6)-1
-##    maxdate = maxdate + timedelta(days=x)
-
     # Determine whether today is Sunday
     sunday = False
     if datetime.now().weekday() == 6:
         sunday = True
 
     # Remove all files but cn, cm and ccl from MASTERFILES
-    # if sunday == False and OMITNONSUNDAYFILES == 1
     if sunday == False and OMITNONSUNDAYFILES == 1:
         files = []
         for fecfile in ['ccl', 'cm', 'cn']:
@@ -180,8 +179,8 @@ if __name__=='__main__':
     # Calculate current election cycle
     maxyear = datetime.now().year
     # Add one if it's not an even-numbered year
-    if maxyear/2*2 < maxyear: maxyear += 1
-        
+    if maxyear / 2 * 2 < maxyear: maxyear += 1
+
     # Create loop to iterate through FEC ftp directories
     for x in range(STARTCYCLE, maxyear + 2, 2):
         fecdir = MASTERFTP + str(x) + '/'
@@ -208,9 +207,9 @@ if __name__=='__main__':
     # Archive files when ARCHIVEFILES == 1
     # Otherwise delete files
     if ARCHIVEFILES == 1:
-	    print('Archiving data files...')
-	    archive_master_files()
-	    print('Done!\n')
+        print('Archiving data files...')
+        archive_master_files()
+        print('Done!\n')
 
     print('Process complete.')
 

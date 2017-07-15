@@ -17,6 +17,7 @@ import zipfile
 # Try to import user settings or set them explicitly
 try:
     import usersettings
+
     ARCPROCDIR = usersettings.ARCPROCDIR
     ARCSVDIR = usersettings.ARCSVDIR
     RPTHOLDDIR = usersettings.RPTHOLDDIR
@@ -31,14 +32,14 @@ except:
 
 # Other user variables
 ARCFTP = 'ftp://ftp.fec.gov/FEC/electronic/'
-NUMPROC = 10  # Multiprocessing processes to run simultaneously
+NUMPROC = 1  # Multiprocessing processes to run simultaneously
 RPTFTP = 'ftp.fec.gov'
-RPTURL = 'http://docquery.fec.gov/dcdev/posted/' # Old URL: http://query.nictusa.com/dcdev/posted/
-RSSURL = 'http://efilingapps.fec.gov/rss/generate?preDefinedFilingType=ALL' # Old URL: http://fecapps.nictusa.com/rss/generate?preDefinedFilingType=ALL
+RPTURL = 'http://docquery.fec.gov/dcdev/posted/'  # Old URL: http://query.nictusa.com/dcdev/posted/
+RSSURL = 'http://efilingapps.fec.gov/rss/generate?preDefinedFilingType=ALL'  # Old URL: http://fecapps.nictusa.com/rss/generate?preDefinedFilingType=ALL
 
 
 def build_archive_download_list(zipinfo={'mostrecent': '', 'badfiles':
-                                         []}, oldarchives=[]):
+    []}, oldarchives=[]):
     """
     Processes the zipinfo.p pickle to build a list of available archive
     files that have not been downloaded.
@@ -74,7 +75,7 @@ def build_prior_archive_list():
     """
     Returns a list of archives that already have been downloaded and
     saved to ARCPROCDIR or ARCSVDIR.
-    
+
     NOTE: This function is slated for deprecation.  I used it for
     development and to test the implementation of the zipinfo.p pickle.
     Using the pickle saves a lot of time and disk space compared to
@@ -114,8 +115,7 @@ def consume_rss():
     # Old URL:
     # regex = re.compile(
     #   '<link>http://query.nictusa.com/dcdev/posted/([0-9]*)\.fec</link>')
-    regex = re.compile('<link>http://docquery.fec.gov/dcdev/posted/' \
-                       '([0-9]*)\.fec</link>')
+    regex = re.compile('<link>http://docquery.fec.gov/dcdev/posted/([0-9]*)\.fec</link>')
     url = urllib.urlopen(RSSURL)
     rss = url.read()
     matches = []
@@ -136,14 +136,19 @@ def download_archive(archive):
     src = ARCFTP + archive
     dest = ARCSVDIR + archive
     y = 0
+    # Add a header to the request
     try:
-        srclen = float(
-            urllib2.urlopen(src).info().get('Content-Length'))
+        request = urllib2.Request(src, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'})
+        srclen = float(urllib2.urlopen(request).info().get('Content-Length'))
     except:
         y = 5
     while y < 5:
         try:
+            # I have added a header
+            urllib.URLopener.version = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'
             urllib.urlretrieve(src, dest)
+
             destlen = os.path.getsize(dest)
 
             # Repeat download up to five times if files not same size
@@ -170,14 +175,20 @@ def download_report(download):
     # Construct file url and get length of file
     url = RPTURL + download + '.fec'
     y = 0
+
+    # Add a header to the request.
     try:
-        srclen = float(
-            urllib2.urlopen(url).info().get('Content-Length'))
+        request = urllib2.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'})
+        srclen = float(urllib2.urlopen(request).info().get('Content-Length'))
     except:
         y = 5
     filename = RPTSVDIR + download + '.fec'
+
     while y < 5:
         try:
+            # Add a header
+            urllib.URLopener.version = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'
             urllib.urlretrieve(url, filename)
             destlen = os.path.getsize(filename)
 
@@ -187,6 +198,7 @@ def download_report(download):
                 y += 1
                 continue
             else:
+                # I wonder if line below be: y = 5
                 y = 6
         except:
             y += 1
@@ -250,8 +262,8 @@ def unzip_archive(archive, overwrite=0):
 
     except:
         print('Files contained in ' + archive + ' could not be '
-              'extracted. The file has been deleted so it can be '
-              'downloaded again later.\n')
+                                                'extracted. The file has been deleted so it can be '
+                                                'downloaded again later.\n')
         os.remove(ARCSVDIR + archive)
 
 
@@ -274,13 +286,15 @@ def verify_reports(rpts, downloaded):
         if rpt not in downloaded:
             downloads.append(rpt)
         else:
+            # Add a header to the request.
             try:
-                srclen = float(urllib2.urlopen(RPTURL + rpt + '.fec').info()
-                               .get('Content-Length'))
+                request = urllib2.Request(RPTURL + rpt + '.fec', headers={
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'})
+                srclen = float(urllib2.urlopen(request).info().get('Content-Length'))
             except urllib2.HTTPError:
                 print(RPTURL + rpt + '.fec could not be downloaded.')
                 continue
-            
+
             for child in childdirs:
                 try:
                     destlen = os.path.getsize(child + rpt + '.fec')
@@ -374,7 +388,7 @@ if __name__ == '__main__':
     print('Compiling list of reports to download...')
     newrpts = verify_reports(rpts, downloaded)
     print('Done! ' + str(len(newrpts)) + ' reports flagged for '
-          'download.\n')
+                                         'download.\n')
 
     # Download each of these reports
     print('Downloading new reports...')

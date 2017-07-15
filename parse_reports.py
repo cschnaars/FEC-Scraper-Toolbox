@@ -16,34 +16,35 @@ import time
 """
   Currently supported forms and versions:
  * Header: all versions through 8.1 (v1 and v2 hardcoded)
- * F1: all versions through 8.1
- * F1S: all versions through 8.1 (first used in v3)
- * F3: all versions through 8.1
- * F3L: all versions through 8.1 (first used in v6.4)
- * F3P: all versions through 8.1
- * F3X: all versions through 8.1
- * SA: all versions through 8.1
- * SB: all versions through 8.1
- * SC: all versions through 8.1
- * SC1: all versions through 8.1
- * SC2: all versions through 8.1 (does not exist in v1)
- * SD: all versions through 8.1
- * SE: all versions through 8.1
- * SF: all versions through 8.1
- * H1: all versions through 8.1
- * H2: all versions through 8.1
- * H3: all versions through 8.1 (temporarily removed v1 and v2)
- * H4: all versions through 8.1
- * H5: all versions through 8.1 (first used in 5.0)
- * H6: all versions through 8.1 (first used in 5.0)
+ * F1: all versions through 8.2
+ * F1S: all versions through 8.2 (first used in v3)
+ * F3: all versions through 8.2
+ * F3L: all versions through 8.2 (first used in v6.4)
+ * F3P: all versions through 8.2
+ * F3X: all versions through 8.2
+ * SA: all versions through 8.2
+ * SB: all versions through 8.2
+ * SC: all versions through 8.2
+ * SC1: all versions through 8.2
+ * SC2: all versions through 8.2 (does not exist in v1)
+ * SD: all versions through 8.2
+ * SE: all versions through 8.2
+ * SF: all versions through 8.2
+ * H1: all versions through 8.2
+ * H2: all versions through 8.2
+ * H3: all versions through 8.2 (temporarily removed v1 and v2)
+ * H4: all versions through 8.2
+ * H5: all versions through 8.2 (first used in 5.0)
+ * H6: all versions through 8.2 (first used in 5.0)
  * SI: all versions through 7.0 (FEC discontinued as of 8.0)
- * SL: all versions through 8.1 (first used in 5.0)
- * TEXT: all versions through 8.1 (does not exist in v1 or v2)
+ * SL: all versions through 8.2 (first used in 5.0)
+ * TEXT: all versions through 8.2 (does not exist in v1 or v2)
 """
 
 # Try to import user settings or set them explicitly.
 try:
     import usersettings
+
     DBCONNSTR = usersettings.DBCONNSTR
     RPTERRDIR = usersettings.RPTERRDIR
     RPTHOLDDIR = usersettings.RPTHOLDDIR
@@ -85,147 +86,1100 @@ filectr = 0
 # lots of cases where version 2.02 uses version 3 headers. These rows
 # are moved to a timestamped OtherData file in the directory specified
 # by RPTOUTDIR until I can more closely examine the data.
-filehdrs = [['F1', [[['1', '2'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm', 'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt']],
-    [['3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm', 'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt', 'CommEmail', 'CommUrl']],
-    [['5.0', '5.1', '5.2', '5.3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm', 'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt', 'CommEmail', 'CommUrl', 'CommFax']],
-    [['6.1'], ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'CommEmail', 'CommUrl', 'CommFax', 'SubmDt', 'SignLName', 'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName', 'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelationship', 'AffOrgTp', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip']],
-    [['6.2'], ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'CommEmail', 'CommUrl', 'CommFax', 'SubmDt', 'SignLName', 'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName', 'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'PACTp', 'flgLdspPAC_5f', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip']],
-    [['6.3', '6.4', '7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'flgChgCommEmail', 'CommEmail', 'flgChgCommUrl', 'CommUrl', 'SubmDt', 'SignLName', 'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName', 'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'PACTp', 'flgLobRegPAC_ConnOrg_5e', 'flgLobRegPAC_MultCands_5f', 'flgLdspPAC_5f', 'AffCommID', 'AffCommNm', 'AffCandID', 'AffCandLName', 'AffCandFName', 'AffCandMName', 'AffCandPfx', 'AffCandSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip']]]],
-    ['F1S', [[['3'], ['FormTp', 'CommID', 'NotUsed1', 'NotUsed2', 'NotUsed3', 'NotUsed4', 'NotUsed5', 'NotUsed6', 'NotUsed7', 'NotUsed8', 'NotUsed9', 'NotUsed10', 'NotUsed11', 'NotUsed12', 'NotUsed13', 'NotUsed14', 'NotUsed15', 'NotUsed16', 'NotUsed17', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRel', 'OrgTp', 'CustFullNm', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullNm', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip', 'TrsFullNm', 'SignDt', 'CommEmail', 'CommUrl']],
-    [['5.0', '5.1', '5.2', '5.3'], ['FormTp', 'CommID', 'NotUsed1', 'NotUsed2', 'NotUsed3', 'NotUsed4', 'NotUsed5', 'NotUsed6', 'NotUsed7', 'NotUsed8', 'NotUsed9', 'NotUsed10', 'NotUsed11', 'NotUsed12', 'NotUsed13', 'NotUsed14', 'NotUsed15', 'NotUsed16', 'NotUsed17', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRel', 'OrgTp', 'CustFullNm', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullNm', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip', 'TrsFullNm', 'SignDt', 'CommEmail', 'CommUrl', 'CommFax']],
-    [['6.1'], ['FormTp', 'CommID', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRel', 'OrgTp', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip']],
-    [['6.2'], ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip']],
-    [['6.3', '6.4', '7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffCandID', 'AffLName', 'AffFName', 'AffMName', 'AffPfx', 'AffSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip']]]],
-    ['F3', [[['1', '2', '3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'ElecSt', 'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'PrimElec', 'GenElec', 'SpecElec', 'RunoffElec', 'CovgFmDt', 'CovgToDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b', 'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22', 'TrsFullName', 'SignDt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'ElecSt', 'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'PrimElec', 'GenElec', 'SpecElec', 'RunoffElec', 'CovgFmDt', 'CovgToDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b', 'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22', 'TrsFullName', 'SignDt', 'CandID', 'CandFullName', 'RptType', 'GrossRctsAuthCommsPrim', 'AggAmtPersFundsPrim', 'GrossRctsMinusPersFmCandPrim', 'GrossRctsAuthCommsGen', 'AggAmtPersFundsGen', 'GrossRctsMinusPersFmCandGen']],
-    [['6.1', '6.2', '6.3'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CandID', 'CandLName', 'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'RptType', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b', 'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22', 'GrossRctsAuthCommsPrim', 'AggAmtPersFundsPrim', 'GrossRctsMinusPersFmCandPrim', 'GrossRctsAuthCommsGen', 'AggAmtPersFundsGen', 'GrossRctsMinusPersFmCandGen']],
-    [['6.4', '7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b', 'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22']]]],
-    ['F3L', [[['6.4', '7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist', 'RptCd', 'ElecDt', 'StateOfElec', 'flgInclSemiAnnPrd', 'CovgFmDt', 'CovgToDt', 'flgInclSemiAnnJanJun', 'flgInclSemiAnnJulDec', 'TotRptBundContribs', 'SemiAnnBundContribs', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt']]]],
-    ['F3P', [[['1', '2', '3', '5.0', '5.1', '5.2', '5.3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'PrimElec', 'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P', 'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b', 'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18', 'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a', 'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21', 'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25', 'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T', 'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T', 'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T', 'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T', 'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T', 'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T', 'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T', 'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T', 'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T', 'TotAllocs_T', 'TrsFullName', 'SignDt']],
-    [['6.1', '6.2', '6.3', '6.4'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec', 'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P', 'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b', 'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18', 'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a', 'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21', 'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25', 'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T', 'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T', 'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T', 'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T', 'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T', 'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T', 'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T', 'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T', 'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T', 'TotAllocs_T']],
-    [['7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec', 'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsItem_P_17a1', 'IndContsUnitem_P_17a2', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P', 'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16', 'IndContsItem_T_17a1', 'IndContsUnitem_T_17a2', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b', 'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18', 'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a', 'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21', 'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25', 'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T', 'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T', 'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T', 'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T', 'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T', 'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T', 'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T', 'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T', 'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T', 'TotAllocs_T']]]],
-    ['F3X', [[['1', '2', '3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'flgQualComm', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1', 'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22', 'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26', 'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotContRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37', 'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d', 'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d', 'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15', 'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TotNonFedTrans_T_18c', 'TotRcpts_T_19', 'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b', 'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24', 'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35', 'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38', 'TrsFullName', 'SignDt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'flgQualComm', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TranFmNonFedAcctH3_P_18a', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1', 'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22', 'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26', 'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotContRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37', 'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d', 'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d', 'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15', 'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a', 'TotRcpts_T_19', 'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b', 'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24', 'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35', 'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38', 'TrsFullName', 'SignDt', 'TranFmNonFedAcctH5_P_18b', 'TotNonFedTrans_P_18c', 'ShrdElecActivityFedShr_P_30a1', 'ShrdElecActivityNonFedShr_P_30a2', 'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c', 'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'ShrdElecActivityFedShr_T_30a1', 'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b', 'TotFedElecActivity_T_30c']],
-    [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'flgQualComm', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TranFmNonFedAcctH3_P_18a', 'TranFmNonFedAcctH5_P_18b', 'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1', 'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22', 'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26', 'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotContRefunds_P_28d', 'OthDisb_P_29', 'ShrdElecActivityFedShr_P_30a1', 'ShrdElecActivityNonFedShr_P_30a2', 'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37', 'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d', 'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d', 'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15', 'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a', 'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'TotRcpts_T_19', 'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b', 'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24', 'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29', 'ShrdElecActivityFedShr_T_30a1', 'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b', 'TotFedElecActivity_T_30c', 'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35', 'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38']]]],
-    ['Hdr', [[['3', '5.0', '5.1', '5.2', '5.3'], ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'NmDelim', 'RptID', 'RptNbr', 'HdrCmnt']],
-    [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'RptID', 'RptNbr', 'HdrCmnt']]]],
-    ['SA', [[['8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.4', '7.0'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.2', '6.3'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'IncLmtCd', 'Emp', 'Occ', 'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.1'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'IncLmtCd', 'Emp', 'Occ', 'DonorCommID', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['5.1', '5.2', '5.3'],['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc', 'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef', 'IncLmtCd', 'ContOrgName', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx']],
-    [['5.0'],['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc', 'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef', 'IncLmtCd']],
-    [['3'],['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc', 'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'NatlCommNonFedAcct']],
-    [['2'],['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc', 'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'],['LineNbr', 'CommID', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc', 'DonorCommID', 'DonorCommNm', 'DonorCommAddr1', 'DonorCommAddr1', 'DonorCommCity', 'DonorCommState', 'DonorCommZip', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandState', 'DonorCandDist', 'MemoCd', 'MemoTxt', 'AmendCd']]]],
-    ['SB', [[['8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'SemiAnnRefBundAmt', 'ExpPurpDesc', 'ExpCatCd', 'BenCommID', 'BenCommNm', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.4', '7.0'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'SemiAnnRefBundAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'BenCommID', 'BenCommNm', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.2', '6.3'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'RfdOrDispExcess', 'CommunDt', 'BenCommID', 'BenCommNm', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['6.1'],['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'RfdOrDispExcess', 'CommunDt', 'BenCommID', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
-    [['5.1', '5.2', '5.3'],['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef', 'RfdOrDispExcess']],
-    [['5.0'],['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef', 'RfdOrDispExcess', 'ExpCatCd', 'CommunDt']],
-    [['3'],['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'NatCommNonFedAcct']],
-    [['2'],['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'],['LineNbr', 'CommID', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID', 'BenCommNm', 'BenCommAddr1', 'BenCommAddr2', 'BenCommCity', 'BenCommState', 'BenCommZip', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'MemoCd', 'MemoTxt', 'AmendCd']]]],
-    ['SC', [[['6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName', 'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'flgPersFunds', 'LenderCommID', 'LenderCandID', 'LenderCandLName', 'LenderCandFName', 'LenderCandMName', 'LenderCandPfx', 'LenderCandSfx', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'MemoCd', 'MemoTxt']],
-    [['6.1'], ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName', 'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandLName', 'LenderCandFName', 'LenderCandMName', 'LenderCandPfx', 'LenderCandSfx', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist']],
-    [['5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandFullName', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd', 'TransID', 'RctLnNbr']],
-    [['3', '5.0'], ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandFullName', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd', 'TransID']],
-    [['2'], ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandFullName', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'TransID', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'Guar1FullName', 'Guar1Addr1', 'Guar1Addr2', 'Guar1City', 'Guar1State', 'Guar1Zip', 'Guar1Emp', 'Guar1Occ', 'Guar1Blnc', 'Guar2FullName', 'Guar2Addr1', 'Guar2Addr2', 'Guar2City', 'Guar2State', 'Guar2Zip', 'Guar2Emp', 'Guar2Occ', 'Guar2Blnc', 'Guar3FullName', 'Guar3Addr1', 'Guar3Addr2', 'Guar3City', 'Guar3State', 'Guar3Zip', 'Guar3Emp', 'Guar3Occ', 'Guar3Blnc', 'AmendCd']]]],
-    ['SC1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsSignDt', 'LendRepLName', 'LendRepFName', 'LendRepMName', 'LendRepPfx', 'LendRepSfx', 'LendRepTitle', 'LendRepSignDt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle', 'LendRepSignDt', 'AmendCd']],
-    [['3'], ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle', 'LendRepSignDt']],
-    [['2'], ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle']],
-    [['1'], ['LineNbr', 'CommID', 'TransID', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle', 'LendRepSignDt', 'AmendCd']]]],
-    ['SC2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'GuarLName', 'GuarFName', 'GuarMName', 'GuarPfx', 'GuarSfx', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'BkRefTransID', 'GuarFullName', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt', 'AmendCd']],
-    [['2', '3'], ['LineNbr', 'CommID', 'BkRefTransID', 'GuarFullName', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt']]]],
-    ['SD', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'EntTp', 'CreditorOrgName', 'CreditorLName', 'CreditorFName', 'CreditorMName', 'CreditorPfx', 'CreditorSfx', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P']],
-    [['3', '5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P', 'CreditorCommID', 'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc', 'CreditorCandState', 'CreditorCandDist', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'AmendCd', 'TransID']],
-    [['2'], ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P', 'CreditorCommID', 'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc', 'CreditorCandState', 'CreditorCandDist', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P']]]],
-    ['SE', [[['8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'DissmntnDt', 'ExpAmt', 'ExpDt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandDist', 'SupOppCandStAbbr', 'CompLName', 'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt']],
-    [['8.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName', 'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt']],
-    [['6.1', '6.2', '6.3', '6.4', '7.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName', 'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt']],
-    [['3', '5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCd', 'SupOppCandID', 'SupOppCandFullName', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCommID', 'Unused1', 'Unused2', 'Unused3', 'Unused4', 'Unused5', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'CompFullName', 'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm', 'ElecCd', 'ElecDesc', 'ExpCatCd', 'TransCd', 'ExpAgg']],
-    [['2'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCd', 'SupOppCandID', 'SupOppCandFullName', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCommID', 'OthCandID', 'OthCandFullNm', 'OthCandOfc', 'OthCandStAbbr', 'OthCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'CompFullName', 'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd', 'TransID', 'BkRefTransID', 'MemoTxt']],
-    [['1'], ['LineNbr', 'CommID', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCandID', 'SupOppCandFullName', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCd', 'CompFullName', 'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd']]]],
-    ['SF', [[['8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
-    [['6.4', '7.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
-    [['6.1', '6.2', '6.3'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'IncLimit', 'PayeeCommID', 'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID', 'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm', 'UnlmtdSpndg', 'ExpCatCd', 'ExpPurpCd']],
-    [['3'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID', 'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm']],
-    [['2'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID', 'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'PayeeCandID', 'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'AmendCd']]]],
-    ['H1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct', 'flgAdmRatio', 'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio']],
-    [['5.2', '5.3'], ['LineNbr', 'CommID', 'Unused1', 'Unused2', 'Unused3', 'Unused4', 'Unused5', 'Unused6', 'Unused7', 'Unused8', 'Unused9', 'Unused10', 'Unused11', 'Unused12', 'Unused13', 'Unused14', 'Unused15', 'Unused16', 'Unused17', 'Unused18', 'Unused19', 'Unused20', 'Unused21', 'Unused22', 'Unused23', 'Unused24', 'Unused25', 'InternalUse', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct', 'flgAdmRatio', 'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio']],
-    [['5.0', '5.1'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup', 'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup', 'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct', 'EstDirCandSupFedPct', 'EstDirCandSupNonFedPct', 'ActDirCandSupFedAmt', 'ActDirCandSupNonFedAmt', 'ActDirCandSupFedPct', 'BallotCompPres', 'BallotCompSen', 'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands', 'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen']],
-    [['3'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup', 'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup', 'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct', 'SepSegFundsAndPctNonConnCmtesEstFedCandSup', 'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup', 'SepSegFundsAndNonConnCmtesActNonFedCandSup', 'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen', 'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands', 'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID']],
-    [['2'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup', 'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup', 'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct', 'SepSegFundsAndPctNonConnCmtesEstFedCandSup', 'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup', 'SepSegFundsAndNonConnCmtesActNonFedCandSup', 'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen', 'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands', 'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup', 'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup', 'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct', 'SepSegFundsAndPctNonConnCmtesEstFedCandSup', 'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup', 'SepSegFundsAndNonConnCmtesActNonFedCandSup', 'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen', 'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands', 'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd']]]],
-    ['H2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'EventNm', 'flgDirFndrsg', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct']],
-    [['5.2', '5.3'], ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'Unused', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct', 'InternalUse', 'TransID']],
-    [['3', '5.0', '5.1'], ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct', 'AmendCd', 'TransID']],
-    [['2'], ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'EventNm', 'EventNbr', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct', 'AmendCd']]]],
-    ['H3', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'AcctNm', 'EventTp', 'EventNm', 'RcptDt', 'TotAmtTrans', 'TransAmt']],
-    [['5.2', '5.3'], ['LineNbr', 'CommID', 'BkRefTransID', 'AcctNm', 'EventNm', 'EventTp', 'RcptDt', 'TransAmt', 'TotAmtTrans', 'InternalUse', 'TransID']],
-    [['3', '5.0', '5.1'], ['LineNbr', 'CommID', 'BkRefTransID', 'AcctNm', 'EventNm', 'EventTp', 'RcptDt', 'TransAmt', 'TotAmtTrans', 'AmendCd', 'TransID']]
-#    ,
-#    [['2'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'TotDirFundrsgAmt', 'TotExemptActDirCandSup', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-#    [['1'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'EventNm', 'EventNbr', 'TransAmt', 'EventNm2', 'EventNbr2', 'TransAmt2', 'EventNm3', 'EventNbr3', 'TransAmt3', 'EventNm4', 'EventNbr4', 'TransAmt4', 'TotDirFndrsgAmt', 'EventNm5', 'EventNbr5', 'TransAmt5', 'EventNm6', 'EventNbr6', 'TransAmt6', 'EventNm7', 'EventNbr7', 'TransAmt7', 'EventNm8', 'EventNbr8', 'TransAmt8', 'TotExemptActDirCandSup', 'AmendCd']]
-    ]],
-    ['H4', [[['8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'EventAgg', 'ExpPurpDesc', 'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg', 'flgExempt', 'flgGenVtrDrv', 'flgDirCandSup', 'flgPubCommun', 'MemoCd', 'MemoTxt']],
-    [['6.1', '6.2', '6.3', '6.4', '7.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'EventAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg', 'flgExempt', 'flgGenVtrDrv', 'flgDirCandSup', 'flgPubCommun', 'MemoCd', 'MemoTxt']],
-    [['5.2', '5.3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'Unused', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'InternalUse', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm', 'flgAdminActivity', 'flgGenVtrDrv', 'ExpCatCd', 'ExpPurpCd', 'flgPubCommun']],
-    [['5.0', '5.1'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm', 'flgAdminActivity', 'flgGenVtrDrv', 'ExpCatCd', 'ExpPurpCd']],
-    [['3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm']],
-    [['2'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'EventNbr', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'AmendCd']]]],
-    ['H5', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'AcctNm', 'RcptDt', 'TotAmt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt', 'GenCampAmt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt', 'GenCampAmt', 'TotAmt', 'AmendCd', 'TransID']]]],
-    ['H6', [[['8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID', 'flgActGenCamp', 'MemoCd', 'MemoTxt']],
-    [['6.1', '6.2', '6.3', '6.4', '7.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID', 'flgActGenCamp', 'MemoCd', 'MemoTxt']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpCatCd', 'ExpCd', 'ExpDesc', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt', 'flgActVotRegn', 'flgActVotID', 'flgActGOTV', 'flgActGenCamp', 'ExpAgg', 'AddlDesc', 'CandCommID', 'CandID', 'CandName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitCommID', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']]]],
-    ['SI', [[['6.1', '6.2', '6.3', '6.4', '7.0'], ['LineNbr', 'CommID', 'TransID', 'RecIDNbr', 'AcctNm', 'BankAcctID', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID', 'SysCd']],
-    [['3'], ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID', 'AcctNbr']],
-    [['2'], ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
-    [['1'], ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd']]]],
-    ['SL', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'RecordID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P', 'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P', 'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P', 'Subtotal_P', 'Disb_P', 'EndCOH_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T', 'OthRcpts_T', 'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T', 'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'CommID', 'AcctNm', 'SysCd', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P', 'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P', 'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P', 'Subtotal_P', 'Disb_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T', 'OthRcpts_T', 'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T', 'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T', 'AmendCd', 'TransID']]]],
-    ['TEXT', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'FullText']],
-    [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText', 'AmendCd']],
-    [['3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText']]]]]
-    
-outputhdrs = {'F1': ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'flgChgCommEmail', 'CommEmail', 'flgChgCommUrl', 'CommUrl', 'SubmDt', 'SignFullName', 'SignLName', 'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandFullName', 'CandLName', 'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'PACTp', 'flgLobRegPAC_ConnOrg_5e', 'flgLobRegPAC_MultCands_5f', 'flgLdspPAC_5f', 'AffCommID', 'AffCommNm', 'AffCandID', 'AffCandLName', 'AffCandFName', 'AffCandMName', 'AffCandPfx', 'AffCandSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'CustFullName', 'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip'],
-    'F1S': ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffCandID', 'AffLName', 'AffFName', 'AffMName', 'AffPfx', 'AffSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip'],
-    'F3': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b', 'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22'],
-    'F3L': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist', 'RptCd', 'ElecDt', 'StateOfElec', 'flgInclSemiAnnPrd', 'CovgFmDt', 'CovgToDt', 'flgInclSemiAnnJanJun', 'flgInclSemiAnnJulDec', 'TotRptBundContribs', 'SemiAnnBundContribs', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt'],
-    'F3P': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec', 'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsItem_P_17a1', 'IndContsUnitem_P_17a2', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P', 'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16', 'IndContsItem_T_17a1', 'IndContsUnitem_T_17a2', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b', 'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18', 'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a', 'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21', 'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25', 'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d', 'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T', 'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T', 'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T', 'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T', 'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T', 'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T', 'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T', 'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T', 'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T', 'TotAllocs_T'],
-    'F3X': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'flgQualComm', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TranFmNonFedAcctH3_P_18a', 'TranFmNonFedAcctH5_P_18b', 'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1', 'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22', 'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26', 'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotContRefunds_P_28d', 'OthDisb_P_29', 'ShrdElecActivityFedShr_P_30a1', 'ShrdElecActivityNonFedShr_P_30a2', 'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37', 'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d', 'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d', 'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15', 'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a', 'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'TotRcpts_T_19', 'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b', 'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24', 'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29', 'ShrdElecActivityFedShr_T_30a1', 'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b', 'TotFedElecActivity_T_30c', 'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35', 'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38'],
-    'SA': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef'],
-    'SB': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'SemiAnnRefBundAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'BenCommID', 'BenCommNm', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef'],
-    'SC': ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName', 'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'flgPersFunds', 'LenderCommID', 'LenderCandID', 'LenderCandLName', 'LenderCandFName', 'LenderCandMName', 'LenderCandPfx', 'LenderCandSfx', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'MemoCd', 'MemoTxt'],
-    'SC1': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsSignDt', 'LendRepLName', 'LendRepFName', 'LendRepMName', 'LendRepPfx', 'LendRepSfx', 'LendRepTitle', 'LendRepSignDt'],
-    'SC2': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'GuarLName', 'GuarFName', 'GuarMName', 'GuarPfx', 'GuarSfx', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt'],
-    'SD': ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorLName', 'CreditorFName', 'CreditorMName', 'CreditorPfx', 'CreditorSfx', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P', 'CreditorCommID', 'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc', 'CreditorCandState', 'CreditorCandDist', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'TransID'],
-    'SE': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'DissmntnDt', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName', 'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt'],
-    'SF': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt'],
-    'H1': ['LineNbr', 'CommID', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct', 'flgAdmRatio', 'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio'],
-    'H2': ['LineNbr', 'CommID', 'TransID', 'EventNm', 'flgDirFndrsg', 'flgDirCandSup', 'RatioCd', 'FedPct', 'NonFedPct'],
-    'H3': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'AcctNm', 'EventTp', 'EventNm', 'RcptDt', 'TotAmtTrans', 'TransAmt'],
-    'H4': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'EventAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg', 'flgExempt', 'flgGenVtrDrv', 'flgDirCandSup', 'flgPubCommun', 'MemoCd', 'MemoTxt'],
-    'H5': ['LineNbr', 'CommID', 'TransID', 'AcctNm', 'RcptDt', 'TotAmt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt', 'GenCampAmt'],
-    'H6': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID', 'flgActGenCamp', 'MemoCd', 'MemoTxt'],
-    'SI': ['LineNbr', 'CommID', 'TransID', 'RecIDNbr', 'AcctNm', 'BankAcctID', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2'],
-    'SL': ['LineNbr', 'CommID', 'TransID', 'RecordID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P', 'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P', 'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P', 'Subtotal_P', 'Disb_P', 'EndCOH_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T', 'OthRcpts_T', 'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T', 'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T'],
+filehdrs = [['F1', [[['1', '2'],
+                     ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm',
+                      'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd',
+                      'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip',
+                      'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr',
+                      'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity',
+                      'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity',
+                      'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City',
+                      'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt']],
+                    [['3'],
+                     ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm',
+                      'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd',
+                      'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip',
+                      'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr',
+                      'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity',
+                      'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity',
+                      'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City',
+                      'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt', 'CommEmail', 'CommUrl']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'SubmDt', 'flgChgCommNm',
+                      'flgAddrChg', 'CommTp', 'CandID', 'CandFullName', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd',
+                      'PtyTp', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip',
+                      'AffRelCd', 'AffOrgTp', 'CustFullName', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr',
+                      'CustZip', 'CustTitle', 'CustPhone', 'TrsFullName', 'TrsAddr1', 'TrsAddr2', 'TrsCity',
+                      'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtAddr1', 'AgtAddr2', 'AgtCity',
+                      'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City',
+                      'Bank1StAbbr', 'Bank1Zip', 'SignFullName', 'SignDt', 'CommEmail', 'CommUrl', 'CommFax']],
+                    [['6.1'],
+                     ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr',
+                      'Zip', 'CommEmail', 'CommUrl', 'CommFax', 'SubmDt', 'SignLName', 'SignFName', 'SignMName',
+                      'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName', 'CandFName', 'CandMName',
+                      'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'CustLName',
+                      'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity',
+                      'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx',
+                      'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone',
+                      'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip',
+                      'AffRelationship', 'AffOrgTp', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1',
+                      'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1',
+                      'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2',
+                      'Bank2City', 'Bank2StAbbr', 'Bank2Zip']],
+                    [['6.2'],
+                     ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr',
+                      'Zip', 'CommEmail', 'CommUrl', 'CommFax', 'SubmDt', 'SignLName', 'SignFName', 'SignMName',
+                      'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName', 'CandFName', 'CandMName',
+                      'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp', 'PACTp',
+                      'flgLdspPAC_5f', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr',
+                      'AffZip', 'AffRelCd', 'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1',
+                      'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName',
+                      'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr',
+                      'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx',
+                      'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm',
+                      'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1',
+                      'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip']],
+                    [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr',
+                      'Zip', 'flgChgCommEmail', 'CommEmail', 'flgChgCommUrl', 'CommUrl', 'SubmDt', 'SignLName',
+                      'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName',
+                      'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd',
+                      'PtyTp', 'PACTp', 'flgLobRegPAC_ConnOrg_5e', 'flgLobRegPAC_MultCands_5f', 'flgLdspPAC_5f',
+                      'AffCommID', 'AffCommNm', 'AffCandID', 'AffCandLName', 'AffCandFName', 'AffCandMName',
+                      'AffCandPfx', 'AffCandSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd',
+                      'CustLName', 'CustFName', 'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity',
+                      'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx',
+                      'TrsSfx', 'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone',
+                      'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity',
+                      'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City',
+                      'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr',
+                      'Bank2Zip']]]],
+            ['F1S', [[['3'],
+                      ['FormTp', 'CommID', 'NotUsed1', 'NotUsed2', 'NotUsed3', 'NotUsed4', 'NotUsed5', 'NotUsed6',
+                       'NotUsed7', 'NotUsed8', 'NotUsed9', 'NotUsed10', 'NotUsed11', 'NotUsed12', 'NotUsed13',
+                       'NotUsed14', 'NotUsed15', 'NotUsed16', 'NotUsed17', 'AffCommID', 'AffCommNm', 'AffAddr1',
+                       'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRel', 'OrgTp', 'CustFullNm', 'CustAddr1',
+                       'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullNm',
+                       'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName',
+                       'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm',
+                       'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip', 'TrsFullNm', 'SignDt',
+                       'CommEmail', 'CommUrl']],
+                     [['5.0', '5.1', '5.2', '5.3'],
+                      ['FormTp', 'CommID', 'NotUsed1', 'NotUsed2', 'NotUsed3', 'NotUsed4', 'NotUsed5', 'NotUsed6',
+                       'NotUsed7', 'NotUsed8', 'NotUsed9', 'NotUsed10', 'NotUsed11', 'NotUsed12', 'NotUsed13',
+                       'NotUsed14', 'NotUsed15', 'NotUsed16', 'NotUsed17', 'AffCommID', 'AffCommNm', 'AffAddr1',
+                       'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRel', 'OrgTp', 'CustFullNm', 'CustAddr1',
+                       'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip', 'CustTitle', 'CustPhone', 'TrsFullNm',
+                       'TrsAddr1', 'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName',
+                       'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm',
+                       'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip', 'TrsFullNm', 'SignDt',
+                       'CommEmail', 'CommUrl', 'CommFax']],
+                     [['6.1'],
+                      ['FormTp', 'CommID', 'AffCommID', 'AffCommNm', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr',
+                       'AffZip', 'AffRel', 'OrgTp', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1',
+                       'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1',
+                       'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip']],
+                     [['6.2'], ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffAddr1',
+                                'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName',
+                                'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr',
+                                'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity',
+                                'BankStAbbr', 'BankZip']],
+                     [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffCandID',
+                       'AffLName', 'AffFName', 'AffMName', 'AffPfx', 'AffSfx', 'AffAddr1', 'AffAddr2', 'AffCity',
+                       'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx',
+                       'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm',
+                       'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr', 'BankZip']]]],
+            ['F3', [[['1', '2', '3'],
+                     ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'ElecSt',
+                      'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'PrimElec', 'GenElec', 'SpecElec',
+                      'RunoffElec', 'CovgFmDt', 'CovgToDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c',
+                      'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9',
+                      'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3',
+                      'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e',
+                      'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c',
+                      'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18',
+                      'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a',
+                      'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21',
+                      'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26',
+                      'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a',
+                      'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+                      'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d',
+                      'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b',
+                      'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17',
+                      'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b',
+                      'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
+                      'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22', 'TrsFullName',
+                      'SignDt']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'ElecSt',
+                      'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'PrimElec', 'GenElec', 'SpecElec',
+                      'RunoffElec', 'CovgFmDt', 'CovgToDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c',
+                      'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9',
+                      'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3',
+                      'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e',
+                      'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b', 'TotLoans_P_13c',
+                      'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17', 'TranToOthAuthComms_P_18',
+                      'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c', 'RefundsInd_P_20a',
+                      'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21',
+                      'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26',
+                      'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a',
+                      'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+                      'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d',
+                      'TotConts_T_11e', 'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b',
+                      'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17',
+                      'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a', 'OthLoansRepaid_T_19b',
+                      'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
+                      'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22', 'TrsFullName',
+                      'SignDt', 'CandID', 'CandFullName', 'RptType', 'GrossRctsAuthCommsPrim', 'AggAmtPersFundsPrim',
+                      'GrossRctsMinusPersFmCandPrim', 'GrossRctsAuthCommsGen', 'AggAmtPersFundsGen',
+                      'GrossRctsMinusPersFmCandGen']],
+                    [['6.1', '6.2', '6.3'],
+                     ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt',
+                      'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsLName',
+                      'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CandID', 'CandLName', 'CandFName',
+                      'CandMName', 'CandPfx', 'CandSfx', 'RptType', 'TotConts_P_6a', 'TotContRfds_P_6b',
+                      'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8',
+                      'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2',
+                      'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d',
+                      'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b',
+                      'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17',
+                      'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b',
+                      'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b',
+                      'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23',
+                      'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a',
+                      'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c',
+                      'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b',
+                      'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12',
+                      'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15',
+                      'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a',
+                      'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
+                      'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22',
+                      'GrossRctsAuthCommsPrim', 'AggAmtPersFundsPrim', 'GrossRctsMinusPersFmCandPrim',
+                      'GrossRctsAuthCommsGen', 'AggAmtPersFundsGen', 'GrossRctsMinusPersFmCandGen']],
+                    [['6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt',
+                      'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsLName',
+                      'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'TotConts_P_6a', 'TotContRfds_P_6b',
+                      'NetConts_P_6c', 'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8',
+                      'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2',
+                      'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'CandConts_P_11d',
+                      'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a', 'OthLoans_P_13b',
+                      'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17',
+                      'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b',
+                      'TotLoansRepaid_P_19c', 'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b',
+                      'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d', 'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23',
+                      'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26', 'CashClose_P_27', 'TotConts_T_6a',
+                      'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a', 'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c',
+                      'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b',
+                      'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e', 'TranFmOthAuthComms_T_12',
+                      'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14', 'OthRcpts_T_15',
+                      'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a',
+                      'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
+                      'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22']]]],
+            ['F3L', [[['6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt',
+                       'ElecDist', 'RptCd', 'ElecDt', 'StateOfElec', 'flgInclSemiAnnPrd', 'CovgFmDt', 'CovgToDt',
+                       'flgInclSemiAnnJanJun', 'flgInclSemiAnnJulDec', 'TotRptBundContribs', 'SemiAnnBundContribs',
+                       'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt']]]],
+            ['F3P', [[['1', '2', '3', '5.0', '5.1', '5.2', '5.3'],
+                      ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg', 'PrimElec',
+                       'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6',
+                       'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12',
+                       'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsTot_P_17a3',
+                       'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e',
+                       'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c',
+                       'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d',
+                       'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25',
+                       'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c',
+                       'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d',
+                       'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P',
+                       'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P',
+                       'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P',
+                       'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P',
+                       'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P',
+                       'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P',
+                       'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P',
+                       'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P',
+                       'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P',
+                       'TotAllocs_P', 'FedFnds_T_16', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b',
+                       'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18',
+                       'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a',
+                       'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21',
+                       'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25',
+                       'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c',
+                       'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d',
+                       'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T',
+                       'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T',
+                       'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T',
+                       'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T',
+                       'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T',
+                       'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T',
+                       'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T',
+                       'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T',
+                       'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T',
+                       'TotAllocs_T', 'TrsFullName', 'SignDt']],
+                     [['6.1', '6.2', '6.3', '6.4'],
+                      ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec',
+                       'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName',
+                       'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8',
+                       'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13',
+                       'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b',
+                       'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18',
+                       'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a',
+                       'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21',
+                       'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25',
+                       'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c',
+                       'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d',
+                       'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P',
+                       'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P',
+                       'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P',
+                       'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P',
+                       'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P',
+                       'NewHampshire_P', 'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P',
+                       'Ohio_P', 'Oklahoma_P', 'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P',
+                       'SouthDakota_P', 'Tennessee_P', 'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P',
+                       'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P',
+                       'TotAllocs_P', 'FedFnds_T_16', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b',
+                       'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18',
+                       'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a',
+                       'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21',
+                       'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25',
+                       'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c',
+                       'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d',
+                       'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T',
+                       'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T',
+                       'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T',
+                       'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T',
+                       'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T',
+                       'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T',
+                       'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T',
+                       'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T',
+                       'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T',
+                       'TotAllocs_T']],
+                     [['7.0', '8.0', '8.1', '8.2'],
+                      ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec',
+                       'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName',
+                       'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8',
+                       'TotDisb_P_9', 'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13',
+                       'NetConts_P_14', 'NetOpExps_P_15', 'FedFnds_P_16', 'IndContsItem_P_17a1',
+                       'IndContsUnitem_P_17a2', 'IndContsTot_P_17a3', 'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c',
+                       'CandConts_P_17d', 'TotConts_P_17e', 'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b',
+                       'TotLoans_P_19c', 'OptgOffsets_P_20a', 'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c',
+                       'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22', 'OpExps_P_23', 'TranToOthAuthComms_P_24',
+                       'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a', 'OthLoansRepaid_P_27b',
+                       'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b',
+                       'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30',
+                       'ItmsToBeLiq_P_31', 'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P',
+                       'Colorado_P', 'Connecticut_P', 'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P',
+                       'Idaho_P', 'Illinois_P', 'Indiana_P', 'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P',
+                       'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P', 'Minnesota_P', 'Mississippi_P',
+                       'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P', 'NewJersey_P',
+                       'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P',
+                       'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P',
+                       'Texas_P', 'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P',
+                       'Wyoming_P', 'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16',
+                       'IndContsItem_T_17a1', 'IndContsUnitem_T_17a2', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b',
+                       'OthPolCommConts_T_17c', 'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18',
+                       'CandLoans_T_19a', 'OthLoans_T_19b', 'TotLoans_T_19c', 'OptgOffsets_T_20a',
+                       'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d', 'OthRcpts_T_21',
+                       'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25',
+                       'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c',
+                       'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d',
+                       'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T',
+                       'California_T', 'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T',
+                       'Georgia_T', 'Hawaii_T', 'Idaho_T', 'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T',
+                       'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T', 'Massachusetts_T', 'Michigan_T',
+                       'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T', 'Nevada_T',
+                       'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T',
+                       'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T',
+                       'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T',
+                       'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T',
+                       'TotAllocs_T']]]],
+            ['F3X', [[['1', '2', '3'],
+                      ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg',
+                       'flgQualComm', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6b',
+                       'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10',
+                       'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b',
+                       'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13',
+                       'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17',
+                       'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1',
+                       'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22',
+                       'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26',
+                       'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c',
+                       'TotContRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33',
+                       'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37',
+                       'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d',
+                       'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+                       'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d',
+                       'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15',
+                       'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TotNonFedTrans_T_18c', 'TotRcpts_T_19',
+                       'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b',
+                       'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24',
+                       'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a',
+                       'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29',
+                       'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35',
+                       'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38', 'TrsFullName', 'SignDt']],
+                     [['5.0', '5.1', '5.2', '5.3'],
+                      ['FormTp', 'CommID', 'CommNm', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'AddrChg',
+                       'flgQualComm', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'CashBegin_P_6b',
+                       'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10',
+                       'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b',
+                       'OthPolCommConts_P_11c', 'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13',
+                       'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17',
+                       'TranFmNonFedAcctH3_P_18a', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1',
+                       'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22',
+                       'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26',
+                       'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c',
+                       'TotContRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_31', 'TotFedDisb_P_32', 'TotConts_P_33',
+                       'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37',
+                       'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d',
+                       'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+                       'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d',
+                       'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15',
+                       'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a', 'TotRcpts_T_19',
+                       'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b',
+                       'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24',
+                       'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a',
+                       'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29',
+                       'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35',
+                       'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38', 'TrsFullName', 'SignDt',
+                       'TranFmNonFedAcctH5_P_18b', 'TotNonFedTrans_P_18c', 'ShrdElecActivityFedShr_P_30a1',
+                       'ShrdElecActivityNonFedShr_P_30a2', 'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c',
+                       'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'ShrdElecActivityFedShr_T_30a1',
+                       'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b',
+                       'TotFedElecActivity_T_30c']],
+                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'RptCd',
+                       'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'flgQualComm', 'TrsLName', 'TrsFName',
+                       'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d',
+                       'TotDisb_P_7', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1',
+                       'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c',
+                       'TotConts_P_11d', 'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14',
+                       'RefundOffsets_P_15', 'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TranFmNonFedAcctH3_P_18a',
+                       'TranFmNonFedAcctH5_P_18b', 'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20',
+                       'OpExpsFedShr_P_21a1', 'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c',
+                       'TranToPtyComms_P_22', 'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25',
+                       'LoansRepaid_P_26', 'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b',
+                       'RefundsOthPolComms_P_28c', 'TotContRefunds_P_28d', 'OthDisb_P_29',
+                       'ShrdElecActivityFedShr_P_30a1', 'ShrdElecActivityNonFedShr_P_30a2',
+                       'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c', 'TotDisb_P_31', 'TotFedDisb_P_32',
+                       'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36',
+                       'TotOffsetsOpExp_P_37', 'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c',
+                       'Subtotal_T_6d', 'TotDisb_T_7', 'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+                       'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d',
+                       'TranFmPtyComms_T_12', 'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15',
+                       'RefundsFedConts_T_16', 'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a',
+                       'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'TotRcpts_T_19', 'TotFedRcpts_T_20',
+                       'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b', 'TotOpExps_T_21c',
+                       'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24', 'CoordExpsByPtyComms_T_25',
+                       'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b',
+                       'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29',
+                       'ShrdElecActivityFedShr_T_30a1', 'ShrdElecActivityNonFedShr_T_30a2',
+                       'NonAllocFedElecActivity_T_30b', 'TotFedElecActivity_T_30c', 'TotDisb_T_31', 'TotFedDisb_T_32',
+                       'TotConts_T_33', 'TotContRefunds_T_34', 'NetConts_T_35', 'TotFedOpExps_T_36',
+                       'TotOffsetsOpExp_T_37', 'NetOpExps_T_38']]]],
+            ['Hdr', [[['3', '5.0', '5.1', '5.2', '5.3'],
+                      ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'NmDelim', 'RptID', 'RptNbr', 'HdrCmnt']],
+                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'RptID', 'RptNbr', 'HdrCmnt']]]],
+            ['SA', [[['8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
+                      'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
+                      'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID',
+                      'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName',
+                      'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm',
+                      'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt',
+                      'SIorSLRef']],
+                    [['6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
+                      'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
+                      'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'Emp', 'Occ',
+                      'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName',
+                      'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm',
+                      'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt',
+                      'SIorSLRef']],
+                    [['6.2', '6.3'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
+                      'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
+                      'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'IncLmtCd',
+                      'Emp', 'Occ', 'DonorCommID', 'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName',
+                      'DonorCandMName', 'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'SIorSLRef']],
+                    [['6.1'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
+                      'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
+                      'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'IncLmtCd',
+                      'Emp', 'Occ', 'DonorCommID', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName',
+                      'DonorCandPfx', 'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm',
+                      'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt',
+                      'SIorSLRef']],
+                    [['5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+                      'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc',
+                      'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef', 'IncLmtCd',
+                      'ContOrgName', 'ContLName', 'ContFName', 'ContMName', 'ContPfx', 'ContSfx']],
+                    [['5.0'],
+                     ['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+                      'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc',
+                      'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef',
+                      'IncLmtCd']],
+                    [['3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+                      'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc',
+                      'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'NatlCommNonFedAcct']],
+                    [['2'],
+                     ['LineNbr', 'CommID', 'EntTp', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+                      'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc',
+                      'DonorCommID', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'], ['LineNbr', 'CommID', 'ContFullName', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+                             'ElecDesc', 'Emp', 'Occ', 'ContAgg', 'ContDt', 'ContAmt', 'ContPurpCd', 'ContPurpDesc',
+                             'DonorCommID', 'DonorCommNm', 'DonorCommAddr1', 'DonorCommAddr1', 'DonorCommCity',
+                             'DonorCommState', 'DonorCommZip', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc',
+                             'DonorCandState', 'DonorCandDist', 'MemoCd', 'MemoTxt', 'AmendCd']]]],
+            ['SB', [[['8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt',
+                      'SemiAnnRefBundAmt', 'ExpPurpDesc', 'ExpCatCd', 'BenCommID', 'BenCommNm', 'BenCandID',
+                      'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc',
+                      'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity',
+                      'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
+                    [['6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt',
+                      'SemiAnnRefBundAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'BenCommID', 'BenCommNm',
+                      'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx',
+                      'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2',
+                      'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
+                    [['6.2', '6.3'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpPurpCd',
+                      'ExpPurpDesc', 'ExpCatCd', 'RfdOrDispExcess', 'CommunDt', 'BenCommID', 'BenCommNm', 'BenCandID',
+                      'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx', 'BenCandSfx', 'BenCandOfc',
+                      'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity',
+                      'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef']],
+                    [['6.1'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                               'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1',
+                               'PayeeAddr2', 'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt',
+                               'ExpAmt', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'RfdOrDispExcess', 'CommunDt',
+                               'BenCommID', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName', 'BenCandPfx',
+                               'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1',
+                               'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt',
+                               'SIorSLRef']],
+                    [['5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                      'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt',
+                      'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist',
+                      'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'SIorSLRef',
+                      'RfdOrDispExcess']],
+                    [['5.0'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                               'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt',
+                               'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState',
+                               'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity',
+                               'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID',
+                               'BkRefSchdNm', 'SIorSLRef', 'RfdOrDispExcess', 'ExpCatCd', 'CommunDt']],
+                    [['3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                             'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt',
+                             'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState',
+                             'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState',
+                             'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm',
+                             'NatCommNonFedAcct']],
+                    [['2'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                             'PayeeState', 'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt',
+                             'ExpAmt', 'BenCommID', 'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState',
+                             'BenCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState',
+                             'ConduitZip', 'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'],
+                     ['LineNbr', 'CommID', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState',
+                      'PayeeZip', 'ExpPurpCd', 'ExpPurpDesc', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'BenCommID',
+                      'BenCommNm', 'BenCommAddr1', 'BenCommAddr2', 'BenCommCity', 'BenCommState', 'BenCommZip',
+                      'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'MemoCd', 'MemoTxt',
+                      'AmendCd']]]],
+            ['SC', [[['6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName',
+                      'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2',
+                      'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc',
+                      'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'flgPersFunds', 'LenderCommID', 'LenderCandID',
+                      'LenderCandLName', 'LenderCandFName', 'LenderCandMName', 'LenderCandPfx', 'LenderCandSfx',
+                      'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'MemoCd', 'MemoTxt']],
+                    [['6.1'], ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName',
+                               'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2',
+                               'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt',
+                               'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID',
+                               'LenderCandLName', 'LenderCandFName', 'LenderCandMName', 'LenderCandPfx',
+                               'LenderCandSfx', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist']],
+                    [['5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+                      'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt',
+                      'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandFullName',
+                      'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd', 'TransID', 'RctLnNbr']],
+                    [['3', '5.0'],
+                     ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+                      'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt',
+                      'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID', 'LenderCandFullName',
+                      'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd', 'TransID']],
+                    [['2'], ['LineNbr', 'CommID', 'EntTp', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+                             'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc',
+                             'IncurredDt', 'DueDt', 'IntRt', 'flgSecured', 'LenderCommID', 'LenderCandID',
+                             'LenderCandFullName', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist', 'AmendCd',
+                             'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'],
+                     ['LineNbr', 'CommID', 'TransID', 'LenderFullName', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+                      'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt',
+                      'DueDt', 'IntRt', 'flgSecured', 'Guar1FullName', 'Guar1Addr1', 'Guar1Addr2', 'Guar1City',
+                      'Guar1State', 'Guar1Zip', 'Guar1Emp', 'Guar1Occ', 'Guar1Blnc', 'Guar2FullName', 'Guar2Addr1',
+                      'Guar2Addr2', 'Guar2City', 'Guar2State', 'Guar2Zip', 'Guar2Emp', 'Guar2Occ', 'Guar2Blnc',
+                      'Guar3FullName', 'Guar3Addr1', 'Guar3Addr2', 'Guar3City', 'Guar3State', 'Guar3Zip', 'Guar3Emp',
+                      'Guar3Occ', 'Guar3Blnc', 'AmendCd']]]],
+            ['SC1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'Lender', 'LenderAddr1', 'LenderAddr2',
+                       'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
+                       'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
+                       'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged',
+                       'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2',
+                       'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsLName',
+                       'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsSignDt', 'LendRepLName', 'LendRepFName',
+                       'LendRepMName', 'LendRepPfx', 'LendRepSfx', 'LendRepTitle', 'LendRepSignDt']],
+                     [['5.0', '5.1', '5.2', '5.3'],
+                      ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2',
+                       'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
+                       'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
+                       'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged',
+                       'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1', 'AcctLocAddr2',
+                       'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt', 'LoanBasisDesc', 'TrsFullName',
+                       'TrsSignDt', 'LendRepFullName', 'LendRepTitle', 'LendRepSignDt', 'AmendCd']],
+                     [['3'], ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2',
+                              'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
+                              'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
+                              'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged',
+                              'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1',
+                              'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt',
+                              'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle',
+                              'LendRepSignDt']],
+                     [['2'], ['LineNbr', 'CommID', 'BkRefTransID', 'EntTp', 'Lender', 'LenderAddr1', 'LenderAddr2',
+                              'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
+                              'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
+                              'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged',
+                              'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1',
+                              'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt',
+                              'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle']],
+                     [['1'], ['LineNbr', 'CommID', 'TransID', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+                              'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
+                              'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
+                              'flgCollateral', 'CollateralDesc', 'CollateralVal', 'flgPerfectedInt', 'flgFutIncPledged',
+                              'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName', 'AcctLocAddr1',
+                              'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt',
+                              'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle',
+                              'LendRepSignDt', 'AmendCd']]]],
+            ['SC2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'GuarLName', 'GuarFName', 'GuarMName', 'GuarPfx',
+                       'GuarSfx', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc',
+                       'GuarAmt']],
+                     [['5.0', '5.1', '5.2', '5.3'],
+                      ['LineNbr', 'CommID', 'BkRefTransID', 'GuarFullName', 'GuarAddr1', 'GuarAddr2', 'GuarCity',
+                       'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt', 'AmendCd']],
+                     [['2', '3'],
+                      ['LineNbr', 'CommID', 'BkRefTransID', 'GuarFullName', 'GuarAddr1', 'GuarAddr2', 'GuarCity',
+                       'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt']]]],
+            ['SD', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'EntTp', 'CreditorOrgName', 'CreditorLName', 'CreditorFName',
+                      'CreditorMName', 'CreditorPfx', 'CreditorSfx', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
+                      'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P',
+                      'BalClose_P']],
+                    [['3', '5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
+                      'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P',
+                      'CreditorCommID', 'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc',
+                      'CreditorCandState', 'CreditorCandDist', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2',
+                      'ConduitCity', 'ConduitState', 'ConduitZip', 'AmendCd', 'TransID']],
+                    [['2'],
+                     ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
+                      'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P',
+                      'CreditorCommID', 'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc',
+                      'CreditorCandState', 'CreditorCandDist', 'ConduitName', 'ConduitAddr1', 'ConduitAddr2',
+                      'ConduitCity', 'ConduitState', 'ConduitZip', 'AmendCd', 'TransID', 'BkRefTransID',
+                      'BkRefSchdNm']],
+                    [['1'], ['LineNbr', 'CommID', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
+                             'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P',
+                             'BalClose_P']]]],
+            ['SE', [[['8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'DissmntnDt', 'ExpAmt', 'ExpDt',
+                      'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName',
+                      'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc',
+                      'SupOppCandDist', 'SupOppCandStAbbr', 'CompLName', 'CompFName', 'CompMName', 'CompPfx', 'CompSfx',
+                      'SignDt', 'MemoCd', 'MemoTxt']],
+                    [['8.0'], ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                               'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1',
+                               'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt',
+                               'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID',
+                               'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx',
+                               'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName',
+                               'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt']],
+                    [['6.1', '6.2', '6.3', '6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'ExpAgg',
+                      'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'SupOppCd', 'SupOppCandID',
+                      'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName', 'SupOppCandPfx', 'SupOppCandSfx',
+                      'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName', 'CompFName', 'CompMName',
+                      'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt']],
+                    [['3', '5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                      'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCd', 'SupOppCandID',
+                      'SupOppCandFullName', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCommID',
+                      'Unused1', 'Unused2', 'Unused3', 'Unused4', 'Unused5', 'ConduitNm', 'ConduitAddr1',
+                      'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'CompFullName', 'SignDt',
+                      'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt',
+                      'BkRefTransID', 'BkRefSchdNm', 'ElecCd', 'ElecDesc', 'ExpCatCd', 'TransCd', 'ExpAgg']],
+                    [['2'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                             'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCd', 'SupOppCandID',
+                             'SupOppCandFullName', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist',
+                             'SupOppCommID', 'OthCandID', 'OthCandFullNm', 'OthCandOfc', 'OthCandStAbbr', 'OthCandDist',
+                             'ConduitNm', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip',
+                             'CompFullName', 'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd', 'TransID',
+                             'BkRefTransID', 'MemoTxt']],
+                    [['1'], ['LineNbr', 'CommID', 'PayeeFullNm', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+                             'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCandID', 'SupOppCandFullName',
+                             'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCd', 'CompFullName',
+                             'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd']]]],
+            ['SF', [[['8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID',
+                      'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity',
+                      'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName',
+                      'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip',
+                      'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID',
+                      'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx',
+                      'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
+                    [['6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID',
+                      'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity',
+                      'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName',
+                      'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip',
+                      'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID',
+                      'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx',
+                      'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
+                    [['6.1', '6.2', '6.3'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID',
+                      'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity',
+                      'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName',
+                      'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip',
+                      'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'IncLimit', 'PayeeCommID',
+                      'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName', 'PayeeCandMName', 'PayeeCandPfx',
+                      'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'MemoCd', 'MemoTxt']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID',
+                      'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'EntTp',
+                      'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpAgg',
+                      'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID', 'PayeeCandFullName',
+                      'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2',
+                      'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd', 'TransID', 'MemoCd', 'MemoTxt',
+                      'BkRefTransID', 'BkRefSchdNm', 'UnlmtdSpndg', 'ExpCatCd', 'ExpPurpCd']],
+                    [['3'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID',
+                             'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip',
+                             'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+                             'PayeeZip', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID',
+                             'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm',
+                             'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd',
+                             'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['2'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'DesigCommNm', 'SubordCommID',
+                             'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip',
+                             'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+                             'PayeeZip', 'ExpAgg', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'PayeeCommID', 'PayeeCandID',
+                             'PayeeCandFullName', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ConduitNm',
+                             'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd',
+                             'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'], ['LineNbr', 'CommID', 'flgDesigCoordExp', 'DesigCommID', 'SubordCommNm', 'SubordAddr1',
+                             'SubordAddr2', 'SubordCity', 'SubordStAbbr', 'SubordZip', 'PayeeFullName', 'PayeeAddr1',
+                             'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'PayeeCandID', 'PayeeCandFullName',
+                             'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ExpAgg', 'ExpPurpDesc', 'ExpDt',
+                             'ExpAmt', 'AmendCd']]]],
+            ['H1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen',
+                      'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct',
+                      'flgAdmRatio', 'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio']],
+                    [['5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'Unused1', 'Unused2', 'Unused3', 'Unused4', 'Unused5', 'Unused6', 'Unused7',
+                      'Unused8', 'Unused9', 'Unused10', 'Unused11', 'Unused12', 'Unused13', 'Unused14', 'Unused15',
+                      'Unused16', 'Unused17', 'Unused18', 'Unused19', 'Unused20', 'Unused21', 'Unused22', 'Unused23',
+                      'Unused24', 'Unused25', 'InternalUse', 'TransID', 'flgStLocFxPctPresOnly',
+                      'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen',
+                      'flgFlatMin50PctFed', 'FedPct', 'NonFedPct', 'flgAdmRatio', 'flgGenericVoterDrvRatio',
+                      'flgPubCommunRefPrtyRatio']],
+                    [['5.0', '5.1'],
+                     ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup',
+                      'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup', 'HseSenPtyCmtesActNonFedCandSup',
+                      'HseSenPtyCmtesActFedPct', 'EstDirCandSupFedPct', 'EstDirCandSupNonFedPct', 'ActDirCandSupFedAmt',
+                      'ActDirCandSupNonFedAmt', 'ActDirCandSupFedPct', 'BallotCompPres', 'BallotCompSen',
+                      'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands',
+                      'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID', 'flgStLocFxPctPresOnly',
+                      'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen']],
+                    [['3'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup',
+                             'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup',
+                             'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct',
+                             'SepSegFundsAndPctNonConnCmtesEstFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup',
+                             'SepSegFundsAndNonConnCmtesActNonFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen',
+                             'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands',
+                             'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID']],
+                    [['2'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup',
+                             'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup',
+                             'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct',
+                             'SepSegFundsAndPctNonConnCmtesEstFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup',
+                             'SepSegFundsAndNonConnCmtesActNonFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen',
+                             'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands',
+                             'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd', 'TransID', 'BkRefTransID',
+                             'BkRefSchdNm']],
+                    [['1'], ['LineNbr', 'CommID', 'NatPtyCommsPct', 'HseSenPtyCommsPct', 'HseSenPtyCmtesEstFedCandSup',
+                             'HseSenPtyCmtesEstNonFedCandSup', 'HseSenPtyCmtesActFedCandSup',
+                             'HseSenPtyCmtesActNonFedCandSup', 'HseSenPtyCmtesActFedPct',
+                             'SepSegFundsAndPctNonConnCmtesEstFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesEstNonFedCandSup', 'SepSegFundsAndNonConnCmtesActFedCandSup',
+                             'SepSegFundsAndNonConnCmtesActNonFedCandSup',
+                             'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen',
+                             'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands',
+                             'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd']]]],
+            ['H2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'EventNm', 'flgDirFndrsg', 'flgDirCandSup', 'RatioCd', 'FedPct',
+                      'NonFedPct']],
+                    [['5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'Unused', 'flgDirCandSup', 'RatioCd', 'FedPct',
+                      'NonFedPct', 'InternalUse', 'TransID']],
+                    [['3', '5.0', '5.1'],
+                     ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup', 'RatioCd',
+                      'FedPct', 'NonFedPct', 'AmendCd', 'TransID']],
+                    [['2'], ['LineNbr', 'CommID', 'EventNm', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup', 'RatioCd',
+                             'FedPct', 'NonFedPct', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'],
+                     ['LineNbr', 'CommID', 'EventNm', 'EventNbr', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup',
+                      'RatioCd', 'FedPct', 'NonFedPct', 'AmendCd']]]],
+            ['H3', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'AcctNm', 'EventTp', 'EventNm', 'RcptDt',
+                      'TotAmtTrans', 'TransAmt']],
+                    [['5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'BkRefTransID', 'AcctNm', 'EventNm', 'EventTp', 'RcptDt', 'TransAmt',
+                      'TotAmtTrans', 'InternalUse', 'TransID']],
+                    [['3', '5.0', '5.1'],
+                     ['LineNbr', 'CommID', 'BkRefTransID', 'AcctNm', 'EventNm', 'EventTp', 'RcptDt', 'TransAmt',
+                      'TotAmtTrans', 'AmendCd', 'TransID']]
+                    #    ,
+                    #    [['2'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'TotDirFundrsgAmt', 'TotExemptActDirCandSup', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    #    [['1'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'EventNm', 'EventNbr', 'TransAmt', 'EventNm2', 'EventNbr2', 'TransAmt2', 'EventNm3', 'EventNbr3', 'TransAmt3', 'EventNm4', 'EventNbr4', 'TransAmt4', 'TotDirFndrsgAmt', 'EventNm5', 'EventNbr5', 'TransAmt5', 'EventNm6', 'EventNbr6', 'TransAmt6', 'EventNm7', 'EventNbr7', 'TransAmt7', 'EventNm8', 'EventNbr8', 'TransAmt8', 'TotExemptActDirCandSup', 'AmendCd']]
+                    ]],
+            ['H4', [[['8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
+                      'EventAgg', 'ExpPurpDesc', 'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg', 'flgExempt',
+                      'flgGenVtrDrv', 'flgDirCandSup', 'flgPubCommun', 'MemoCd', 'MemoTxt']],
+                    [['6.1', '6.2', '6.3', '6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
+                      'EventAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg',
+                      'flgExempt', 'flgGenVtrDrv', 'flgDirCandSup', 'flgPubCommun', 'MemoCd', 'MemoTxt']],
+                    [['5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                      'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'Unused',
+                      'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'CandCommID', 'CandID',
+                      'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2',
+                      'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'InternalUse', 'TransID', 'MemoCd', 'MemoTxt',
+                      'BkRefTransID', 'BkRefSchdNm', 'flgAdminActivity', 'flgGenVtrDrv', 'ExpCatCd', 'ExpPurpCd',
+                      'flgPubCommun']],
+                    [['5.0', '5.1'],
+                     ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                      'PayeeStAbbr', 'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
+                      'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc',
+                      'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm',
+                      'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd',
+                      'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm', 'flgAdminActivity', 'flgGenVtrDrv',
+                      'ExpCatCd', 'ExpPurpCd']],
+                    [['3'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                             'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
+                             'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc',
+                             'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm',
+                             'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd',
+                             'TransID', 'MemoCd', 'MemoTxt', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['2'], ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                             'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
+                             'flgAdminVtrDrv', 'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc',
+                             'CandCommID', 'CandID', 'CandFullName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitNm',
+                             'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip', 'AmendCd',
+                             'TransID', 'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'],
+                     ['LineNbr', 'CommID', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+                      'PayeeZip', 'EventNm', 'EventNbr', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv',
+                      'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'AmendCd']]]],
+            ['H5', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'AcctNm', 'RcptDt', 'TotAmt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt',
+                      'GenCampAmt']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt', 'GenCampAmt',
+                      'TotAmt', 'AmendCd', 'TransID']]]],
+            ['H6', [[['8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt',
+                      'ExpAgg', 'ExpPurpDesc', 'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID',
+                      'flgActGenCamp', 'MemoCd', 'MemoTxt']],
+                    [['6.1', '6.2', '6.3', '6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
+                      'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
+                      'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt',
+                      'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc', 'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID',
+                      'flgActGenCamp', 'MemoCd', 'MemoTxt']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'EntTp', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity',
+                      'PayeeStAbbr', 'PayeeZip', 'ExpCatCd', 'ExpCd', 'ExpDesc', 'ExpDt', 'TotExpAmt', 'FedAmt',
+                      'LevinAmt', 'flgActVotRegn', 'flgActVotID', 'flgActGOTV', 'flgActGenCamp', 'ExpAgg', 'AddlDesc',
+                      'CandCommID', 'CandID', 'CandName', 'CandOfc', 'CandStAbbr', 'CandDist', 'ConduitCommID',
+                      'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitStAbbr', 'ConduitZip',
+                      'MemoCd', 'MemoTxt', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']]]],
+            ['SI', [[['6.1', '6.2', '6.3', '6.4', '7.0'],
+                     ['LineNbr', 'CommID', 'TransID', 'RecIDNbr', 'AcctNm', 'BankAcctID', 'CovgFmDt', 'CovgToDt',
+                      'TotRcpts', 'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH',
+                      'Rcpts', 'Subtotal', 'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2',
+                      'DirStLocCandSup2', 'OthDisb2', 'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2',
+                      'EndCOH2']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed',
+                      'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb',
+                      'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2',
+                      'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID', 'SysCd']],
+                    [['3'],
+                     ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed',
+                      'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb',
+                      'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2',
+                      'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID',
+                      'AcctNbr']],
+                    [['2'],
+                     ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed',
+                      'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb',
+                      'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2',
+                      'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd', 'TransID',
+                      'BkRefTransID', 'BkRefSchdNm']],
+                    [['1'],
+                     ['LineNbr', 'CommID', 'BankAcctID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'TotRcpts', 'TransToFed',
+                      'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb',
+                      'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2',
+                      'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd']]]],
+            ['SL', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     ['LineNbr', 'CommID', 'TransID', 'RecordID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P',
+                      'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P',
+                      'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P',
+                      'Subtotal_P', 'Disb_P', 'EndCOH_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T',
+                      'OthRcpts_T', 'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T',
+                      'TransTot_T', 'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T',
+                      'EndCOH_T']],
+                    [['5.0', '5.1', '5.2', '5.3'],
+                     ['LineNbr', 'CommID', 'AcctNm', 'SysCd', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P',
+                      'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P',
+                      'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P',
+                      'Subtotal_P', 'Disb_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T', 'OthRcpts_T',
+                      'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T',
+                      'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T', 'AmendCd',
+                      'TransID']]]],
+            ['TEXT', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                       ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'FullText']],
+                      [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText', 'AmendCd']],
+                      [['3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText']]]]]
+
+outputhdrs = {
+    'F1': ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
+           'flgChgCommEmail', 'CommEmail', 'flgChgCommUrl', 'CommUrl', 'SubmDt', 'SignFullName', 'SignLName',
+           'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandFullName', 'CandLName',
+           'CandFName', 'CandMName', 'CandPfx', 'CandSfx', 'CandOff', 'CandStAbbr', 'CandDist', 'PtyCd', 'PtyTp',
+           'PACTp', 'flgLobRegPAC_ConnOrg_5e', 'flgLobRegPAC_MultCands_5f', 'flgLdspPAC_5f', 'AffCommID', 'AffCommNm',
+           'AffCandID', 'AffCandLName', 'AffCandFName', 'AffCandMName', 'AffCandPfx', 'AffCandSfx', 'AffAddr1',
+           'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip', 'AffRelCd', 'CustFullName', 'CustLName', 'CustFName',
+           'CustMName', 'CustPfx', 'CustSfx', 'CustAddr1', 'CustAddr2', 'CustCity', 'CustStAbbr', 'CustZip',
+           'CustTitle', 'CustPhone', 'TrsFullName', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsAddr1',
+           'TrsAddr2', 'TrsCity', 'TrsStAbbr', 'TrsZip', 'TrsTitle', 'TrsPhone', 'AgtFullName', 'AgtLName', 'AgtFName',
+           'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle',
+           'AgtPhone', 'Bank1Nm', 'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm',
+           'Bank2Addr1', 'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip'],
+    'F1S': ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffCandID', 'AffLName',
+            'AffFName', 'AffMName', 'AffPfx', 'AffSfx', 'AffAddr1', 'AffAddr2', 'AffCity', 'AffStAbbr', 'AffZip',
+            'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity',
+            'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity', 'BankStAbbr',
+            'BankZip'],
+    'F3': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist',
+           'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsFullName', 'TrsLName', 'TrsFName',
+           'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'TotConts_P_6a', 'TotContRfds_P_6b', 'NetConts_P_6c',
+           'TotOpExps_P_7a', 'TotOffsetOpExps_P_7b', 'NetOpExps_P_7c', 'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10',
+           'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2', 'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b',
+           'OthPolCommConts_P_11c', 'CandConts_P_11d', 'TotConts_P_11e', 'TranFmOthAuthComms_P_12', 'CandLoans_P_13a',
+           'OthLoans_P_13b', 'TotLoans_P_13c', 'OffsetOpExps_P_14', 'OthRcpts_P_15', 'TotRcpts_P_16', 'OpExps_P_17',
+           'TranToOthAuthComms_P_18', 'CandLoansRepaid_P_19a', 'OthLoansRepaid_P_19b', 'TotLoansRepaid_P_19c',
+           'RefundsInd_P_20a', 'RefundsPolPtyComms_P_20b', 'RefundsOthPolComms_P_20c', 'TotRefunds_P_20d',
+           'OthDisb_P_21', 'TotDisb_P_22', 'CashBegin_P_23', 'TotRcpts_P_24', 'Subtotal_P_25', 'TotDisb_P_26',
+           'CashClose_P_27', 'TotConts_T_6a', 'TotContRfds_T_6b', 'NetConts_T_6c', 'TotOpExps_T_7a',
+           'TotOffsetOpExps_T_7b', 'NetOpExps_T_7c', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2',
+           'IndContsTot_T_11a3', 'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'CandConts_T_11d', 'TotConts_T_11e',
+           'TranFmOthAuthComms_T_12', 'CandLoans_T_13a', 'OthLoans_T_13b', 'TotLoans_T_13c', 'OffsetOpExps_T_14',
+           'OthRcpts_T_15', 'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a',
+           'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
+           'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22'],
+    'F3L': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt', 'ElecDist',
+            'RptCd', 'ElecDt', 'StateOfElec', 'flgInclSemiAnnPrd', 'CovgFmDt', 'CovgToDt', 'flgInclSemiAnnJanJun',
+            'flgInclSemiAnnJulDec', 'TotRptBundContribs', 'SemiAnnBundContribs', 'TrsFullName', 'TrsLName', 'TrsFName',
+            'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt'],
+    'F3P': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec', 'GenElec',
+            'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsFullName', 'TrsLName', 'TrsFName',
+            'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8', 'TotDisb_P_9',
+            'CashClose_P_10', 'DebtsTo_P_11', 'DebtsBy_P_12', 'LmtdExps_P_13', 'NetConts_P_14', 'NetOpExps_P_15',
+            'FedFnds_P_16', 'IndContsItem_P_17a1', 'IndContsUnitem_P_17a2', 'IndContsTot_P_17a3',
+            'PolPtyCommConts_P_17b', 'OthPolCommConts_P_17c', 'CandConts_P_17d', 'TotConts_P_17e',
+            'TranFmPtyComms_P_18', 'CandLoans_P_19a', 'OthLoans_P_19b', 'TotLoans_P_19c', 'OptgOffsets_P_20a',
+            'FndrsgOffsets_P_20b', 'LegalAcctgOffsets_P_20c', 'TotOffsets_P_20d', 'OthRcpts_P_21', 'TotRcpts_P_22',
+            'OpExps_P_23', 'TranToOthAuthComms_P_24', 'FndrsgDisb_P_25', 'LegalAcctgDisb_P_26', 'CandLoansRepaid_P_27a',
+            'OthLoansRepaid_P_27b', 'TotLoansRepaid_P_27c', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b',
+            'RefundsOthPolComms_P_28c', 'TotRefunds_P_28d', 'OthDisb_P_29', 'TotDisb_P_30', 'ItmsToBeLiq_P_31',
+            'Alabama_P', 'Alaska_P', 'Arizona_P', 'Arkansas_P', 'California_P', 'Colorado_P', 'Connecticut_P',
+            'Delaware_P', 'DistCol_P', 'Florida_P', 'Georgia_P', 'Hawaii_P', 'Idaho_P', 'Illinois_P', 'Indiana_P',
+            'Iowa_P', 'Kansas_P', 'Kentucky_P', 'Louisiana_P', 'Maine_P', 'Maryland_P', 'Massachusetts_P', 'Michigan_P',
+            'Minnesota_P', 'Mississippi_P', 'Missouri_P', 'Montana_P', 'Nebraska_P', 'Nevada_P', 'NewHampshire_P',
+            'NewJersey_P', 'NewMexico_P', 'NewYork_P', 'NorthCarolina_P', 'NorthDakota_P', 'Ohio_P', 'Oklahoma_P',
+            'Oregon_P', 'Pennsylvania_P', 'RhodeIsland_P', 'SouthCarolina_P', 'SouthDakota_P', 'Tennessee_P', 'Texas_P',
+            'Utah_P', 'Vermont_P', 'Virginia_P', 'Washington_P', 'WestVirginia_P', 'Wisconsin_P', 'Wyoming_P',
+            'PuertoRico_P', 'Guam_P', 'VirginIslands_P', 'TotAllocs_P', 'FedFnds_T_16', 'IndContsItem_T_17a1',
+            'IndContsUnitem_T_17a2', 'IndContsTot_T_17a3', 'PolPtyCommConts_T_17b', 'OthPolCommConts_T_17c',
+            'CandConts_T_17d', 'TotConts_T_17e', 'TranFmPtyComms_T_18', 'CandLoans_T_19a', 'OthLoans_T_19b',
+            'TotLoans_T_19c', 'OptgOffsets_T_20a', 'FndrsgOffsets_T_20b', 'LegalAcctgOffsets_T_20c', 'TotOffsets_T_20d',
+            'OthRcpts_T_21', 'TotRcpts_T_22', 'OpExps_T_23', 'TranToOthAuthComms_T_24', 'FndrsgDisb_T_25',
+            'LegalAcctgDisb_T_26', 'CandLoansRepaid_T_27a', 'OthLoansRepaid_T_27b', 'TotLoansRepaid_T_27c',
+            'RefundsInd_T_28a', 'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotRefunds_T_28d',
+            'OthDisb_T_29', 'TotDisb_T_30', 'Alabama_T', 'Alaska_T', 'Arizona_T', 'Arkansas_T', 'California_T',
+            'Colorado_T', 'Connecticut_T', 'Delaware_T', 'DistCol_T', 'Florida_T', 'Georgia_T', 'Hawaii_T', 'Idaho_T',
+            'Illinois_T', 'Indiana_T', 'Iowa_T', 'Kansas_T', 'Kentucky_T', 'Louisiana_T', 'Maine_T', 'Maryland_T',
+            'Massachusetts_T', 'Michigan_T', 'Minnesota_T', 'Mississippi_T', 'Missouri_T', 'Montana_T', 'Nebraska_T',
+            'Nevada_T', 'NewHampshire_T', 'NewJersey_T', 'NewMexico_T', 'NewYork_T', 'NorthCarolina_T', 'NorthDakota_T',
+            'Ohio_T', 'Oklahoma_T', 'Oregon_T', 'Pennsylvania_T', 'RhodeIsland_T', 'SouthCarolina_T', 'SouthDakota_T',
+            'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T', 'WestVirginia_T',
+            'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T', 'TotAllocs_T'],
+    'F3X': ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'RptCd', 'ElecCd',
+            'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'flgQualComm', 'TrsFullName', 'TrsLName', 'TrsFName',
+            'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d', 'TotDisb_P_7',
+            'CashClose_P_8', 'DebtsTo_P_9', 'DebtsBy_P_10', 'IndContsItem_P_11a1', 'IndContsUnitem_P_11a2',
+            'IndContsTot_P_11a3', 'PolPtyCommConts_P_11b', 'OthPolCommConts_P_11c', 'TotConts_P_11d',
+            'TranFmPtyComms_P_12', 'AllLoansRcvd_P_13', 'LoanPymtsRcvd_P_14', 'RefundOffsets_P_15',
+            'RefundsFedConts_P_16', 'OthFedRcptsDvds_P_17', 'TranFmNonFedAcctH3_P_18a', 'TranFmNonFedAcctH5_P_18b',
+            'TotNonFedTrans_P_18c', 'TotRcpts_P_19', 'TotFedRcpts_P_20', 'OpExpsFedShr_P_21a1',
+            'OpExpsNonFedShr_P_21a2', 'OpExpsOthFed_P_21b', 'TotOpExps_P_21c', 'TranToPtyComms_P_22',
+            'ContsToFedCandsComms_P_23', 'IndtExps_P_24', 'CoordExpsByPtyComms_P_25', 'LoansRepaid_P_26',
+            'LoansMade_P_27', 'RefundsInd_P_28a', 'RefundsPolPtyComms_P_28b', 'RefundsOthPolComms_P_28c',
+            'TotContRefunds_P_28d', 'OthDisb_P_29', 'ShrdElecActivityFedShr_P_30a1', 'ShrdElecActivityNonFedShr_P_30a2',
+            'NonAllocFedElecActivity_P_30b', 'TotFedElecActivity_P_30c', 'TotDisb_P_31', 'TotFedDisb_P_32',
+            'TotConts_P_33', 'TotContRefunds_P_34', 'NetConts_P_35', 'TotFedOpExps_P_36', 'TotOffsetsOpExp_P_37',
+            'NetOpExps_P_38', 'CashBegin_T_6a', 'CashBeginYr', 'TotRcpts_T_6c', 'Subtotal_T_6d', 'TotDisb_T_7',
+            'CashClose_T_8', 'IndContsItem_T_11a1', 'IndContsUnitem_T_11a2', 'IndContsTot_T_11a3',
+            'PolPtyCommConts_T_11b', 'OthPolCommConts_T_11c', 'TotConts_T_11d', 'TranFmPtyComms_T_12',
+            'AllLoansRcvd_T_13', 'LoanPymtsRcvd_T_14', 'RefundOffsets_T_15', 'RefundsFedConts_T_16',
+            'OthFedRcptsDvds_T_17', 'TranFmNonFedAcctH3_T_18a', 'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c',
+            'TotRcpts_T_19', 'TotFedRcpts_T_20', 'OpExpsFedShr_T_21a1', 'OpExpsNonFedShr_T_21a2', 'OpExpsOthFed_T_21b',
+            'TotOpExps_T_21c', 'TranToPtyComms_T_22', 'ContsToFedCandsComms_T_23', 'IndtExps_T_24',
+            'CoordExpsByPtyComms_T_25', 'LoansRepaid_T_26', 'LoansMade_T_27', 'RefundsInd_T_28a',
+            'RefundsPolPtyComms_T_28b', 'RefundsOthPolComms_T_28c', 'TotContRefunds_T_28d', 'OthDisb_T_29',
+            'ShrdElecActivityFedShr_T_30a1', 'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b',
+            'TotFedElecActivity_T_30c', 'TotDisb_T_31', 'TotFedDisb_T_32', 'TotConts_T_33', 'TotContRefunds_T_34',
+            'NetConts_T_35', 'TotFedOpExps_T_36', 'TotOffsetsOpExp_T_37', 'NetOpExps_T_38'],
+    'SA': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
+           'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecCd',
+           'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpCd', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID',
+           'DonorCommNm', 'DonorCandID', 'DonorCandLName', 'DonorCandFName', 'DonorCandMName', 'DonorCandPfx',
+           'DonorCandSfx', 'DonorCandOfc', 'DonorCandSt', 'DonorCandDist', 'ConduitNm', 'ConduitAddr1', 'ConduitAddr2',
+           'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef'],
+    'SB': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName',
+           'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeState',
+           'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt', 'SemiAnnRefBundAmt', 'ExpPurpCd', 'ExpPurpDesc',
+           'ExpCatCd', 'BenCommID', 'BenCommNm', 'BenCandID', 'BenCandLName', 'BenCandFName', 'BenCandMName',
+           'BenCandPfx', 'BenCandSfx', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'ConduitNm', 'ConduitAddr1',
+           'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'MemoCd', 'MemoTxt', 'SIorSLRef'],
+    'SC': ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName', 'LenderFName',
+           'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2', 'LenderCity', 'LenderState',
+           'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc', 'IncurredDt', 'DueDt', 'IntRt',
+           'flgSecured', 'flgPersFunds', 'LenderCommID', 'LenderCandID', 'LenderCandLName', 'LenderCandFName',
+           'LenderCandMName', 'LenderCandPfx', 'LenderCandSfx', 'LenderCandOfc', 'LenderCandState', 'LenderCandDist',
+           'MemoCd', 'MemoTxt'],
+    'SC1': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'Lender', 'LenderAddr1', 'LenderAddr2', 'LenderCity',
+            'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt', 'flgLoanRestructured', 'OrigLoanDt',
+            'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable', 'flgCollateral', 'CollateralDesc', 'CollateralVal',
+            'flgPerfectedInt', 'flgFutIncPledged', 'FutIncDesc', 'FutIncEstVal', 'DepAcctEstDt', 'AcctLocName',
+            'AcctLocAddr1', 'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt',
+            'LoanBasisDesc', 'TrsLName', 'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'TrsSignDt', 'LendRepLName',
+            'LendRepFName', 'LendRepMName', 'LendRepPfx', 'LendRepSfx', 'LendRepTitle', 'LendRepSignDt'],
+    'SC2': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'GuarLName', 'GuarFName', 'GuarMName', 'GuarPfx', 'GuarSfx',
+            'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt'],
+    'SD': ['LineNbr', 'CommID', 'EntTp', 'CreditorOrgName', 'CreditorLName', 'CreditorFName', 'CreditorMName',
+           'CreditorPfx', 'CreditorSfx', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity', 'CreditorState',
+           'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P', 'BalClose_P', 'CreditorCommID',
+           'CreditorCandID', 'CreditorCandFullName', 'CreditorCandOfc', 'CreditorCandState', 'CreditorCandDist',
+           'ConduitName', 'ConduitAddr1', 'ConduitAddr2', 'ConduitCity', 'ConduitState', 'ConduitZip', 'TransID'],
+    'SE': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName',
+           'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+           'PayeeZip', 'ElecCd', 'ElecDesc', 'DissmntnDt', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpDesc', 'ExpCatCd',
+           'PayeeCommID', 'SupOppCd', 'SupOppCandID', 'SupOppCandLName', 'SupOppCandFName', 'SupOppCandMName',
+           'SupOppCandPfx', 'SupOppCandSfx', 'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'CompLName',
+           'CompFName', 'CompMName', 'CompPfx', 'CompSfx', 'SignDt', 'MemoCd', 'MemoTxt'],
+    'SF': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID',
+           'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity', 'SubordStAbbr',
+           'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx',
+           'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ExpDt', 'ExpAmt', 'ExpAgg', 'ExpPurpCd',
+           'ExpPurpDesc', 'ExpCatCd', 'PayeeCommID', 'PayeeCandID', 'PayeeCandLName', 'PayeeCandFName',
+           'PayeeCandMName', 'PayeeCandPfx', 'PayeeCandSfx', 'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist',
+           'MemoCd', 'MemoTxt'],
+    'H1': ['LineNbr', 'CommID', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen', 'flgStLocFxPctSenOnly',
+           'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct', 'flgAdmRatio',
+           'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio'],
+    'H2': ['LineNbr', 'CommID', 'TransID', 'EventNm', 'flgDirFndrsg', 'flgDirCandSup', 'RatioCd', 'FedPct',
+           'NonFedPct'],
+    'H3': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'AcctNm', 'EventTp', 'EventNm', 'RcptDt', 'TotAmtTrans',
+           'TransAmt'],
+    'H4': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName',
+           'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+           'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'EventAgg', 'ExpPurpCd', 'ExpPurpDesc',
+           'ExpCatCd', 'flgAdminActivity', 'flgDirectFndrsg', 'flgExempt', 'flgGenVtrDrv', 'flgDirCandSup',
+           'flgPubCommun', 'MemoCd', 'MemoTxt'],
+    'H5': ['LineNbr', 'CommID', 'TransID', 'AcctNm', 'RcptDt', 'TotAmt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt',
+           'GenCampAmt'],
+    'H6': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm', 'PayeeLName',
+           'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
+           'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt', 'ExpAgg', 'ExpPurpCd', 'ExpPurpDesc',
+           'ExpCatCd', 'flgActVotRegn', 'flgActGOTV', 'flgActVotID', 'flgActGenCamp', 'MemoCd', 'MemoTxt'],
+    'SI': ['LineNbr', 'CommID', 'TransID', 'RecIDNbr', 'AcctNm', 'BankAcctID', 'CovgFmDt', 'CovgToDt', 'TotRcpts',
+           'TransToFed', 'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal',
+           'Disb', 'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2', 'TotDisb2',
+           'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2'],
+    'SL': ['LineNbr', 'CommID', 'TransID', 'RecordID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P',
+           'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P',
+           'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P', 'Subtotal_P',
+           'Disb_P', 'EndCOH_P', 'IndRcptsItem_T', 'IndRcptsUnitem_T', 'IndRcptsTot_T', 'OthRcpts_T', 'TotRcpts_T',
+           'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T', 'OthDisb_T', 'TotDisb_T',
+           'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T'],
     'TEXT': ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'FullText']}
+
 
 def add_entry_to_error_log(logfile, logtext):
     with open(logfile, 'a+b') as output:
         output.write(logtext.strip() + '\n')
+
 
 def build_data_row(data, headers, imageid, rpttype):
     output = [str(imageid)]
@@ -238,7 +1192,8 @@ def build_data_row(data, headers, imageid, rpttype):
             output.append('')
         else:
             output.append(data[header])
-    return output 
+    return output
+
 
 def build_list_of_supported_report_types():
     types = []
@@ -246,21 +1201,26 @@ def build_list_of_supported_report_types():
         types.append(hdr[0])
     return types
 
+
 def ck_curr_val(val, image, fieldname, formtype, rownbr):
+    errfile = RPTERRDIR + 'BadDates.log'
     try:
         if val == None:
             return ''
-        val = val.replace('$','').replace(',','').strip(' "')
+        val = val.replace('$', '').replace(',', '').strip(' "')
         if val == '':
             return ''
         else:
             float(val)
             return val
     except:
-        add_entry_to_error_log('Unable to convert ' + fieldname + ' field (value: "' + val + '") to number for row ' + str(rownbr) + ' (form type: ' + formtype + ') of ' + str(image) + '.')
+        add_entry_to_error_log(errfile,
+                               'Unable to convert ' + fieldname + ' field (value: "' + val + '") to number for row ' + str(
+                                   rownbr) + ' (form type: ' + formtype + ') of ' + str(image) + '.')
         return ''
 
-def clean_sql_text(val, nullstring='', outputtextdelim = ''):
+
+def clean_sql_text(val, nullstring='', outputtextdelim=''):
     # This function removes leading and trailing quotation marks and whitespace
     # and converts any instances of an apostrope to two apostrophes so the
     # text can be imported into SQL Server.
@@ -279,6 +1239,7 @@ def clean_sql_text(val, nullstring='', outputtextdelim = ''):
             val = val.replace("'", "''")
         return outputtextdelim + val + outputtextdelim
 
+
 def convert_to_bit(val):
     val = val.strip()
     if val == '':
@@ -290,6 +1251,7 @@ def convert_to_bit(val):
     else:
         val = '1'
     return val
+
 
 def convert_to_date(val, dateformat, image, fieldname, formtype, rownbr, sched, trans=''):
     errfile = RPTERRDIR + 'BadDates.log'
@@ -307,12 +1269,12 @@ def convert_to_date(val, dateformat, image, fieldname, formtype, rownbr, sched, 
             curryear = int(currtime.strftime('%Y'))
             # First see if date string is M/D/(CC)YY or M-D-(CC)YY
             if val.find('/') != -1:
-                if val[val.find('/')+1:].find('/') != -1:
+                if val[val.find('/') + 1:].find('/') != -1:
                     x1 = val.find('/')
-                    x2 = x1+val[x1+1:].find('/')+1
+                    x2 = x1 + val[x1 + 1:].find('/') + 1
                     month = val[:x1].lstrip('0')
-                    day = val[x1+1:x2].lstrip('0')
-                    year = val[x2+1:]
+                    day = val[x1 + 1:x2].lstrip('0')
+                    year = val[x2 + 1:]
                     if int(year) < 10:
                         year = '0' + year
                     if int(year) < 100:
@@ -320,12 +1282,12 @@ def convert_to_date(val, dateformat, image, fieldname, formtype, rownbr, sched, 
                     if int(year) > curryear:
                         year = '19' + year[-2:]
             elif val.find('-') != -1:
-                if val[val.find('-')+1:].find('-') != -1:
+                if val[val.find('-') + 1:].find('-') != -1:
                     x1 = val.find('-')
-                    x2 = x1+val[x1+1:].find('-')+1
+                    x2 = x1 + val[x1 + 1:].find('-') + 1
                     month = val[:x1].lstrip('0')
-                    day = val[x1+1:x2].lstrip('0')
-                    year = val[x2+1:]
+                    day = val[x1 + 1:x2].lstrip('0')
+                    year = val[x2 + 1:]
                     if int(year) < 10:
                         year = '0' + year
                     if int(year) < 100:
@@ -334,19 +1296,20 @@ def convert_to_date(val, dateformat, image, fieldname, formtype, rownbr, sched, 
                         year = '19' + year[-2:]
             else:
                 month = dateformat.find('MM')
-                month = val[month:month+2] #.lstrip('0')
+                month = val[month:month + 2]  # .lstrip('0')
                 day = dateformat.find('DD')
-                day = val[day:day+2] #.lstrip('0')
+                day = val[day:day + 2]  # .lstrip('0')
                 if dateformat.find('CCYY') != -1:
-                    year = val[dateformat.find('CCYY'):dateformat.find('CCYY')+4]
+                    year = val[dateformat.find('CCYY'):dateformat.find('CCYY') + 4]
                 elif dateformat.find('YYYY') != -1:
-                    year = val[dateformat.find('YYYY'):dateformat.find('YYYY')+4]
+                    year = val[dateformat.find('YYYY'):dateformat.find('YYYY') + 4]
                 elif dateformat.find('YY') != -1:
-                    year = '20' + val[dateformat.find('YY'):dateformat.find('YY')+2]
+                    year = '20' + val[dateformat.find('YY'):dateformat.find('YY') + 2]
                     if int(year) > curryear:
                         year = '19' + val[-2:]
                 else:
-                    add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val + '\t' + dateformat)
+                    add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(
+                        rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val + '\t' + dateformat)
                     with open(errfile, 'a+b') as output:
                         output.write(errtxt + '\n')
                     return ''
@@ -355,8 +1318,10 @@ def convert_to_date(val, dateformat, image, fieldname, formtype, rownbr, sched, 
             return datestring
 
         except:
-            add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val + '\t' + dateformat)
+            add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(
+                rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val + '\t' + dateformat)
             return ''
+
 
 def convert_to_tinyint(val, image, fieldname, formtype, rownbr, sched, trans=''):
     errfile = RPTERRDIR + 'BadIntegers.log'
@@ -369,18 +1334,22 @@ def convert_to_tinyint(val, image, fieldname, formtype, rownbr, sched, trans='')
         try:
             x = int(val)
             if x < 0 or x > 255:
-                add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val)
+                add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(
+                    rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val)
                 return ''
             else:
                 return str(x)
         except:
-            add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val)
+            add_entry_to_error_log(errfile, str(image) + '\t' + sched + '\t' + trans + '\t' + str(
+                rownbr) + '\t' + formtype + '\t' + fieldname + '\t' + val)
             return ''
+
 
 def create_file_timestamp():
     filetime = datetime.datetime.now()
     return filetime.strftime('%Y%m%d%H%M')
-    
+
+
 def get_row_headers(header, version):
     rowhdrs = []
     for hdr in filehdrs:
@@ -389,6 +1358,7 @@ def get_row_headers(header, version):
                 if str(version) in subhdr[0]:
                     rowhdrs = subhdr[1]
     return rowhdrs
+
 
 def load_rpt_hdrs(rpttype, imageid, rowdata, filehdr, outputhdrs, DBCONNSTR):
     errfile = RPTERRDIR + 'ErrorMessages.log'
@@ -434,21 +1404,22 @@ def load_rpt_hdrs(rpttype, imageid, rowdata, filehdr, outputhdrs, DBCONNSTR):
     # Display error messages
     if sqlresult == -1:
         add_entry_to_error_log(errfile, str(imageid) + '.fec already ' \
-                               'exists in the FEC database. Data ' \
-                               'from this file will not be imported, ' \
-                               'and the file has been moved to the ' \
-                               'Review directory.')
+                                                       'exists in the FEC database. Data ' \
+                                                       'from this file will not be imported, ' \
+                                                       'and the file has been moved to the ' \
+                                                       'Review directory.')
     elif sqlresult == -2:
         add_entry_to_error_log(errfile, 'The stored procedure ' \
-                               'returned an error when this Python ' \
-                               'script attempted to load the header ' \
-                               'for ' + str(imageid) + '. The data ' \
-                               'was not loaded into the database, ' \
-                               'and the file has been moved to the ' \
-                               'Review directory. The stored ' \
-                               'procedure call which failed was: ' + sql
+                                        'returned an error when this Python ' \
+                                        'script attempted to load the header ' \
+                                        'for ' + str(imageid) + '. The data ' \
+                                                                'was not loaded into the database, ' \
+                                                                'and the file has been moved to the ' \
+                                                                'Review directory. The stored ' \
+                                                                'procedure call which failed was: ' + sql
                                )
     return sqlresult
+
 
 def parse_data_row(data, delim):
     # There are many cases where a field begins with " but is cut off or
@@ -461,8 +1432,9 @@ def parse_data_row(data, delim):
     else:
         data = data.split(delim)
         data[:] = (datum.strip('" ') for datum in data)
-        
+
     return data
+
 
 def parse_full_name(data, delimiter):
     fullname = data.split(delimiter)
@@ -479,7 +1451,7 @@ def parse_full_name(data, delimiter):
         fullname[1] = clean_sql_text(fullname[1])
         fullname.append('')
         fullname.append('')
-        fullname.append('')       
+        fullname.append('')
     elif len(fullname) == 3:
         fullname[0] = clean_sql_text(fullname[0])
         fullname[1] = clean_sql_text(fullname[1])
@@ -515,49 +1487,52 @@ def parse_full_name(data, delimiter):
         fullname[2] = ''
         fullname[3] = ''
         fullname[4] = ''
-            
+
     return fullname
+
 
 def populate_data_row_dict(data, headers, output):
     for x in range(len(headers)):
-        if headers[x] in output.keys() and x < len(data): # 100235 (F3X, v5.0) missing last 12 cols after treas sign date
+        if headers[x] in output.keys() and x < len(
+                data):  # 100235 (F3X, v5.0) missing last 12 cols after treas sign date
             output[headers[x]] = data[x].strip().replace('\t', ' ').strip(' "\n')
     return output
+
 
 def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
     data['FormTp'] = clean_sql_text(data['FormTp'], 'nullstring', "'")
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'], 'nullstring', "'")
-    
+
     # CommNm
     data['CommNm'] = clean_sql_text(data['CommNm'], 'nullstring', "'")
-    
+
     # AddrChg
     data['AddrChg'] = convert_to_bit(clean_sql_text(data['AddrChg']))
-    
+
     # Addr1
     data['Addr1'] = clean_sql_text(data['Addr1'], 'nullstring', "'")
 
     # Addr2
     data['Addr2'] = clean_sql_text(data['Addr2'], '', "'")
-    
+
     # City
     data['City'] = clean_sql_text(data['City'], 'nullstring', "'")
-    
+
     # StAbbr
     data['StAbbr'] = clean_sql_text(data['StAbbr'], 'nullstring', "'")
-    
+
     # Zip
     data['Zip'] = clean_sql_text(data['Zip'], 'nullstring', "'")
-    
+
     # ElecSt
     data['ElecSt'] = clean_sql_text(data['ElecSt'], 'nullstring', "'")
-    
+
     # ElecDist
     data['ElecDist'] = convert_to_tinyint(data['ElecDist'], image, 'ElecDist', 'Header', 0, 'F3', '')
-    
+
     # RptCd
     data['RptCd'] = clean_sql_text(data['RptCd'], 'nullstring', "'")
 
@@ -571,21 +1546,25 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # StateOfElec
     data['StateOfElec'] = clean_sql_text(data['StateOfElec'], 'nullstring', "'")
-    
+
     # CovgFmDt
-    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3', '') + "'"
+    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3',
+                                             '') + "'"
     if data['CovgFmDt'] == "''":
         data['CovgFmDt'] = 'NULL'
 
     # CovgToDt
-    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3', '') + "'"
+    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3',
+                                             '') + "'"
     if data['CovgToDt'] == "''":
         data['CovgToDt'] = 'NULL'
 
     # TrsFullName
     if data['TrsFullName'] != '':
-        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data['TrsSfx'] != '':
-            add_entry_to_error_log(RPTERRDIR + 'ErrorMessages.log', 'Treasurer full name (' + data['TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data[
+            'TrsSfx'] != '':
+            add_entry_to_error_log(RPTERRDIR + 'ErrorMessages.log', 'Treasurer full name (' + data[
+                'TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['TrsFullName'], namedelim)
             data['TrsLName'] = treas[0]
@@ -595,7 +1574,7 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['TrsSfx'] = treas[4]
         else:
             data['TrsLName'] = data['TrsFullName']
-                
+
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'], 'nullstring', "'")
 
@@ -647,16 +1626,19 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_P_11a1'] = ck_curr_val(data['IndContsItem_P_11a1'], image, 'IndContsItem_P_11a1', 'Header', 0)
 
     # IndContsUnitem_P_11a2
-    data['IndContsUnitem_P_11a2'] = ck_curr_val(data['IndContsUnitem_P_11a2'], image, 'IndContsUnitem_P_11a2', 'Header', 0)
+    data['IndContsUnitem_P_11a2'] = ck_curr_val(data['IndContsUnitem_P_11a2'], image, 'IndContsUnitem_P_11a2', 'Header',
+                                                0)
 
     # IndContsTot_P_11a3
     data['IndContsTot_P_11a3'] = ck_curr_val(data['IndContsTot_P_11a3'], image, 'IndContsTot_P_11a3', 'Header', 0)
 
     # PolPtyCommConts_P_11b
-    data['PolPtyCommConts_P_11b'] = ck_curr_val(data['PolPtyCommConts_P_11b'], image, 'PolPtyCommConts_P_11b', 'Header', 0)
+    data['PolPtyCommConts_P_11b'] = ck_curr_val(data['PolPtyCommConts_P_11b'], image, 'PolPtyCommConts_P_11b', 'Header',
+                                                0)
 
     # OthPolCommConts_P_11c
-    data['OthPolCommConts_P_11c'] = ck_curr_val(data['OthPolCommConts_P_11c'], image, 'OthPolCommConts_P_11c', 'Header', 0)
+    data['OthPolCommConts_P_11c'] = ck_curr_val(data['OthPolCommConts_P_11c'], image, 'OthPolCommConts_P_11c', 'Header',
+                                                0)
 
     # CandConts_P_11d
     data['CandConts_P_11d'] = ck_curr_val(data['CandConts_P_11d'], image, 'CandConts_P_11d', 'Header', 0)
@@ -665,7 +1647,8 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['TotConts_P_11e'] = ck_curr_val(data['TotConts_P_11e'], image, 'TotConts_P_11e', 'Header', 0)
 
     # TranFmOthAuthComms_P_12
-    data['TranFmOthAuthComms_P_12'] = ck_curr_val(data['TranFmOthAuthComms_P_12'], image, 'TranFmOthAuthComms_P_12', 'Header', 0)
+    data['TranFmOthAuthComms_P_12'] = ck_curr_val(data['TranFmOthAuthComms_P_12'], image, 'TranFmOthAuthComms_P_12',
+                                                  'Header', 0)
 
     # CandLoans_P_13a
     data['CandLoans_P_13a'] = ck_curr_val(data['CandLoans_P_13a'], image, 'CandLoans_P_13a', 'Header', 0)
@@ -689,10 +1672,12 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExps_P_17'] = ck_curr_val(data['OpExps_P_17'], image, 'OpExps_P_17', 'Header', 0)
 
     # TranToOthAuthComms_P_18
-    data['TranToOthAuthComms_P_18'] = ck_curr_val(data['TranToOthAuthComms_P_18'], image, 'TranToOthAuthComms_P_18', 'Header', 0)
+    data['TranToOthAuthComms_P_18'] = ck_curr_val(data['TranToOthAuthComms_P_18'], image, 'TranToOthAuthComms_P_18',
+                                                  'Header', 0)
 
     # CandLoansRepaid_P_19a
-    data['CandLoansRepaid_P_19a'] = ck_curr_val(data['CandLoansRepaid_P_19a'], image, 'CandLoansRepaid_P_19a', 'Header', 0)
+    data['CandLoansRepaid_P_19a'] = ck_curr_val(data['CandLoansRepaid_P_19a'], image, 'CandLoansRepaid_P_19a', 'Header',
+                                                0)
 
     # OthLoansRepaid_P_19b
     data['OthLoansRepaid_P_19b'] = ck_curr_val(data['OthLoansRepaid_P_19b'], image, 'OthLoansRepaid_P_19b', 'Header', 0)
@@ -704,10 +1689,12 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_P_20a'] = ck_curr_val(data['RefundsInd_P_20a'], image, 'RefundsInd_P_20a', 'Header', 0)
 
     # RefundsPolPtyComms_P_20b
-    data['RefundsPolPtyComms_P_20b'] = ck_curr_val(data['RefundsPolPtyComms_P_20b'], image, 'RefundsPolPtyComms_P_20b', 'Header', 0)
+    data['RefundsPolPtyComms_P_20b'] = ck_curr_val(data['RefundsPolPtyComms_P_20b'], image, 'RefundsPolPtyComms_P_20b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_P_20c
-    data['RefundsOthPolComms_P_20c'] = ck_curr_val(data['RefundsOthPolComms_P_20c'], image, 'RefundsOthPolComms_P_20c', 'Header', 0)
+    data['RefundsOthPolComms_P_20c'] = ck_curr_val(data['RefundsOthPolComms_P_20c'], image, 'RefundsOthPolComms_P_20c',
+                                                   'Header', 0)
 
     # TotRefunds_P_20d
     data['TotRefunds_P_20d'] = ck_curr_val(data['TotRefunds_P_20d'], image, 'TotRefunds_P_20d', 'Header', 0)
@@ -755,16 +1742,19 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_T_11a1'] = ck_curr_val(data['IndContsItem_T_11a1'], image, 'IndContsItem_T_11a1', 'Header', 0)
 
     # IndContsUnitem_T_11a2
-    data['IndContsUnitem_T_11a2'] = ck_curr_val(data['IndContsUnitem_T_11a2'], image, 'IndContsUnitem_T_11a2', 'Header', 0)
+    data['IndContsUnitem_T_11a2'] = ck_curr_val(data['IndContsUnitem_T_11a2'], image, 'IndContsUnitem_T_11a2', 'Header',
+                                                0)
 
     # IndContsTot_T_11a3
     data['IndContsTot_T_11a3'] = ck_curr_val(data['IndContsTot_T_11a3'], image, 'IndContsTot_T_11a3', 'Header', 0)
 
     # PolPtyCommConts_T_11b
-    data['PolPtyCommConts_T_11b'] = ck_curr_val(data['PolPtyCommConts_T_11b'], image, 'PolPtyCommConts_T_11b', 'Header', 0)
+    data['PolPtyCommConts_T_11b'] = ck_curr_val(data['PolPtyCommConts_T_11b'], image, 'PolPtyCommConts_T_11b', 'Header',
+                                                0)
 
     # OthPolCommConts_T_11c
-    data['OthPolCommConts_T_11c'] = ck_curr_val(data['OthPolCommConts_T_11c'], image, 'OthPolCommConts_T_11c', 'Header', 0)
+    data['OthPolCommConts_T_11c'] = ck_curr_val(data['OthPolCommConts_T_11c'], image, 'OthPolCommConts_T_11c', 'Header',
+                                                0)
 
     # CandConts_T_11d
     data['CandConts_T_11d'] = ck_curr_val(data['CandConts_T_11d'], image, 'CandConts_T_11d', 'Header', 0)
@@ -773,7 +1763,8 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['TotConts_T_11e'] = ck_curr_val(data['TotConts_T_11e'], image, 'TotConts_T_11e', 'Header', 0)
 
     # TranFmOthAuthComms_T_12
-    data['TranFmOthAuthComms_T_12'] = ck_curr_val(data['TranFmOthAuthComms_T_12'], image, 'TranFmOthAuthComms_T_12', 'Header', 0)
+    data['TranFmOthAuthComms_T_12'] = ck_curr_val(data['TranFmOthAuthComms_T_12'], image, 'TranFmOthAuthComms_T_12',
+                                                  'Header', 0)
 
     # CandLoans_T_13a
     data['CandLoans_T_13a'] = ck_curr_val(data['CandLoans_T_13a'], image, 'CandLoans_T_13a', 'Header', 0)
@@ -797,10 +1788,12 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExps_T_17'] = ck_curr_val(data['OpExps_T_17'], image, 'OpExps_T_17', 'Header', 0)
 
     # TranToOthAuthComms_T_18
-    data['TranToOthAuthComms_T_18'] = ck_curr_val(data['TranToOthAuthComms_T_18'], image, 'TranToOthAuthComms_T_18', 'Header', 0)
+    data['TranToOthAuthComms_T_18'] = ck_curr_val(data['TranToOthAuthComms_T_18'], image, 'TranToOthAuthComms_T_18',
+                                                  'Header', 0)
 
     # CandLoansRepaid_T_19a
-    data['CandLoansRepaid_T_19a'] = ck_curr_val(data['CandLoansRepaid_T_19a'], image, 'CandLoansRepaid_T_19a', 'Header', 0)
+    data['CandLoansRepaid_T_19a'] = ck_curr_val(data['CandLoansRepaid_T_19a'], image, 'CandLoansRepaid_T_19a', 'Header',
+                                                0)
 
     # OthLoansRepaid_T_19b
     data['OthLoansRepaid_T_19b'] = ck_curr_val(data['OthLoansRepaid_T_19b'], image, 'OthLoansRepaid_T_19b', 'Header', 0)
@@ -812,10 +1805,12 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_T_20a'] = ck_curr_val(data['RefundsInd_T_20a'], image, 'RefundsInd_T_20a', 'Header', 0)
 
     # RefundsPolPtyComms_T_20b
-    data['RefundsPolPtyComms_T_20b'] = ck_curr_val(data['RefundsPolPtyComms_T_20b'], image, 'RefundsPolPtyComms_T_20b', 'Header', 0)
+    data['RefundsPolPtyComms_T_20b'] = ck_curr_val(data['RefundsPolPtyComms_T_20b'], image, 'RefundsPolPtyComms_T_20b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_T_20c
-    data['RefundsOthPolComms_T_20c'] = ck_curr_val(data['RefundsOthPolComms_T_20c'], image, 'RefundsOthPolComms_T_20c', 'Header', 0)
+    data['RefundsOthPolComms_T_20c'] = ck_curr_val(data['RefundsOthPolComms_T_20c'], image, 'RefundsOthPolComms_T_20c',
+                                                   'Header', 0)
 
     # TotRefunds_T_20d
     data['TotRefunds_T_20d'] = ck_curr_val(data['TotRefunds_T_20d'], image, 'TotRefunds_T_20d', 'Header', 0)
@@ -828,40 +1823,41 @@ def check_rpt_hdrs_f3(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     return data
 
+
 def check_rpt_hdrs_f3l(image, data, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
     data['FormTp'] = clean_sql_text(data['FormTp'], 'nullstring', "'")
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'], 'nullstring', "'")
-    
+
     # CommNm
     data['CommNm'] = clean_sql_text(data['CommNm'], 'nullstring', "'")
-    
+
     # AddrChg
     data['AddrChg'] = convert_to_bit(clean_sql_text(data['AddrChg']))
-    
+
     # Addr1
     data['Addr1'] = clean_sql_text(data['Addr1'], 'nullstring', "'")
 
     # Addr2
     data['Addr2'] = clean_sql_text(data['Addr2'], '', "'")
-    
+
     # City
     data['City'] = clean_sql_text(data['City'], 'nullstring', "'")
-    
+
     # StAbbr
     data['StAbbr'] = clean_sql_text(data['StAbbr'], 'nullstring', "'")
-    
+
     # Zip
     data['Zip'] = clean_sql_text(data['Zip'], 'nullstring', "'")
-    
+
     # ElecSt
     data['ElecSt'] = clean_sql_text(data['ElecSt'], 'nullstring', "'")
-    
+
     # ElecDist
     data['ElecDist'] = convert_to_tinyint(data['ElecDist'], image, 'ElecDist', 'Header', 0, 'F3', '')
-    
+
     # RptCd
     data['RptCd'] = clean_sql_text(data['RptCd'], 'nullstring', "'")
 
@@ -875,14 +1871,16 @@ def check_rpt_hdrs_f3l(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # flgInclSemiAnnPrd
     data['flgInclSemiAnnPrd'] = convert_to_bit(clean_sql_text(data['flgInclSemiAnnPrd']))
-    
+
     # CovgFmDt
-    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3', '') + "'"
+    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3',
+                                             '') + "'"
     if data['CovgFmDt'] == "''":
         data['CovgFmDt'] = 'NULL'
 
     # CovgToDt
-    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3', '') + "'"
+    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3',
+                                             '') + "'"
     if data['CovgToDt'] == "''":
         data['CovgToDt'] = 'NULL'
 
@@ -896,7 +1894,7 @@ def check_rpt_hdrs_f3l(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['TotRptBundContribs'] = ck_curr_val(data['TotRptBundContribs'], image, 'TotRptBundContribs', 'Header', 0)
 
     # SemiAnnBundContribs
-    data['SemiAnnBundContribs'] = ck_curr_val(data['SemiAnnBundContribs'], image, 'SemiAnnBundContribs', 'Header', 0)    
+    data['SemiAnnBundContribs'] = ck_curr_val(data['SemiAnnBundContribs'], image, 'SemiAnnBundContribs', 'Header', 0)
 
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'], 'nullstring', "'")
@@ -917,34 +1915,35 @@ def check_rpt_hdrs_f3l(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['SignDt'] = "'" + convert_to_date(data['SignDt'], dateformat, image, 'SignDt', 'Header', 0, 'F3', '') + "'"
     if data['SignDt'] == "''":
         data['SignDt'] = 'NULL'
-    
+
     return data
+
 
 def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
     data['FormTp'] = clean_sql_text(data['FormTp'], 'nullstring', "'")
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'], 'nullstring', "'")
-    
+
     # CommNm
     data['CommNm'] = clean_sql_text(data['CommNm'], 'nullstring', "'")
-    
+
     # AddrChg
     data['AddrChg'] = convert_to_bit(clean_sql_text(data['AddrChg']))
-    
+
     # Addr1
     data['Addr1'] = clean_sql_text(data['Addr1'], 'nullstring', "'")
 
     # Addr2
     data['Addr2'] = clean_sql_text(data['Addr2'], '', "'")
-    
+
     # City
     data['City'] = clean_sql_text(data['City'], 'nullstring', "'")
-    
+
     # StAbbr
     data['StAbbr'] = clean_sql_text(data['StAbbr'], 'nullstring', "'")
-    
+
     # Zip
     data['Zip'] = clean_sql_text(data['Zip'], 'nullstring', "'")
 
@@ -964,24 +1963,28 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['ElecDt'] = "'" + convert_to_date(data['ElecDt'], dateformat, image, 'ElecDt', 'Header', 0, 'F3P', '') + "'"
     if data['ElecDt'] == "''":
         data['ElecDt'] = 'NULL'
-        
+
     # ElecSt
     data['ElecSt'] = clean_sql_text(data['ElecSt'], 'nullstring', "'")
-    
+
     # CovgFmDt
-    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3P', '') + "'"
+    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3P',
+                                             '') + "'"
     if data['CovgFmDt'] == "''":
         data['CovgFmDt'] = 'NULL'
 
     # CovgToDt
-    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3P', '') + "'"
+    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3P',
+                                             '') + "'"
     if data['CovgToDt'] == "''":
         data['CovgToDt'] = 'NULL'
 
     # TrsFullName
     if data['TrsFullName'] != '':
-        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data['TrsSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data[
+            'TrsSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['TrsFullName'], namedelim)
             data['TrsLName'] = treas[0]
@@ -991,7 +1994,7 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['TrsSfx'] = treas[4]
         else:
             data['TrsLName'] = data['TrsFullName']
-                
+
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'], 'nullstring', "'")
 
@@ -1049,16 +2052,19 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_P_17a1'] = ck_curr_val(data['IndContsItem_P_17a1'], image, 'IndContsItem_P_17a1', 'Header', 0)
 
     # IndContsUnitem_P_17a2
-    data['IndContsUnitem_P_17a2'] = ck_curr_val(data['IndContsUnitem_P_17a2'], image, 'IndContsUnitem_P_17a2', 'Header', 0)
+    data['IndContsUnitem_P_17a2'] = ck_curr_val(data['IndContsUnitem_P_17a2'], image, 'IndContsUnitem_P_17a2', 'Header',
+                                                0)
 
     # IndContsTot_P_17a3
     data['IndContsTot_P_17a3'] = ck_curr_val(data['IndContsTot_P_17a3'], image, 'IndContsTot_P_17a3', 'Header', 0)
 
     # PolPtyCommConts_P_17b
-    data['PolPtyCommConts_P_17b'] = ck_curr_val(data['PolPtyCommConts_P_17b'], image, 'PolPtyCommConts_P_17b', 'Header', 0)
+    data['PolPtyCommConts_P_17b'] = ck_curr_val(data['PolPtyCommConts_P_17b'], image, 'PolPtyCommConts_P_17b', 'Header',
+                                                0)
 
     # OthPolCommConts_P_17c
-    data['OthPolCommConts_P_17c'] = ck_curr_val(data['OthPolCommConts_P_17c'], image, 'OthPolCommConts_P_17c', 'Header', 0)
+    data['OthPolCommConts_P_17c'] = ck_curr_val(data['OthPolCommConts_P_17c'], image, 'OthPolCommConts_P_17c', 'Header',
+                                                0)
 
     # CandConts_P_17d
     data['CandConts_P_17d'] = ck_curr_val(data['CandConts_P_17d'], image, 'CandConts_P_17d', 'Header', 0)
@@ -1085,7 +2091,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['FndrsgOffsets_P_20b'] = ck_curr_val(data['FndrsgOffsets_P_20b'], image, 'FndrsgOffsets_P_20b', 'Header', 0)
 
     # LegalAcctgOffsets_P_20c
-    data['LegalAcctgOffsets_P_20c'] = ck_curr_val(data['LegalAcctgOffsets_P_20c'], image, 'LegalAcctgOffsets_P_20c', 'Header', 0)
+    data['LegalAcctgOffsets_P_20c'] = ck_curr_val(data['LegalAcctgOffsets_P_20c'], image, 'LegalAcctgOffsets_P_20c',
+                                                  'Header', 0)
 
     # TotOffsets_P_20d
     data['TotOffsets_P_20d'] = ck_curr_val(data['TotOffsets_P_20d'], image, 'TotOffsets_P_20d', 'Header', 0)
@@ -1100,7 +2107,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExps_P_23'] = ck_curr_val(data['OpExps_P_23'], image, 'OpExps_P_23', 'Header', 0)
 
     # TranToOthAuthComms_P_24
-    data['TranToOthAuthComms_P_24'] = ck_curr_val(data['TranToOthAuthComms_P_24'], image, 'TranToOthAuthComms_P_24', 'Header', 0)
+    data['TranToOthAuthComms_P_24'] = ck_curr_val(data['TranToOthAuthComms_P_24'], image, 'TranToOthAuthComms_P_24',
+                                                  'Header', 0)
 
     # FndrsgDisb_P_25
     data['FndrsgDisb_P_25'] = ck_curr_val(data['FndrsgDisb_P_25'], image, 'FndrsgDisb_P_25', 'Header', 0)
@@ -1109,7 +2117,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['LegalAcctgDisb_P_26'] = ck_curr_val(data['LegalAcctgDisb_P_26'], image, 'LegalAcctgDisb_P_26', 'Header', 0)
 
     # CandLoansRepaid_P_27a
-    data['CandLoansRepaid_P_27a'] = ck_curr_val(data['CandLoansRepaid_P_27a'], image, 'CandLoansRepaid_P_27a', 'Header', 0)
+    data['CandLoansRepaid_P_27a'] = ck_curr_val(data['CandLoansRepaid_P_27a'], image, 'CandLoansRepaid_P_27a', 'Header',
+                                                0)
 
     # OthLoansRepaid_P_27b
     data['OthLoansRepaid_P_27b'] = ck_curr_val(data['OthLoansRepaid_P_27b'], image, 'OthLoansRepaid_P_27b', 'Header', 0)
@@ -1121,10 +2130,12 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_P_28a'] = ck_curr_val(data['RefundsInd_P_28a'], image, 'RefundsInd_P_28a', 'Header', 0)
 
     # RefundsPolPtyComms_P_28b
-    data['RefundsPolPtyComms_P_28b'] = ck_curr_val(data['RefundsPolPtyComms_P_28b'], image, 'RefundsPolPtyComms_P_28b', 'Header', 0)
+    data['RefundsPolPtyComms_P_28b'] = ck_curr_val(data['RefundsPolPtyComms_P_28b'], image, 'RefundsPolPtyComms_P_28b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_P_28c
-    data['RefundsOthPolComms_P_28c'] = ck_curr_val(data['RefundsOthPolComms_P_28c'], image, 'RefundsOthPolComms_P_28c', 'Header', 0)
+    data['RefundsOthPolComms_P_28c'] = ck_curr_val(data['RefundsOthPolComms_P_28c'], image, 'RefundsOthPolComms_P_28c',
+                                                   'Header', 0)
 
     # TotRefunds_P_28d
     data['TotRefunds_P_28d'] = ck_curr_val(data['TotRefunds_P_28d'], image, 'TotRefunds_P_28d', 'Header', 0)
@@ -1310,16 +2321,19 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_T_17a1'] = ck_curr_val(data['IndContsItem_T_17a1'], image, 'IndContsItem_T_17a1', 'Header', 0)
 
     # IndContsUnitem_T_17a2
-    data['IndContsUnitem_T_17a2'] = ck_curr_val(data['IndContsUnitem_T_17a2'], image, 'IndContsUnitem_T_17a2', 'Header', 0)
+    data['IndContsUnitem_T_17a2'] = ck_curr_val(data['IndContsUnitem_T_17a2'], image, 'IndContsUnitem_T_17a2', 'Header',
+                                                0)
 
     # IndContsTot_T_17a3
     data['IndContsTot_T_17a3'] = ck_curr_val(data['IndContsTot_T_17a3'], image, 'IndContsTot_T_17a3', 'Header', 0)
 
     # PolPtyCommConts_T_17b
-    data['PolPtyCommConts_T_17b'] = ck_curr_val(data['PolPtyCommConts_T_17b'], image, 'PolPtyCommConts_T_17b', 'Header', 0)
+    data['PolPtyCommConts_T_17b'] = ck_curr_val(data['PolPtyCommConts_T_17b'], image, 'PolPtyCommConts_T_17b', 'Header',
+                                                0)
 
     # OthPolCommConts_T_17c
-    data['OthPolCommConts_T_17c'] = ck_curr_val(data['OthPolCommConts_T_17c'], image, 'OthPolCommConts_T_17c', 'Header', 0)
+    data['OthPolCommConts_T_17c'] = ck_curr_val(data['OthPolCommConts_T_17c'], image, 'OthPolCommConts_T_17c', 'Header',
+                                                0)
 
     # CandConts_T_17d
     data['CandConts_T_17d'] = ck_curr_val(data['CandConts_T_17d'], image, 'CandConts_T_17d', 'Header', 0)
@@ -1346,7 +2360,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['FndrsgOffsets_T_20b'] = ck_curr_val(data['FndrsgOffsets_T_20b'], image, 'FndrsgOffsets_T_20b', 'Header', 0)
 
     # LegalAcctgOffsets_T_20c
-    data['LegalAcctgOffsets_T_20c'] = ck_curr_val(data['LegalAcctgOffsets_T_20c'], image, 'LegalAcctgOffsets_T_20c', 'Header', 0)
+    data['LegalAcctgOffsets_T_20c'] = ck_curr_val(data['LegalAcctgOffsets_T_20c'], image, 'LegalAcctgOffsets_T_20c',
+                                                  'Header', 0)
 
     # TotOffsets_T_20d
     data['TotOffsets_T_20d'] = ck_curr_val(data['TotOffsets_T_20d'], image, 'TotOffsets_T_20d', 'Header', 0)
@@ -1361,7 +2376,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExps_T_23'] = ck_curr_val(data['OpExps_T_23'], image, 'OpExps_T_23', 'Header', 0)
 
     # TranToOthAuthComms_T_24
-    data['TranToOthAuthComms_T_24'] = ck_curr_val(data['TranToOthAuthComms_T_24'], image, 'TranToOthAuthComms_T_24', 'Header', 0)
+    data['TranToOthAuthComms_T_24'] = ck_curr_val(data['TranToOthAuthComms_T_24'], image, 'TranToOthAuthComms_T_24',
+                                                  'Header', 0)
 
     # FndrsgDisb_T_25
     data['FndrsgDisb_T_25'] = ck_curr_val(data['FndrsgDisb_T_25'], image, 'FndrsgDisb_T_25', 'Header', 0)
@@ -1370,7 +2386,8 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['LegalAcctgDisb_T_26'] = ck_curr_val(data['LegalAcctgDisb_T_26'], image, 'LegalAcctgDisb_T_26', 'Header', 0)
 
     # CandLoansRepaid_T_27a
-    data['CandLoansRepaid_T_27a'] = ck_curr_val(data['CandLoansRepaid_T_27a'], image, 'CandLoansRepaid_T_27a', 'Header', 0)
+    data['CandLoansRepaid_T_27a'] = ck_curr_val(data['CandLoansRepaid_T_27a'], image, 'CandLoansRepaid_T_27a', 'Header',
+                                                0)
 
     # OthLoansRepaid_T_27b
     data['OthLoansRepaid_T_27b'] = ck_curr_val(data['OthLoansRepaid_T_27b'], image, 'OthLoansRepaid_T_27b', 'Header', 0)
@@ -1382,10 +2399,12 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_T_28a'] = ck_curr_val(data['RefundsInd_T_28a'], image, 'RefundsInd_T_28a', 'Header', 0)
 
     # RefundsPolPtyComms_T_28b
-    data['RefundsPolPtyComms_T_28b'] = ck_curr_val(data['RefundsPolPtyComms_T_28b'], image, 'RefundsPolPtyComms_T_28b', 'Header', 0)
+    data['RefundsPolPtyComms_T_28b'] = ck_curr_val(data['RefundsPolPtyComms_T_28b'], image, 'RefundsPolPtyComms_T_28b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_T_28c
-    data['RefundsOthPolComms_T_28c'] = ck_curr_val(data['RefundsOthPolComms_T_28c'], image, 'RefundsOthPolComms_T_28c', 'Header', 0)
+    data['RefundsOthPolComms_T_28c'] = ck_curr_val(data['RefundsOthPolComms_T_28c'], image, 'RefundsOthPolComms_T_28c',
+                                                   'Header', 0)
 
     # TotRefunds_T_28d
     data['TotRefunds_T_28d'] = ck_curr_val(data['TotRefunds_T_28d'], image, 'TotRefunds_T_28d', 'Header', 0)
@@ -1563,31 +2582,32 @@ def check_rpt_hdrs_f3p(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     return data
 
+
 def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
     data['FormTp'] = clean_sql_text(data['FormTp'], 'nullstring', "'")
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'], 'nullstring', "'")
-    
+
     # CommNm
     data['CommNm'] = clean_sql_text(data['CommNm'], 'nullstring', "'")
-    
+
     # AddrChg
     data['AddrChg'] = convert_to_bit(clean_sql_text(data['AddrChg']))
-    
+
     # Addr1
     data['Addr1'] = clean_sql_text(data['Addr1'], 'nullstring', "'")
 
     # Addr2
     data['Addr2'] = clean_sql_text(data['Addr2'], '', "'")
-    
+
     # City
     data['City'] = clean_sql_text(data['City'], 'nullstring', "'")
-    
+
     # StAbbr
     data['StAbbr'] = clean_sql_text(data['StAbbr'], 'nullstring', "'")
-    
+
     # Zip
     data['Zip'] = clean_sql_text(data['Zip'], 'nullstring', "'")
 
@@ -1601,27 +2621,31 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['ElecDt'] = "'" + convert_to_date(data['ElecDt'], dateformat, image, 'ElecDt', 'Header', 0, 'F3X', '') + "'"
     if data['ElecDt'] == "''":
         data['ElecDt'] = 'NULL'
-        
+
     # ElecSt
     data['ElecSt'] = clean_sql_text(data['ElecSt'], 'nullstring', "'")
-    
+
     # CovgFmDt
-    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3X', '') + "'"
+    data['CovgFmDt'] = "'" + convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', 'Header', 0, 'F3X',
+                                             '') + "'"
     if data['CovgFmDt'] == "''":
         data['CovgFmDt'] = 'NULL'
 
     # CovgToDt
-    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3X', '') + "'"
+    data['CovgToDt'] = "'" + convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', 'Header', 0, 'F3X',
+                                             '') + "'"
     if data['CovgToDt'] == "''":
         data['CovgToDt'] = 'NULL'
 
     # flgQualComm
     data['flgQualComm'] = convert_to_bit(clean_sql_text(data['flgQualComm'], '', "'"))
-    
+
     # TrsFullName
     if data['TrsFullName'] != '':
-        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data['TrsSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data[
+            'TrsSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['TrsFullName'], namedelim)
             data['TrsLName'] = treas[0]
@@ -1631,7 +2655,7 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['TrsSfx'] = treas[4]
         else:
             data['TrsLName'] = data['TrsFullName']
-                
+
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'], 'nullstring', "'")
 
@@ -1677,16 +2701,19 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_P_11a1'] = ck_curr_val(data['IndContsItem_P_11a1'], image, 'IndContsItem_P_11a1', 'Header', 0)
 
     # IndContsUnitem_P_11a2
-    data['IndContsUnitem_P_11a2'] = ck_curr_val(data['IndContsUnitem_P_11a2'], image, 'IndContsUnitem_P_11a2', 'Header', 0)
+    data['IndContsUnitem_P_11a2'] = ck_curr_val(data['IndContsUnitem_P_11a2'], image, 'IndContsUnitem_P_11a2', 'Header',
+                                                0)
 
     # IndContsTot_P_11a3
     data['IndContsTot_P_11a3'] = ck_curr_val(data['IndContsTot_P_11a3'], image, 'IndContsTot_P_11a3', 'Header', 0)
 
     # PolPtyCommConts_P_11b
-    data['PolPtyCommConts_P_11b'] = ck_curr_val(data['PolPtyCommConts_P_11b'], image, 'PolPtyCommConts_P_11b', 'Header', 0)
+    data['PolPtyCommConts_P_11b'] = ck_curr_val(data['PolPtyCommConts_P_11b'], image, 'PolPtyCommConts_P_11b', 'Header',
+                                                0)
 
     # OthPolCommConts_P_11c
-    data['OthPolCommConts_P_11c'] = ck_curr_val(data['OthPolCommConts_P_11c'], image, 'OthPolCommConts_P_11c', 'Header', 0)
+    data['OthPolCommConts_P_11c'] = ck_curr_val(data['OthPolCommConts_P_11c'], image, 'OthPolCommConts_P_11c', 'Header',
+                                                0)
 
     # TotConts_P_11d
     data['TotConts_P_11d'] = ck_curr_val(data['TotConts_P_11d'], image, 'TotConts_P_11d', 'Header', 0)
@@ -1710,10 +2737,12 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OthFedRcptsDvds_P_17'] = ck_curr_val(data['OthFedRcptsDvds_P_17'], image, 'OthFedRcptsDvds_P_17', 'Header', 0)
 
     # TranFmNonFedAcctH3_P_18a
-    data['TranFmNonFedAcctH3_P_18a'] = ck_curr_val(data['TranFmNonFedAcctH3_P_18a'], image, 'TranFmNonFedAcctH3_P_18a', 'Header', 0)
+    data['TranFmNonFedAcctH3_P_18a'] = ck_curr_val(data['TranFmNonFedAcctH3_P_18a'], image, 'TranFmNonFedAcctH3_P_18a',
+                                                   'Header', 0)
 
     # TranFmNonFedAcctH5_P_18b
-    data['TranFmNonFedAcctH5_P_18b'] = ck_curr_val(data['TranFmNonFedAcctH5_P_18b'], image, 'TranFmNonFedAcctH5_P_18b', 'Header', 0)
+    data['TranFmNonFedAcctH5_P_18b'] = ck_curr_val(data['TranFmNonFedAcctH5_P_18b'], image, 'TranFmNonFedAcctH5_P_18b',
+                                                   'Header', 0)
 
     # TotNonFedTrans_P_18c
     data['TotNonFedTrans_P_18c'] = ck_curr_val(data['TotNonFedTrans_P_18c'], image, 'TotNonFedTrans_P_18c', 'Header', 0)
@@ -1728,7 +2757,8 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExpsFedShr_P_21a1'] = ck_curr_val(data['OpExpsFedShr_P_21a1'], image, 'OpExpsFedShr_P_21a1', 'Header', 0)
 
     # OpExpsNonFedShr_P_21a2
-    data['OpExpsNonFedShr_P_21a2'] = ck_curr_val(data['OpExpsNonFedShr_P_21a2'], image, 'OpExpsNonFedShr_P_21a2', 'Header', 0)
+    data['OpExpsNonFedShr_P_21a2'] = ck_curr_val(data['OpExpsNonFedShr_P_21a2'], image, 'OpExpsNonFedShr_P_21a2',
+                                                 'Header', 0)
 
     # OpExpsOthFed_P_21b
     data['OpExpsOthFed_P_21b'] = ck_curr_val(data['OpExpsOthFed_P_21b'], image, 'OpExpsOthFed_P_21b', 'Header', 0)
@@ -1740,13 +2770,15 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['TranToPtyComms_P_22'] = ck_curr_val(data['TranToPtyComms_P_22'], image, 'TranToPtyComms_P_22', 'Header', 0)
 
     # ContsToFedCandsComms_P_23
-    data['ContsToFedCandsComms_P_23'] = ck_curr_val(data['ContsToFedCandsComms_P_23'], image, 'ContsToFedCandsComms_P_23', 'Header', 0)
+    data['ContsToFedCandsComms_P_23'] = ck_curr_val(data['ContsToFedCandsComms_P_23'], image,
+                                                    'ContsToFedCandsComms_P_23', 'Header', 0)
 
     # IndtExps_P_24
     data['IndtExps_P_24'] = ck_curr_val(data['IndtExps_P_24'], image, 'IndtExps_P_24', 'Header', 0)
 
     # CoordExpsByPtyComms_P_25
-    data['CoordExpsByPtyComms_P_25'] = ck_curr_val(data['CoordExpsByPtyComms_P_25'], image, 'CoordExpsByPtyComms_P_25', 'Header', 0)
+    data['CoordExpsByPtyComms_P_25'] = ck_curr_val(data['CoordExpsByPtyComms_P_25'], image, 'CoordExpsByPtyComms_P_25',
+                                                   'Header', 0)
 
     # LoansRepaid_P_26
     data['LoansRepaid_P_26'] = ck_curr_val(data['LoansRepaid_P_26'], image, 'LoansRepaid_P_26', 'Header', 0)
@@ -1758,10 +2790,12 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_P_28a'] = ck_curr_val(data['RefundsInd_P_28a'], image, 'RefundsInd_P_28a', 'Header', 0)
 
     # RefundsPolPtyComms_P_28b
-    data['RefundsPolPtyComms_P_28b'] = ck_curr_val(data['RefundsPolPtyComms_P_28b'], image, 'RefundsPolPtyComms_P_28b', 'Header', 0)
+    data['RefundsPolPtyComms_P_28b'] = ck_curr_val(data['RefundsPolPtyComms_P_28b'], image, 'RefundsPolPtyComms_P_28b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_P_28c
-    data['RefundsOthPolComms_P_28c'] = ck_curr_val(data['RefundsOthPolComms_P_28c'], image, 'RefundsOthPolComms_P_28c', 'Header', 0)
+    data['RefundsOthPolComms_P_28c'] = ck_curr_val(data['RefundsOthPolComms_P_28c'], image, 'RefundsOthPolComms_P_28c',
+                                                   'Header', 0)
 
     # TotContRefunds_P_28d
     data['TotContRefunds_P_28d'] = ck_curr_val(data['TotContRefunds_P_28d'], image, 'TotContRefunds_P_28d', 'Header', 0)
@@ -1770,16 +2804,20 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OthDisb_P_29'] = ck_curr_val(data['OthDisb_P_29'], image, 'OthDisb_P_29', 'Header', 0)
 
     # ShrdElecActivityFedShr_P_30a1
-    data['ShrdElecActivityFedShr_P_30a1'] = ck_curr_val(data['ShrdElecActivityFedShr_P_30a1'], image, 'ShrdElecActivityFedShr_P_30a1', 'Header', 0)
+    data['ShrdElecActivityFedShr_P_30a1'] = ck_curr_val(data['ShrdElecActivityFedShr_P_30a1'], image,
+                                                        'ShrdElecActivityFedShr_P_30a1', 'Header', 0)
 
     # ShrdElecActivityNonFedShr_P_30a2
-    data['ShrdElecActivityNonFedShr_P_30a2'] = ck_curr_val(data['ShrdElecActivityNonFedShr_P_30a2'], image, 'ShrdElecActivityNonFedShr_P_30a2', 'Header', 0)
+    data['ShrdElecActivityNonFedShr_P_30a2'] = ck_curr_val(data['ShrdElecActivityNonFedShr_P_30a2'], image,
+                                                           'ShrdElecActivityNonFedShr_P_30a2', 'Header', 0)
 
     # NonAllocFedElecActivity_P_30b
-    data['NonAllocFedElecActivity_P_30b'] = ck_curr_val(data['NonAllocFedElecActivity_P_30b'], image, 'NonAllocFedElecActivity_P_30b', 'Header', 0)
+    data['NonAllocFedElecActivity_P_30b'] = ck_curr_val(data['NonAllocFedElecActivity_P_30b'], image,
+                                                        'NonAllocFedElecActivity_P_30b', 'Header', 0)
 
     # TotFedElecActivity_P_30c
-    data['TotFedElecActivity_P_30c'] = ck_curr_val(data['TotFedElecActivity_P_30c'], image, 'TotFedElecActivity_P_30c', 'Header', 0)
+    data['TotFedElecActivity_P_30c'] = ck_curr_val(data['TotFedElecActivity_P_30c'], image, 'TotFedElecActivity_P_30c',
+                                                   'Header', 0)
 
     # TotDisb_P_31
     data['TotDisb_P_31'] = ck_curr_val(data['TotDisb_P_31'], image, 'TotDisb_P_31', 'Header', 0)
@@ -1827,16 +2865,19 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['IndContsItem_T_11a1'] = ck_curr_val(data['IndContsItem_T_11a1'], image, 'IndContsItem_T_11a1', 'Header', 0)
 
     # IndContsUnitem_T_11a2
-    data['IndContsUnitem_T_11a2'] = ck_curr_val(data['IndContsUnitem_T_11a2'], image, 'IndContsUnitem_T_11a2', 'Header', 0)
+    data['IndContsUnitem_T_11a2'] = ck_curr_val(data['IndContsUnitem_T_11a2'], image, 'IndContsUnitem_T_11a2', 'Header',
+                                                0)
 
     # IndContsTot_T_11a3
     data['IndContsTot_T_11a3'] = ck_curr_val(data['IndContsTot_T_11a3'], image, 'IndContsTot_T_11a3', 'Header', 0)
 
     # PolPtyCommConts_T_11b
-    data['PolPtyCommConts_T_11b'] = ck_curr_val(data['PolPtyCommConts_T_11b'], image, 'PolPtyCommConts_T_11b', 'Header', 0)
+    data['PolPtyCommConts_T_11b'] = ck_curr_val(data['PolPtyCommConts_T_11b'], image, 'PolPtyCommConts_T_11b', 'Header',
+                                                0)
 
     # OthPolCommConts_T_11c
-    data['OthPolCommConts_T_11c'] = ck_curr_val(data['OthPolCommConts_T_11c'], image, 'OthPolCommConts_T_11c', 'Header', 0)
+    data['OthPolCommConts_T_11c'] = ck_curr_val(data['OthPolCommConts_T_11c'], image, 'OthPolCommConts_T_11c', 'Header',
+                                                0)
 
     # TotConts_T_11d
     data['TotConts_T_11d'] = ck_curr_val(data['TotConts_T_11d'], image, 'TotConts_T_11d', 'Header', 0)
@@ -1860,10 +2901,12 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OthFedRcptsDvds_T_17'] = ck_curr_val(data['OthFedRcptsDvds_T_17'], image, 'OthFedRcptsDvds_T_17', 'Header', 0)
 
     # TranFmNonFedAcctH3_T_18a
-    data['TranFmNonFedAcctH3_T_18a'] = ck_curr_val(data['TranFmNonFedAcctH3_T_18a'], image, 'TranFmNonFedAcctH3_T_18a', 'Header', 0)
+    data['TranFmNonFedAcctH3_T_18a'] = ck_curr_val(data['TranFmNonFedAcctH3_T_18a'], image, 'TranFmNonFedAcctH3_T_18a',
+                                                   'Header', 0)
 
     # TranFmNonFedAcctH5_T_18b
-    data['TranFmNonFedAcctH5_T_18b'] = ck_curr_val(data['TranFmNonFedAcctH5_T_18b'], image, 'TranFmNonFedAcctH5_T_18b', 'Header', 0)
+    data['TranFmNonFedAcctH5_T_18b'] = ck_curr_val(data['TranFmNonFedAcctH5_T_18b'], image, 'TranFmNonFedAcctH5_T_18b',
+                                                   'Header', 0)
 
     # TotNonFedTrans_T_18c
     data['TotNonFedTrans_T_18c'] = ck_curr_val(data['TotNonFedTrans_T_18c'], image, 'TotNonFedTrans_T_18c', 'Header', 0)
@@ -1878,7 +2921,8 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OpExpsFedShr_T_21a1'] = ck_curr_val(data['OpExpsFedShr_T_21a1'], image, 'OpExpsFedShr_T_21a1', 'Header', 0)
 
     # OpExpsNonFedShr_T_21a2
-    data['OpExpsNonFedShr_T_21a2'] = ck_curr_val(data['OpExpsNonFedShr_T_21a2'], image, 'OpExpsNonFedShr_T_21a2', 'Header', 0)
+    data['OpExpsNonFedShr_T_21a2'] = ck_curr_val(data['OpExpsNonFedShr_T_21a2'], image, 'OpExpsNonFedShr_T_21a2',
+                                                 'Header', 0)
 
     # OpExpsOthFed_T_21b
     data['OpExpsOthFed_T_21b'] = ck_curr_val(data['OpExpsOthFed_T_21b'], image, 'OpExpsOthFed_T_21b', 'Header', 0)
@@ -1890,13 +2934,15 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['TranToPtyComms_T_22'] = ck_curr_val(data['TranToPtyComms_T_22'], image, 'TranToPtyComms_T_22', 'Header', 0)
 
     # ContsToFedCandsComms_T_23
-    data['ContsToFedCandsComms_T_23'] = ck_curr_val(data['ContsToFedCandsComms_T_23'], image, 'ContsToFedCandsComms_T_23', 'Header', 0)
+    data['ContsToFedCandsComms_T_23'] = ck_curr_val(data['ContsToFedCandsComms_T_23'], image,
+                                                    'ContsToFedCandsComms_T_23', 'Header', 0)
 
     # IndtExps_T_24
     data['IndtExps_T_24'] = ck_curr_val(data['IndtExps_T_24'], image, 'IndtExps_T_24', 'Header', 0)
 
     # CoordExpsByPtyComms_T_25
-    data['CoordExpsByPtyComms_T_25'] = ck_curr_val(data['CoordExpsByPtyComms_T_25'], image, 'CoordExpsByPtyComms_T_25', 'Header', 0)
+    data['CoordExpsByPtyComms_T_25'] = ck_curr_val(data['CoordExpsByPtyComms_T_25'], image, 'CoordExpsByPtyComms_T_25',
+                                                   'Header', 0)
 
     # LoansRepaid_T_26
     data['LoansRepaid_T_26'] = ck_curr_val(data['LoansRepaid_T_26'], image, 'LoansRepaid_T_26', 'Header', 0)
@@ -1908,10 +2954,12 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['RefundsInd_T_28a'] = ck_curr_val(data['RefundsInd_T_28a'], image, 'RefundsInd_T_28a', 'Header', 0)
 
     # RefundsPolPtyComms_T_28b
-    data['RefundsPolPtyComms_T_28b'] = ck_curr_val(data['RefundsPolPtyComms_T_28b'], image, 'RefundsPolPtyComms_T_28b', 'Header', 0)
+    data['RefundsPolPtyComms_T_28b'] = ck_curr_val(data['RefundsPolPtyComms_T_28b'], image, 'RefundsPolPtyComms_T_28b',
+                                                   'Header', 0)
 
     # RefundsOthPolComms_T_28c
-    data['RefundsOthPolComms_T_28c'] = ck_curr_val(data['RefundsOthPolComms_T_28c'], image, 'RefundsOthPolComms_T_28c', 'Header', 0)
+    data['RefundsOthPolComms_T_28c'] = ck_curr_val(data['RefundsOthPolComms_T_28c'], image, 'RefundsOthPolComms_T_28c',
+                                                   'Header', 0)
 
     # TotContRefunds_T_28d
     data['TotContRefunds_T_28d'] = ck_curr_val(data['TotContRefunds_T_28d'], image, 'TotContRefunds_T_28d', 'Header', 0)
@@ -1920,16 +2968,20 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
     data['OthDisb_T_29'] = ck_curr_val(data['OthDisb_T_29'], image, 'OthDisb_T_29', 'Header', 0)
 
     # ShrdElecActivityFedShr_T_30a1
-    data['ShrdElecActivityFedShr_T_30a1'] = ck_curr_val(data['ShrdElecActivityFedShr_T_30a1'], image, 'ShrdElecActivityFedShr_T_30a1', 'Header', 0)
+    data['ShrdElecActivityFedShr_T_30a1'] = ck_curr_val(data['ShrdElecActivityFedShr_T_30a1'], image,
+                                                        'ShrdElecActivityFedShr_T_30a1', 'Header', 0)
 
     # ShrdElecActivityNonFedShr_T_30a2
-    data['ShrdElecActivityNonFedShr_T_30a2'] = ck_curr_val(data['ShrdElecActivityNonFedShr_T_30a2'], image, 'ShrdElecActivityNonFedShr_T_30a2', 'Header', 0)
+    data['ShrdElecActivityNonFedShr_T_30a2'] = ck_curr_val(data['ShrdElecActivityNonFedShr_T_30a2'], image,
+                                                           'ShrdElecActivityNonFedShr_T_30a2', 'Header', 0)
 
     # NonAllocFedElecActivity_T_30b
-    data['NonAllocFedElecActivity_T_30b'] = ck_curr_val(data['NonAllocFedElecActivity_T_30b'], image, 'NonAllocFedElecActivity_T_30b', 'Header', 0)
+    data['NonAllocFedElecActivity_T_30b'] = ck_curr_val(data['NonAllocFedElecActivity_T_30b'], image,
+                                                        'NonAllocFedElecActivity_T_30b', 'Header', 0)
 
     # TotFedElecActivity_T_30c
-    data['TotFedElecActivity_T_30c'] = ck_curr_val(data['TotFedElecActivity_T_30c'], image, 'TotFedElecActivity_T_30c', 'Header', 0)
+    data['TotFedElecActivity_T_30c'] = ck_curr_val(data['TotFedElecActivity_T_30c'], image, 'TotFedElecActivity_T_30c',
+                                                   'Header', 0)
 
     # TotDisb_T_31
     data['TotDisb_T_31'] = ck_curr_val(data['TotDisb_T_31'], image, 'TotDisb_T_31', 'Header', 0)
@@ -1957,34 +3009,35 @@ def check_rpt_hdrs_f3x(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     return data
 
+
 def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
     data['FormTp'] = clean_sql_text(data['FormTp'], 'nullstring', "'")
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'], 'nullstring', "'")
 
     # flgChgCommNm
     data['flgChgCommNm'] = convert_to_bit(clean_sql_text(data['flgChgCommNm']))
-    
+
     # CommNm
     data['CommNm'] = clean_sql_text(data['CommNm'], 'nullstring', "'")
-    
+
     # flgAddrChg
     data['flgAddrChg'] = convert_to_bit(clean_sql_text(data['flgAddrChg']))
-    
+
     # Addr1
     data['Addr1'] = clean_sql_text(data['Addr1'], 'nullstring', "'")
 
     # Addr2
     data['Addr2'] = clean_sql_text(data['Addr2'], '', "'")
-    
+
     # City
     data['City'] = clean_sql_text(data['City'], 'nullstring', "'")
-    
+
     # StAbbr
     data['StAbbr'] = clean_sql_text(data['StAbbr'], 'nullstring', "'")
-    
+
     # Zip
     data['Zip'] = clean_sql_text(data['Zip'], 'nullstring', "'")
 
@@ -2007,8 +3060,10 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # SignFullName
     if data['SignFullName'] != '':
-        if data['SignLName'] != '' or data['SignFName'] != '' or data['SignMName'] != '' or data['SignPfx'] != '' or data['SignSfx'] != '':
-            AddEntryToErrorLog('Signer full name (' + data['SignFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['SignLName'] != '' or data['SignFName'] != '' or data['SignMName'] != '' or data['SignPfx'] != '' or \
+                        data['SignSfx'] != '':
+            AddEntryToErrorLog('Signer full name (' + data[
+                'SignFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['SignFullName'], namedelim)
             data['SignLName'] = treas[0]
@@ -2018,7 +3073,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['SignSfx'] = treas[4]
         else:
             data['SignLName'] = data['SignFullName']
-                
+
     # SignLName
     data['SignLName'] = clean_sql_text(data['SignLName'], 'nullstring', "'")
 
@@ -2047,8 +3102,10 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # CandFullName
     if data['CandFullName'] != '':
-        if data['CandLName'] != '' or data['CandFName'] != '' or data['CandMName'] != '' or data['CandPfx'] != '' or data['CandSfx'] != '':
-            AddEntryToErrorLog('Candidate full name (' + data['CandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['CandLName'] != '' or data['CandFName'] != '' or data['CandMName'] != '' or data['CandPfx'] != '' or \
+                        data['CandSfx'] != '':
+            AddEntryToErrorLog('Candidate full name (' + data[
+                'CandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['CandFullName'], namedelim)
             data['CandLName'] = treas[0]
@@ -2058,7 +3115,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['CandSfx'] = treas[4]
         else:
             data['CandLName'] = data['CandFullName']
-                
+
     # CandLName
     data['CandLName'] = clean_sql_text(data['CandLName'], '', "'")
 
@@ -2145,8 +3202,10 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # CustFullName
     if data['CustFullName'] != '':
-        if data['CustLName'] != '' or data['CustFName'] != '' or data['CustMName'] != '' or data['CustPfx'] != '' or data['CustSfx'] != '':
-            AddEntryToErrorLog('Custodian full name (' + data['CustFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['CustLName'] != '' or data['CustFName'] != '' or data['CustMName'] != '' or data['CustPfx'] != '' or \
+                        data['CustSfx'] != '':
+            AddEntryToErrorLog('Custodian full name (' + data[
+                'CustFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['CustFullName'], namedelim)
             data['CustLName'] = treas[0]
@@ -2156,7 +3215,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['CustSfx'] = treas[4]
         else:
             data['CustLName'] = data['CustFullName']
-                
+
     # CustLName
     data['CustLName'] = clean_sql_text(data['CustLName'], '', "'")
 
@@ -2195,8 +3254,10 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # TrsFullName
     if data['TrsFullName'] != '':
-        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data['TrsSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data[
+            'TrsSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['TrsFullName'], namedelim)
             data['TrsLName'] = treas[0]
@@ -2206,7 +3267,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['TrsSfx'] = treas[4]
         else:
             data['TrsLName'] = data['TrsFullName']
-                
+
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'], '', "'")
 
@@ -2245,8 +3306,10 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # AgtFullName
     if data['AgtFullName'] != '':
-        if data['AgtLName'] != '' or data['AgtFName'] != '' or data['AgtMName'] != '' or data['AgtPfx'] != '' or data['AgtSfx'] != '':
-            AddEntryToErrorLog('Agent full name (' + data['AgtFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['AgtLName'] != '' or data['AgtFName'] != '' or data['AgtMName'] != '' or data['AgtPfx'] != '' or data[
+            'AgtSfx'] != '':
+            AddEntryToErrorLog('Agent full name (' + data[
+                'AgtFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['AgtFullName'], namedelim)
             data['AgtLName'] = treas[0]
@@ -2256,7 +3319,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
             data['AgtSfx'] = treas[4]
         else:
             data['AgtLName'] = data['AgtFullName']
-                
+
     # AgtLName
     data['AgtLName'] = clean_sql_text(data['AgtLName'], '', "'")
 
@@ -2307,7 +3370,7 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # Bank1StAbbr
     data['Bank1StAbbr'] = clean_sql_text(data['Bank1StAbbr'], 'nullstring', "'")
-    
+
     # Bank1Zip
     data['Bank1Zip'] = clean_sql_text(data['Bank1Zip'], '', "'")
 
@@ -2325,11 +3388,12 @@ def check_rpt_hdrs_f1(image, data, namedelim='', dateformat='CCYYMMDD'):
 
     # Bank2StAbbr
     data['Bank2StAbbr'] = clean_sql_text(data['Bank2StAbbr'], 'nullstring', "'")
-    
+
     # Bank2Zip
     data['Bank2Zip'] = clean_sql_text(data['Bank2Zip'], '', "'")
 
     return data
+
 
 def check_row_data_f1s(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # FormTp
@@ -2442,10 +3506,11 @@ def check_row_data_f1s(data, image, rownbr, namedelim='', dateformat='CCYYMMDD')
 
     return data
 
+
 def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -2454,23 +3519,25 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     if len(data['TransID']) > 20:
         print(("TransID field too long.", image, rownbr, data))
         sys.exit(("TransID field too long.", image, rownbr, data))
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
 
     # EntTp
     data['EntTp'] = clean_sql_text(data['EntTp'])
-    
+
     # ContOrgNm
     data['ContOrgNm'] = clean_sql_text(data['ContOrgNm'])
 
     # ContFullName
     if data['ContFullName'] != '':
-        if data['ContLName'] != '' or data['ContFName'] != '' or data['ContMName'] != '' or data['ContPfx'] != '' or data['ContSfx'] != '':
-            AddEntryToErrorLog('Contributor full name (' + data['ContFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['ContLName'] != '' or data['ContFName'] != '' or data['ContMName'] != '' or data['ContPfx'] != '' or \
+                        data['ContSfx'] != '':
+            AddEntryToErrorLog('Contributor full name (' + data[
+                'ContFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['ContFullName'], namedelim)
             data['ContLName'] = name[0]
@@ -2521,7 +3588,8 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['ElecDesc'] = clean_sql_text(data['ElecDesc'])
 
     # ContDt
-    data['ContDt'] = convert_to_date(data['ContDt'], dateformat, image, 'ContDt', data['LineNbr'], rownbr, 'SA', data['TransID'])
+    data['ContDt'] = convert_to_date(data['ContDt'], dateformat, image, 'ContDt', data['LineNbr'], rownbr, 'SA',
+                                     data['TransID'])
 
     # ContAmt
     data['ContAmt'] = ck_curr_val(data['ContAmt'], image, 'ContAmt', data['LineNbr'], rownbr)
@@ -2561,8 +3629,10 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     # DonorCandFullName
     if data['DonorCandFullName'] != '':
-        if data['DonorCandLName'] != '' or data['DonorCandFName'] != '' or data['DonorCandMName'] != '' or data['DonorCandPfx'] != '' or data['DonorCandSfx'] != '':
-            AddEntryToErrorLog('Donor candidater full name (' + data['DonorCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['DonorCandLName'] != '' or data['DonorCandFName'] != '' or data['DonorCandMName'] != '' or data[
+            'DonorCandPfx'] != '' or data['DonorCandSfx'] != '':
+            AddEntryToErrorLog('Donor candidater full name (' + data[
+                'DonorCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['DonorCandFullName'], namedelim)
             data['DonorCandLName'] = name[0]
@@ -2572,7 +3642,7 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
             data['DonorCandSfx'] = name[4]
         else:
             data['DonorCandLName'] = data['DonorCandFullName']
-            
+
     # DonorCandLName
     data['DonorCandLName'] = clean_sql_text(data['DonorCandLName'])
 
@@ -2598,7 +3668,8 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['DonorCandSt'] = clean_sql_text(data['DonorCandSt'])
 
     # DonorCandDist
-    data['DonorCandDist'] = convert_to_tinyint(data['DonorCandDist'], image, 'DonorCandDist', data['LineNbr'], rownbr, 'SA', data['TransID'])
+    data['DonorCandDist'] = convert_to_tinyint(data['DonorCandDist'], image, 'DonorCandDist', data['LineNbr'], rownbr,
+                                               'SA', data['TransID'])
 
     # ConduitNm
     data['ConduitNm'] = clean_sql_text(data['ConduitNm'])
@@ -2629,32 +3700,35 @@ def check_row_data_sch_a(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
+
 def check_row_data_sch_b(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
 
     # EntTp
     data['EntTp'] = clean_sql_text(data['EntTp'])
-    
+
     # PayeeOrgNm
     data['PayeeOrgNm'] = clean_sql_text(data['PayeeOrgNm'])
 
     # PayeeFullName
     if data['PayeeFullName'] != '':
-        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or data['PayeeSfx'] != '':
-            AddEntryToErrorLog('Payee full name (' + data['PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or \
+                        data['PayeeSfx'] != '':
+            AddEntryToErrorLog('Payee full name (' + data[
+                'PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeFullName'], namedelim)
             data['PayeeLName'] = name[0]
@@ -2702,13 +3776,15 @@ def check_row_data_sch_b(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['ElecDesc'] = clean_sql_text(data['ElecDesc'])
 
     # ExpDt
-    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SB', data['TransID'])
+    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SB',
+                                    data['TransID'])
 
     # ExpAmt
     data['ExpAmt'] = ck_curr_val(data['ExpAmt'], image, 'ExpAmt', data['LineNbr'], rownbr)
 
     # SemiAnnRefBundAmt
-    data['SemiAnnRefBundAmt'] = ck_curr_val(data['SemiAnnRefBundAmt'], image, 'SemiAnnRefBundAmt', data['LineNbr'], rownbr)
+    data['SemiAnnRefBundAmt'] = ck_curr_val(data['SemiAnnRefBundAmt'], image, 'SemiAnnRefBundAmt', data['LineNbr'],
+                                            rownbr)
 
     # ExpPurpCd
     data['ExpPurpCd'] = clean_sql_text(data['ExpPurpCd'])
@@ -2730,8 +3806,10 @@ def check_row_data_sch_b(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     # BenCandFullName
     if data['BenCandFullName'] != '':
-        if data['BenCandLName'] != '' or data['BenCandFName'] != '' or data['BenCandMName'] != '' or data['BenCandPfx'] != '' or data['BenCandSfx'] != '':
-            AddEntryToErrorLog('Beneficiary candidate full name (' + data['BenCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['BenCandLName'] != '' or data['BenCandFName'] != '' or data['BenCandMName'] != '' or data[
+            'BenCandPfx'] != '' or data['BenCandSfx'] != '':
+            AddEntryToErrorLog('Beneficiary candidate full name (' + data[
+                'BenCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['BenCandFullName'], namedelim)
             data['BenCandLName'] = name[0]
@@ -2773,7 +3851,8 @@ def check_row_data_sch_b(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
             data['BenCandDist'] = None
     elif data['BenCandDist'] == 'NA' or data['BenCandDist'] == '**':
         data['BenCandDist'] = None
-    data['BenCandDist'] = convert_to_tinyint(data['BenCandDist'], image, 'BenCandDist', data['LineNbr'], rownbr, 'SB', data['TransID'])
+    data['BenCandDist'] = convert_to_tinyint(data['BenCandDist'], image, 'BenCandDist', data['LineNbr'], rownbr, 'SB',
+                                             data['TransID'])
 
     # ConduitNm
     data['ConduitNm'] = clean_sql_text(data['ConduitNm'])
@@ -2804,10 +3883,11 @@ def check_row_data_sch_b(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
+
 def check_row_data_sch_c(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -2869,10 +3949,12 @@ def check_row_data_sch_c(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['LoanBlnc'] = ck_curr_val(data['LoanBlnc'], image, 'LoanBlnc', data['LineNbr'], rownbr)
 
     # IncurredDt
-    data['IncurredDt'] = convert_to_date(data['IncurredDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr, 'SC', data['TransID'])
+    data['IncurredDt'] = convert_to_date(data['IncurredDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr,
+                                         'SC', data['TransID'])
 
     # DueDt
-    data['DueDt'] = convert_to_date(data['DueDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr, 'SC', data['TransID'])
+    data['DueDt'] = convert_to_date(data['DueDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr, 'SC',
+                                    data['TransID'])
 
     # IntRt
     data['IntRt'] = clean_sql_text(data['IntRt'])
@@ -2911,7 +3993,8 @@ def check_row_data_sch_c(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['LenderCandState'] = clean_sql_text(data['LenderCandState'])
 
     # LenderCandDist
-    data['LenderCandDist'] = convert_to_tinyint(data['LenderCandDist'], image, 'LenderCandDist', data['LineNbr'], rownbr, 'SC', data['TransID'])
+    data['LenderCandDist'] = convert_to_tinyint(data['LenderCandDist'], image, 'LenderCandDist', data['LineNbr'],
+                                                rownbr, 'SC', data['TransID'])
 
     # MemoCd
     data['MemoCd'] = convert_to_bit(clean_sql_text(data['MemoCd']))
@@ -2921,16 +4004,17 @@ def check_row_data_sch_c(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
+
 def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
 
@@ -2959,16 +4043,19 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['IntRt'] = clean_sql_text(data['IntRt'])
 
     # IncurredDt
-    data['IncurredDt'] = convert_to_date(data['IncurredDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['IncurredDt'] = convert_to_date(data['IncurredDt'], dateformat, image, 'IncurredDt', data['LineNbr'], rownbr,
+                                         'SC1', data['TransID'])
 
     # DueDt
-    data['DueDt'] = convert_to_date(data['DueDt'], dateformat, image, 'DueDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['DueDt'] = convert_to_date(data['DueDt'], dateformat, image, 'DueDt', data['LineNbr'], rownbr, 'SC1',
+                                    data['TransID'])
 
     # flgLoanRestructured
     data['flgLoanRestructured'] = convert_to_bit(clean_sql_text(data['flgLoanRestructured']))
 
     # OrigLoanDt
-    data['OrigLoanDt'] = convert_to_date(data['OrigLoanDt'], dateformat, image, 'OrigLoanDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['OrigLoanDt'] = convert_to_date(data['OrigLoanDt'], dateformat, image, 'OrigLoanDt', data['LineNbr'], rownbr,
+                                         'SC1', data['TransID'])
 
     # CrdtAmtThisDraw
     data['CrdtAmtThisDraw'] = ck_curr_val(data['CrdtAmtThisDraw'], image, 'CrdtAmtThisDraw', data['LineNbr'], rownbr)
@@ -3001,7 +4088,8 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['FutIncEstVal'] = ck_curr_val(data['FutIncEstVal'], image, 'FutIncEstVal', data['LineNbr'], rownbr)
 
     # DepAcctEstDt
-    data['DepAcctEstDt'] = convert_to_date(data['DepAcctEstDt'], dateformat, image, 'DepAcctEstDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['DepAcctEstDt'] = convert_to_date(data['DepAcctEstDt'], dateformat, image, 'DepAcctEstDt', data['LineNbr'],
+                                           rownbr, 'SC1', data['TransID'])
 
     # AcctLocName
     data['AcctLocName'] = clean_sql_text(data['AcctLocName'])
@@ -3022,15 +4110,18 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['AcctLocZip'] = clean_sql_text(data['AcctLocZip'])
 
     # DepAcctAuthDt
-    data['DepAcctAuthDt'] = convert_to_date(data['DepAcctAuthDt'], dateformat, image, 'DepAcctAuthDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['DepAcctAuthDt'] = convert_to_date(data['DepAcctAuthDt'], dateformat, image, 'DepAcctAuthDt', data['LineNbr'],
+                                            rownbr, 'SC1', data['TransID'])
 
     # LoanBasisDesc
     data['LoanBasisDesc'] = clean_sql_text(data['LoanBasisDesc'])
 
     # TrsFullName
     if data['TrsFullName'] != '':
-        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data['TrsSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['TrsLName'] != '' or data['TrsFName'] != '' or data['TrsMName'] != '' or data['TrsPfx'] != '' or data[
+            'TrsSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'TrsFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['TrsFullName'], namedelim)
             data['TrsLName'] = treas[0]
@@ -3040,7 +4131,7 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
             data['TrsSfx'] = treas[4]
         else:
             data['TrsLName'] = data['TrsFullName']
-                
+
     # TrsLName
     data['TrsLName'] = clean_sql_text(data['TrsLName'])
 
@@ -3055,14 +4146,17 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     # TrsSfx
     data['TrsSfx'] = clean_sql_text(data['TrsSfx'])
-    
+
     # TrsSignDt
-    data['TrsSignDt'] = convert_to_date(data['TrsSignDt'], dateformat, image, 'TrsSignDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['TrsSignDt'] = convert_to_date(data['TrsSignDt'], dateformat, image, 'TrsSignDt', data['LineNbr'], rownbr,
+                                        'SC1', data['TransID'])
 
     # LendRepFullName
     if data['LendRepFullName'] != '':
-        if data['LendRepLName'] != '' or data['LendRepFName'] != '' or data['LendRepMName'] != '' or data['LendRepPfx'] != '' or data['LendRepSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['LendRepFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['LendRepLName'] != '' or data['LendRepFName'] != '' or data['LendRepMName'] != '' or data[
+            'LendRepPfx'] != '' or data['LendRepSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'LendRepFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             treas = parse_full_name(data['LendRepFullName'], namedelim)
             data['LendRepLName'] = treas[0]
@@ -3072,7 +4166,7 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
             data['LendRepSfx'] = treas[4]
         else:
             data['LendRepLName'] = data['LendRepFullName']
-                
+
     # LendRepLName
     data['LendRepLName'] = clean_sql_text(data['LendRepLName'])
 
@@ -3092,27 +4186,31 @@ def check_row_data_sch_c1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['LendRepTitle'] = clean_sql_text(data['LendRepTitle'])
 
     # LendRepSignDt
-    data['LendRepSignDt'] = convert_to_date(data['LendRepSignDt'], dateformat, image, 'LendRepSignDt', data['LineNbr'], rownbr, 'SC1', data['TransID'])
+    data['LendRepSignDt'] = convert_to_date(data['LendRepSignDt'], dateformat, image, 'LendRepSignDt', data['LineNbr'],
+                                            rownbr, 'SC1', data['TransID'])
 
     return data
+
 
 def check_row_data_sch_c2(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
 
     # GuarFullName
     if data['GuarFullName'] != '':
-        if data['GuarLName'] != '' or data['GuarFName'] != '' or data['GuarMName'] != '' or data['GuarPfx'] != '' or data['GuarSfx'] != '':
-            AddEntryToErrorLog('Treasurer full name (' + data['GuarFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['GuarLName'] != '' or data['GuarFName'] != '' or data['GuarMName'] != '' or data['GuarPfx'] != '' or \
+                        data['GuarSfx'] != '':
+            AddEntryToErrorLog('Treasurer full name (' + data[
+                'GuarFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             guar = parse_full_name(data['GuarFullName'], namedelim)
             data['GuarLName'] = guar[0]
@@ -3122,7 +4220,7 @@ def check_row_data_sch_c2(data, image, rownbr, namedelim='', dateformat='CCYYMMD
             data['GuarSfx'] = guar[4]
         else:
             data['GuarLName'] = data['GuarFullName']
-                
+
     # GuarLName
     data['GuarLName'] = clean_sql_text(data['GuarLName'])
 
@@ -3164,10 +4262,11 @@ def check_row_data_sch_c2(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
+
 def check_row_data_sch_d(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -3221,7 +4320,7 @@ def check_row_data_sch_d(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     # BalClose_P
     data['BalClose_P'] = ck_curr_val(data['BalClose_P'], image, 'BalClose_P', data['LineNbr'], rownbr)
-    
+
     # CreditorCommID
     data['CreditorCommID'] = clean_sql_text(data['CreditorCommID'])
 
@@ -3238,7 +4337,8 @@ def check_row_data_sch_d(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['CreditorCandState'] = clean_sql_text(data['CreditorCandState'])
 
     # CreditorCandDist
-    data['CreditorCandDist'] = convert_to_tinyint(data['CreditorCandDist'], image, 'CreditorCandDist', data['LineNbr'], rownbr, 'SD', data['TransID'])
+    data['CreditorCandDist'] = convert_to_tinyint(data['CreditorCandDist'], image, 'CreditorCandDist', data['LineNbr'],
+                                                  rownbr, 'SD', data['TransID'])
 
     # ConduitName
     data['ConduitName'] = clean_sql_text(data['ConduitName'])
@@ -3263,33 +4363,35 @@ def check_row_data_sch_d(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
-def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
-    
+
     # EntTp
     data['EntTp'] = clean_sql_text(data['EntTp'])
-    
+
     # PayeeOrgNm
     data['PayeeOrgNm'] = clean_sql_text(data['PayeeOrgNm'])
 
     # PayeeFullName
     if data['PayeeFullName'] != '':
-        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or data['PayeeSfx'] != '':
-            AddEntryToErrorLog('Payee full name (' + data['PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or \
+                        data['PayeeSfx'] != '':
+            AddEntryToErrorLog('Payee full name (' + data[
+                'PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeFullName'], namedelim)
             data['PayeeLName'] = name[0]
@@ -3337,10 +4439,12 @@ def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['ElecDesc'] = clean_sql_text(data['ElecDesc'])
 
     # DissmntnDt
-    data['DissmntnDt'] = convert_to_date(data['DissmntnDt'], dateformat, image, 'DissmntnDt', data['LineNbr'], rownbr, 'SE', data['TransID'])
-    
+    data['DissmntnDt'] = convert_to_date(data['DissmntnDt'], dateformat, image, 'DissmntnDt', data['LineNbr'], rownbr,
+                                         'SE', data['TransID'])
+
     # ExpDt
-    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SE', data['TransID'])
+    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SE',
+                                    data['TransID'])
 
     # ExpAmt
     data['ExpAmt'] = ck_curr_val(data['ExpAmt'], image, 'ExpAmt', data['LineNbr'], rownbr)
@@ -3354,19 +4458,21 @@ def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     # ExpCatCd
     data['ExpCatCd'] = clean_sql_text(data['ExpCatCd'])
 
-    #PayeeCommID
+    # PayeeCommID
     data['PayeeCommID'] = clean_sql_text(data['PayeeCommID'])
 
-    #SupOppCd
+    # SupOppCd
     data['SupOppCd'] = clean_sql_text(data['SupOppCd'])
 
-    #SupOppCandID
+    # SupOppCandID
     data['SupOppCandID'] = clean_sql_text(data['SupOppCandID'])
 
     # SupOppCandFullName
     if data['SupOppCandFullName'] != '':
-        if data['SupOppCandLName'] != '' or data['SupOppCandFName'] != '' or data['SupOppCandMName'] != '' or data['SupOppCandPfx'] != '' or data['SupOppCandSfx'] != '':
-            AddEntryToErrorLog('Sup/Opp candidate full name (' + data['SupOppCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['SupOppCandLName'] != '' or data['SupOppCandFName'] != '' or data['SupOppCandMName'] != '' or data[
+            'SupOppCandPfx'] != '' or data['SupOppCandSfx'] != '':
+            AddEntryToErrorLog('Sup/Opp candidate full name (' + data[
+                'SupOppCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['SupOppCandFullName'], namedelim)
             data['SupOppCandLName'] = name[0]
@@ -3377,34 +4483,37 @@ def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
         else:
             data['SupOppCandLName'] = data['SupOppCandFullName']
 
-    #SupOppCandLName
+    # SupOppCandLName
     data['SupOppCandLName'] = clean_sql_text(data['SupOppCandLName'])
 
-    #SupOppCandFName
+    # SupOppCandFName
     data['SupOppCandFName'] = clean_sql_text(data['SupOppCandFName'])
 
-    #SupOppCandMName
+    # SupOppCandMName
     data['SupOppCandMName'] = clean_sql_text(data['SupOppCandMName'])
 
-    #SupOppCandPfx
+    # SupOppCandPfx
     data['SupOppCandPfx'] = clean_sql_text(data['SupOppCandPfx'])
 
-    #SupOppCandSfx
+    # SupOppCandSfx
     data['SupOppCandSfx'] = clean_sql_text(data['SupOppCandSfx'])
 
-    #SupOppCandOfc
+    # SupOppCandOfc
     data['SupOppCandOfc'] = clean_sql_text(data['SupOppCandOfc'])
 
-    #SupOppCandStAbbr
+    # SupOppCandStAbbr
     data['SupOppCandStAbbr'] = clean_sql_text(data['SupOppCandStAbbr'])
 
-    #SupOppCandDist
-    data['SupOppCandDist'] = convert_to_tinyint(data['SupOppCandDist'], image, 'SupOppCandDist', data['LineNbr'], rownbr, 'SE', data['TransID'])
+    # SupOppCandDist
+    data['SupOppCandDist'] = convert_to_tinyint(data['SupOppCandDist'], image, 'SupOppCandDist', data['LineNbr'],
+                                                rownbr, 'SE', data['TransID'])
 
     # CompFullName
     if data['CompFullName'] != '':
-        if data['CompLName'] != '' or data['CompFName'] != '' or data['CompMName'] != '' or data['CompPfx'] != '' or data['CompSfx'] != '':
-            AddEntryToErrorLog('Form completed by full name (' + data['CompFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['CompLName'] != '' or data['CompFName'] != '' or data['CompMName'] != '' or data['CompPfx'] != '' or \
+                        data['CompSfx'] != '':
+            AddEntryToErrorLog('Form completed by full name (' + data[
+                'CompFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['CompFullName'], namedelim)
             data['CompLName'] = name[0]
@@ -3415,46 +4524,47 @@ def check_row_data_sch_e(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
         else:
             data['CompLName'] = data['CompFullName']
 
-    #CompLName
+    # CompLName
     data['CompLName'] = clean_sql_text(data['CompLName'])
 
-    #CompFName
+    # CompFName
     data['CompFName'] = clean_sql_text(data['CompFName'])
 
-    #CompMName
+    # CompMName
     data['CompMName'] = clean_sql_text(data['CompMName'])
 
-    #CompPfx
+    # CompPfx
     data['CompPfx'] = clean_sql_text(data['CompPfx'])
 
-    #CompSfx
+    # CompSfx
     data['CompSfx'] = clean_sql_text(data['CompSfx'])
 
-    #SignDt
-    data['SignDt'] = convert_to_date(data['SignDt'], dateformat, image, 'SignDt', data['LineNbr'], rownbr, 'SE', data['TransID'])
+    # SignDt
+    data['SignDt'] = convert_to_date(data['SignDt'], dateformat, image, 'SignDt', data['LineNbr'], rownbr, 'SE',
+                                     data['TransID'])
 
-    #MemoCd
+    # MemoCd
     data['MemoCd'] = convert_to_bit(clean_sql_text(data['MemoCd']))
 
-    #MemoTxt
+    # MemoTxt
     data['MemoTxt'] = clean_sql_text(data['MemoTxt'])
-    
+
     return data
 
-def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
 
@@ -3496,8 +4606,10 @@ def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     # PayeeFullName
     if data['PayeeFullName'] != '':
-        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or data['PayeeSfx'] != '':
-            AddEntryToErrorLog('Payee full name (' + data['PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or \
+                        data['PayeeSfx'] != '':
+            AddEntryToErrorLog('Payee full name (' + data[
+                'PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeFullName'], namedelim)
             data['PayeeLName'] = name[0]
@@ -3539,7 +4651,8 @@ def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['PayeeZip'] = clean_sql_text(data['PayeeZip'])
 
     # ExpDt
-    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SF', data['TransID'])
+    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'SF',
+                                    data['TransID'])
 
     # ExpAmt
     data['ExpAmt'] = ck_curr_val(data['ExpAmt'], image, 'ExpAmt', data['LineNbr'], rownbr)
@@ -3564,8 +4677,10 @@ def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     # PayeeCandFullName
     if data['PayeeCandFullName'] != '':
-        if data['PayeeCandLName'] != '' or data['PayeeCandFName'] != '' or data['PayeeCandMName'] != '' or data['PayeeCandPfx'] != '' or data['PayeeCandSfx'] != '':
-            AddEntryToErrorLog('Payee candidate full name (' + data['PayeeCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeCandLName'] != '' or data['PayeeCandFName'] != '' or data['PayeeCandMName'] != '' or data[
+            'PayeeCandPfx'] != '' or data['PayeeCandSfx'] != '':
+            AddEntryToErrorLog('Payee candidate full name (' + data[
+                'PayeeCandFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeCandFullName'], namedelim)
             data['PayeeCandLName'] = name[0]
@@ -3576,43 +4691,44 @@ def check_row_data_sch_f(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
         else:
             data['PayeeCandLName'] = data['PayeeCandFullName']
 
-    #PayeeCandLName
+    # PayeeCandLName
     data['PayeeCandLName'] = clean_sql_text(data['PayeeCandLName'])
 
-    #PayeeCandFName
+    # PayeeCandFName
     data['PayeeCandFName'] = clean_sql_text(data['PayeeCandFName'])
 
-    #PayeeCandMName
+    # PayeeCandMName
     data['PayeeCandMName'] = clean_sql_text(data['PayeeCandMName'])
 
-    #PayeeCandPfx
+    # PayeeCandPfx
     data['PayeeCandPfx'] = clean_sql_text(data['PayeeCandPfx'])
 
-    #PayeeCandSfx
+    # PayeeCandSfx
     data['PayeeCandSfx'] = clean_sql_text(data['PayeeCandSfx'])
 
-    #PayeeCandOfc
+    # PayeeCandOfc
     data['PayeeCandOfc'] = clean_sql_text(data['PayeeCandOfc'])
 
-    #PayeeCandStAbbr
+    # PayeeCandStAbbr
     data['PayeeCandStAbbr'] = clean_sql_text(data['PayeeCandStAbbr'])
 
-    #PayeeCandDist
-    data['PayeeCandDist'] = convert_to_tinyint(data['PayeeCandDist'], image, 'PayeeCandDist', data['LineNbr'], rownbr, 'SF', data['TransID'])
+    # PayeeCandDist
+    data['PayeeCandDist'] = convert_to_tinyint(data['PayeeCandDist'], image, 'PayeeCandDist', data['LineNbr'], rownbr,
+                                               'SF', data['TransID'])
 
-    #MemoCd
+    # MemoCd
     data['MemoCd'] = convert_to_bit(clean_sql_text(data['MemoCd']))
 
-    #MemoTxt
+    # MemoTxt
     data['MemoTxt'] = clean_sql_text(data['MemoTxt'])
 
     return data
 
-def check_row_data_sch_h1(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h1(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -3651,11 +4767,11 @@ def check_row_data_sch_h1(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_h2(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h2(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -3682,11 +4798,11 @@ def check_row_data_sch_h2(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_h3(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h3(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -3706,7 +4822,8 @@ def check_row_data_sch_h3(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['EventNm'] = clean_sql_text(data['EventNm'])
 
     # RcptDt
-    data['RcptDt'] = convert_to_date(data['RcptDt'], dateformat, image, 'RcptDt', data['LineNbr'], rownbr, 'H3', data['TransID'])
+    data['RcptDt'] = convert_to_date(data['RcptDt'], dateformat, image, 'RcptDt', data['LineNbr'], rownbr, 'H3',
+                                     data['TransID'])
 
     # TotAmtTrans
     data['TotAmtTrans'] = ck_curr_val(data['TotAmtTrans'], image, 'TotAmtTrans', data['LineNbr'], rownbr)
@@ -3716,20 +4833,20 @@ def check_row_data_sch_h3(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_h4(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h4(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
 
@@ -3741,8 +4858,10 @@ def check_row_data_sch_h4(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     # PayeeFullName
     if data['PayeeFullName'] != '':
-        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or data['PayeeSfx'] != '':
-            AddEntryToErrorLog('Payee full name (' + data['PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or \
+                        data['PayeeSfx'] != '':
+            AddEntryToErrorLog('Payee full name (' + data[
+                'PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeFullName'], namedelim)
             data['PayeeLName'] = name[0]
@@ -3785,9 +4904,10 @@ def check_row_data_sch_h4(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     # EventNm
     data['EventNm'] = clean_sql_text(data['EventNm'])
-     
+
     # ExpDt
-    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'H4', data['TransID'])
+    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'H4',
+                                    data['TransID'])
 
     # ExpAmt
     data['ExpAmt'] = ck_curr_val(data['ExpAmt'], image, 'ExpAmt', data['LineNbr'], rownbr)
@@ -3836,11 +4956,11 @@ def check_row_data_sch_h4(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_h5(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h5(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -3851,7 +4971,8 @@ def check_row_data_sch_h5(data, image, rownbr, namedelim='', dateformat='CCYYMMD
     data['AcctNm'] = clean_sql_text(data['AcctNm'])
 
     # RcptDt
-    data['RcptDt'] = convert_to_date(data['RcptDt'], dateformat, image, 'RcptDt', data['LineNbr'], rownbr, 'H5', data['TransID'])
+    data['RcptDt'] = convert_to_date(data['RcptDt'], dateformat, image, 'RcptDt', data['LineNbr'], rownbr, 'H5',
+                                     data['TransID'])
 
     # TotAmt
     data['TotAmt'] = ck_curr_val(data['TotAmt'], image, 'TotAmt', data['LineNbr'], rownbr)
@@ -3870,20 +4991,20 @@ def check_row_data_sch_h5(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_h6(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_h6(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
     # TransID
     data['TransID'] = clean_sql_text(data['TransID'])
-    
+
     # BkRefTransID
     data['BkRefTransID'] = clean_sql_text(data['BkRefTransID'])
-    
+
     # BkRefSchdNm
     data['BkRefSchdNm'] = clean_sql_text(data['BkRefSchdNm'])
 
@@ -3895,8 +5016,10 @@ def check_row_data_sch_h6(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     # PayeeFullName
     if data['PayeeFullName'] != '':
-        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or data['PayeeSfx'] != '':
-            AddEntryToErrorLog('Payee full name (' + data['PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
+        if data['PayeeLName'] != '' or data['PayeeFName'] != '' or data['PayeeMName'] != '' or data['PayeePfx'] != '' or \
+                        data['PayeeSfx'] != '':
+            AddEntryToErrorLog('Payee full name (' + data[
+                'PayeeFullName'] + ') could not be parsed for ' + imageid + ' because that would overwrite existing data. This script will attempt to add this data row to the database, but the full name field will be ignored.')
         elif namedelim != '':
             name = parse_full_name(data['PayeeFullName'], namedelim)
             data['PayeeLName'] = name[0]
@@ -3939,9 +5062,10 @@ def check_row_data_sch_h6(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     # EventNm
     data['EventNm'] = clean_sql_text(data['EventNm'])
-     
+
     # ExpDt
-    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'H6', data['TransID'])
+    data['ExpDt'] = convert_to_date(data['ExpDt'], dateformat, image, 'ExpDt', data['LineNbr'], rownbr, 'H6',
+                                    data['TransID'])
 
     # TotExpAmt
     data['TotExpAmt'] = ck_curr_val(data['TotExpAmt'], image, 'TotExpAmt', data['LineNbr'], rownbr)
@@ -3984,11 +5108,11 @@ def check_row_data_sch_h6(data, image, rownbr, namedelim='', dateformat='CCYYMMD
 
     return data
 
-def check_row_data_sch_i(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_i(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -4005,10 +5129,12 @@ def check_row_data_sch_i(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['BankAcctID'] = clean_sql_text(data['BankAcctID'])
 
     # CovgFmDt
-    data['CovgFmDt'] = convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', data['LineNbr'], rownbr, 'SI', data['TransID'])
+    data['CovgFmDt'] = convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', data['LineNbr'], rownbr, 'SI',
+                                       data['TransID'])
 
     # CovgToDt
-    data['CovgToDt'] = convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', data['LineNbr'], rownbr, 'SI', data['TransID'])
+    data['CovgToDt'] = convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', data['LineNbr'], rownbr, 'SI',
+                                       data['TransID'])
 
     # TotRcpts
     data['TotRcpts'] = ck_curr_val(data['TotRcpts'], image, 'TotRcpts', data['LineNbr'], rownbr)
@@ -4078,11 +5204,11 @@ def check_row_data_sch_i(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
-def check_row_data_sch_l(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_sch_l(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
-    
+
     # CommID
     data['CommID'] = clean_sql_text(data['CommID'])
 
@@ -4096,10 +5222,12 @@ def check_row_data_sch_l(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
     data['AcctNm'] = clean_sql_text(data['AcctNm'])
 
     # CovgFmDt
-    data['CovgFmDt'] = convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', data['LineNbr'], rownbr, 'SL', data['TransID'])
+    data['CovgFmDt'] = convert_to_date(data['CovgFmDt'], dateformat, image, 'CovgFmDt', data['LineNbr'], rownbr, 'SL',
+                                       data['TransID'])
 
     # CovgToDt
-    data['CovgToDt'] = convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', data['LineNbr'], rownbr, 'SL', data['TransID'])
+    data['CovgToDt'] = convert_to_date(data['CovgToDt'], dateformat, image, 'CovgToDt', data['LineNbr'], rownbr, 'SL',
+                                       data['TransID'])
 
     # IndRcptsItem_P
     data['IndRcptsItem_P'] = ck_curr_val(data['IndRcptsItem_P'], image, 'IndRcptsItem_P', data['LineNbr'], 0)
@@ -4205,8 +5333,8 @@ def check_row_data_sch_l(data, image, rownbr, namedelim='', dateformat='CCYYMMDD
 
     return data
 
-def check_row_data_text(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
 
+def check_row_data_text(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'):
     # LineNbr
     data['LineNbr'] = clean_sql_text(data['LineNbr'])
 
@@ -4226,8 +5354,6 @@ def check_row_data_text(data, image, rownbr, namedelim='', dateformat='CCYYMMDD'
     data['FullText'] = clean_sql_text(data['FullText'])
 
     return data
-
-
 
 
 ##############################################
@@ -4263,55 +5389,72 @@ f1sfile = RPTOUTDIR + 'F1S_' + filestamp + '.txt'
 
 # Write headers to data output files
 with open(schedafile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SA'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SA'])) + '\r')
 
 with open(schedbfile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SB'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SB'])) + '\r')
 
 with open(schedcfile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SC'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SC'])) + '\r')
 
 with open(schedc1file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SC1'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SC1'])) + '\r')
 
 with open(schedc2file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SC2'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SC2'])) + '\r')
 
 with open(scheddfile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SD'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SD'])) + '\r')
 
 with open(schedefile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SE'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SE'])) + '\r')
 
 with open(schedffile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SF'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SF'])) + '\r')
 
 with open(schedh1file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H1'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H1'])) + '\r')
 
 with open(schedh2file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H2'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H2'])) + '\r')
 
 with open(schedh3file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H3'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H3'])) + '\r')
 
 with open(schedh4file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H4'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H4'])) + '\r')
 
 with open(schedh5file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H5'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H5'])) + '\r')
 
 with open(schedh6file, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['H6'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['H6'])) + '\r')
 
 with open(schedifile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SI'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SI'])) + '\r')
 
 with open(schedlfile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['SL'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['SL'])) + '\r')
 
 with open(textfile, 'wb') as outputfile:
-    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['TEXT'])) + '\r')
+    outputfile.write('ImageID' + OUTPUTDELIMITER + 'PrtTp' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(
+        map(str, outputhdrs['TEXT'])) + '\r')
 
 with open(f1sfile, 'wb') as outputfile:
     outputfile.write('ImageID' + OUTPUTDELIMITER + OUTPUTDELIMITER.join(map(str, outputhdrs['F1S'])) + '\r')
@@ -4353,7 +5496,7 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
 
     # Extract file header
     filehdr = linecache.getline(fecfile, 1)
-    
+
     # Headers in versions 1 and 2 are multiple lines
     # If first line contains /* Header, it's an old style header
     x = 2
@@ -4389,7 +5532,7 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
         continue
     else:
         hdrver = ''
-        if filehdr.lower().find('fec_ver_#') != -1: # FEC_VER_#, FEC_Ver_#
+        if filehdr.lower().find('fec_ver_#') != -1:  # FEC_VER_#, FEC_Ver_#
             hdrver = filehdr[filehdr.lower().find('fec_ver_#') + 9:].lstrip(' =')
             hdrver = float(hdrver[:hdrver.find('\n')].strip(' "'))
         else:
@@ -4400,17 +5543,17 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
 
     # First, fetch file headers. Custom code needed for versions 1 and 2.
     filehdrdata = {'ImageID': imageid,
-           'RecType': 'HDR',
-           'EFType': 'FEC',
-           'Ver': hdrver,
-           'SftNm': '',
-           'SftVer': '',
-           'RptID': '',
-           'RptNbr': '0',
-           'HdrCmnt': '',
-           'NmDelim': '',
-           'DecNoDec': 'DEC',
-           'DtFmt': 'CCYYMMDD'}
+                   'RecType': 'HDR',
+                   'EFType': 'FEC',
+                   'Ver': hdrver,
+                   'SftNm': '',
+                   'SftVer': '',
+                   'RptID': '',
+                   'RptNbr': '0',
+                   'HdrCmnt': '',
+                   'NmDelim': '',
+                   'DecNoDec': 'DEC',
+                   'DtFmt': 'CCYYMMDD'}
 
     if hdrver < 3.0:
         # Custom code for multiline headers (versions 1 and 2)
@@ -4420,19 +5563,19 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
         for hdr in filehdr:
             line = hdr.strip()
             if line.lower().startswith('soft_name'):
-                filehdrdata['SftNm'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['SftNm'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().startswith('soft_ver'):
-                filehdrdata['SftVer'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['SftVer'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().startswith('control'):
-                filehdrdata['RptID'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['RptID'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().startswith('namedelim'):
-                filehdrdata['NmDelim'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['NmDelim'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().startswith('dec/nodec'):
-                filehdrdata['DecNoDec'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['DecNoDec'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().startswith('date_fmat'):
-                filehdrdata['DtFmt'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['DtFmt'] = line[line.find('=') + 1:].strip(' "')
             elif line.lower().find('comment') != -1:
-                filehdrdata['HdrCmnt'] = line[line.find('=')+1:].strip(' "')
+                filehdrdata['HdrCmnt'] = line[line.find('=') + 1:].strip(' "')
 
     else:
         rowhdrs = get_row_headers('Hdr', hdrver)
@@ -4442,7 +5585,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
 
         # Iterate through file header row and populate header dictionary
         for x in range(len(rowhdrs)):
-            if rowhdrs[x] in filehdrdata.keys() and x < len(filehdr): # Checking len because sometimes header comment omitted
+            if rowhdrs[x] in filehdrdata.keys() and x < len(
+                    filehdr):  # Checking len because sometimes header comment omitted
                 filehdrdata[rowhdrs[x]] = filehdr[x].strip().replace(OUTPUTDELIMITER, ' ').strip(' "\n')
 
     # First, change hdrver to int when < 4
@@ -4462,7 +5606,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
 
     # Iterate through report header row and populate report header dictionary
     for x in range(len(rowhdrs)):
-        if rowhdrs[x] in rpthdrdata.keys() and x < len(rpthdr): # 100235 (F3X, v5.0) missing last 12 cols after treas sign date
+        if rowhdrs[x] in rpthdrdata.keys() and x < len(
+                rpthdr):  # 100235 (F3X, v5.0) missing last 12 cols after treas sign date
             rpthdrdata[rowhdrs[x]] = rpthdr[x].strip().replace(OUTPUTDELIMITER, ' ').strip(' "\n')
 
     # Attempt to determine name delimiter if missing
@@ -4534,18 +5679,18 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             # Skip blank lines
             if line.strip() == '':
                 continue
-            
+
             # Create list to house this line's data
             data = []
-            
+
             # Do some basic whitespace cleanup
             # If OUTPUTDELIMITER is tab, change all tabs and newlines to spaces
             if OUTPUTDELIMITER == '\t':
-                line = line.expandtabs(1).replace('\r',' ').strip()
+                line = line.expandtabs(1).replace('\r', ' ').strip()
 
             # Remove all instances of two spaces
             while '  ' in line:
-                line = line.replace('  ',' ')
+                line = line.replace('  ', ' ')
 
             # Convert line to list
             data = parse_data_row(line, SRCDELIMITER)
@@ -4578,7 +5723,7 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 formtype = 'H5'
             elif data[0].startswith('H6'):
                 formtype = 'H6'
-            elif data[0].lower() == 'text': # Sometimes not ALLCAPS
+            elif data[0].lower() == 'text':  # Sometimes not ALLCAPS
                 formtype = 'TEXT'
             elif data[0].startswith('F1S'):
                 formtype = 'F1S'
@@ -4591,12 +5736,13 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             # Write the row to the other data file if row's form type not found
             # and skip to next line
             if formtype == '':
-                otherdata.append(str(imageid) + OUTPUTDELIMITER + str(hdrver) + OUTPUTDELIMITER + 'line: ' + str(linenbr) + OUTPUTDELIMITER + line + '\r')
+                otherdata.append(str(imageid) + OUTPUTDELIMITER + str(hdrver) + OUTPUTDELIMITER + 'line: ' + str(
+                    linenbr) + OUTPUTDELIMITER + line + '\r')
                 continue
-            
+
             # Make local copy of output headers
             linehdrs = outputhdrs[formtype][:]
-            
+
             # Build output dictionary to house data
             linedata = {}
             for hdr in linehdrs:
@@ -4607,7 +5753,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
 
             # Write the row to the other data file if no headers found
             if rowhdrs == []:
-                otherdata.append(str(imageid) + OUTPUTDELIMITER + str(hdrver) + OUTPUTDELIMITER + 'line: ' + str(linenbr) + OUTPUTDELIMITER + line + '\r')
+                otherdata.append(str(imageid) + OUTPUTDELIMITER + str(hdrver) + OUTPUTDELIMITER + 'line: ' + str(
+                    linenbr) + OUTPUTDELIMITER + line + '\r')
                 continue
 
             # Populate data row dictionary
@@ -4616,7 +5763,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             # Call function to verify data is valid before loading into database
             if formtype == 'SA':
                 # Validate data
-                linedata = check_row_data_sch_a(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_a(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('ContFullName')
                 linehdrs.remove('DonorCandFullName')
@@ -4625,7 +5773,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 scheda.append(data)
             elif formtype == 'SB':
                 # Validate data
-                linedata = check_row_data_sch_b(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_b(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('PayeeFullName')
                 linehdrs.remove('BenCandFullName')
@@ -4634,7 +5783,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 schedb.append(data)
             elif formtype == 'SC':
                 # Validate data
-                linedata = check_row_data_sch_c(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_c(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('LenderFullName')
                 linehdrs.remove('LenderCandFullName')
@@ -4643,7 +5793,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 schedc.append(data)
             elif formtype == 'SC1':
                 # Validate data
-                linedata = check_row_data_sch_c1(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_c1(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('LendRepFullName')
                 linehdrs.remove('TrsFullName')
@@ -4651,7 +5802,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedc1.append(data)
             elif formtype == 'SC2':
-                linedata = check_row_data_sch_c2(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_c2(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('GuarFullName')
                 # Create list for the data row
@@ -4660,13 +5812,15 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             elif formtype == 'SD':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_d(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_d(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedd.append(data)
             elif formtype == 'SE':
                 # Validate data
-                linedata = check_row_data_sch_e(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_e(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('PayeeFullName')
                 linehdrs.remove('SupOppCandFullName')
@@ -4676,7 +5830,8 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 schede.append(data)
             elif formtype == 'SF':
                 # Validate data
-                linedata = check_row_data_sch_f(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_f(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('PayeeFullName')
                 linehdrs.remove('PayeeCandFullName')
@@ -4686,27 +5841,31 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             elif formtype == 'H1':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_h1(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h1(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedh1.append(data)
             elif formtype == 'H2':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_h2(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h2(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedh2.append(data)
             elif formtype == 'H3':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_h3(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h3(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedh3.append(data)
             elif formtype == 'H4':
                 # Validate data
-                linedata = check_row_data_sch_h4(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h4(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('PayeeFullName')
                 # Create list for the data row
@@ -4715,13 +5874,15 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             elif formtype == 'H5':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_h5(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h5(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedh5.append(data)
             elif formtype == 'H6':
                 # Validate data
-                linedata = check_row_data_sch_h6(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_h6(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                 filehdrdata['DtFmt'])
                 # Remove full name fields
                 linehdrs.remove('PayeeFullName')
                 # Create list for the data row
@@ -4730,14 +5891,16 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             elif formtype == 'SI':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_i(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_i(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedi.append(data)
             elif formtype == 'SL':
                 # No full name fields in data dictionary
                 # Validate data
-                linedata = check_row_data_sch_l(linedata, imageid, linenbr, filehdrdata['NmDelim'], filehdrdata['DtFmt'])
+                linedata = check_row_data_sch_l(linedata, imageid, linenbr, filehdrdata['NmDelim'],
+                                                filehdrdata['DtFmt'])
                 # Create list for the data row
                 data = build_data_row(linedata, linehdrs, imageid, fullrpttype)
                 schedl.append(data)
@@ -4757,12 +5920,12 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
                 data = build_data_row(linedata, linehdrs, imageid, None)
                 f1s.append(data)
 
-        # Write data to files        
+        # Write data to files
         if len(otherdata) > 0:
             with open(otherdatafile, 'a+b') as outputfile:
                 for row in otherdata:
                     outputfile.write(row)
-                    
+
         if len(scheda) > 0:
             with open(schedafile, 'a+b') as outputfile:
                 for row in scheda:
@@ -4792,62 +5955,62 @@ for fecfile in glob.glob(os.path.join(RPTSVDIR, '*.fec')):
             with open(scheddfile, 'a+b') as outputfile:
                 for row in schedd:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schede) > 0:
             with open(schedefile, 'a+b') as outputfile:
                 for row in schede:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedf) > 0:
             with open(schedffile, 'a+b') as outputfile:
                 for row in schedf:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh1) > 0:
             with open(schedh1file, 'a+b') as outputfile:
                 for row in schedh1:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh2) > 0:
             with open(schedh2file, 'a+b') as outputfile:
                 for row in schedh2:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh3) > 0:
             with open(schedh3file, 'a+b') as outputfile:
                 for row in schedh3:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh4) > 0:
             with open(schedh4file, 'a+b') as outputfile:
                 for row in schedh4:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh5) > 0:
             with open(schedh5file, 'a+b') as outputfile:
                 for row in schedh5:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedh6) > 0:
             with open(schedh6file, 'a+b') as outputfile:
                 for row in schedh6:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedi) > 0:
             with open(schedifile, 'a+b') as outputfile:
                 for row in schedi:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(schedl) > 0:
             with open(schedlfile, 'a+b') as outputfile:
                 for row in schedl:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(text) > 0:
             with open(textfile, 'a+b') as outputfile:
                 for row in text:
                     outputfile.write(OUTPUTDELIMITER.join(map(str, row)) + '\r')
-                    
+
         if len(f1s) > 0:
             with open(f1sfile, 'a+b') as outputfile:
                 for row in f1s:

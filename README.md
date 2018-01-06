@@ -32,7 +32,6 @@ The following modules are required to use FEC Scraper Toolbox. All of
 them are included with a standard Python 2.7 installation:
 * csv
 * datetime
-* ftplib
 * glob
 * linecache
 * multiprocessing

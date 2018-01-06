@@ -49,7 +49,7 @@ def build_archive_download_list(zipinfo):
     """
 
     # Generate date range to look for new files
-    start_date = datetime.datetime.strptime(zipinfo['mostrecent'], '%Y%m%d').date()
+    start_date = datetime.datetime.strptime(zipinfo['mostrecent'].rstrip('.zip'), '%Y%m%d').date()
     add_day = datetime.timedelta(days=1)
     start_date += add_day
     end_date = datetime.datetime.now().date()
@@ -98,8 +98,9 @@ def consume_rss():
     """
     regex = re.compile('<link>http://docquery.fec.gov/dcdev/posted/' \
                        '([0-9]*)\.fec</link>')
-    url = urllib.urlopen(RSSURL)
-    rss = url.read()
+    opener = urllib2.build_opener()
+    opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0')]
+    rss = opener.open(RSSURL).read()
     matches = []
     for match in re.findall(regex, rss):
         matches.append(match)

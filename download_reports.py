@@ -38,7 +38,7 @@ RPTURL = 'http://docquery.fec.gov/dcdev/posted/'
 RSSURL = 'http://efilingapps.fec.gov/rss/generate?preDefinedFilingType=ALL'
 
 
-def build_archive_download_list(zipinfo):
+def build_archive_download_list(zipinfo, oldarchives):
     """
     On 1/8/2018, the FEC shut down its FTP server and moved their
     bulk files to an Amazon S3 bucket. Rather than try to hack the
@@ -65,14 +65,33 @@ def build_archive_download_list(zipinfo):
     # Add try_again files
     for fec_file in zipinfo['try_again_later']:
         if fec_file not in downloads:
-            downloads.append(datetime.datetime.strftime(fec_file, '%Y%m%d'))
+            downloads.append(fec_file)
+    zipinfo['try_again_later'] = []
 
     # Remove any bad files from the list
     for fec_file in zipinfo['badfiles']:
         if fec_file in downloads:
             downloads.remove(fec_file)
 
+    # Remove previously downloaded archives
+    downloads = [download for download in downloads if download not in oldarchives]
+
     return downloads
+
+
+def build_prior_archive_list():
+    """
+    Returns a list of archives that already have been downloaded and
+    saved to ARCPROCDIR or ARCSVDIR.
+    """
+    dirs = [ARCSVDIR, ARCPROCDIR]
+    archives = []
+
+    for dir in dirs:
+        for datafile in glob.glob(os.path.join(dir, '*.zip')):
+            archives.append(datafile.replace(dir, ''))
+
+    return archives
 
 
 def build_prior_report_list():
@@ -215,7 +234,16 @@ def pickle_archives(zipinfo, archives):
     if len(downloads) > 0:
         zipinfo['mostrecent'] = max(downloads)
 
-    pickle.dump(zipinfo, open('zipinfo.p', 'wb'))
+        # Remove bad files older than most recent
+        if len(zipinfo['badfiles']) > 0:
+            most_recent_date = datetime.datetime.strptime(zipinfo['mostrecent'].rstrip('.zip'), '%Y%m%d').date()
+
+            for bad_file in zipinfo['badfiles'][::-1]:
+                bad_file_date = datetime.datetime.strptime(bad_file.rstrip('.zip'), '%Y%m%d').date()
+                if bad_file_date < most_recent_date:
+                    zipinfo['badfiles'].remove(bad_file)
+
+        pickle.dump(zipinfo, open('zipinfo.p', 'wb'))
 
 
 def unzip_archive(archive, overwrite=0):
@@ -304,21 +332,31 @@ if __name__ == '__main__':
             zipinfo['try_again_later'] = []
         print('Information retrieved successfully.\n')
     except:
-        zipinfo = {'mostrecent': '20000101.zip', 'badfiles': [], 'try_again_later': []}
+        zipinfo = {'mostrecent': '20010403.zip',
+                   'badfiles': ['20010408.zip', '20010428.zip', '20010429.zip', '20010505.zip', '20010506.zip',
+                                '20010512.zip', '20010526.zip', '20010527.zip', '20010528.zip', '20010624.zip',
+                                '20010812.zip', '20010826.zip', '20010829.zip', '20010902.zip', '20010915.zip',
+                                '20010929.zip', '20010930.zip', '20011013.zip', '20011014.zip', '20011028.zip',
+                                '20011123.zip', '20011124.zip', '20011125.zip', '20011201.zip', '20011202.zip',
+                                '20011215.zip', '20011223.zip', '20011229.zip', '20030823.zip', '20030907.zip',
+                                '20031102.zip', '20031129.zip', '20031225.zip', '20040728.zip', '20040809.zip',
+                                '20040921.zip', '20040922.zip', '20041127.zip', '20050115.zip', '20050130.zip',
+                                '20050306.zip', '20050814.zip', '20050904.zip', '20051106.zip', '20051225.zip',
+                                '20060210.zip', '20060318.zip', '20060319.zip', '20060320.zip', '20061224.zip',
+                                '20070507.zip', '20071028.zip', '20081225.zip', '20091226.zip', '20111203.zip',
+                                '20120701.zip', '20121215.zip', '20121225.zip', '20130703.zip', '20130802.zip',
+                                '20130825.zip', '20130914.zip', '20131109.zip', '20150207.zip', '20150525.zip'],
+                   'try_again_later': ['20001015.zip', '20010201-20010403.zip']}
         print('zipinfo.p not found. Starting from scratch...\n')
 
-    # IF YOU DON'T WANT TO DOWNLOAD ALL ARCHIVES BACK TO 2001 OR
-    # OTHERWISE WANT TO MANUALLY CONTROL WHAT IS DOWNLOADED, YOU CAN
-    # UNCOMMENT THE TWO LINES OF CODE BELOW AND EXPLICITLY SET THE
-    # VALUES.
-    # Set mostrecent to the last date you DON'T want, so if you want
-    # everything since Jan. 1, 2013, set mostrecent to: '20121231.zip'
-    # zipinfo['mostrecent'] = '20121231.zip' # YYYYMMDD.zip
-    # zipinfo['badfiles'] = [] # You probably want to leave this blank
+    # Build a list of previously downloaded archives
+    print('Building a list of previously downloaded archive files...')
+    oldarchives = build_prior_archive_list()
+    print('Done!\n')
 
     # Go to FEC site and fetch a list of .zip files available
     print('Compiling a list of archives available for download...')
-    archives = build_archive_download_list(zipinfo)
+    archives = build_archive_download_list(zipinfo, oldarchives)
     if len(archives) == 0:
         print('No new archives found.\n')
     # If any files returned, download them using multiprocessing

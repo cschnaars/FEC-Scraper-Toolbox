@@ -16,29 +16,29 @@ import time
 """
   Currently supported forms and versions:
  * Header: all versions through 8.1 (v1 and v2 hardcoded)
- * F1: all versions through 8.2
- * F1S: all versions through 8.2 (first used in v3)
- * F3: all versions through 8.2
- * F3L: all versions through 8.2 (first used in v6.4)
- * F3P: all versions through 8.2
- * F3X: all versions through 8.2
- * SA: all versions through 8.2
- * SB: all versions through 8.2
- * SC: all versions through 8.2
- * SC1: all versions through 8.2
- * SC2: all versions through 8.2 (does not exist in v1)
- * SD: all versions through 8.2
- * SE: all versions through 8.2
- * SF: all versions through 8.2
- * H1: all versions through 8.2
- * H2: all versions through 8.2
- * H3: all versions through 8.2 (temporarily removed v1 and v2)
- * H4: all versions through 8.2
- * H5: all versions through 8.2 (first used in 5.0)
- * H6: all versions through 8.2 (first used in 5.0)
+ * F1: all versions through 8.3
+ * F1S: all versions through 8.3 (first used in v3)
+ * F3: all versions through 8.3
+ * F3L: all versions through 8.3 (first used in v6.4)
+ * F3P: all versions through 8.3
+ * F3X: all versions through 8.3
+ * SA: all versions through 8.3
+ * SB: all versions through 8.3
+ * SC: all versions through 8.3
+ * SC1: all versions through 8.3
+ * SC2: all versions through 8.3 (does not exist in v1)
+ * SD: all versions through 8.3
+ * SE: all versions through 8.3
+ * SF: all versions through 8.3
+ * H1: all versions through 8.3
+ * H2: all versions through 8.3
+ * H3: all versions through 8.3 (temporarily removed v1 and v2)
+ * H4: all versions through 8.3
+ * H5: all versions through 8.3 (first used in 5.0)
+ * H6: all versions through 8.3 (first used in 5.0)
  * SI: all versions through 7.0 (FEC discontinued as of 8.0)
- * SL: all versions through 8.2 (first used in 5.0)
- * TEXT: all versions through 8.2 (does not exist in v1 or v2)
+ * SL: all versions through 8.3 (first used in 5.0)
+ * TEXT: all versions through 8.3 (does not exist in v1 or v2)
 """
 
 # Try to import user settings or set them explicitly.
@@ -139,7 +139,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr', 'AgtZip', 'AgtTitle', 'AgtPhone', 'Bank1Nm',
                       'Bank1Addr1', 'Bank1Addr2', 'Bank1City', 'Bank1StAbbr', 'Bank1Zip', 'Bank2Nm', 'Bank2Addr1',
                       'Bank2Addr2', 'Bank2City', 'Bank2StAbbr', 'Bank2Zip']],
-                    [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                    [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['FormTp', 'CommID', 'flgChgCommNm', 'CommNm', 'flgAddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr',
                       'Zip', 'flgChgCommEmail', 'CommEmail', 'flgChgCommUrl', 'CommUrl', 'SubmDt', 'SignLName',
                       'SignFName', 'SignMName', 'SignPfx', 'SignSfx', 'SignDt', 'CommTp', 'CandID', 'CandLName',
@@ -184,7 +184,7 @@ filehdrs = [['F1', [[['1', '2'],
                                 'AgtMName', 'AgtPfx', 'AgtSfx', 'AgtAddr1', 'AgtAddr2', 'AgtCity', 'AgtStAbbr',
                                 'AgtZip', 'AgtTitle', 'AgtPhone', 'BankNm', 'BankAddr1', 'BankAddr2', 'BankCity',
                                 'BankStAbbr', 'BankZip']],
-                     [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     [['6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['FormTp', 'CommID', 'JtFndCommNm', 'JtFundCommID', 'AffCommID', 'AffCommNm', 'AffCandID',
                        'AffLName', 'AffFName', 'AffMName', 'AffPfx', 'AffSfx', 'AffAddr1', 'AffAddr2', 'AffCity',
                        'AffStAbbr', 'AffZip', 'AffRelCd', 'AgtLName', 'AgtFName', 'AgtMName', 'AgtPfx', 'AgtSfx',
@@ -257,7 +257,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22',
                       'GrossRctsAuthCommsPrim', 'AggAmtPersFundsPrim', 'GrossRctsMinusPersFmCandPrim',
                       'GrossRctsAuthCommsGen', 'AggAmtPersFundsGen', 'GrossRctsMinusPersFmCandGen']],
-                    [['6.4', '7.0', '8.0', '8.1', '8.2'],
+                    [['6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt',
                       'ElecDist', 'RptCd', 'ElecCd', 'ElecDt', 'StateOfElec', 'CovgFmDt', 'CovgToDt', 'TrsLName',
                       'TrsFName', 'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'TotConts_P_6a', 'TotContRfds_P_6b',
@@ -277,7 +277,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'TotRcpts_T_16', 'OpExps_T_17', 'TranToOthAuthComms_T_18', 'CandLoansRepaid_T_19a',
                       'OthLoansRepaid_T_19b', 'TotLoansRepaid_T_19c', 'RefundsInd_T_20a', 'RefundsPolPtyComms_T_20b',
                       'RefundsOthPolComms_T_20c', 'TotRefunds_T_20d', 'OthDisb_T_21', 'TotDisb_T_22']]]],
-            ['F3L', [[['6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['F3L', [[['6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'ElecSt',
                        'ElecDist', 'RptCd', 'ElecDt', 'StateOfElec', 'flgInclSemiAnnPrd', 'CovgFmDt', 'CovgToDt',
                        'flgInclSemiAnnJanJun', 'flgInclSemiAnnJulDec', 'TotRptBundContribs', 'SemiAnnBundContribs',
@@ -357,7 +357,7 @@ filehdrs = [['F1', [[['1', '2'],
                        'SouthDakota_T', 'Tennessee_T', 'Texas_T', 'Utah_T', 'Vermont_T', 'Virginia_T', 'Washington_T',
                        'WestVirginia_T', 'Wisconsin_T', 'Wyoming_T', 'PuertoRico_T', 'Guam_T', 'VirginIslands_T',
                        'TotAllocs_T']],
-                     [['7.0', '8.0', '8.1', '8.2'],
+                     [['7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'PrimElec',
                        'GenElec', 'RptCd', 'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'TrsLName', 'TrsFName',
                        'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6', 'TotRcpts_P_7', 'Subtotal_P_8',
@@ -449,7 +449,7 @@ filehdrs = [['F1', [[['1', '2'],
                        'TranFmNonFedAcctH5_T_18b', 'TotNonFedTrans_T_18c', 'ShrdElecActivityFedShr_T_30a1',
                        'ShrdElecActivityNonFedShr_T_30a2', 'NonAllocFedElecActivity_T_30b',
                        'TotFedElecActivity_T_30c']],
-                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['FormTp', 'CommID', 'CommNm', 'AddrChg', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip', 'RptCd',
                        'ElecCd', 'ElecDt', 'ElecSt', 'CovgFmDt', 'CovgToDt', 'flgQualComm', 'TrsLName', 'TrsFName',
                        'TrsMName', 'TrsPfx', 'TrsSfx', 'SignDt', 'CashBegin_P_6b', 'TotRcpts_P_6c', 'Subtotal_P_6d',
@@ -481,9 +481,9 @@ filehdrs = [['F1', [[['1', '2'],
                        'TotOffsetsOpExp_T_37', 'NetOpExps_T_38']]]],
             ['Hdr', [[['3', '5.0', '5.1', '5.2', '5.3'],
                       ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'NmDelim', 'RptID', 'RptNbr', 'HdrCmnt']],
-                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+                     [['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['RecType', 'EFType', 'Ver', 'SftNm', 'SftVer', 'RptID', 'RptNbr', 'HdrCmnt']]]],
-            ['SA', [[['8.0', '8.1', '8.2'],
+            ['SA', [[['8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'ContOrgNm', 'ContLName',
                       'ContFName', 'ContMName', 'ContPfx', 'ContSfx', 'Addr1', 'Addr2', 'City', 'StAbbr', 'Zip',
                       'ElecCd', 'ElecDesc', 'ContDt', 'ContAmt', 'ContAgg', 'ContPurpDesc', 'Emp', 'Occ', 'DonorCommID',
@@ -546,7 +546,7 @@ filehdrs = [['F1', [[['1', '2'],
                              'DonorCommID', 'DonorCommNm', 'DonorCommAddr1', 'DonorCommAddr1', 'DonorCommCity',
                              'DonorCommState', 'DonorCommZip', 'DonorCandID', 'DonorCandFullName', 'DonorCandOfc',
                              'DonorCandState', 'DonorCandDist', 'MemoCd', 'MemoTxt', 'AmendCd']]]],
-            ['SB', [[['8.0', '8.1', '8.2'],
+            ['SB', [[['8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
                       'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
                       'PayeeCity', 'PayeeState', 'PayeeZip', 'ElecCd', 'ElecDesc', 'ExpDt', 'ExpAmt',
@@ -608,7 +608,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'BenCommNm', 'BenCommAddr1', 'BenCommAddr2', 'BenCommCity', 'BenCommState', 'BenCommZip',
                       'BenCandID', 'BenCandFullName', 'BenCandOfc', 'BenCandState', 'BenCandDist', 'MemoCd', 'MemoTxt',
                       'AmendCd']]]],
-            ['SC', [[['6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['SC', [[['6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'RctLnNbr', 'EntTp', 'LenderOrgName', 'LenderLName',
                       'LenderFName', 'LenderMName', 'LenderPfx', 'LenderSfx', 'LenderAddr1', 'LenderAddr2',
                       'LenderCity', 'LenderState', 'LenderZip', 'ElecCd', 'ElecDesc', 'LoanAmt', 'PymtToDt', 'LoanBlnc',
@@ -644,7 +644,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'Guar2Addr2', 'Guar2City', 'Guar2State', 'Guar2Zip', 'Guar2Emp', 'Guar2Occ', 'Guar2Blnc',
                       'Guar3FullName', 'Guar3Addr1', 'Guar3Addr2', 'Guar3City', 'Guar3State', 'Guar3Zip', 'Guar3Emp',
                       'Guar3Occ', 'Guar3Blnc', 'AmendCd']]]],
-            ['SC1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['SC1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'Lender', 'LenderAddr1', 'LenderAddr2',
                        'LenderCity', 'LenderState', 'LenderZip', 'LoanAmt', 'IntRt', 'IncurredDt', 'DueDt',
                        'flgLoanRestructured', 'OrigLoanDt', 'CrdtAmtThisDraw', 'TotBlnc', 'flgOthersLiable',
@@ -684,7 +684,7 @@ filehdrs = [['F1', [[['1', '2'],
                               'AcctLocAddr2', 'AcctLocCity', 'AcctLocState', 'AcctLocZip', 'DepAcctAuthDt',
                               'LoanBasisDesc', 'TrsFullName', 'TrsSignDt', 'LendRepFullName', 'LendRepTitle',
                               'LendRepSignDt', 'AmendCd']]]],
-            ['SC2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['SC2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                       ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'GuarLName', 'GuarFName', 'GuarMName', 'GuarPfx',
                        'GuarSfx', 'GuarAddr1', 'GuarAddr2', 'GuarCity', 'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc',
                        'GuarAmt']],
@@ -694,7 +694,7 @@ filehdrs = [['F1', [[['1', '2'],
                      [['2', '3'],
                       ['LineNbr', 'CommID', 'BkRefTransID', 'GuarFullName', 'GuarAddr1', 'GuarAddr2', 'GuarCity',
                        'GuarState', 'GuarZip', 'GuarEmp', 'GuarOcc', 'GuarAmt']]]],
-            ['SD', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['SD', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'EntTp', 'CreditorOrgName', 'CreditorLName', 'CreditorFName',
                       'CreditorMName', 'CreditorPfx', 'CreditorSfx', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
                       'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P',
@@ -715,7 +715,7 @@ filehdrs = [['F1', [[['1', '2'],
                     [['1'], ['LineNbr', 'CommID', 'CreditorOrgName', 'CreditorAddr1', 'CreditorAddr2', 'CreditorCity',
                              'CreditorState', 'CreditorZip', 'DebtPurp', 'BegBlnc_P', 'IncurAmt_P', 'PymtAmt_P',
                              'BalClose_P']]]],
-            ['SE', [[['8.1', '8.2'],
+            ['SE', [[['8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
                       'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
                       'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'ElecCd', 'ElecDesc', 'DissmntnDt', 'ExpAmt', 'ExpDt',
@@ -757,7 +757,7 @@ filehdrs = [['F1', [[['1', '2'],
                              'PayeeZip', 'ExpPurpDesc', 'ExpDt', 'ExpAmt', 'SupOppCandID', 'SupOppCandFullName',
                              'SupOppCandOfc', 'SupOppCandStAbbr', 'SupOppCandDist', 'SupOppCd', 'CompFullName',
                              'SignDt', 'NotaryDt', 'NotaryExpDt', 'NotaryFullNm', 'AmendCd']]]],
-            ['SF', [[['8.0', '8.1', '8.2'],
+            ['SF', [[['8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'flgDesigCoordExp', 'DesigCommID',
                       'DesigCommNm', 'SubordCommID', 'SubordCommNm', 'SubordAddr1', 'SubordAddr2', 'SubordCity',
                       'SubordStAbbr', 'SubordZip', 'EntTp', 'PayeeOrgNm', 'PayeeLName', 'PayeeFName', 'PayeeMName',
@@ -808,7 +808,7 @@ filehdrs = [['F1', [[['1', '2'],
                              'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'PayeeCandID', 'PayeeCandFullName',
                              'PayeeCandOfc', 'PayeeCandStAbbr', 'PayeeCandDist', 'ExpAgg', 'ExpPurpDesc', 'ExpDt',
                              'ExpAmt', 'AmendCd']]]],
-            ['H1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['H1', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'flgStLocFxPctPresOnly', 'flgStLocFxPctPresAndSen',
                       'flgStLocFxPctSenOnly', 'flgStLocFxPctNonPresNonSen', 'flgFlatMin50PctFed', 'FedPct', 'NonFedPct',
                       'flgAdmRatio', 'flgGenericVoterDrvRatio', 'flgPubCommunRefPrtyRatio']],
@@ -856,7 +856,7 @@ filehdrs = [['F1', [[['1', '2'],
                              'SepSegFundsAndPctNonConnCmtesActNonFedCandSup', 'BallotCompPres', 'BallotCompSen',
                              'BallotCompHse', 'FedSub', 'BallotCompGov', 'OthStatewide', 'StSen', 'StRep', 'LocCands',
                              'ExtraNonFed', 'Subtotal', 'TotPts', 'FedAllocPct', 'AmendCd']]]],
-            ['H2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['H2', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'EventNm', 'flgDirFndrsg', 'flgDirCandSup', 'RatioCd', 'FedPct',
                       'NonFedPct']],
                     [['5.2', '5.3'],
@@ -870,7 +870,7 @@ filehdrs = [['F1', [[['1', '2'],
                     [['1'],
                      ['LineNbr', 'CommID', 'EventNm', 'EventNbr', 'flgDirFndrsg', 'flgExemptAct', 'flgDirCandSup',
                       'RatioCd', 'FedPct', 'NonFedPct', 'AmendCd']]]],
-            ['H3', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['H3', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'AcctNm', 'EventTp', 'EventNm', 'RcptDt',
                       'TotAmtTrans', 'TransAmt']],
                     [['5.2', '5.3'],
@@ -883,7 +883,7 @@ filehdrs = [['F1', [[['1', '2'],
                     #    [['2'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'TotDirFundrsgAmt', 'TotExemptActDirCandSup', 'AmendCd', 'TransID', 'BkRefTransID', 'BkRefSchdNm']],
                     #    [['1'], ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'TotAmtTrans', 'AdmVtrDrv', 'EventNm', 'EventNbr', 'TransAmt', 'EventNm2', 'EventNbr2', 'TransAmt2', 'EventNm3', 'EventNbr3', 'TransAmt3', 'EventNm4', 'EventNbr4', 'TransAmt4', 'TotDirFndrsgAmt', 'EventNm5', 'EventNbr5', 'TransAmt5', 'EventNm6', 'EventNbr6', 'TransAmt6', 'EventNm7', 'EventNbr7', 'TransAmt7', 'EventNm8', 'EventNbr8', 'TransAmt8', 'TotExemptActDirCandSup', 'AmendCd']]
                     ]],
-            ['H4', [[['8.0', '8.1', '8.2'],
+            ['H4', [[['8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
                       'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
                       'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt',
@@ -927,13 +927,13 @@ filehdrs = [['F1', [[['1', '2'],
                      ['LineNbr', 'CommID', 'PayeeFullName', 'PayeeAddr1', 'PayeeAddr2', 'PayeeCity', 'PayeeStAbbr',
                       'PayeeZip', 'EventNm', 'EventNbr', 'ExpDt', 'ExpAmt', 'FedAmt', 'NonFedAmt', 'flgAdminVtrDrv',
                       'flgDirectFndrsg', 'flgExempt', 'flgDirCandSup', 'ExpAgg', 'ExpPurpDesc', 'AmendCd']]]],
-            ['H5', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['H5', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'AcctNm', 'RcptDt', 'TotAmt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt',
                       'GenCampAmt']],
                     [['5.0', '5.1', '5.2', '5.3'],
                      ['LineNbr', 'CommID', 'AcctNm', 'RcptDt', 'VotRegnAmt', 'VotIDAmt', 'GOTVAmt', 'GenCampAmt',
                       'TotAmt', 'AmendCd', 'TransID']]]],
-            ['H6', [[['8.0', '8.1', '8.2'],
+            ['H6', [[['8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'EntTp', 'PayeeOrgNm',
                       'PayeeLName', 'PayeeFName', 'PayeeMName', 'PayeePfx', 'PayeeSfx', 'PayeeAddr1', 'PayeeAddr2',
                       'PayeeCity', 'PayeeStAbbr', 'PayeeZip', 'EventNm', 'ExpDt', 'TotExpAmt', 'FedAmt', 'LevinAmt',
@@ -980,7 +980,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'TransToStAndLoc', 'DirStLocCandSup', 'OthDisb', 'TotDisb', 'BegCOH', 'Rcpts', 'Subtotal', 'Disb',
                       'EndCOH', 'TotRcpts2', 'TransToFed2', 'TransToStAndLoc2', 'DirStLocCandSup2', 'OthDisb2',
                       'TotDisb2', 'BegCOH2', 'Rcpts2', 'Subtotal2', 'Disb2', 'EndCOH2', 'AmendCd']]]],
-            ['SL', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['SL', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                      ['LineNbr', 'CommID', 'TransID', 'RecordID', 'AcctNm', 'CovgFmDt', 'CovgToDt', 'IndRcptsItem_P',
                       'IndRcptsUnitem_P', 'IndRcptsTot_P', 'OthRcpts_P', 'TotRcpts_P', 'TransVotReg_P', 'TransVotID_P',
                       'TransGOTV_P', 'TransGenCamp_P', 'TransTot_P', 'OthDisb_P', 'TotDisb_P', 'BegCOH_P', 'Rcpts_P',
@@ -996,7 +996,7 @@ filehdrs = [['F1', [[['1', '2'],
                       'TotRcpts_T', 'TransVotReg_T', 'TransVotID_T', 'TransGOTV_T', 'TransGenCamp_T', 'TransTot_T',
                       'OthDisb_T', 'TotDisb_T', 'BegCOH_T', 'Rcpts_T', 'Subtotal_T', 'Disb_T', 'EndCOH_T', 'AmendCd',
                       'TransID']]]],
-            ['TEXT', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2'],
+            ['TEXT', [[['6.1', '6.2', '6.3', '6.4', '7.0', '8.0', '8.1', '8.2', '8.3'],
                        ['LineNbr', 'CommID', 'TransID', 'BkRefTransID', 'BkRefSchdNm', 'FullText']],
                       [['5.0', '5.1', '5.2', '5.3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText', 'AmendCd']],
                       [['3'], ['LineNbr', 'ParentTp', 'BkRefTransID', 'FullText']]]]]
